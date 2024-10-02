@@ -1,0 +1,46 @@
+generator client {
+  provider        = "prisma-client-js"
+  previewFeatures = ["driverAdapters"]
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model Applicant {
+  id  String  @id @default(uuid())
+  createdAt   DateTime  @default(now())
+  updatedAt   DateTime  @updatedAt
+  name  String  @db.VarChar(100)
+  gender  String  @db.VarChar(8)
+  school  String  @db.VarChar(255)
+  email  String  @db.VarChar(80)
+  contact  String  @db.VarChar(10)
+  program  String   @db.VarChar()
+}
+
+
+model Wright {
+  id  String  @id @default(uuid())
+  createdAt   DateTime  @default(now())
+  updatedAt   DateTime  @updatedAt
+  name  String  @db.VarChar(100)
+  gender  String  @db.VarChar(8)
+  school  String  @db.VarChar(255)
+  email  String  @db.VarChar(80)
+  contact  String  @db.VarChar(10)
+  batch   String @db.VarChar()
+  
+}
+
+model Facilitator {
+  id  String  @id @default(uuid())
+  gender  String  @db.VarChar(8)
+  createdAt   DateTime  @default(now())
+  updatedAt   DateTime  @updatedAt
+  name  String  @db.VarChar(100)
+  description  String  @db.VarChar(255)
+  email  String  @db.VarChar(80)
+  contact  String  @db.VarChar(10) 
+}
