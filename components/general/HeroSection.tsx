@@ -18,7 +18,7 @@ const HeroSection = () => {
         Meet fellow aspirants, work on exciting projects that change the world and become a jewel sought after by big tech corporations.
       </p>
       <div className="flex">
-        <Link href={'/tw/become-a-wright'}>
+        <Link href={'/become-a-wright'}>
           <Button className='bg-tw-accent font-medium hover:opacity-85 mr-4 rounded-full'>Enroll Now!</Button>
         </Link>
         <Button className='border-2  rounded-full font-medium '>Explore Curriculum</Button>

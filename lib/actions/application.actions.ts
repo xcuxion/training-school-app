@@ -2,7 +2,6 @@
 
 import { revalidatePath } from "next/cache"
 import { newApplication } from "../application"
-import { handleError } from "../utils"
 
 export async function cohort_application(state: any, formData: FormData) {
     try {
@@ -20,9 +19,9 @@ export async function cohort_application(state: any, formData: FormData) {
             gender,
             contact,        
         })
-        revalidatePath('/tw/admin')
+        revalidatePath('/admin')
     } catch (error) {
-        handleError(error)
+        console.log(error)
     }
 }
 
@@ -30,7 +29,7 @@ export async function portal_login() {
     try {
         
     } catch (error) {
-        handleError(error)
+        console.log(error)
     }
 }
 
@@ -38,7 +37,7 @@ export async function reset_password() {
     try {
         
     } catch (error) {
-        handleError(error)
+        console.log(error)
     }
 }
 
@@ -46,6 +45,6 @@ export async function update_details() {
     try {
         
     } catch (error) {
-        handleError(error)
+        console.log(error)
     }
 }

@@ -1,13 +1,13 @@
-import FacilitatorSection from '@/components/tw/FaciltatorSection'
-import Header from '@/components/tw/Header'
-import HeroSection from '@/components/tw/HeroSection'
-import TrainingCenterSection from '@/components/tw/TrainingCenterSection'
-import Curriculum from '@/components/tw/Curriculum'
+import FacilitatorSection from '@/components/general/FaciltatorSection'
+import Header from '@/components/general/Header'
+import HeroSection from '@/components/general/HeroSection'
+import TrainingCenterSection from '@/components/general/TrainingCenterSection'
+import Curriculum from '@/components/general/Curriculum'
 import { Button } from '@/components/ui/button'
 import Image from 'next/image'
 import Link from 'next/link'
 import React from 'react'
-import Footer from '@/components/tw/Footer'
+import Footer from '@/components/general/Footer'
 
 
 

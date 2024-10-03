@@ -1,6 +1,6 @@
 import React from 'react'
 import type { Metadata } from "next";
-import AdventurerSidebar from '@/components/tw/AdventurerSidebar';
+import AdventurerSidebar from '@/components/general/AdventurerSidebar';
 
 export const metadata: Metadata = {
     title: "TW | Adventurer's Guild",

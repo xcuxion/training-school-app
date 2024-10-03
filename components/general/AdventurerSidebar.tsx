@@ -6,22 +6,22 @@ import React from 'react'
 
 const navs = [
     {
-        route: '/tw/adventurer-guild/notice-board',
+        route: '/adventurer-guild/notice-board',
         label: 'Notice Board',
         icon: '/icons/linkedIn.png'
     },
     {
-        route: '/tw/adventurer-guild/quests',
+        route: '/adventurer-guild/quests',
         label: 'Quests Taken',
         icon: '/icons/linkedIn.png'
     },
     {
-        route: '/tw/adventurer-guild/profile',
+        route: '/adventurer-guild/profile',
         label: 'Profile',
         icon: '/icons/linkedIn.png'
     },
     {
-        route: '/tw/adventurer-guild/applications',
+        route: '/adventurer-guild/applications',
         label: '',
         icon: '/icons/linkedIn.png'
     },
