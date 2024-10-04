@@ -1,15 +1,3 @@
-import FacilitatorSection from '@/components/general/FaciltatorSection'
-import Header from '@/components/general/Header'
-import HeroSection from '@/components/general/HeroSection'
-import TrainingCenterSection from '@/components/general/TrainingCenterSection'
-import Curriculum from '@/components/general/Curriculum'
-import { Button } from '@/components/ui/button'
-import Image from 'next/image'
-import Link from 'next/link'
-import React from 'react'
-import Footer from '@/components/general/Footer'
-
-
 
 
 
@@ -43,13 +31,8 @@ const facilitators = [
 
 const page = () => {
   return (
-    <main className='w-full bg-tw-primary text-tw-text px-10 py-2'>
-      <Header/>
-      <HeroSection/>
-      <TrainingCenterSection/>
-      <Curriculum/>
-      <FacilitatorSection/>
-      <Footer/>
+    <main className='w-full bg-primary-dark text-color-dark px-10 py-2'>
+
     </main>
   )
 }

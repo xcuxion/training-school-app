@@ -9,52 +9,64 @@ const config: Config = {
   ],
   theme: {
   	extend: {
-  		colors: {
-  			background: 'hsl(var(--background))',
-  			foreground: 'hsl(var(--foreground))',
-  			card: {
-  				DEFAULT: 'hsl(var(--card))',
-  				foreground: 'hsl(var(--card-foreground))'
-  			},
-  			popover: {
-  				DEFAULT: 'hsl(var(--popover))',
-  				foreground: 'hsl(var(--popover-foreground))'
-  			},
-  			primary: {
-  				DEFAULT: 'hsl(var(--primary))',
-  				foreground: 'hsl(var(--primary-foreground))'
-  			},
-  			secondary: {
-  				DEFAULT: 'hsl(var(--secondary))',
-  				foreground: 'hsl(var(--secondary-foreground))'
-  			},
-  			muted: {
-  				DEFAULT: 'hsl(var(--muted))',
-  				foreground: 'hsl(var(--muted-foreground))'
-  			},
-  			accent: {
-  				DEFAULT: 'hsl(var(--accent))',
-  				foreground: 'hsl(var(--accent-foreground))'
-  			},
-  			destructive: {
-  				DEFAULT: 'hsl(var(--destructive))',
-  				foreground: 'hsl(var(--destructive-foreground))'
-  			},
-  			border: 'hsl(var(--border))',
-  			input: 'hsl(var(--input))',
-  			ring: 'hsl(var(--ring))',
-  			chart: {
-  				'1': 'hsl(var(--chart-1))',
-  				'2': 'hsl(var(--chart-2))',
-  				'3': 'hsl(var(--chart-3))',
-  				'4': 'hsl(var(--chart-4))',
-  				'5': 'hsl(var(--chart-5))'
-  			}
-  		},
+		colors: {
+			primary: {
+			  light: '#F0F4F8',
+			  dark: '#1A1A2E'
+			},
+			secondary: {
+			  light: '#D8E2EC',
+			  dark: '#16213E'
+			},
+			accent: {
+			  light: '#4A90E2',
+			  dark: '#0F3460'
+			},
+			color: {
+			  light: '#2D3748',
+			  dark: '#E0E0E0'
+			},
+			success: {
+			  light: '#48BB78',
+			  dark: '#50C878'
+			},
+			error: {
+			  light: '#E53E3E',
+			  dark: '#DC143C'
+			},
+			border: {
+			  light: '#CBD5E0',
+			  dark: '#2D3748'
+			},
+			input: {
+			  light: '#EDF2F7',
+			  dark: '#2C3E50'
+			},
+			ring: {
+				light: '#4A90E2',
+				dark: '#0F3460'
+			  },
+			  chart: {
+				light: {
+				  '1': '#4A90E2', // Blue
+				  '2': '#FF6B6B', // Red
+				  '3': '#FFD93D', // Yellow
+				  '4': '#6BCB77', // Green
+				  '5': '#9B59B6'  // Purple
+				},
+				dark: {
+				  '1': '#00A8E8', // Bright Blue
+				  '2': '#FF4365', // Bright Red
+				  '3': '#FFD200', // Bright Yellow
+				  '4': '#4CBB17', // Kelly Green
+				  '5': '#9D65C9'  // Bright Purple
+				}
+			}
+		  },
   		borderRadius: {
-  			lg: 'var(--radius)',
-  			md: 'calc(var(--radius) - 2px)',
-  			sm: 'calc(var(--radius) - 4px)'
+  			lg: '12px',
+  			md: '8px',
+  			sm: '4px'
   		},
   		keyframes: {
   			'accordion-down': {
