@@ -1,39 +1,18 @@
-
-
-
-const facilitators = [
-  {
-    image: '/images/addy.png',
-    name: 'Jessica Addy',
-    highlight: 'Hey'
-  },
-  {
-    image: '/images/jj.png',
-    name: 'Jessica Jones',
-    highlight: 'Hey'
-  },
-  {
-    image: '/images/steph.jpg',
-    name: 'Stephanie Opoku-Mensah',
-    highlight: 'Hey'
-  },
-  {
-    image: '/images/bayat.jpg',
-    name: 'Bayat Osman',
-    highlight: 'Hey'
-  },
-  {
-    image: '/images/ned.jpeg',
-    name: 'Prince Nedjoh',
-    highlight: 'Hey'
-  },
-]
+import LevelCard from '@/components/portfolio/LevelCard'
+import React from 'react'
 
 const page = () => {
   return (
-    <main className='w-full bg-primary-dark text-color-dark px-10 py-2'>
-
-    </main>
+    <div>
+      <LevelCard 
+        title='Level 1'
+        description='This is the first level'
+        primaryButtonText='Start'
+        primaryButtonOnClick={async () => {
+          "use server"
+        }}
+      />
+    </div>
   )
 }
 
