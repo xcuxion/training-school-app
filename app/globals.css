@@ -6,9 +6,17 @@ body {
   font-family: Arial, Helvetica, sans-serif;
 }
 
+
+
 @layer utilities {
   .text-balance {
     text-wrap: balance;
+  }
+  .flex-between {
+    @apply items-center justify-between
+  }
+  .flex-start {
+    @apply items-start justify-between
   }
 }
 

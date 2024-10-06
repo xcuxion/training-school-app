@@ -1,17 +1,17 @@
 import type { Metadata } from "next";
-import localFont from "next/font/local";
 import "./globals.css";
+import { Exo_2, Roboto } from "next/font/google";
+import { Toaster } from "@/components/ui/sonner";
 
-const geistSans = localFont({
-  src: "./fonts/GeistVF.woff",
-  variable: "--font-geist-sans",
-  weight: "100 900",
+const exo2 = Exo_2({
+  subsets: ["latin"],
+  variable: "--font-exo2",
 });
-const geistMono = localFont({
-  src: "./fonts/GeistMonoVF.woff",
-  variable: "--font-geist-mono",
-  weight: "100 900",
-});
+
+const roboto = Roboto({
+  subsets: ["latin"],
+  weight: "400"
+})
 
 export const metadata: Metadata = {
   title: "Technology Wrights",
@@ -26,8 +26,9 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased`}
+        className={`${roboto.className} ${exo2.className} antialiased bg-primary-light text-color-light`}
       >
+        <Toaster/>
         {children}
       </body>
     </html>

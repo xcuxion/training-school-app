@@ -2,23 +2,25 @@
 import React from 'react'
 import { Card, CardContent, CardFooter, CardHeader, CardTitle } from '../ui/card';
 import { Button } from '../ui/button';
+import Link from 'next/link';
 
-interface LevelCardProps {
+export interface LevelCardProps {
   title: string;
   description: string;
   primaryButtonText?: string;
   secondaryButtonText?: string;
-  primaryButtonOnClick?: () => void;
-  secondaryButtonOnClick?: () => void;
+  primaryButtonLink?: string;
+  secondaryButtonLink?: string;
+  isDojo?: boolean
 }
 
 const LevelCard = ({
     title, description, 
     primaryButtonText, secondaryButtonText,
-    primaryButtonOnClick, secondaryButtonOnClick
+    primaryButtonLink, secondaryButtonLink, isDojo = false
 }:LevelCardProps) => {
   return (
-    <Card className="w-[300px]">
+    <Card className={`w-full h-full ${isDojo && isDojo === true? 'bg-accent-light' : 'bg-secondary-light'}`}>
       <CardHeader>
         <CardTitle>{title}</CardTitle>
       </CardHeader>
@@ -28,19 +30,18 @@ const LevelCard = ({
       <CardFooter className="flex gap-2">
         {
             primaryButtonText && (
-                <Button className='rounded-full' onClick={primaryButtonOnClick}>{primaryButtonText}</Button>
+              <Link href={primaryButtonLink!}>
+                <Button className='rounded-full' >{primaryButtonText}</Button>
+              </Link>
             )
         }
         {
             secondaryButtonText && (
-                <Button className='rounded-full' onClick={secondaryButtonOnClick}>{secondaryButtonText}</Button>
+              <Link href={secondaryButtonLink!}>
+                <Button className='rounded-full' variant={'outline'} >{secondaryButtonText}</Button>
+              </Link>
             )
         }
-        <Button className='rounded-full' variant='destructive'>Hi</Button>
-        <Button className='rounded-full' variant='outline'>Hi</Button>
-        <Button className='rounded-full' variant='secondary'>Hi</Button>
-        <Button className='rounded-full' variant='ghost'>Hi</Button>
-        <Button className='rounded-full' variant='link'>Hi</Button>
       </CardFooter>
     </Card>
   )
