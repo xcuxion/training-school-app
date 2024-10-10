@@ -2,14 +2,19 @@ import Header from '@/components/portfolio/Header'
 import Hero from '@/components/portfolio/Hero'
 import LevelCard from '@/components/portfolio/LevelCard'
 import Level from '@/components/portfolio/Levels'
+import Modules from '@/components/portfolio/Modules'
+import Partners from '@/components/portfolio/Partners'
 import React from 'react'
 
 const page = () => {
   return (
-    <div className='px-10 py-5'>
+    <div className=''>
       <Header/>
       <Hero/>
-      <Level/>
+      <div className='bg-secondary-light rounded-xl'>
+        <Modules/>
+        <Partners/>
+      </div>
     </div>
   )
 }

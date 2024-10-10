@@ -22,7 +22,7 @@ acumen.`,
 Work on industry standard projects, 
 collaborate with fellow guild members, and 
 level up your abilities.`,
-    secondaryButtonText: ``,
+    secondaryButtonText: `Register As An Adventurer`,
     secondaryButtonLink: ``,
   },
   {
@@ -31,14 +31,14 @@ level up your abilities.`,
 are forged into reality. Receive guidance from 
 legendary mentors, access exclusive resources, 
 and craft your unicorn.`,
-    secondaryButtonText: ``,
+    secondaryButtonText: `Browse Startups`,
     secondaryButtonLink: ``,
   },
 ]
 
 const Levels = () => {
   return (
-    <div className='w-full h-[40vh] bg-color-light rounded-3xl flex gap-5 p-5 items-center justify-around'>
+    <div className='w-full h-[40vh]  bg-color-light rounded-3xl flex gap-5 p-5 items-center justify-around 0'>
       {
         TWLevels.map((level, index) => (
           <LevelCard 

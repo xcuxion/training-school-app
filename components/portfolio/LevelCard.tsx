@@ -20,9 +20,9 @@ const LevelCard = ({
     primaryButtonLink, secondaryButtonLink, isDojo = false
 }:LevelCardProps) => {
   return (
-    <Card className={`w-full h-full ${isDojo && isDojo === true? 'bg-accent-light' : 'bg-secondary-light'}`}>
+    <Card className={`w-full h-full border-none ${isDojo && isDojo === true? 'bg-accent-light text-primary-light' : 'bg-primary-light text-color-light'}`}>
       <CardHeader>
-        <CardTitle>{title}</CardTitle>
+        <CardTitle className='text-xl font-semibold leading-none'>{title}</CardTitle>
       </CardHeader>
       <CardContent>
         <p>{description}</p>
@@ -31,14 +31,14 @@ const LevelCard = ({
         {
             primaryButtonText && (
               <Link href={primaryButtonLink!}>
-                <Button className='rounded-full' >{primaryButtonText}</Button>
+                <Button className='rounded-full bg-primary-light text-color-light hover:bg-primary-light/90' >{primaryButtonText}</Button>
               </Link>
             )
         }
         {
             secondaryButtonText && (
               <Link href={secondaryButtonLink!}>
-                <Button className='rounded-full' variant={'outline'} >{secondaryButtonText}</Button>
+                <Button className={`rounded-full ${isDojo && isDojo === true? 'border-primary-light' : 'border-color-light'}`} variant={'outline'} >{secondaryButtonText} </Button>
               </Link>
             )
         }

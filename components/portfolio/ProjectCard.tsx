@@ -2,6 +2,7 @@ import Image from 'next/image';
 import React from 'react'
 import { Button } from '../ui/button';
 import { ArrowRightIcon } from 'lucide-react';
+import Link from 'next/link';
 
 interface ProjectCardProps {
     title: string;
@@ -16,7 +17,9 @@ const ProjectCard = ({title, description, image, link}: ProjectCardProps) => {
       <Image src={image} alt={title} width={300} height={300}  className='rounded-md object-cover w-[90%] h-[45%] mx-auto'/>
       <h3>{title}</h3>
       <p>{description}</p>
-      <Button variant={'link'} className=''>View Project <ArrowRightIcon className='w-4 h-4'/></Button>
+      <Link href={link}>
+        View Project <ArrowRightIcon className='w-4 h-4'/>
+      </Link>
     </div>
   )
 }
