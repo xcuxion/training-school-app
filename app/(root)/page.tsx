@@ -1,7 +1,5 @@
 import Header from '@/components/portfolio/Header'
 import Hero from '@/components/portfolio/Hero'
-import LevelCard from '@/components/portfolio/LevelCard'
-import Level from '@/components/portfolio/Levels'
 import Modules from '@/components/portfolio/Modules'
 import Partners from '@/components/portfolio/Partners'
 import React from 'react'
@@ -15,6 +13,7 @@ const page = () => {
         <Modules/>
         <Partners/>
       </div>
+      
     </div>
   )
 }
