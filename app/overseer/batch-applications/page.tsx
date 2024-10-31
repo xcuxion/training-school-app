@@ -2,7 +2,7 @@ import React from 'react'
 
 const page = () => {
   return (
-    <div>batch applicants page</div>
+    <div>batch application page</div>
   )
 }
 
