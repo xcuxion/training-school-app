@@ -9,7 +9,7 @@ interface ProjectDisplayProps {
     foundingYear: string;
 }
 
-const ProjectDisplay = ({title, description, link, image, foundingYear}: ProjectDisplayProps) => {
+const ProjectDisplay = ({title, description, link}: ProjectDisplayProps) => {
   return (
     <div>
       <div className="flex flex-col w-2/5">
