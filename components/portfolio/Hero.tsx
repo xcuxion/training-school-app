@@ -8,9 +8,8 @@ const Hero = () => {
     <section className="px-10">
       <div className="w-full pt-16 flex flex-start relative">
         <div className="w-2/3">
-          <h1 className="text-5xl font-semibold mb-4 leading-[64px]">
-            {emojis.fire} Forging Digital Titans: Crafting the Legends of
-            Tomorrow's Tech
+          <h1 className="text-6xl font-semibold mb-4 leading-[64px]">
+            {emojis.fire} Forging Digital Titans: Crafting the Legends of Tomorrow`&apos;`s Tech
           </h1>
           <p className="text-lg w-4/5">
             At Technology Wrights, we believe every aspiring technologist and

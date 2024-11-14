@@ -9,6 +9,7 @@ interface ProjectDisplayProps {
   foundingYear: string;
 }
 
+<<<<<<< HEAD
 const ProjectDisplay = ({
   title,
   description,
@@ -16,6 +17,9 @@ const ProjectDisplay = ({
   image,
   foundingYear,
 }: ProjectDisplayProps) => {
+=======
+const ProjectDisplay = ({title, description, link}: ProjectDisplayProps) => {
+>>>>>>> 18a215a4005409fc1570cc0ff66d5d647dda9f8a
   return (
     <div>
       <div className="flex flex-col w-2/5">

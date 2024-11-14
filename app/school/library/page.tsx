@@ -2,7 +2,7 @@ import React from 'react'
 
 const page = () => {
   return (
-    <div>discussion page</div>
+    <div>library page</div>
   )
 }
 

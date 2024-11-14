@@ -3,7 +3,7 @@
 import { revalidatePath } from "next/cache"
 import { newApplication } from "../application"
 
-export async function cohort_application(state: any, formData: FormData) {
+export async function cohort_application(state: unknown, formData: FormData) {
     try {
         const data = Object.fromEntries(formData.entries())
         const name = data.name as string
