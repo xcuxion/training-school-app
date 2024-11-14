@@ -1,21 +1,24 @@
-import Header from '@/components/portfolio/Header'
-import Hero from '@/components/portfolio/Hero'
-import Modules from '@/components/portfolio/Modules'
-import Partners from '@/components/portfolio/Partners'
-import React from 'react'
+import Header from "@/components/portfolio/Header";
+import Hero from "@/components/portfolio/Hero";
+import Modules from "@/components/portfolio/Modules";
+import Partners from "@/components/portfolio/Partners";
+import SignIn from "./sign-in";
+import React from "react";
 
 const page = () => {
   return (
-    <div className=''>
-      <Header/>
-      <Hero/>
-      <div className='bg-secondary-light rounded-xl'>
-        <Modules/>
-        <Partners/>
+    <div className="">
+      <div>
+        <SignIn />
       </div>
-      
+      <Header />
+      <Hero />
+      <div className="bg-secondary-light rounded-xl">
+        <Modules />
+        <Partners />
+      </div>
     </div>
-  )
-}
+  );
+};
 
-export default page
+export default page;

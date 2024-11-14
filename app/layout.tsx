@@ -3,6 +3,7 @@ import "./globals.css";
 import { Exo_2, Roboto } from "next/font/google";
 import { Toaster } from "@/components/ui/sonner";
 
+
 const exo2 = Exo_2({
   subsets: ["latin"],
   variable: "--font-exo2",
@@ -29,6 +30,7 @@ export default function RootLayout({
         className={`${roboto.className} ${exo2.className} antialiased bg-primary-light text-color-light`}
       >
         <Toaster/>
+
         {children}
       </body>
     </html>
