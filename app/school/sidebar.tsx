@@ -4,9 +4,10 @@ import { PiSquaresFourBold } from "react-icons/pi";
 import { FaRegFileAlt } from "react-icons/fa";
 import { VscLibrary } from "react-icons/vsc";
 import { VscBook } from "react-icons/vsc";
+import { Button } from "@/components/ui/button";
 const Sidebar = () => {
   return (
-    <div className="w-[300px] border-2 border-black p-2 flex flex-col justify-between bg-white">
+    <div className="h-screen w-[250px] sticky top-0 left-0 p-2 flex flex-col justify-between bg-white">
       {/* Top Section */}
       <div className="flex items-center mb-12">
         <Image src={"/icons/download.png"} alt="Logo" width={50} height={50} />
@@ -34,23 +35,25 @@ const Sidebar = () => {
       </div>
 
       {/* Bottom Section */}
-      <div className="text-center bg-slate-200 m-1 px-2 rounded-md flex flex-col items-center">
+      <div className="relative w-[200px]">
         <Image
           src={"/icons/manBag.png"}
           alt="Logo"
-          width={180}
-          height={120}
-          className="mb-1"
+          width={150}
+          height={155}
+          className="absolute top-[-100px] left-5 "
         />
-        <h3>
-          Explore our guide to try your hands on real-time pressing challenges
-        </h3>
-        <button
-          type="submit"
-          className="bg-blue-800 text-white rounded-lg p-1 mt-3 mb-3 text-sm"
-        >
-          Go to Guild
-        </button>
+      <div className="text-center bg-school-neutral h-[155px] rounded-md flex flex-col items-center justify-center ">
+          <p className="leading-tight my-2">
+            Explore our guide to try your hands on real-time pressing challenges
+          </p>
+          <Button
+            variant={"default"}
+            className="bg-school-primary text-white rounded-full p-2 text-sm"
+          >
+            Go to Guild
+          </Button>
+        </div>
       </div>
     </div>
   );

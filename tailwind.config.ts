@@ -11,6 +11,12 @@ const config: Config = {
   theme: {
   	extend: {
 		colors: {
+			school: {
+				primary: '#9D2292',
+				light: '#F0F4F8',
+				secondary: '#FFF0FE',
+				neutral: '#f5f5f6'
+			},
 			primary: {
 			  light: '#F0F4F8',
 			  dark: '#1A1A2E'
@@ -46,24 +52,8 @@ const config: Config = {
 			ring: {
 				light: '#4A90E2',
 				dark: '#0F3460'
-			  },
-			  chart: {
-				light: {
-				  '1': '#4A90E2', // Blue
-				  '2': '#FF6B6B', // Red
-				  '3': '#FFD93D', // Yellow
-				  '4': '#6BCB77', // Green
-				  '5': '#9B59B6'  // Purple
-				},
-				dark: {
-				  '1': '#00A8E8', // Bright Blue
-				  '2': '#FF4365', // Bright Red
-				  '3': '#FFD200', // Bright Yellow
-				  '4': '#4CBB17', // Kelly Green
-				  '5': '#9D65C9'  // Bright Purple
-				}
-			}
 		  },
+		},
   		borderRadius: {
 			xxl: '24px',
 			xl: '16px',

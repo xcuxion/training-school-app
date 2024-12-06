@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import "./globals.css";
-import { Exo_2, Roboto } from "next/font/google";
+import { Exo_2, Nunito_Sans } from "next/font/google";
 import { Toaster } from "@/components/ui/sonner";
 
 
@@ -9,7 +9,7 @@ const exo2 = Exo_2({
   variable: "--font-exo2",
 });
 
-const roboto = Roboto({
+const nunito_Sans = Nunito_Sans({
   subsets: ["latin"],
   weight: "400"
 })
@@ -27,7 +27,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body
-        className={`${roboto.className} ${exo2.className} antialiased bg-primary-light text-color-light`}
+        className={`${nunito_Sans.className} ${exo2.className} antialiased bg-primary-light text-color-light`}
       >
         <Toaster/>
 

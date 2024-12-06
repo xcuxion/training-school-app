@@ -3,7 +3,7 @@ import Sidebar from './sidebar'
 
 const layout = ({children}: {children:ReactNode}) => {
   return (
-    <div className='inline-flex gap-5'>
+    <div className='w-full inline-flex gap-5 bg-white'>
         <Sidebar/>
         {children}
     </div>
