@@ -15,6 +15,9 @@ body {
   .flex-between {
     @apply items-center justify-between
   }
+  .flex-center{
+    @apply items-center justify-center
+  }
   .flex-start {
     @apply items-start justify-between
   }

@@ -1,8 +1,13 @@
 import React from 'react'
+import MainContent from '../main-content'
+import SideSection from '../side-section'
 
 const page = () => {
   return (
-    <div>assignment page</div>
+    <>
+      <MainContent>g</MainContent>
+      <SideSection></SideSection>
+    </>
   )
 }
 

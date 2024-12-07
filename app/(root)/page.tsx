@@ -19,7 +19,7 @@ const links = [
   },
   {
     label: 'School Cases',
-    link: '/school/cases'
+    link: '/school/case'
   },
   {
     label: 'School Assignments',
