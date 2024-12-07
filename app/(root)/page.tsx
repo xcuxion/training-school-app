@@ -30,9 +30,7 @@ const links = [
 const page = () => {
   return (
     <div className=''>
-      <div>
-        <SignIn />
-      </div>
+
       
       <Header/>
 

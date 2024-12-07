@@ -7,11 +7,12 @@ import { Toaster } from "@/components/ui/sonner";
 const exo2 = Exo_2({
   subsets: ["latin"],
   variable: "--font-exo2",
+  weight: "600"
 });
 
 const nunito_Sans = Nunito_Sans({
   subsets: ["latin"],
-  weight: "400"
+  weight: ["400", "500", "600","800"]
 })
 
 export const metadata: Metadata = {

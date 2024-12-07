@@ -1,37 +1,53 @@
-import React from "react";
+"use client"
+import React, { useState } from "react";
 import Image from "next/image";
-import { PiSquaresFourBold } from "react-icons/pi";
-import { FaRegFileAlt } from "react-icons/fa";
-import { VscLibrary } from "react-icons/vsc";
-import { VscBook } from "react-icons/vsc";
 import { Button } from "@/components/ui/button";
+import Link from "next/link";
+import { usePathname } from "next/navigation";
+
+const links = [
+  {
+    icon: '/icons/dashboard.svg',
+    href: '/school',
+    label: 'Overview'
+  },
+  {
+    icon: '/icons/assignment-sidebar.svg',
+    href: '/school/assignment',
+    label: 'Assignment'
+  },
+  {
+    icon: '/icons/case.svg',
+    href: '/school/case',
+    label: 'Case Studies'
+  },
+  {
+    icon: '/icons/library.svg',
+    href: '/school/library',
+    label: 'Library'
+  },
+]
+
 const Sidebar = () => {
+  const pathname = usePathname()
+
   return (
-    <div className="h-screen w-[250px] sticky top-0 left-0 p-2 flex flex-col justify-between bg-white">
+    <div className="h-screen w-[250px] sticky top-0 left-0 p-4 flex flex-col items-center justify-between bg-white  ">
       {/* Top Section */}
       <div className="flex items-center mb-12">
-        <Image src={"/icons/download.png"} alt="Logo" width={50} height={50} />
-        <h3 className="text-blue-800 pt-2">TW-School</h3>
+        <Image src={"/school-logo.svg"} alt="Logo" width={200} height={40} className="w-[200px] h-[45px]" />
       </div>
 
       {/* Middle Section */}
-      <div className="space-y-6 ml-8 flex-grow">
-        <div className="flex ">
-          <PiSquaresFourBold className="text-2xl pt-1 pr-2" />
-          Overview
-        </div>
-        <div className="flex ">
-          <FaRegFileAlt className="text-xl pt-1 pr-2" />
-          Assignment
-        </div>
-        <div className="flex ">
-          <VscBook className="text-2xl pt-1 pr-2" />
-          Careers
-        </div>
-        <div className="flex ">
-          <VscLibrary className="text-2xl pt-1 pr-2" />
-          Library
-        </div>
+      <div className="space-y-4 flex-grow">
+        {
+          links.map((link, index)=>(
+            <div className={`flex items-center gap-x-4 w-[200px] p-2 hover:bg-school-secondary rounded-md ${pathname===link.href? 'bg-school-secondary font-medium': 'opacity-75'}`} key={index}>
+              <Image src={link.icon} alt="" width={16} height={16} className="w-5 h-5"/>
+              <Link href={link.href} className="">{link.label}</Link>
+            </div>
+          ))
+        }
       </div>
 
       {/* Bottom Section */}
