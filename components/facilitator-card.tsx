@@ -2,7 +2,7 @@ import Image from 'next/image'
 import Link from 'next/link'
 import React from 'react'
 
-interface IFacilitator {
+export interface IFacilitator {
     image: string
     name: string
     link?: string

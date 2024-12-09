@@ -1,48 +1,45 @@
 import React from 'react'
 
-const CaseDescription = () => {
+export interface ICaseDescription {
+  title: string
+  coverImage: string
+  problemStatement: string
+  requirements: string[]
+}
+
+
+
+const CaseDescription = ({title, coverImage, problemStatement, requirements}: ICaseDescription) => {
   return (
     <div className="">
+
       <h2 className="text-[#9D2292] bg-[#FFF0FE]  p-2 text-lg mb-4">
-        Centralized E-commerce Platform For Students
+        {title}
       </h2>
       <div className="space-y-10">
         <section>
-          <h1>Background</h1>
+          <h3 className=''>Background</h3>
           <p>
-            University campuses are bustling with student entrepreneurs selling
-            various products such as books, stationery, tech gadgets, clothes,
-            and even food items. However, most students lack a centralized
-            platform to advertise and sell their products. Instead, they rely on
-            fragmented solutions like social media groups and word of mouth,
-            which limit their reach and efficiency. To address this gap, you
-            have been approached to design and develop a Centralized E-Commerce
-            Platform for Students. This platform should streamline buying and
-            selling while catering to the specific needs of students on campus.
+            {problemStatement}
           </p>
         </section>
 
         <section>
-          <h1>Scope</h1>
-          <ol>
-            The platform must:
-            <li>Register users as either buyers or sellers.</li>
-            <li>Allow sellers to create product listings.</li>
-            <li>Enable buyers to browse, search, and purchase products.</li>
-            <li>Include a payment gateway for secure transactions.</li>
-            <li>
-              Provide a dashboard for sellers to track orders and inventory.
-            </li>
-            <li>Offer features like delivery options and order tracking.</li>
-            <li>
-              Have a moderation system to ensure compliance with campus
-              policies.
-            </li>
+          <h3 className=''>Scope</h3>
+          <ol className='list-disc'>
+            You are required to:
+            <span className="pl-4">
+              {
+                requirements.map((task, index)=>(
+                  <li key={index}>{task}</li>
+                ))
+              }
+            </span>
           </ol>
         </section>
 
         <section>
-          <h1>Suggested Technology Stack</h1>
+          <h3 className=''>Suggested Technology Stack</h3>
           <ul>
             <li>Frontend: React.js (with TailwindCSS for styling).</li>
             <li>Backend: Node.js with Express.js.</li>
@@ -57,7 +54,7 @@ const CaseDescription = () => {
         </section>
 
         <section>
-          <h1>Deliverables</h1>
+          <h3 className=''>Deliverables</h3>
           <ol>
             Students working on this case study must produce the following:
             <li>

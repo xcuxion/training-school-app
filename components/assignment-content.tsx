@@ -1,12 +1,12 @@
 import React from 'react'
 
-interface CaseContentProps {
+interface AssignmentContentProps {
     title: string;
     body?: string;
     listedContent?: string[]
 }
 
-const CaseContent = ({title, body, listedContent}: CaseContentProps) => {
+const AssignmentContent = ({title, body, listedContent}: AssignmentContentProps) => {
   return (
     <div>
         <h1 className="text-lg font-semibold">{title}</h1>
@@ -27,4 +27,4 @@ const CaseContent = ({title, body, listedContent}: CaseContentProps) => {
   )
 }
 
-export default CaseContent
+export default AssignmentContent
