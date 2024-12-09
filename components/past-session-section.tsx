@@ -2,7 +2,7 @@ import React from 'react'
 
 const PastSessionSection = () => {
   return (
-    <div>
+    <div className=''>
         
     </div>
   )
