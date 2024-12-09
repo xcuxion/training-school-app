@@ -8,7 +8,7 @@ export const names = ["Yasmins"];
 const MainContent = ({children}: {children: React.ReactNode}) => {
 
   return (
-    <div className='w-2/3 '>
+    <div className='w-2/3 p-4'>
       {children}
     </div>
   )
