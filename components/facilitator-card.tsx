@@ -16,7 +16,7 @@ export interface IFacilitator {
 
 const FacilitatorCard = ({image, name, link,role, linkedIn, email, summary, x}: IFacilitator) => {
   return (
-    <div className='w-full bg-school-light p-2'>
+    <div className='w-full bg-school-light p-2 h-[200px]'>
         <h3 className="font-medium">Facilitator</h3>
         <div className="flex">
             <Image src={image} alt='facilitator image' width={45} height={45} className='w-[60px] h-[60px] object-cover rounded-md mr-2' />
@@ -31,21 +31,21 @@ const FacilitatorCard = ({image, name, link,role, linkedIn, email, summary, x}: 
             {
                 email && (
                     <Link href={email}>
-                        <Image src={'/icons/linkedin.png'} alt='icon' width={24} height={24} className=''/>
+                        <Image src={'/icons/linkedIn.png'} alt='icon' width={24} height={24} className=''/>
                     </Link>
                 )
             }
             {
                 linkedIn && (
                     <Link href={linkedIn}>
-                        <Image src={'/icons/linkedin.png'} alt='icon' width={24} height={24} className=''/>
+                        <Image src={'/icons/linkedIn.png'} alt='icon' width={24} height={24} className=''/>
                     </Link>
                 )
             }
             {
                 x && (
                     <Link href={x}>
-                        <Image src={'/icons/linkedin.png'} alt='icon' width={24} height={24} className=''/>
+                        <Image src={'/icons/linkedIn.png'} alt='icon' width={24} height={24} className=''/>
                     </Link>
                 )
             }

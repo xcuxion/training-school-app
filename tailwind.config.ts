@@ -13,7 +13,7 @@ const config: Config = {
 		colors: {
 			school: {
 				primary: '#9D2292',
-				light: '#F0F4F8',
+				light: '#FFF9FF',
 				secondary: '#FFF0FE',
 				neutral: '#f5f5f6'
 			},

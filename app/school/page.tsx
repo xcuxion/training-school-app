@@ -25,7 +25,7 @@ const page = () => {
     <div className="w-full p-4 flex flex-row gap-4 items-start ">
       <MainContent>
         <UpcomingSession/>
-        <div className="w-full grid grid-cols-2 gap-x-4">
+        <div className="w-full grid grid-cols-2 gap-x-4 mt-4">
           <PendingTasks/>
           <FacilitatorCard {...facilitatorData}/>
         </div>
