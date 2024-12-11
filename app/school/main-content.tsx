@@ -5,10 +5,10 @@ import { BiLogoLinkedinSquare } from "react-icons/bi";
 import { BsTwitterX } from "react-icons/bs";
 
 export const name = "Jessica";
-const MainContent = ({children}: {children: React.ReactNode}) => {
+const MainContent = ({children, className}: {children: React.ReactNode, className?:string}) => {
 
   return (
-    <div className='w-2/3 p-4'>
+    <div className={`w-2/3 p-4 ${className} `}>
       {children}
     </div>
   )

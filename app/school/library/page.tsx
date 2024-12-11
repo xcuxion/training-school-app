@@ -26,7 +26,7 @@ const BookCard = () => {
 const Page = () => {
   return (
     <div className="flex w-full">
-      <MainContent>
+      <MainContent className="w-full">
         <div className="flex-1 p-4 ">
           <div className="mb-6 bg-blue-100 p-4 relative">
             <p className="text-xl font-bold">Discover</p>
@@ -88,7 +88,6 @@ const Page = () => {
           </div>
         </div>
       </MainContent>
-      <SideSection />
     </div>
   );
 };

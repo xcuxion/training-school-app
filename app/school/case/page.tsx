@@ -35,7 +35,6 @@ const page = () => {
       <SideSection>
         <CaseResources/>
       </SideSection>
-
     </>
   );
 };

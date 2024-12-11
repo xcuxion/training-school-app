@@ -22,7 +22,7 @@ const facilitatorData: IFacilitator = {
 
 const page = () => {
   return (
-    <div className="w-full p-4 flex flex-row gap-4 items-start ">
+    <div className="w-full flex flex-row gapx-4 items-start ">
       <MainContent>
         <UpcomingSession/>
         <div className="w-full grid grid-cols-2 gap-x-4 mt-4">
@@ -34,7 +34,7 @@ const page = () => {
       <SideSection>
         <ProfileCard />
         <TodoSection />
-        <div>
+        <div className="w-full h-[125px] bg-school-primary">
           <Image src={"/images/tasks.svg"} alt="" width={80} height={80} />
         </div>
       </SideSection>

@@ -6,7 +6,7 @@ import { Button } from './ui/button'
 const UpcomingSession = () => {
   return (
     <>
-      <div>
+      <div className='w-full bg-white sticky top-0 py-2'>
         <h1 className="font-semibold text-xl">Hello</h1>
         <h3>Welcome Back, {name}! </h3>
       </div >
