@@ -1,0 +1,221 @@
+{
+    "books": [
+        {
+            "id": 1,
+            "title": "Programming for Computations - Python",
+            "subtitle": "A Gentle Introduction to Numerical Simulations with Python 3.6",
+            "authors": "Svein Linge, Hans Petter Langtangen",
+            "image": "https://www.dbooks.org/img/books/3030168778s.jpg",
+            "url": "https://www.dbooks.org/programming-for-computations-python-3030168778/"
+        },
+        {
+            "id": 2,
+            "title": "Programming for Computations - Python",
+            "subtitle": "A Gentle Introduction to Numerical Simulations with Python",
+            "authors": "Svein Linge, Hans Petter Langtangen",
+            "image": "https://www.dbooks.org/img/books/3319324284s.jpg",
+            "url": "https://www.dbooks.org/programming-for-computations-python-3319324284/"
+        },
+        {
+            "id": 3,
+            "title": "Invent Your Own Computer Games with Python",
+            "subtitle": "A beginner&#039;s guide to computer programming in Python",
+            "authors": "Al Sweigart",
+            "image": "https://www.dbooks.org/img/books/1503212300s.jpg",
+            "url": "https://www.dbooks.org/invent-your-own-computer-games-with-python-1503212300/"
+        },
+        {
+            "id": 4,
+            "title": "Coffee Break Python Slicing",
+            "subtitle": "24 Workouts to Master Slicing in Python, Once and for All",
+            "authors": "Christian Mayer",
+            "image": "https://www.dbooks.org/img/books/1586s.jpg",
+            "url": "https://www.dbooks.org/coffee-break-python-slicing-1586/"
+        },
+        {
+            "id": 5,
+            "title": "Create Graphical User Interfaces with Python",
+            "subtitle": "How to build windows, buttons, and widgets for your Python projects",
+            "authors": "Martin O&#039;Hanlon, Laura Sach",
+            "image": "https://www.dbooks.org/img/books/1912047918s.jpg",
+            "url": "https://www.dbooks.org/create-graphical-user-interfaces-with-python-1912047918/"
+        },
+        {
+            "id": 6,
+            "title": "Solving PDEs in Python",
+            "subtitle": "The FEniCS Tutorial I",
+            "authors": "Hans Petter Langtangen, Anders Logg",
+            "image": "https://www.dbooks.org/img/books/3319524623s.jpg",
+            "url": "https://www.dbooks.org/solving-pdes-in-python-3319524623/"
+        },
+        {
+            "id": 7,
+            "title": "Hacking Secret Ciphers with Python",
+            "subtitle": "A beginner&#039;s guide to cryptography and computer programming with Python",
+            "authors": "Al Sweigart",
+            "image": "https://www.dbooks.org/img/books/1482614375s.jpg",
+            "url": "https://www.dbooks.org/hacking-secret-ciphers-with-python-1482614375/"
+        },
+        {
+            "id": 8,
+            "title": "Making Games with Python &amp; Pygame",
+            "subtitle": "A guide to programming with graphics, animation, and sound",
+            "authors": "Al Sweigart",
+            "image": "https://www.dbooks.org/img/books/1469901730s.jpg",
+            "url": "https://www.dbooks.org/making-games-with-python-pygame-1469901730/"
+        },
+        {
+            "id": 9,
+            "title": "Python Machine Learning Projects",
+            "subtitle": "",
+            "authors": "Lisa Tagliaferri, Michelle Morales, Ellie Birkbeck, Alvin Wan",
+            "image": "https://www.dbooks.org/img/books/099977302Xs.jpg",
+            "url": "https://www.dbooks.org/python-machine-learning-projects-099977302x/"
+        },
+        {
+            "id": 10,
+            "title": "Introduction to Python for Computational Science and Engineering",
+            "subtitle": "A beginner&#039;s guide",
+            "authors": "Hans Fangohr",
+            "image": "https://www.dbooks.org/img/books/1515s.jpg",
+            "url": "https://www.dbooks.org/introduction-to-python-for-computational-science-and-engineering-1515/"
+        },
+        {
+            "id": 11,
+            "title": "How To Code in Python 3",
+            "subtitle": "",
+            "authors": "Lisa Tagliaferri",
+            "image": "https://www.dbooks.org/img/books/0999773011s.jpg",
+            "url": "https://www.dbooks.org/how-to-code-in-python-3-0999773011/"
+        },
+        {
+            "id": 12,
+            "title": "A Whirlwind Tour of Python",
+            "subtitle": "",
+            "authors": "Jake VanderPlas",
+            "image": "https://www.dbooks.org/img/books/1491964650s.jpg",
+            "url": "https://www.dbooks.org/a-whirlwind-tour-of-python-1491964650/"
+        },
+        {
+            "id":13,
+            "title": "Python Notes for Professionals",
+            "subtitle": "",
+            "authors": "Stack Overflow Community",
+            "image": "https://www.dbooks.org/img/books/5591650063s.jpg",
+            "url": "https://www.dbooks.org/python-notes-for-professionals-5591650063/"
+        },
+        {
+            "id": 14,
+            "title": "The Coder&#039;s Apprentice",
+            "subtitle": "Learning Programming with Python 3",
+            "authors": "Pieter Spronck",
+            "image": "https://www.dbooks.org/img/books/5595844388s.jpg",
+            "url": "https://www.dbooks.org/the-coders-apprentice-5595844388/"
+        },
+        {
+            "id": 15,
+            "title": "Introduction to Scientific Programming with Python",
+            "subtitle": "",
+            "authors": "Joakim Sundnes",
+            "image": "https://www.dbooks.org/img/books/3030503569s.jpg",
+            "url": "https://www.dbooks.org/introduction-to-scientific-programming-with-python-3030503569/"
+        },
+        {
+            "id": 16,
+            "title": "Snake Wrangling for Kids",
+            "subtitle": "Learning to Program with Python",
+            "authors": "Jason Briggs",
+            "image": "https://www.dbooks.org/img/books/5614606548s.jpg",
+            "url": "https://www.dbooks.org/snake-wrangling-for-kids-5614606548/"
+        },
+        {
+            "id": 17,
+            "title": "Python for Everybody",
+            "subtitle": "Exploring Data Using Python 3",
+            "authors": "Dr. Charles Severance",
+            "image": "https://www.dbooks.org/img/books/1530051126s.jpg",
+            "url": "https://www.dbooks.org/python-for-everybody-1530051126/"
+        },
+        {
+            "id": 18,
+            "title": "Python for You and Me",
+            "subtitle": "",
+            "authors": "Kushal Das",
+            "image": "https://www.dbooks.org/img/books/5616397074s.jpg",
+            "url": "https://www.dbooks.org/python-for-you-and-me-5616397074/"
+        },
+        {
+            "id": 19,
+            "title": "Open Workbook of Cryptology",
+            "subtitle": "A project-based introduction to crypto in Python",
+            "authors": "Jonathan A. Poritz",
+            "image": "https://www.dbooks.org/img/books/5656491028s.jpg",
+            "url": "https://www.dbooks.org/open-workbook-of-cryptology-5656491028/"
+        },
+        {
+            "id": 20,
+            "title": "Learn Python the right way",
+            "subtitle": "How to think like a computer scientist",
+            "authors": "Peter Wentworth, Jeffrey Elkner, Allen B. Downey, Chris Meyers",
+            "image": "https://www.dbooks.org/img/books/5670579292s.jpg",
+            "url": "https://www.dbooks.org/learn-python-the-right-way-5670579292/"
+        },
+        {
+            "id": 21,
+            "title": "Think Python",
+            "subtitle": "How to Think Like a Computer Scientist",
+            "authors": "Allen Downey",
+            "image": "https://www.dbooks.org/img/books/1491939362s.jpg",
+            "url": "https://www.dbooks.org/think-python-1491939362/"
+        },
+        {
+            "id": 22,
+            "title": "Modeling and Simulation in Python",
+            "subtitle": "",
+            "authors": "Allen Downey",
+            "image": "https://www.dbooks.org/img/books/847s.jpg",
+            "url": "https://www.dbooks.org/modeling-and-simulation-in-python-847/"
+        },
+        {
+            "id": 23,
+            "title": "Fundamentals of Python Programming",
+            "subtitle": "",
+            "authors": "Richard L. Halterman",
+            "image": "https://www.dbooks.org/img/books/1200s.jpg",
+            "url": "https://www.dbooks.org/fundamentals-of-python-programming-1200/"
+        },
+        {
+            "id": 24,
+            "title": "A Byte of Python",
+            "subtitle": "",
+            "authors": "Swaroop C H",
+            "image": "https://www.dbooks.org/img/books/1219s.jpg",
+            "url": "https://www.dbooks.org/a-byte-of-python-1219/"
+        },
+        {
+            "id": 25,
+            "title": "Annotated Algorithms in Python",
+            "subtitle": "With applications in Physics, Biology, and Finance",
+            "authors": "Massimo Di Pierro",
+            "image": "https://www.dbooks.org/img/books/0991160401s.jpg",
+            "url": "https://www.dbooks.org/annotated-algorithms-in-python-0991160401/"
+        },
+        {
+            "id": 26,
+            "title": "Biopython: Tutorial and Cookbook",
+            "subtitle": "Python Tools for Computational Molecular Biology",
+            "authors": "Jeff Chang, Brad Chapman, Iddo Friedberg, Thomas Hamelryck, Michiel de Hoon, Peter Cock, Tiago Antao, Eric Talevich, Bartek Wilczyński",
+            "image": "https://www.dbooks.org/img/books/1542s.jpg",
+            "url": "https://www.dbooks.org/biopython-tutorial-and-cookbook-1542/"
+        },
+        {
+            "id": 27,
+            "title": "How to Make Mistakes in Python",
+            "subtitle": "",
+            "authors": "Mike Pirnat",
+            "image": "https://www.dbooks.org/img/books/1491934476s.jpg",
+            "url": "https://www.dbooks.org/how-to-make-mistakes-in-python-1491934476/"
+        }
+        ]
+    
+    }
