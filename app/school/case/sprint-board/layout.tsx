@@ -2,7 +2,7 @@ import React from 'react'
 
 const layout = ({children} : {children: React.ReactNode}) => {
   return (
-    <div className='p-4'>
+    <div className='w-full p-4'>
         {children}
     </div>
   )

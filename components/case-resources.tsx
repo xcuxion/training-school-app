@@ -41,11 +41,11 @@ const CaseResources = () => {
             <Image src={'/images/sprint-image.svg'} alt='image' width={150} height={150} className=''/>
             <h2 className="text-lg font-medium">Case Sprint Board</h2>
             <p className="text-center">Check the workflow and project task assignments from the board.</p>
-            <Link href={'/school/case/sprint-board'}>
-                <Button className='bg-school-primary text-white rounded-full'>
+            <Button className='bg-school-primary text-white rounded-full' asChild>
+                <Link href={'/school/case/sprint-board'}>
                     Enter Sprint
-                </Button>           
-            </Link>
+                </Link>
+            </Button>           
         </div>
     </div>
   )
