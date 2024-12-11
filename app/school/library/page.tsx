@@ -5,6 +5,7 @@ import Image from "next/image";
 
 const BookCard = () => {
   return (
+
     <div className="bg-white p-4 rounded-md shadow-md w-full flex">
       <div className="w-1/2 h-full">
         <Image
@@ -41,7 +42,6 @@ const Page = () => {
             </div>
             <h1 className="text-2xl font-bold mt-4 mb-2">Recommendation</h1>
             <p>From Us</p>
-
             <div className="absolute bottom-[-40px] left-0 right-0 justify-between px-8 flex gap">
               <Image
                 src="/icons/bgIcon.jpg"

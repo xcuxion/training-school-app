@@ -1,36 +1,41 @@
-import { names } from '@/app/school/main-content'
+import { name } from '@/app/school/main-content'
 import Image from 'next/image'
 import React from 'react'
+import { Button } from './ui/button'
 
 const UpcomingSession = () => {
   return (
     <>
       <div>
         <h1 className="font-semibold text-xl">Hello</h1>
-        <h3>Welcome Back, {names}! </h3>
+        <h3>Welcome Back, {name}! </h3>
       </div >
-      <section className="flex space-x-36 bg-[#ffe7fe] px-3 py-1 rounded-lg ">
-          <div>
-            <h4 className="text-sm py-3">Upcoming Live Session</h4>
-            {new Date().toDateString()} <br />
-            {new Date().toLocaleTimeString()}
-            <button
-              type="submit"
-              className="bg-blue-800 text-white rounded-lg p-1 mt-3 mb-3 text-sm block px-2"
-            >
-              Preview Materials
-            </button>
+      <section className="flex flex-start bg-school-secondary p-4 mt-4 rounded-lg ">
+          <div className=''>
+            <h4 className="text-sm font-semibold">Upcoming Live Session</h4>
+            <div className="mt-8">
+              <h1 className="text-4xl font-semibold">
+                {new Date().toDateString()} 
+              </h1>
+              <p className="text-2xl my-1 font-medium">
+                {new Date().toLocaleTimeString()}
+              </p>
+              <Button
+                variant="default"
+                className="bg-school-primary text-white rounded-full"
+              >
+                Preview Materials
+              </Button>
+            </div>
           </div>
 
-          <div>
             <Image
               src={"/VectorImg/overview.png"}
               alt="Logo"
-              width={150}
-              height={20}
-              className="mb-1 "
+              width={250}
+              height={200}
+              className="mb-1 w-[250px] h-[200px] object-cover"
             />
-          </div>
       </section>
     </>
   )

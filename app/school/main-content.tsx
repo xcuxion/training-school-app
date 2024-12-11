@@ -4,11 +4,11 @@ import { GoMail } from "react-icons/go";
 import { BiLogoLinkedinSquare } from "react-icons/bi";
 import { BsTwitterX } from "react-icons/bs";
 
-export const names = ["Yasmins"];
+export const name = "Jessica";
 const MainContent = ({children}: {children: React.ReactNode}) => {
 
   return (
-    <div className='w-2/3 '>
+    <div className='w-2/3 p-4'>
       {children}
     </div>
   )

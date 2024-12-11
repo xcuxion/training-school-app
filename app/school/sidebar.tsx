@@ -65,7 +65,7 @@ const Sidebar = () => {
           </p>
           <Button
             variant={"default"}
-            className="bg-school-primary text-white rounded-full p-2 text-sm"
+            className="bg-school-primary text-white rounded-full text-sm"
           >
             Go to Guild
           </Button>
