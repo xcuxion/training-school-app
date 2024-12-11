@@ -32,10 +32,10 @@ const page = () => {
         <PastSessionSection/>
       </MainContent>
       <SideSection>
-        <ProfileCard/>
-        <TodoSection/>
+        <ProfileCard />
+        <TodoSection />
         <div>
-            <Image src={'/images/tasks.svg'} alt='' width={80} height={80} />
+          <Image src={"/images/tasks.svg"} alt="" width={80} height={80} />
         </div>
       </SideSection>
     </div>
