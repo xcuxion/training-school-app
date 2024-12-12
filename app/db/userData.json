@@ -1,0 +1,16 @@
+{
+    "user": {
+        "name": "",
+        "email": "",
+        "school": "",
+        "aspiration": "",
+        "assignments": "",
+        "mentor": "",
+        "tasks": "",
+        "password": "",
+        "dateOfBirth": "",
+        "points": "",
+        "club": "",
+        "gender": ""
+    }
+}
