@@ -1,6 +1,7 @@
 {
     "tasks": [
         {
+            "id": "1",
             "title": "Design UI for landing page",
             "summary": "In designing the UI, make sure to include call to action buttons for registering and logging users into their account. Also make use of lots of visuals that trigger an emotional attachment.",
             "assignees": [
@@ -14,6 +15,7 @@
             "status": "To-do"
         },
         {
+            "id": "2",
             "title": "Set up user authentication service",
             "summary": "Implement secure user authentication using OAuth2 and ensure compatibility with Google and Facebook login.",
             "assignees": [
@@ -27,6 +29,7 @@
             "status": "In Progress"
         },
         {
+            "id": "3",
             "title": "Develop API for patient records",
             "summary": "Create RESTful APIs for managing patient records, ensuring encryption for sensitive data.",
             "assignees": [
@@ -40,6 +43,7 @@
             "status": "To-do"
         },
         {
+            "id": "4",
             "title": "Design pharmacy admin dashboard",
             "summary": "Develop a dashboard interface for pharmacy admins to manage inventory, employees, and advertisements.",
             "assignees": [
@@ -53,6 +57,7 @@
             "status": "To-do"
         },
         {
+            "id": "5",
             "title": "Implement CI/CD pipeline",
             "summary": "Set up a Jenkins-based CI/CD pipeline for automated testing and deployment.",
             "assignees": [
@@ -66,6 +71,7 @@
             "status": "In Progress"
         },
         {
+            "id": "6",
             "title": "Write unit tests for consultation module",
             "summary": "Develop and execute unit tests for the consultation module, focusing on physician-patient interactions.",
             "assignees": [
@@ -79,6 +85,7 @@
             "status": "To-do"
         },
         {
+            "id": "7",
             "title": "Create a specialist rating system",
             "summary": "Develop a rating and review system for patients to leave feedback on specialists.",
             "assignees": [
@@ -102,6 +109,7 @@
             "status": "To-do"
         },
         {
+            "id": "8",
             "title": "Integrate health insurance verification",
             "summary": "Implement a feature for verifying patient insurance details during registration and consultations.",
             "assignees": [
@@ -120,6 +128,7 @@
             "status": "To-do"
         },
         {
+            "id": "9",
             "title": "Optimize platform for mobile devices",
             "summary": "Ensure all UI components are responsive and optimized for mobile users.",
             "assignees": [
@@ -133,6 +142,8 @@
             "status": "In Progress"
         },
         {
+            "id": "10",
+
             "title": "Develop marketing email templates",
             "summary": "Create templates for onboarding and promotional emails targeting pharmacy and hospital admins.",
             "assignees": [
@@ -146,6 +157,7 @@
             "status": "To-do"
         },
         {
+            "id": "11",
             "title": "Set up system monitoring tools",
             "summary": "Implement monitoring tools for server health and real-time application performance.",
             "assignees": [
