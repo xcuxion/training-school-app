@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import "./globals.css";
-import { Exo_2, Nunito, Nunito_Sans, Roboto } from "next/font/google";
+import { Exo_2, Nunito_Sans } from "next/font/google";
 import { Toaster } from "@/components/ui/sonner";
 
 
@@ -12,7 +12,7 @@ const exo2 = Exo_2({
 
 const nunito_Sans = Nunito_Sans({
   subsets: ["latin"],
-  weight: ["200","300", "400", "500"]
+  weight: ["300", "400", "600", "800"]
 })
 
 export const metadata: Metadata = {
