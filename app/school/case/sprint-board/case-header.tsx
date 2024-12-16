@@ -2,7 +2,7 @@ import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar'
 
 import React from 'react'
 
-type Person = {
+export type Person = {
   name: string
   email: string
   image?: string
