@@ -19,11 +19,11 @@ const FacilitatorCard = ({image, name, link,role, linkedIn, email, summary, x}: 
     <div className='w-full bg-school-light border p-2 h-[200px]'>
         <h3 className="font-medium">Facilitator</h3>
         <div className="flex">
-            <Image src={image} alt='facilitator image' width={45} height={45} className='w-[60px] h-[60px] object-cover rounded-md mr-2' />
+            <Image src={image} alt='facilitator image' width={60} height={60} className='w-[60px] h-[60px] object-cover rounded-md mr-2' />
             <div className="flex flex-col">
                 <h3 className="text-lg">{name}</h3>
-                <p className='text-sm'>{role && role}</p>
-                <p className='text-xs '>{link && link}</p>
+                <p className='text-base leading-none'>{role && role}</p>
+                <p className='text-sm '>{link && link}</p>
             </div>
         </div>
         <p>{summary}</p>

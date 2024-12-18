@@ -1,12 +1,13 @@
-import React from 'react';
+import Image from "next/image";
+import React from "react";
 import { FiPlus } from "react-icons/fi";
 
 const todayDate = new Date().getDay();
-const month = new Date().toLocaleString('default', { month: 'short' });
+const month = new Date().toLocaleString("default", { month: "short" });
 
 const displayDays = () => {
-  const days = []; 
-  for (let index = 1; index <= 6; index++) { 
+  const days = [];
+  for (let index = 1; index <= 5; index++) {
     days.push(index + todayDate);
   }
   return days;
@@ -14,20 +15,19 @@ const displayDays = () => {
 
 interface Task {
   content: string;
-  state: 'Uncompleted' | 'Completed';
+  state: "Uncompleted" | "Completed";
   period: string;
 }
 
 const Tasks = ({ content, state, period }: Task) => {
   return (
-    <div className='m-3 p-2 bg-violet-100'>
-      <p>{content}</p>
-      <div className='flex justify-between mt-2'>
-         <span className={`status ${state}`}>
-          {state === 'Completed' ? 'Completed' : 'UnCompleted'}
+    <div className="p-2 bg-white border rounded-md">
+      <p className="font-semibold">{content}</p>
+      <div className="flex items-center space-x-10 mt-1 text-sm">
+        <span className="">
+          {state}
         </span>
-        <p>{period}</p>
-       
+        <p className="">{period}</p>
       </div>
     </div>
   );
@@ -36,41 +36,44 @@ const Tasks = ({ content, state, period }: Task) => {
 const TodoSection = () => {
   return (
     <>
-      <div className="w-full h-[500px] bg-school-neutral p-6">
-        <div className='flex justify-between mb-4'>
-        <h1>To-Dos</h1>
-        <FiPlus className='text-4xl bg-slate-200 px-2 rounded-lg hover:bg-slate-300 '/>
+      <div className="w-full bg-school-light border rounded-md p-3">
+        <div className="flex justify-between">
+          <h1 className="text-lg font-semibold leading-tight">To-Dos</h1>
+          <span className="w-6 h-6 flex flex-center bg-school-secondary rounded-sm">
+            <FiPlus/>
+          </span>
         </div>
-        
-        <div className=" w-full mb-6 flex justify-between">
-          {
-            displayDays().map((day, index) => (
-              <div key={index} className={`flex flex-col px-2 py-1 rounded-sm items-center justify-center ${index === 0? 'bg-violet-200': ' '}`}>
-                <span className="">{day}</span>
-                <span className="">{month}</span>
-              </div>
-            ))
-          }
+        <div className=" w-full grid grid-cols-5 my-3">
+          {displayDays().map((day, index) => (
+            <div
+              key={index}
+              className={`flex flex-col px-2 py-1 rounded-sm items-center justify-center ${
+                index === 0 ? "bg-school-secondary" : "opacity-60"
+              }`}
+            >
+              <span className="text-xl font-semibold">{day}</span>
+              <span className="text-sm">{month}</span>
+            </div>
+          ))}
         </div>
-        
-        <div>
+
+        <div className="space-y-2">
           <Tasks
-          content="Complete use case for E-commerce System"
-          state="Uncompleted"
-          period="10:00am - 2:34pm"
-        />
-        <Tasks
-          content="Complete use case for E-commerce System"
-          state="Uncompleted"
-          period="10:00am - 2:34pm"
-        />
-        <Tasks
-          content="Complete use case for E-commerce System"
-          state="Uncompleted"
-          period="10:00am - 2:34pm"
-        />
+            content="Complete use case for E-commerce System"
+            state="Uncompleted"
+            period="10:00am - 2:34pm"
+          />
+          <Tasks
+            content="Complete use case for E-commerce System"
+            state="Uncompleted"
+            period="10:00am - 2:34pm"
+          />
+          <Tasks
+            content="Complete use case for E-commerce System"
+            state="Uncompleted"
+            period="10:00am - 2:34pm"
+          />
         </div>
-        
       </div>
     </>
   );

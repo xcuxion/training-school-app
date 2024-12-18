@@ -34,8 +34,12 @@ const page = () => {
       <SideSection>
         <ProfileCard />
         <TodoSection />
-        <div className="w-full h-[125px] bg-school-primary">
-          <Image src={"/images/tasks.svg"} alt="" width={80} height={80} />
+        <div className="w-full h-[125px] bg-school-primary rounded-md flex px-6 items-center justify-between">
+          <div className="text-white">
+            <h1 className="text-4xl font-semibold">237</h1>
+            <p className="text-lg">Achievement Points</p>
+          </div>
+          <Image src={"/images/trophy.svg"} alt="" width={80} height={80} />
         </div>
       </SideSection>
     </div>

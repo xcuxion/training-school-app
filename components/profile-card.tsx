@@ -12,7 +12,7 @@ interface IUserProfile {
 const ProfileCard = () => {
   return (
     <>
-      <div className="bg-school-neutral w-full h-[225px]">
+      <div className="bg-school-light border rounded-md w-full p-2">
         <div className="flex flex-col flex-center">
           <Image
             src={"/images/jess.jpeg"}
@@ -24,7 +24,7 @@ const ProfileCard = () => {
           <h3 className="text-xl font-medium">Jessica Baze</h3>
           <p>Aspiring Software Developer</p>
         </div>
-        <div className="flex justify-center space-x-6 m-2">
+        <div className="flex justify-center space-x-4 m-2">
           <FaLinkedin />
           <MdOutlineEmail />
           <BsTwitterX />
