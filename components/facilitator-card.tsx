@@ -14,6 +14,18 @@ export interface IFacilitator {
 
 }
 
+const facilitatorData: IFacilitator = {
+    image: '/images/bayat.jpg',
+    name: 'Bayat Osman',
+    summary: 'Excited about innovations in blockchain technology and financial forecasting',
+    email: 'bayatosman123@gmail.com',
+    link: 'bayat.com',
+    linkedIn: 'https://linkedin.com/in/bayat-123',
+    role: 'Software Engineer',
+    x: 'https://x.com/bayati'
+  }
+  
+
 const FacilitatorCard = ({image, name, link,role, linkedIn, email, summary, x}: IFacilitator) => {
   return (
     <div className='w-full bg-school-light border p-2 h-[200px]'>
@@ -55,3 +67,5 @@ const FacilitatorCard = ({image, name, link,role, linkedIn, email, summary, x}: 
 }
 
 export default FacilitatorCard
+
+

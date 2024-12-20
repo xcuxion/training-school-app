@@ -6,18 +6,26 @@ import ProfileCard from "@/components/profile-card";
 import TodoSection from "@/components/todo-section";
 import UpcomingSession from "@/components/upcoming-session";
 import PastSessionSection from "@/components/past-session-section";
-import PendingTasks from "@/components/pending-tasks";
-import FacilitatorCard, { IFacilitator } from "@/components/facilitator-card";
+import ModuleDetails from "@/components/module-details";
 
-const facilitatorData: IFacilitator = {
-  image: '/images/bayat.jpg',
-  name: 'Bayat Osman',
-  summary: 'Excited about innovations in blockchain technology and financial forecasting',
-  email: 'bayatosman123@gmail.com',
-  link: 'bayat.com',
-  linkedIn: 'https://linkedin.com/in/bayat-123',
-  role: 'Software Engineer',
-  x: 'https://x.com/bayati'
+const moduleData = {
+  name: 'Software Engineering',
+  image: '/images/se.png',
+  resources: [
+    {
+      url: '',
+      title: 'Activities'
+    },
+    {
+      url: '',
+      title: 'Assignments'
+    },
+    {
+      url: '',
+      title: 'Course Materials'
+    },
+  ],
+  facilitator: 'Yaw Offeh'
 }
 
 const page = () => {
@@ -25,9 +33,8 @@ const page = () => {
     <div className="w-full flex flex-row gapx-4 items-start ">
       <MainContent>
         <UpcomingSession/>
-        <div className="w-full grid grid-cols-2 gap-x-4 mt-4">
-          <PendingTasks/>
-          <FacilitatorCard {...facilitatorData}/>
+        <div className="w-full mt-4">
+          <ModuleDetails {...moduleData}/>
         </div>
         <PastSessionSection/>
       </MainContent>

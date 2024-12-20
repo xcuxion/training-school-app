@@ -12,14 +12,14 @@ const links = [
     label: 'Overview',
   },
   {
-    icon: '/icons/assignment-sidebar.svg',
-    href: '/school/assignment',
-    label: 'Assignment',
+    icon: '/icons/discussion.svg',
+    href: '/school/discussions',
+    label: 'Discussions',
   },
   {
-    icon: '/icons/case.svg',
+    icon: '/icons/assignment-sidebar.svg',
     href: '/school/case',
-    label: 'Case Studies',
+    label: 'Case Study',
   },
   {
     icon: '/icons/library.svg',
@@ -32,7 +32,7 @@ const Sidebar = () => {
   const pathname = usePathname();
 
   return (
-    <div className="h-screen w-[250px] sticky top-0 left-0 p-4 flex flex-col items-center justify-between bg-white">
+    <div className="h-screen w-[250px] sticky top-0 left-0 p-4 flex flex-col items-center justify-between bg-white border-r">
       {/* Top Section */}
       <div className="flex items-center mb-12">
         <Image
