@@ -17,7 +17,10 @@ model Applicant {
   school  String  @db.VarChar(255)
   email  String  @db.VarChar(80)
   contact  String  @db.VarChar(10)
-  program  String   @db.VarChar()
+  programme  String   @db.VarChar()
+  level  String   @db.VarChar()
+  dateOfBirth  DateTime   @db.Time()
+
 }
 
 

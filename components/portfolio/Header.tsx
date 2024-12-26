@@ -14,7 +14,7 @@ const Header = () => {
           height={45}
           className="mr-2 w-[45px] h-[45px]"
         />
-        <h1 className="text-2xl font-bold md:visible">Technology Wrights</h1>
+        <h1 className="text-2xl font-bold md:visible">XCUXION</h1>
       </div>
       <Button variant={"default"} className="rounded-full h-10">
         Open Portal {emojis.crystalBall}{" "}
