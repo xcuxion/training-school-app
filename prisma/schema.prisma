@@ -8,6 +8,15 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
+model Enquiry{
+  id String @id @default(uuid())
+  createdAt   DateTime  @default(now())
+  updatedAt   DateTime  @updatedAt
+  name  String  @db.VarChar(100)
+  email  String  @db.VarChar(80)
+  question String @db.VarChar()
+}
+
 model Applicant {
   id  String  @id @default(uuid())
   createdAt   DateTime  @default(now())
@@ -20,11 +29,11 @@ model Applicant {
   programme  String   @db.VarChar()
   level  String   @db.VarChar()
   dateOfBirth  DateTime   @db.Time()
-
+  accepted Boolean @db.Boolean()
 }
 
 
-model Wright {
+model Member {
   id  String  @id @default(uuid())
   createdAt   DateTime  @default(now())
   updatedAt   DateTime  @updatedAt
