@@ -17,33 +17,29 @@ model Enquiry{
   question String @db.VarChar()
 }
 
-model Applicant {
+model Student {
   id  String  @id @default(uuid())
   createdAt   DateTime  @default(now())
   updatedAt   DateTime  @updatedAt
-  name  String  @db.VarChar(100)
   gender  String  @db.VarChar(8)
   school  String  @db.VarChar(255)
-  email  String  @db.VarChar(80)
   contact  String  @db.VarChar(10)
   programme  String   @db.VarChar()
   level  String   @db.VarChar()
   dateOfBirth  DateTime   @db.Time()
   accepted Boolean @db.Boolean()
+  batch   String @db.VarChar()
 }
 
-
-model Member {
+model Profile {
   id  String  @id @default(uuid())
   createdAt   DateTime  @default(now())
   updatedAt   DateTime  @updatedAt
   name  String  @db.VarChar(100)
-  gender  String  @db.VarChar(8)
-  school  String  @db.VarChar(255)
+  gender  String?  @db.VarChar(8)
   email  String @unique @db.VarChar(80)
-  contact  String  @db.VarChar(10)
-  batch   String @db.VarChar()
-  
+  role Role @default(USER)
+  password String @db.VarChar()
 }
 
 model Facilitator {
@@ -52,7 +48,25 @@ model Facilitator {
   createdAt   DateTime  @default(now())
   updatedAt   DateTime  @updatedAt
   name  String  @db.VarChar(100)
-  description  String  @db.VarChar(255)
+  bio  String  @db.VarChar(255)
   email  String  @db.VarChar(80)
-  contact  String  @db.VarChar(10) 
+  password String @db.VarChar()
+}
+
+model Engineer {
+  id  String  @id @default(uuid())
+  gender  String  @db.VarChar(8)
+  createdAt   DateTime  @default(now())
+  updatedAt   DateTime  @updatedAt
+  name  String  @db.VarChar(100)
+  bio  String  @db.VarChar(255)
+  email  String  @db.VarChar(80)
+  skillsets  String[]  @db.VarChar(10) 
+}
+
+enum Role {
+  USER
+  DIRECTOR
+  FACILITATOR
+
 }
