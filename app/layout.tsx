@@ -28,10 +28,9 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body
-        className={`${nunito_Sans.className} ${exo2.className} antialiased bg-primary-light text-color-light`}
+        className={`${nunito_Sans.className} ${exo2.className} antialiased  text-color-light`}
       >
         <Toaster/>
-
         {children}
       </body>
     </html>

@@ -8,65 +8,91 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
-model Enquiry{
-  id String @id @default(uuid())
-  createdAt   DateTime  @default(now())
-  updatedAt   DateTime  @updatedAt
-  name  String  @db.VarChar(100)
-  email  String  @db.VarChar(80)
-  question String @db.VarChar()
+model Enquiry {
+  id        String   @id @default(uuid())
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  name      String   @db.VarChar(100)
+  email     String   @db.VarChar(80)
+  question  String   @db.VarChar()
 }
 
 model Student {
-  id  String  @id @default(uuid())
-  createdAt   DateTime  @default(now())
-  updatedAt   DateTime  @updatedAt
-  gender  String  @db.VarChar(8)
-  school  String  @db.VarChar(255)
-  contact  String  @db.VarChar(10)
-  programme  String   @db.VarChar()
-  level  String   @db.VarChar()
-  dateOfBirth  DateTime   @db.Time()
-  accepted Boolean @db.Boolean()
-  batch   String @db.VarChar()
+  reference  String  @id @default(uuid())
+  gender     String  @db.VarChar(8)
+  school     School
+  contact    String  @db.VarChar(10)
+  programme  String  @db.VarChar()
+  level      String  @db.VarChar()
+  dateOfBirth DateTime @db.Time()
+  fees       Fee     @relation(fields: [feeId], references: [id])
+  feeId      String  @unique
+  batch      String  @db.VarChar()
 }
 
 model Profile {
-  id  String  @id @default(uuid())
-  createdAt   DateTime  @default(now())
-  updatedAt   DateTime  @updatedAt
-  name  String  @db.VarChar(100)
-  gender  String?  @db.VarChar(8)
-  email  String @unique @db.VarChar(80)
-  role Role @default(USER)
-  password String @db.VarChar()
+  id        String   @id @default(uuid())
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  name      String   @db.VarChar(100)
+  gender    Gender
+  email     String   @unique @db.VarChar(80)
+  password  String   @db.VarChar()
 }
 
 model Facilitator {
-  id  String  @id @default(uuid())
-  gender  String  @db.VarChar(8)
-  createdAt   DateTime  @default(now())
-  updatedAt   DateTime  @updatedAt
-  name  String  @db.VarChar(100)
-  bio  String  @db.VarChar(255)
-  email  String  @db.VarChar(80)
-  password String @db.VarChar()
+  id        String   @id @default(uuid())
+  bio       String   @db.VarChar(255)
+}
+
+model Fee {
+  id          String   @id @default(uuid())
+  scholarship Int      @db.Integer()
+  balance     Float    @db.DoublePrecision()
+  receipts    Receipt[]
+  student     Student? 
+  studentId   String?
+}
+
+model Receipt {
+  id          String   @id @default(uuid())
+  amount      Float    @db.DoublePrecision()
+  paymentMode String   @db.VarChar()
+  fee         Fee?     @relation(fields: [feeId], references: [id])
+  feeId       String?
+}
+
+model Project {
+  id          String     @id @default(uuid())
+  title       String     @db.VarChar(255)
+  description String     @db.VarChar()
+  engineers   Engineer[]
 }
 
 model Engineer {
-  id  String  @id @default(uuid())
-  gender  String  @db.VarChar(8)
-  createdAt   DateTime  @default(now())
-  updatedAt   DateTime  @updatedAt
-  name  String  @db.VarChar(100)
-  bio  String  @db.VarChar(255)
-  email  String  @db.VarChar(80)
-  skillsets  String[]  @db.VarChar(10) 
+  reference  String    @id @default(uuid())
+  name       String    @db.VarChar(100)
+  bio        String    @db.VarChar(255)
+  project    Project?  @relation(fields: [projectId], references: [id])
+  projectId  String?
+  skillsets  String[]  @db.VarChar(10)
 }
 
-enum Role {
-  USER
-  DIRECTOR
-  FACILITATOR
+// model Experience {
 
+// }
+
+// model Education {
+
+// }
+
+enum Gender {
+  MALE
+  FEMALE
+  OTHER
+}
+
+enum School {
+  KNUST
+  UG
 }

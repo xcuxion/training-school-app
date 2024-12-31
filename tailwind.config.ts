@@ -29,6 +29,10 @@ const config: Config = {
   				light: '#4A90E2',
   				dark: '#0F3460'
   			},
+			brand: {
+				background: '#000',
+				foreground: "#E6D38D"
+			},
   			color: {
   				light: '#2D3748',
   				dark: '#E0E0E0'

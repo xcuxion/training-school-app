@@ -46,26 +46,27 @@ const people = [
 
 const page = () => {
   return (
-    <div className='px-10 py-4'>      
+    <div className='px-10 py-4 '>      
       <Header/>
-      <div className="">
+      <div className="flex flex-col items-center justify-center w-3/5 mx-auto">
         <h1 className="text-4xl font-bold">Empowering Dreams, Building Futures</h1>
-        <p className="text-lg text-center">At XCUXION, we turn aspirations into achievements. Whether you’re an aspiring technologist, a budding entrepreneur, or a skilled engineer, we provide the tools, knowledge, and opportunities you need to succeed. Are you ready to take the next step? Join XCUXION and start your journey today.</p>
+        <p className="text-lg text-center my-4">At XCUXION, we turn aspirations into achievements. Whether you’re an aspiring technologist, a budding entrepreneur, or a skilled engineer, we provide the tools, knowledge, and opportunities you need to succeed. Are you ready to take the next step? Join XCUXION and start your journey today.</p>
+        <Button className="bg-brand-background text-brand-foreground font-semibold">Become a member</Button>
       </div>
-      <div className="">
-        <div className="flex">
-          <span className="">
+      <div className="bg-primary-light rounded-lg my-8 p-6 w-full">
+        <div className="flex items-center">
+          <span className="w-1/2 ">
             <h2 className="text-2xl font-semibold">
               School of Engineering & Techpreneurship
             </h2>
-            <p className="">The XCUXION School of Engineering and Techpreneurship is a transformative educational program designed to empower aspiring technologists and entrepreneurs. By providing hands-on training in software engineering, product development, marketing, and business strategies, the school equips students with the skills and mindset needed to build and scale innovative ventures. The program emphasizes practical application, guiding participants from idea conception to the launch of viable startups, fostering a new generation of tech leaders and changemakers.</p>
+            <p className="pr-6">The XCUXION School of Engineering and Techpreneurship is a transformative educational program designed to empower aspiring technologists and entrepreneurs. By providing hands-on training in software engineering, product development, marketing, and business strategies, the school equips students with the skills and mindset needed to build and scale innovative ventures. The program emphasizes practical application, guiding participants from idea conception to the launch of viable startups, fostering a new generation of tech leaders and changemakers.</p>
           </span>
-          <Image src={''} alt="image" width={300} height={250} className=""/>
+          <Image src={'/images/group.jpg'} alt="image" width={450} height={350} className="w-[450px] h-[300px] object-cover rounded-md"/>
         </div>
-        <div className="">
+        <div className="bg-white p-4 rounded-md">
           <h3 className="text-3xl font-bold">Admissions In Progress!</h3>
           <p className="">Good news! We are currently admitting people to kickstart our next batch of training starting March and ending in August. Our 6 months intensive training program focuses on the fundamentals needed to start and run your own tech startup venture. We will delve into interesting topics like Product management, Software engineering, Marketing, and Strategy. Don’t miss this opportunity while it is still available. Simply click the button below to get started!</p>
-          <Button>Start Yoour Application!</Button>
+          <Button className="bg-school-primary text-white ">Start Yoour Application!</Button>
         </div>
       </div>
       <div className="">
