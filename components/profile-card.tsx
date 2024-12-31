@@ -12,7 +12,7 @@ interface IUserProfile {
 const ProfileCard = () => {
   return (
     <>
-      <div className="bg-school-light border rounded-md w-full p-2">
+      <div className="bg-light border rounded-md w-full p-2">
         <div className="flex flex-col flex-center">
           <Image
             src={"/images/jess.jpeg"}

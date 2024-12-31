@@ -10,7 +10,7 @@ const UpcomingSession = () => {
         <h1 className="font-semibold text-xl">Hello</h1>
         <h3>Welcome Back, {name}! </h3>
       </div >
-      <section className="flex flex-start bg-school-secondary p-4 mt-4 rounded-lg ">
+      <section className="flex flex-start bg-secondary p-4 mt-4 rounded-lg ">
           <div className=''>
             <h4 className="text-sm font-semibold">Upcoming Live Session</h4>
             <div className="mt-8">
@@ -22,7 +22,7 @@ const UpcomingSession = () => {
               </p>
               <Button
                 variant="default"
-                className="bg-school-primary text-white rounded-full"
+                className="bg-primary text-white rounded-full"
               >
                 Preview Materials
               </Button>

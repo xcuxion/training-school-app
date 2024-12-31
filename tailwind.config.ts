@@ -11,52 +11,29 @@ const config: Config = {
   theme: {
   	extend: {
   		colors: {
-  			school: {
-  				primary: '#9D2292',
-  				light: '#FFF9FF',
-  				secondary: '#FFF0FE',
-  				neutral: '#f5f5f6'
-  			},
-  			primary: {
-  				light: '#F0F4F8',
-  				dark: '#1A1A2E'
-  			},
-  			secondary: {
-  				light: '#D8E2EC',
-  				dark: '#16213E'
-  			},
-  			accent: {
-  				light: '#4A90E2',
-  				dark: '#0F3460'
-  			},
-			brand: {
-				background: '#000',
-				foreground: "#E6D38D"
+			primary: '#9D2292',
+			light: '#FFF9FF',
+			secondary: '#FFF0FE',
+			neutral: '#f5f5f6',
+			dark: '#4D0045',
+			muted: {
+				DEFAULT: 'hsl(var(--muted))',
+				foreground: 'hsl(var(--muted-foreground))'
 			},
-  			color: {
-  				light: '#2D3748',
-  				dark: '#E0E0E0'
-  			},
-  			success: {
-  				light: '#48BB78',
-  				dark: '#50C878'
-  			},
-  			error: {
-  				light: '#E53E3E',
-  				dark: '#DC143C'
-  			},
-  			border: {
-  				light: '#CBD5E0',
-  				dark: '#2D3748'
-  			},
-  			input: {
-  				light: '#EDF2F7',
-  				dark: '#2C3E50'
-  			},
-  			ring: {
-  				light: '#4A90E2',
-  				dark: '#0F3460'
-  			}
+			destructive: {
+				DEFAULT: 'hsl(var(--destructive))',
+				foreground: 'hsl(var(--destructive-foreground))'
+			},
+			border: 'hsl(var(--border))',
+			input: 'hsl(var(--input))',
+			ring: 'hsl(var(--ring))',
+			chart: {
+				'1': 'hsl(var(--chart-1))',
+				'2': 'hsl(var(--chart-2))',
+				'3': 'hsl(var(--chart-3))',
+				'4': 'hsl(var(--chart-4))',
+				'5': 'hsl(var(--chart-5))'
+			}
   		},
   		borderRadius: {
   			xxl: '24px',

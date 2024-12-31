@@ -52,8 +52,8 @@ const Sidebar = () => {
             (pathname.startsWith(link.href) && link.href !== '/school');
 
           return (
-            <Link href={link.href} className={`flex items-center gap-x-4 w-[200px] p-2 hover:bg-school-secondary rounded-md ${
-              isActive ? 'bg-school-secondary font-medium' : ''}`}
+            <Link href={link.href} className={`flex items-center gap-x-4 w-[200px] p-2 hover:bg-secondary rounded-md ${
+              isActive ? 'bg-secondary font-medium' : ''}`}
               key={index}
             >
               <Image src={link.icon} alt="" width={16} height={16} className="w-5 h-5" />
@@ -72,13 +72,13 @@ const Sidebar = () => {
           height={155}
           className="absolute top-[-100px] left-5"
         />
-        <div className="text-center bg-school-neutral h-[155px] rounded-md flex flex-col items-center justify-center">
+        <div className="text-center bg-neutral h-[155px] rounded-md flex flex-col items-center justify-center">
           <p className="leading-none text-sm my-2 font-normal">
             Explore our guild to try your hands on real-time pressing challenges!
           </p>
           <Button
             variant={"default"}
-            className="bg-school-primary text-white rounded-full text-sm"
+            className="bg-primary text-white rounded-full text-sm"
           >
             Go to Guild
           </Button>

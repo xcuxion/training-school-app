@@ -36,10 +36,10 @@ const Tasks = ({ content, state, period }: Task) => {
 const TodoSection = () => {
   return (
     <>
-      <div className="w-full bg-school-light border rounded-md p-3">
+      <div className="w-full bg-light border rounded-md p-3">
         <div className="flex justify-between">
           <h1 className="text-lg font-semibold leading-tight">To-Dos</h1>
-          <span className="w-6 h-6 flex flex-center bg-school-secondary rounded-sm">
+          <span className="w-6 h-6 flex flex-center bg-secondary rounded-sm">
             <FiPlus/>
           </span>
         </div>
@@ -48,7 +48,7 @@ const TodoSection = () => {
             <div
               key={index}
               className={`flex flex-col px-2 py-1 rounded-sm items-center justify-center ${
-                index === 0 ? "bg-school-secondary" : "opacity-60"
+                index === 0 ? "bg-secondary" : "opacity-60"
               }`}
             >
               <span className="text-xl font-semibold">{day}</span>

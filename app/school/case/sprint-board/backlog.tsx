@@ -22,18 +22,18 @@ const Backlog = ({roles}: {roles: string[]}) => {
                 <span className="">
                     {
                     roles.map((role, index)=>(
-                        <Button key={index} variant={'secondary'} className='bg-transparent rounded-none hover:bg-school-secondary'>{role}</Button>
+                        <Button key={index} variant={'secondary'} className='bg-transparent rounded-none hover:bg-secondary'>{role}</Button>
                     ))
                     }
                 </span>
                 <span className='flex items-center gap-x-2'>            
-                    <Button variant={"default"} className="bg-school-primary rounded-full">
+                    <Button variant={"default"} className="bg-primary rounded-full">
                         New Task
                         <Image src={'/icons/plus.svg'} alt='icon' width={16} height={16} className='w-4 h-4'/>
                     </Button>
                     <Popover>
                     <PopoverTrigger asChild>
-                    <span className='bg-school-secondary w-8 h-8 flex flex-center hover:bg-school-primary/10 hover:cursor-pointer rounded-sm'>
+                    <span className='bg-secondary w-8 h-8 flex flex-center hover:bg-primary/10 hover:cursor-pointer rounded-sm'>
                         <FaFilter/>
                     </span>
                     </PopoverTrigger>

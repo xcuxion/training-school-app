@@ -62,20 +62,11 @@ model Receipt {
   feeId       String?
 }
 
-model Project {
+model Case {
   id          String     @id @default(uuid())
   title       String     @db.VarChar(255)
   description String     @db.VarChar()
-  engineers   Engineer[]
-}
-
-model Engineer {
-  reference  String    @id @default(uuid())
-  name       String    @db.VarChar(100)
-  bio        String    @db.VarChar(255)
-  project    Project?  @relation(fields: [projectId], references: [id])
-  projectId  String?
-  skillsets  String[]  @db.VarChar(10)
+  responsilities String[]
 }
 
 // model Experience {

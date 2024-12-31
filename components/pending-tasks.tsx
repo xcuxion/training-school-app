@@ -5,7 +5,7 @@ import TaskCard from './task-card'
 
 const PendingTasks = () => {
   return (
-    <div className='w-full bg-school-light p-2 h-[180px] mb-6'>
+    <div className='w-full bg-light p-2 h-[180px] mb-6'>
        Current Module
         <TaskCard/>
     </div>

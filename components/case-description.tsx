@@ -16,7 +16,7 @@ const CaseDescription = ({title, coverImage, problemStatement, requirements}: IC
         className="w-full h-[200px] bg-cover bg-top flex items-center justify-center mb-4"
         style={{ backgroundImage: `url(${coverImage})` }}
       >
-        <h2 className="text-[#9D2292] bg-school-secondary p-2 text-lg text-center w-4/5 mx-auto ">
+        <h2 className="text-[#9D2292] bg-secondary p-2 text-lg text-center w-4/5 mx-auto ">
           {title}
         </h2>
       </div>

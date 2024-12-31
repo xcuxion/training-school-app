@@ -15,7 +15,7 @@ interface SessionCardProps {
 
 const SessionCard = ({image, title, description, facilitator}: SessionCardProps) => {
   return (
-    <div className='w-full p-2 bg-school-light border max-h-[350px]'>
+    <div className='w-full p-2 bg-light border max-h-[350px]'>
       <Image src={image} alt='cover image' width={250} height={150} className='w-full h-[45%] bg-top object-cover rounded-md' />
       <h2 className="text-xl font-semibold my-1">{title}</h2>
       <p className="my-1">{description}</p>

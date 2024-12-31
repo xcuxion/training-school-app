@@ -11,7 +11,7 @@ const SprintField = () => {
           <Image src={'/icons/sprint-cycle.svg'} alt='icon' width={30} height={30} className=''/>
           <h3 className="text-lg font-medium">Sprints</h3>
         </span>
-        <Button variant={"secondary"} className='border-2 border-school-primary text-school-primary bg-school-secondary'>
+        <Button variant={"secondary"} className='border-2 border-primary text-primary bg-secondary'>
           Start Sprint
         </Button>
       </div>
