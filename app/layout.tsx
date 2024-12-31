@@ -1,23 +1,24 @@
 import type { Metadata } from "next";
 import "./globals.css";
-import { Exo_2, Nunito_Sans } from "next/font/google";
+import { Poppins, Acme, Nunito } from "next/font/google";
 import { Toaster } from "@/components/ui/sonner";
 
 
-const exo2 = Exo_2({
+const poppins = Poppins({
   subsets: ["latin"],
-  variable: "--font-exo2",
-  weight: "600"
+  variable: "--font-Poppins",
+  weight: "400"
 });
 
-const nunito_Sans = Nunito_Sans({
+const nunito = Nunito({
   subsets: ["latin"],
-  weight: ["300", "400", "600", "800"]
+  variable: "--font-Nunito",
+  weight: ["300", "400", "500", "600", "800"]
 })
 
 export const metadata: Metadata = {
-  title: "Technology Wrights",
-  description: "Makers of modern technology",
+  title: "XCUXION School",
+  description: "XCUXION's School of Engineering & Techpreneurship",
 };
 
 export default function RootLayout({
@@ -28,7 +29,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body
-        className={`${nunito_Sans.className} ${exo2.className} antialiased  text-color-light`}
+        className={`${nunito.className} ${poppins.className} antialiased  text-color-light`}
       >
         <Toaster/>
         {children}

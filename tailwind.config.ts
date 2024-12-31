@@ -10,6 +10,11 @@ const config: Config = {
   ],
   theme: {
   	extend: {
+		fontFamily: {
+			Poppins: ['var(--font-Poppins)'],
+			Nunito: ['var(--font-Nunito)'],
+
+		},
   		colors: {
 			primary: '#9D2292',
 			light: '#FFF9FF',
