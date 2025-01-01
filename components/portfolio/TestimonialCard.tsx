@@ -22,9 +22,9 @@ const TestimonialCard = ({
   position,
 }: TestimonialCardProps) => {
   return (
-    <Card className="bg-primary-light ">
+    <Card className="bg-primary-light min-w-80 min-h-40 ">
       <CardHeader>
-        <CardTitle className="text-base md:text-2xl font-semibold ">
+        <CardTitle className="flex text-base md:text-2xl font-semibold items-center">
           <Image
             src={image}
             alt=""
@@ -34,7 +34,7 @@ const TestimonialCard = ({
           />
           <span className="text-lg text-color-light">
             <h3 className="text-xl">{name}</h3>
-            <p className="">{position}</p>
+            <p className="text-sm">{position}</p>
           </span>
         </CardTitle>
       </CardHeader>

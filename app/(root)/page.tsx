@@ -5,6 +5,7 @@ import Link from 'next/link'
 import Image from "next/image";
 import { Button } from "@/components/ui/button";
 import TeamMemberCard from "@/components/portfolio/TeamMemberCard";
+import TestimonialCard from "@/components/portfolio/TestimonialCard";
 
 const links = [
   {
@@ -23,26 +24,36 @@ const links = [
 
 const people = [
   {
-    image: '/p1.jpg',
+    image: '/images/p1.jpg',
     name: 'Anton Bismark',
     role: 'Founder & Director'
   },
   {
-    image: '/p1.jpg',
+    image: '/images/p1.jpg',
     name: 'Anton Bismark',
     role: 'Founder & Director'
   },
   {
-    image: '/p1.jpg',
+    image: '/images/p1.jpg',
     name: 'Anton Bismark',
     role: 'Founder & Director'
   },
   {
-    image: '/p1.jpg',
+    image: '/images/p1.jpg',
     name: 'Anton Bismark',
     role: 'Founder & Director'
   },
 ]
+
+const testimonials = [
+  {
+    image: '/images/p1.jpg',
+    name: 'Anton Bismark',
+    position: 'Founder & Director',
+    content: 'I joined the training program back in 2022 when I knew very little about technology. Through the program, I met amazing people and learnt a lot about what I could do other than just coding to leave my mark on the walls of the tech industry. Through their support and guidance, I have been able to cofound a tech startup to solve real world challenges in the financial industry.',
+  },
+]
+
 
 const page = () => {
   return (
@@ -53,25 +64,25 @@ const page = () => {
         <p className="text-lg text-center my-4">At XCUXION, we turn aspirations into achievements. Whether you’re an aspiring technologist, a budding entrepreneur, or a skilled engineer, we provide the tools, knowledge, and opportunities you need to succeed. Are you ready to take the next step? Join XCUXION and start your journey today.</p>
         <Button className="bg-primary text-white font-semibold">Become a member</Button>
       </div>
-      <div className=" rounded-lg my-8 p-6 w-full">
-        <div className="flex items-center">
-          <span className="w-1/2 ">
-            <h2 className="text-2xl font-semibold">
+      <div className=" rounded-lg my-8 p-6 w-full bg-secondary">
+        <div className="flex items-center justify-between">
+          <span className="w-2/3 ">
+            <h2 className="text-2xl font-semibold w-4/5">
               School of Engineering & Techpreneurship
             </h2>
             <p className="pr-6">The XCUXION School of Engineering and Techpreneurship is a transformative educational program designed to empower aspiring technologists and entrepreneurs. By providing hands-on training in software engineering, product development, marketing, and business strategies, the school equips students with the skills and mindset needed to build and scale innovative ventures. The program emphasizes practical application, guiding participants from idea conception to the launch of viable startups, fostering a new generation of tech leaders and changemakers.</p>
           </span>
           <Image src={'/images/group.jpg'} alt="image" width={450} height={350} className="w-[450px] h-[300px] object-cover rounded-md"/>
         </div>
-        <div className="bg-white p-4 rounded-md">
+        <div className="bg-white py-4 px-8 rounded-md mt-8">
           <h3 className="text-3xl font-bold">Admissions In Progress!</h3>
-          <p className="">Good news! We are currently admitting people to kickstart our next batch of training starting March and ending in August. Our 6 months intensive training program focuses on the fundamentals needed to start and run your own tech startup venture. We will delve into interesting topics like Product management, Software engineering, Marketing, and Strategy. Don’t miss this opportunity while it is still available. Simply click the button below to get started!</p>
+          <p className="my-2">Good news! We are currently admitting people to kickstart our next batch of training starting March and ending in August. Our 6 months intensive training program focuses on the fundamentals needed to start and run your own tech startup venture. We will delve into interesting topics like Product management, Software engineering, Marketing, and Strategy. Don’t miss this opportunity while it is still available. Simply click the button below to get started!</p>
           <Button className="bg-primary text-white ">Start Yoour Application!</Button>
         </div>
       </div>
-      <div className="">
-        <h2 className="text-2xl font-semibold">Our Team</h2>
-        <div className="grid grid-cols-3">
+      <div className="flex flex-col flex-start">
+        <h2 className="text-2xl font-bold mb-4">Our Team</h2>
+        <div className="grid grid-cols-4 gap-4">
         {people.map((member, index) => (
           <TeamMemberCard
             key={index}
@@ -81,6 +92,17 @@ const page = () => {
           />
         ))}
         </div>
+      </div>
+      <div className="">
+      <h2 className="text-2xl font-bold mb-4">Teatimonials</h2>
+      <div className="grid grid-cols-3">
+        {
+          testimonials.map((testimonial, index)=>(
+            <TestimonialCard key={index} {...testimonial}/>
+          ))
+        }
+
+      </div>
       </div>
     </div>
   );

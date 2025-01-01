@@ -20,7 +20,7 @@ const config: Config = {
 			light: '#FFF9FF',
 			secondary: '#FFF0FE',
 			neutral: '#f5f5f6',
-			dark: '#4D0045',
+			dark: '#563553',
 			muted: {
 				DEFAULT: 'hsl(var(--muted))',
 				foreground: 'hsl(var(--muted-foreground))'
