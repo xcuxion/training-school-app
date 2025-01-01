@@ -1,68 +1,94 @@
 import Header from "@/components/portfolio/Header";
 import React from "react";
 
-import Link from 'next/link'
+import Link from "next/link";
 import Image from "next/image";
 import { Button } from "@/components/ui/button";
 import TeamMemberCard from "@/components/portfolio/TeamMemberCard";
 import TestimonialCard from "@/components/portfolio/TestimonialCard";
+import { Input } from "@/components/ui/input";
+import { Textarea } from "@/components/ui/textarea";
 
 const links = [
   {
-    label: 'About Us',
-    link: '/about-us'
+    label: "About Us",
+    link: "/about-us",
   },
   {
-    label: 'School of Engineering & Techpreneurship',
-    link: '/school-portfolio'
+    label: "School of Engineering & Techpreneurship",
+    link: "/school-portfolio",
   },
   {
-    label: 'Engineers\' Guild',
-    link: '/guild-portfolio'
+    label: "Engineers' Guild",
+    link: "/guild-portfolio",
   },
-]
+];
 
 const people = [
   {
-    image: '/images/p1.jpg',
-    name: 'Anton Bismark',
-    role: 'Founder & Director'
+    image: "/images/p1.jpg",
+    name: "Anton Bismark",
+    role: "Founder & Director",
   },
   {
-    image: '/images/p1.jpg',
-    name: 'Anton Bismark',
-    role: 'Founder & Director'
+    image: "/images/p1.jpg",
+    name: "Anton Bismark",
+    role: "Founder & Director",
   },
   {
-    image: '/images/p1.jpg',
-    name: 'Anton Bismark',
-    role: 'Founder & Director'
+    image: "/images/p1.jpg",
+    name: "Anton Bismark",
+    role: "Founder & Director",
   },
   {
-    image: '/images/p1.jpg',
-    name: 'Anton Bismark',
-    role: 'Founder & Director'
+    image: "/images/p1.jpg",
+    name: "Anton Bismark",
+    role: "Founder & Director",
   },
-]
+];
 
 const testimonials = [
   {
-    image: '/images/p1.jpg',
-    name: 'Anton Bismark',
-    position: 'Founder & Director',
-    content: 'I joined the training program back in 2022 when I knew very little about technology. Through the program, I met amazing people and learnt a lot about what I could do other than just coding to leave my mark on the walls of the tech industry. Through their support and guidance, I have been able to cofound a tech startup to solve real world challenges in the financial industry.',
+    image: "/images/p1.jpg",
+    name: "Anton Bismark",
+    position: "Founder & Director",
+    content:
+      "I joined the training program back in 2022 when I knew very little about technology. Through the program, I met amazing people and learnt a lot about what I could do other than just coding to leave my mark on the walls of the tech industry. Through their support and guidance, I have been able to cofound a tech startup to solve real world challenges in the financial industry.",
   },
-]
-
+  {
+    image: "/images/p1.jpg",
+    name: "Anton Bismark",
+    position: "Founder & Director",
+    content:
+      "I joined the training program back in 2022 when I knew very little about technology. Through the program, I met amazing people and learnt a lot about what I could do other than just coding to leave my mark on the walls of the tech industry. Through their support and guidance, I have been able to cofound a tech startup to solve real world challenges in the financial industry.",
+  },
+  {
+    image: "/images/p1.jpg",
+    name: "Anton Bismark",
+    position: "Founder & Director",
+    content:
+      "I joined the training program back in 2022 when I knew very little about technology. Through the program, I met amazing people and learnt a lot about what I could do other than just coding to leave my mark on the walls of the tech industry. Through their support and guidance, I have been able to cofound a tech startup to solve real world challenges in the financial industry.",
+  },
+];
 
 const page = () => {
   return (
-    <div className='px-10 py-4 '>      
-      <Header/>
+    <div className="px-10 py-4 ">
+      <Header />
       <div className="flex flex-col items-center justify-center w-3/5 mx-auto">
-        <h1 className="text-4xl font-bold">Empowering Dreams, Building Futures</h1>
-        <p className="text-lg text-center my-4">At XCUXION, we turn aspirations into achievements. Whether you’re an aspiring technologist, a budding entrepreneur, or a skilled engineer, we provide the tools, knowledge, and opportunities you need to succeed. Are you ready to take the next step? Join XCUXION and start your journey today.</p>
-        <Button className="bg-primary text-white font-semibold">Become a member</Button>
+        <h1 className="text-4xl font-bold">
+          Empowering Dreams, Building Futures
+        </h1>
+        <p className="text-lg text-center my-4">
+          At XCUXION, we turn aspirations into achievements. Whether you’re an
+          aspiring technologist, a budding entrepreneur, or a skilled engineer,
+          we provide the tools, knowledge, and opportunities you need to
+          succeed. Are you ready to take the next step? Join XCUXION and start
+          your journey today.
+        </p>
+        <Button className="bg-primary text-white font-semibold">
+          Become a member
+        </Button>
       </div>
       <div className=" rounded-lg my-8 p-6 w-full bg-secondary">
         <div className="flex items-center justify-between">
@@ -70,39 +96,74 @@ const page = () => {
             <h2 className="text-2xl font-semibold w-4/5">
               School of Engineering & Techpreneurship
             </h2>
-            <p className="pr-6">The XCUXION School of Engineering and Techpreneurship is a transformative educational program designed to empower aspiring technologists and entrepreneurs. By providing hands-on training in software engineering, product development, marketing, and business strategies, the school equips students with the skills and mindset needed to build and scale innovative ventures. The program emphasizes practical application, guiding participants from idea conception to the launch of viable startups, fostering a new generation of tech leaders and changemakers.</p>
+            <p className="pr-6">
+              The XCUXION School of Engineering and Techpreneurship is a
+              transformative educational program designed to empower aspiring
+              technologists and entrepreneurs. By providing hands-on training in
+              software engineering, product development, marketing, and business
+              strategies, the school equips students with the skills and mindset
+              needed to build and scale innovative ventures. The program
+              emphasizes practical application, guiding participants from idea
+              conception to the launch of viable startups, fostering a new
+              generation of tech leaders and changemakers.
+            </p>
           </span>
-          <Image src={'/images/group.jpg'} alt="image" width={450} height={350} className="w-[450px] h-[300px] object-cover rounded-md"/>
+          <Image
+            src={"/images/group.jpg"}
+            alt="image"
+            width={450}
+            height={350}
+            className="w-[450px] h-[300px] object-cover rounded-md"
+          />
         </div>
         <div className="bg-white py-4 px-8 rounded-md mt-8">
           <h3 className="text-3xl font-bold">Admissions In Progress!</h3>
-          <p className="my-2">Good news! We are currently admitting people to kickstart our next batch of training starting March and ending in August. Our 6 months intensive training program focuses on the fundamentals needed to start and run your own tech startup venture. We will delve into interesting topics like Product management, Software engineering, Marketing, and Strategy. Don’t miss this opportunity while it is still available. Simply click the button below to get started!</p>
-          <Button className="bg-primary text-white ">Start Yoour Application!</Button>
+          <p className="my-2">
+            Good news! We are currently admitting people to kickstart our next
+            batch of training starting March and ending in August. Our 6 months
+            intensive training program focuses on the fundamentals needed to
+            start and run your own tech startup venture. We will delve into
+            interesting topics like Product management, Software engineering,
+            Marketing, and Strategy. Don’t miss this opportunity while it is
+            still available. Simply click the button below to get started!
+          </p>
+          <Button className="bg-primary text-white ">
+            Start Yoour Application!
+          </Button>
         </div>
       </div>
       <div className="flex flex-col flex-start">
         <h2 className="text-2xl font-bold mb-4">Our Team</h2>
         <div className="grid grid-cols-4 gap-4">
-        {people.map((member, index) => (
-          <TeamMemberCard
-            key={index}
-            name={member.name}
-            role={member.role}
-            image={member.image}
-          />
-        ))}
+          {people.map((member, index) => (
+            <TeamMemberCard
+              key={index}
+              name={member.name}
+              role={member.role}
+              image={member.image}
+            />
+          ))}
         </div>
       </div>
-      <div className="">
-      <h2 className="text-2xl font-bold mb-4">Teatimonials</h2>
-      <div className="grid grid-cols-3">
-        {
-          testimonials.map((testimonial, index)=>(
-            <TestimonialCard key={index} {...testimonial}/>
-          ))
-        }
-
+      <div className="my-6">
+        <h2 className="text-2xl font-bold mb-2">Testimonials</h2>
+        <div className="grid grid-cols-3 gap-4">
+          {testimonials.map((testimonial, index) => (
+            <TestimonialCard key={index} {...testimonial} />
+          ))}
+        </div>
       </div>
+      <div className="grid grid-cols-3 my-4 gap-x-6">
+          <div className="col-span-2">
+            <h4 className="text-lg font-semibold">Frequently Asked Questions (FAQs)</h4>
+          </div>
+          <form action="" className="bg-secondary p-4 space-y-4">
+            <h1 className="text-lg">Make An Enquiry</h1>
+            <Input placeholder="Enter name" className="bg-light"/>
+            <Input placeholder="Enter email" className="bg-light"/>
+            <Textarea placeholder="Type your question here..." className="bg-light border border-light min-h-20"/>
+            <Button>Send</Button>
+          </form>
       </div>
     </div>
   );
