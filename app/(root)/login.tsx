@@ -1,21 +1,40 @@
-import FormModal from '@/components/form-modal'
-import { Input } from '@/components/ui/input'
-import { login } from '@/lib/actions/general.action'
-import React from 'react'
+import FormModal from "@/components/form-modal";
+import { Input } from "@/components/ui/input";
+import { login } from "@/lib/actions/general.action";
+import React, { useActionState } from "react";
 
-const Login = ({show, onClose}: {show:boolean, onClose:()=>void}) => {
+const Login = ({ show, onClose }: { show: boolean; onClose: () => void }) => {
+  const [state, action] = useActionState(login, undefined);
+
   return (
-   <FormModal formAction={login} isOpen={show} onClose={onClose} title='Become An xcuxioner' buttonText='Register Account' >
-    <div className="">
+    <FormModal
+      isOpen={show}
+      onClose={onClose}
+      title="Become An xcuxioner"
+      buttonText="Register Account"
+    >
+      <div className="">
+        <span className="rounded-full order">Sign up with google</span>
+      </div>
+      or
+      <div className="">
+        <form action={action}>
+          <>
+            <Input id="email" name="email" />
+            {state?.errors?.email && (
+              <p className="text-red-500">{state.errors.email}</p>
+            )}
+          </>
+          <>
+            <Input id="password" name="password" />
+            {state?.errors?.email && (
+              <p className="text-red-500">{state.errors.email}</p>
+            )}
+          </>
+        </form>
+      </div>
+    </FormModal>
+  );
+};
 
-    </div>
-    or
-    <div className="">
-      <Input id='email' name='email'/>
-      <Input id='password' name='password'/>
-    </div>
-   </FormModal>
-  )
-}
-
-export default Login
+export default Login;

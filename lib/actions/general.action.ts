@@ -24,6 +24,7 @@ const enquirySchema = z.object({
   question: z.string({ message: "question field cannot be empty" }).min(2),
 });
 const registrationSchema = z.object({
+  name: z.string().min(2),
   email: z.string().email({ message: "Invalid email address" }).trim(),
   password: z
     .string()
@@ -39,6 +40,10 @@ export default async function makeEnquiry(prevState: any, formData: FormData) {
         errors: result.error.flatten().fieldErrors,
       };
     }
+    await prisma.enquiry.create(formData)
+    return JSON.parse(JSON.stringify({
+      message: "Enquiry sent successfully!"
+    }))
   } catch (error) {
     handleError(error);
   }
@@ -88,7 +93,7 @@ export async function login(prevState: any, formData: FormData) {
 
 export async function register(prevState: any, formData: FormData) {
   try {
-    const result = loginSchema.safeParse(Object.fromEntries(formData));
+    const result = registrationSchema.safeParse(Object.fromEntries(formData));
 
     if (!result.success) {
       return {
@@ -96,7 +101,7 @@ export async function register(prevState: any, formData: FormData) {
       };
     }
 
-    const { email, password } = result.data;
+    const { name, email, password } = result.data;
 
     const existingUser = await prisma.member.find({ email });
     if (!existingUser) {
@@ -107,17 +112,14 @@ export async function register(prevState: any, formData: FormData) {
       };
     }
 
-    const comparison = await bcrypt.compare(password, existingUser.password);
+    const hashedPassword = await bcrypt.hash(password, 10);
+    const newUser = await prisma.member.create({
+      name, 
+      password:hashedPassword,
+      email: email
+    })
 
-    if (!comparison) {
-      return {
-        errors: {
-          password: ["Invalid password"],
-        },
-      };
-    }
-
-    await createSession(existingUser._id);
+    await createSession(newUser._id);
 
     return redirect("/landing");
   } catch (error) {

@@ -1,5 +1,6 @@
+"use client"
 import Header from "@/components/portfolio/Header";
-import React from "react";
+import React, { useState } from "react";
 
 import Link from "next/link";
 import Image from "next/image";
@@ -11,6 +12,7 @@ import { Textarea } from "@/components/ui/textarea";
 import FaqCard from "@/components/portfolio/faq-card";
 import { Footer } from "react-day-picker";
 import InquiryForm from "@/components/portfolio/inquiry-form";
+import Register from "./register";
 
 const links = [
   {
@@ -82,6 +84,7 @@ const faqs = [
 ]
 
 const page = () => {
+  const [openDialog, setPoenDialog] = useState(false)
   return (
     <div className="px-10 py-4 ">
       <Header />
@@ -96,7 +99,9 @@ const page = () => {
           succeed. Are you ready to take the next step? Join XCUXION and start
           your journey today.
         </p>
-        <Button className="bg-primary text-white font-semibold">
+        <Button className="bg-primary text-white font-semibold" onClick={()=>{
+          return <Register show={openDialog} onClose={()=>setPoenDialog(false)}/>
+        }}>
           Become a member
         </Button>
       </div>
@@ -137,7 +142,7 @@ const page = () => {
             Marketing, and Strategy. Don’t miss this opportunity while it is
             still available. Simply click the button below to get started!
           </p>
-          <Button className="bg-primary text-white ">
+          <Button className="bg-primary text-white">
             Start Yoour Application!
           </Button>
         </div>

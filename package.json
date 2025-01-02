@@ -33,6 +33,7 @@
     "@stream-io/video-react-sdk": "^1.4.4",
     "@tanstack/react-table": "^8.20.6",
     "@types/bcrypt": "^5.0.2",
+    "bcrypt": "^5.1.1",
     "class-variance-authority": "^0.7.0",
     "clsx": "^2.1.1",
     "date-fns": "^3.6.0",
