@@ -8,6 +8,9 @@ import TeamMemberCard from "@/components/portfolio/TeamMemberCard";
 import TestimonialCard from "@/components/portfolio/TestimonialCard";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
+import FaqCard from "@/components/portfolio/faq-card";
+import { Footer } from "react-day-picker";
+import InquiryForm from "@/components/portfolio/inquiry-form";
 
 const links = [
   {
@@ -70,6 +73,13 @@ const testimonials = [
       "I joined the training program back in 2022 when I knew very little about technology. Through the program, I met amazing people and learnt a lot about what I could do other than just coding to leave my mark on the walls of the tech industry. Through their support and guidance, I have been able to cofound a tech startup to solve real world challenges in the financial industry.",
   },
 ];
+
+const faqs = [
+  {
+    question: 'How are you?',
+    answer: 'I am fine please'
+  }
+]
 
 const page = () => {
   return (
@@ -156,15 +166,17 @@ const page = () => {
       <div className="grid grid-cols-3 my-4 gap-x-6">
           <div className="col-span-2">
             <h4 className="text-lg font-semibold">Frequently Asked Questions (FAQs)</h4>
+            <div className="space-y-1 5">
+              {
+                faqs.map((faq, index)=> (
+                  <FaqCard {...faq} key={index}/>
+                ))
+              }
+            </div>
           </div>
-          <form action="" className="bg-secondary p-4 space-y-4">
-            <h1 className="text-lg">Make An Enquiry</h1>
-            <Input placeholder="Enter name" className="bg-light"/>
-            <Input placeholder="Enter email" className="bg-light"/>
-            <Textarea placeholder="Type your question here..." className="bg-light border border-light min-h-20"/>
-            <Button>Send</Button>
-          </form>
+          <InquiryForm/>
       </div>
+      <Footer/>
     </div>
   );
 };
