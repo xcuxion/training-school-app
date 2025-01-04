@@ -1,4 +1,4 @@
-"use client"
+"use client";
 import Header from "@/components/portfolio/Header";
 import React, { useState } from "react";
 
@@ -61,15 +61,23 @@ const testimonials = [
 
 const faqs = [
   {
-    question: 'How are you?',
-    answer: 'I am fine please'
-  }
-]
+    question: "How are you?",
+    answer: "I am fine please",
+  },
+  {
+    question: "How are you?",
+    answer: "I am fine please",
+  },
+  {
+    question: "How are you?",
+    answer: "I am fine please",
+  },
+];
 
 const LandingPage = () => {
-  const [openDialog, setOpenDialog] = useState(false)
+  const [openDialog, setOpenDialog] = useState(false);
   return (
-    <div className="px-10 py-4 ">
+    <div className="px-10  ">
       <Header />
       <div className="flex flex-col items-center justify-center w-3/5 mx-auto min-h-[60vh]">
         <h1 className="text-4xl font-bold">
@@ -82,9 +90,12 @@ const LandingPage = () => {
           succeed. Are you ready to take the next step? Join XCUXION and start
           your journey today.
         </p>
-        <Button className="bg-primary text-white font-semibold" onClick={()=>{
-          return <Register show={openDialog} onClose={()=>setOpenDialog(false)}/>
-        }}>
+        <Button
+          className="bg-primary text-white font-semibold rounded-full"
+          onClick={() => {
+            setOpenDialog(true);
+          }}
+        >
           Become a member
         </Button>
       </div>
@@ -114,7 +125,7 @@ const LandingPage = () => {
             className="w-[450px] h-[300px] object-cover rounded-md"
           />
         </div>
-        <div className="bg-white py-4 px-8 rounded-md mt-8">
+        <div className="bg-white py-4 px-6 rounded-md mt-8">
           <h3 className="text-3xl font-bold">Admissions In Progress!</h3>
           <p className="my-2">
             Good news! We are currently admitting people to kickstart our next
@@ -125,14 +136,12 @@ const LandingPage = () => {
             Marketing, and Strategy. Don’t miss this opportunity while it is
             still available. Simply click the button below to get started!
           </p>
-          <Button className="bg-primary text-white" asChild>
-            <Link href={'/apply'}>
-            Start Yoour Application!
-            </Link>
+          <Button variant={"default"} className=" rounded-full" asChild>
+            <Link href={"/apply"}>Start Your Application!</Link>
           </Button>
         </div>
       </div>
-      <div className="flex flex-col flex-start">
+      <div className="flex flex-col flex-center min-h-[60vh]">
         <h2 className="text-2xl font-bold mb-4">Our Team</h2>
         <div className="grid grid-cols-4 gap-4">
           {people.map((member, index) => (
@@ -145,7 +154,7 @@ const LandingPage = () => {
           ))}
         </div>
       </div>
-      <div className="my-6">
+      <div className="flex flex-col flex-center min-h-[70vh]">
         <h2 className="text-2xl font-bold mb-2">Testimonials</h2>
         <div className="grid grid-cols-3 gap-4">
           {testimonials.map((testimonial, index) => (
@@ -153,20 +162,23 @@ const LandingPage = () => {
           ))}
         </div>
       </div>
-      <div className="flex items-center justify-between my-4 gap-x-6 min-h-[50vh]">
-          <div className="w-1/2">
-            <h4 className="text-lg font-semibold">Frequently Asked Questions (FAQs)</h4>
-            <div className="space-y-1 5">
-              {
-                faqs.map((faq, index)=> (
-                  <FaqCard {...faq} key={index}/>
-                ))
-              }
-            </div>
+      <div className="flex items-start justify-between my-4 gap-x-6 min-h-[50vh]">
+        <div className="w-1/2">
+          <h4 className="text-lg font-semibold">
+            Frequently Asked Questions (FAQs)
+          </h4>
+          <div className="space-y-1 5">
+            {faqs.map((faq, index) => (
+              <FaqCard {...faq} key={index} />
+            ))}
           </div>
-          <InquiryForm/>
+        </div>
+        <InquiryForm />
       </div>
-      <Footer/>
+      <Footer />
+      {
+        openDialog? <Register show={openDialog} onClose={()=>setOpenDialog(false)} /> : ''
+      }
     </div>
   );
 };

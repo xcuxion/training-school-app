@@ -21,6 +21,7 @@ const config: Config = {
 			secondary: '#FFF0FE',
 			neutral: '#f5f5f6',
 			dark: '#563553',
+			outline: '#EFC5ED',
 			muted: {
 				DEFAULT: 'hsl(var(--muted))',
 				foreground: 'hsl(var(--muted-foreground))'
@@ -29,7 +30,6 @@ const config: Config = {
 				DEFAULT: 'hsl(var(--destructive))',
 				foreground: 'hsl(var(--destructive-foreground))'
 			},
-			border: 'hsl(var(--border))',
 			input: 'hsl(var(--input))',
 			ring: 'hsl(var(--ring))',
 			chart: {

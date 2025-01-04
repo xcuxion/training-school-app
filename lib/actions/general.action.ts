@@ -93,6 +93,7 @@ export async function login(prevState: any, formData: FormData) {
 
 export async function register(prevState: any, formData: FormData) {
   try {
+    console.log(formData)
     const result = registrationSchema.safeParse(Object.fromEntries(formData));
 
     if (!result.success) {

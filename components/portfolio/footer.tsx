@@ -3,7 +3,7 @@ import React from "react";
 
 const Footer = () => {
   return (
-    <div className="flex flex-between bg-dark">
+    <div className="flex flex-between bg-dark text-light p-4">
       <div className="">
         <Image src={"/logo.svg"} alt="" width={150} height={45} className="" />
         <p className="">

@@ -2,10 +2,14 @@
 import FormModal from '@/components/form-modal'
 import { Input } from '@/components/ui/input'
 import { register } from '@/lib/actions/general.action'
-import React, { useActionState } from 'react'
+import React, { useState } from 'react'
+import { useFormState } from 'react-dom'
 
 const Register = ({show, onClose}: {show:boolean, onClose:()=>void}) => {
-  const [state, action] = useActionState(register, undefined);
+  const [name, setName] = useState<string>('')
+  const [email, setEmail] = useState<string>('')
+  const [password, setPassword] = useState<string>('')  
+  const [state, action] = useFormState(register, undefined);
   return (
     <FormModal
     isOpen={show}
@@ -20,19 +24,19 @@ const Register = ({show, onClose}: {show:boolean, onClose:()=>void}) => {
     <div className="">
       <form action={action}>
       <>
-          <Input id="name" name="name" />
+          <Input id="name" name="name" placeholder='Name'/>
           {state?.errors?.name && (
             <p className="text-red-500">{state.errors.name}</p>
           )}
         </>
         <>
-          <Input id="email" name="email" />
+          <Input id="email" name="email" placeholder='Email Address' type='email'/>
           {state?.errors?.email && (
             <p className="text-red-500">{state.errors.email}</p>
           )}
         </>
         <>
-          <Input id="password" name="password" />
+          <Input id="password" name="password" placeholder='Password' type='password' />
           {state?.errors?.email && (
             <p className="text-red-500">{state.errors.email}</p>
           )}

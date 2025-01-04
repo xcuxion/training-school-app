@@ -1,10 +1,11 @@
 import FormModal from "@/components/form-modal";
 import { Input } from "@/components/ui/input";
 import { login } from "@/lib/actions/general.action";
-import React, { useActionState } from "react";
+import React from "react";
+import { useFormState } from "react-dom";
 
 const Login = ({ show, onClose }: { show: boolean; onClose: () => void }) => {
-  const [state, action] = useActionState(login, undefined);
+  const [state, action] = useFormState(login, undefined);
 
   return (
     <FormModal

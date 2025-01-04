@@ -15,7 +15,7 @@ const Header = () => {
         />
         <h1 className="text-2xl font-bold md:visible">XCUXION</h1>
       </div>
-      <Button variant={"default"} className="bg-brand-background text-brand-foreground rounded-md h-10">
+      <Button variant={"outline"} className="border-2 border-primary text-primary rounded-full h-10">
         Log in
       </Button>
     </div>
