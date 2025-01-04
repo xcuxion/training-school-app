@@ -7,27 +7,10 @@ import Image from "next/image";
 import { Button } from "@/components/ui/button";
 import TeamMemberCard from "@/components/portfolio/TeamMemberCard";
 import TestimonialCard from "@/components/portfolio/TestimonialCard";
-import { Input } from "@/components/ui/input";
-import { Textarea } from "@/components/ui/textarea";
 import FaqCard from "@/components/portfolio/faq-card";
-import { Footer } from "react-day-picker";
 import InquiryForm from "@/components/portfolio/inquiry-form";
 import Register from "./register";
-
-const links = [
-  {
-    label: "About Us",
-    link: "/about-us",
-  },
-  {
-    label: "School of Engineering & Techpreneurship",
-    link: "/school-portfolio",
-  },
-  {
-    label: "Engineers' Guild",
-    link: "/guild-portfolio",
-  },
-];
+import Footer from "@/components/portfolio/footer";
 
 const people = [
   {
@@ -83,12 +66,12 @@ const faqs = [
   }
 ]
 
-const page = () => {
-  const [openDialog, setPoenDialog] = useState(false)
+const LandingPage = () => {
+  const [openDialog, setOpenDialog] = useState(false)
   return (
     <div className="px-10 py-4 ">
       <Header />
-      <div className="flex flex-col items-center justify-center w-3/5 mx-auto">
+      <div className="flex flex-col items-center justify-center w-3/5 mx-auto min-h-[60vh]">
         <h1 className="text-4xl font-bold">
           Empowering Dreams, Building Futures
         </h1>
@@ -100,7 +83,7 @@ const page = () => {
           your journey today.
         </p>
         <Button className="bg-primary text-white font-semibold" onClick={()=>{
-          return <Register show={openDialog} onClose={()=>setPoenDialog(false)}/>
+          return <Register show={openDialog} onClose={()=>setOpenDialog(false)}/>
         }}>
           Become a member
         </Button>
@@ -142,8 +125,10 @@ const page = () => {
             Marketing, and Strategy. Don’t miss this opportunity while it is
             still available. Simply click the button below to get started!
           </p>
-          <Button className="bg-primary text-white">
+          <Button className="bg-primary text-white" asChild>
+            <Link href={'/apply'}>
             Start Yoour Application!
+            </Link>
           </Button>
         </div>
       </div>
@@ -168,8 +153,8 @@ const page = () => {
           ))}
         </div>
       </div>
-      <div className="grid grid-cols-3 my-4 gap-x-6">
-          <div className="col-span-2">
+      <div className="flex items-center justify-between my-4 gap-x-6 min-h-[50vh]">
+          <div className="w-1/2">
             <h4 className="text-lg font-semibold">Frequently Asked Questions (FAQs)</h4>
             <div className="space-y-1 5">
               {
@@ -186,4 +171,4 @@ const page = () => {
   );
 };
 
-export default page;
+export default LandingPage;

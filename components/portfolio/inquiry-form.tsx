@@ -10,9 +10,9 @@ const InquiryForm = () => {
   const [state, makeEnquiryAction] = useActionState(makeEnquiry, undefined);
   const { pending } = useFormStatus();
   return (
-    <div className="bg-secondary p-4 space-y-4">
+    <div className="bg-secondary min-w-[350px] p-4 h-auto flex flex-col gap-y-4">
       <h1 className="text-2xl">Make An Enquiry</h1>
-      <form action={makeEnquiryAction} className="w-2/3 mx-auto">
+      <form action={makeEnquiryAction} className="space-y-2">
         <>
           <Input
             id="name"
@@ -28,12 +28,11 @@ const InquiryForm = () => {
 
         </>
         <>
-          <Textarea id="question" name="question"/>
+          <Textarea id="question" name="question" className="bg-light border "/>
           {state?.errors?.question && (<p className='text-red-500'>{state.errors.question}</p>)}
-
         </>
       </form>
-      <Button disabled={pending} />
+      <Button disabled={pending}>Send</Button>
     </div>
   );
 };

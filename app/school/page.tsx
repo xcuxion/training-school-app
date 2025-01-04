@@ -27,7 +27,11 @@ const moduleData = {
   ],
   facilitator: 'Yaw Offeh'
 }
-
+const profile = {
+  name: "Jessica Jones",
+  image: "/images/jess/jpeg",
+  aspiration: "Software Engineer"
+}
 const page = () => {
   return (
     <div className="w-full flex flex-row gapx-4 items-start ">
@@ -39,7 +43,7 @@ const page = () => {
         <PastSessionSection/>
       </MainContent>
       <SideSection>
-        <ProfileCard />
+        <ProfileCard {...profile}/>
         <TodoSection />
         <div className="w-full h-[125px] bg-primary rounded-md flex px-6 items-center justify-between">
           <div className="text-white">

@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import "./globals.css";
-import { Poppins, Acme, Nunito } from "next/font/google";
+import { Poppins, Nunito } from "next/font/google";
 import { Toaster } from "@/components/ui/sonner";
 
 

@@ -32,7 +32,7 @@ const registrationSchema = z.object({
     .trim(),
 });
 
-export default async function makeEnquiry(prevState: any, formData: FormData) {
+export default async function makeEnquiry(prevState: string | any, formData: FormData) {
   try {
     const result = enquirySchema.safeParse(Object.fromEntries(formData));
     if (!result.success) {
