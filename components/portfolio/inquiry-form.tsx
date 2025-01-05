@@ -56,8 +56,8 @@ const InquiryForm = () => {
             <p className="text-red-500">{state.errors.question}</p>
           )}
         </>
+      <Button type="submit" disabled={pending}>Send</Button>
       </form>
-      <Button disabled={pending}>Send</Button>
     </div>
   );
 };

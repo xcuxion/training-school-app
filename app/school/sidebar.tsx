@@ -36,7 +36,7 @@ const Sidebar = () => {
       {/* Top Section */}
       <div className="flex items-center mb-12">
         <Image
-          src={"/school-logo.svg"}
+          src={"/logo.svg"}
           alt="Logo"
           width={200}
           height={40}

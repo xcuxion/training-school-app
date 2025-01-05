@@ -34,13 +34,16 @@ const registrationSchema = z.object({
 
 export default async function makeEnquiry(prevState: string | any, formData: FormData) {
   try {
+    console.log(formData)
     const result = enquirySchema.safeParse(Object.fromEntries(formData));
     if (!result.success) {
       return {
         errors: result.error.flatten().fieldErrors,
       };
     }
-    await prisma.enquiry.create(formData)
+    const { email, name, question } = result.data;
+
+    await prisma.enquiry.create({data: {email, name, question}})
     return JSON.parse(JSON.stringify({
       message: "Enquiry sent successfully!"
     }))
@@ -52,6 +55,8 @@ export default async function makeEnquiry(prevState: string | any, formData: For
 export async function login(prevState: any, formData: FormData) {
   try {
     const result = loginSchema.safeParse(Object.fromEntries(formData));
+    console.log(formData)
+
 
     if (!result.success) {
       return {
@@ -61,8 +66,8 @@ export async function login(prevState: any, formData: FormData) {
 
     const { email, password } = result.data;
 
-    const existingUser = await prisma.member.find({ email });
-    if (!existingUser) {
+    const existingProfile = await prisma.profile.findFirst({ where: {email} });
+    if (!existingProfile) {
       return {
         errors: {
           email: ["Invalid email"],
@@ -70,7 +75,7 @@ export async function login(prevState: any, formData: FormData) {
       };
     }
 
-    const comparison = await bcrypt.compare(password, existingUser.password);
+    const comparison = await bcrypt.compare(password, existingProfile.password);
 
     if (!comparison) {
       return {
@@ -80,7 +85,7 @@ export async function login(prevState: any, formData: FormData) {
       };
     }
 
-    await createSession(existingUser._id);
+    await createSession(existingProfile.id);
 
     return redirect("/landing");
   } catch (error) {
@@ -91,21 +96,75 @@ export async function login(prevState: any, formData: FormData) {
   }
 }
 
+// export async function register(prevState: any, formData: FormData) {
+//   try {
+//     console.log(formData)
+//     const result = registrationSchema.safeParse(Object.fromEntries(formData));
+//     console.log("reach 0")
+
+//     if (!result.success) {
+//     console.log("reach 0.1")
+//       return {
+//         errors: result.error.flatten().fieldErrors,
+//       };
+//     }
+
+//     console.log("reach 1")
+//     const { name, email, password } = result.data;
+
+//     const existingProfile = await prisma.profile.findFirst({ where: {email} });
+//     if (!existingProfile) {
+//       return {
+//         errors: {
+//           email: ["Invalid email"],
+//         },
+//       };
+//     }
+//     console.log("reach 2")
+
+//     const hashedPassword = await bcrypt.hash(password, 10);
+//     const newUser = await prisma.profile.create({
+//       data: {
+//         name, 
+//         password:hashedPassword,
+//         email: email
+//       }
+//     })
+//     console.log(newUser)
+//     await createSession(newUser.id);
+//     console.log("reach 3")
+
+//     return redirect("/school");
+//   } catch (error) {
+//     if (error instanceof Error && error.message === "NEXT_REDIRECT") {
+//       throw error; // Let Next.js handle the redirect
+//     }
+//     handleError(error);
+//   }
+// }
+
 export async function register(prevState: any, formData: FormData) {
   try {
-    console.log(formData)
+    console.log("Received formData:", Object.fromEntries(formData));
+    
     const result = registrationSchema.safeParse(Object.fromEntries(formData));
+    console.log("Validation result:", result);
 
     if (!result.success) {
+      console.log("Validation errors:", result.error.flatten().fieldErrors);
       return {
         errors: result.error.flatten().fieldErrors,
       };
     }
 
     const { name, email, password } = result.data;
+    console.log("Parsed data:", { name, email });
 
-    const existingUser = await prisma.member.find({ email });
-    if (!existingUser) {
+    const existingProfile = await prisma.profile.findFirst({ where: { email } });
+    console.log("Existing profile:", existingProfile);
+
+    if (!existingProfile) {
+      console.log("No profile found for email:", email);
       return {
         errors: {
           email: ["Invalid email"],
@@ -114,19 +173,29 @@ export async function register(prevState: any, formData: FormData) {
     }
 
     const hashedPassword = await bcrypt.hash(password, 10);
-    const newUser = await prisma.member.create({
-      name, 
-      password:hashedPassword,
-      email: email
-    })
+    console.log("Hashed password:", hashedPassword);
 
-    await createSession(newUser._id);
+    const newUser = await prisma.profile.create({
+      data: {
+        name,
+        password: hashedPassword,
+        email: email,
+      },
+    });
+    console.log("New user created:", newUser);
 
-    return redirect("/landing");
+    await createSession(newUser.id);
+    console.log("Session created for user:", newUser.id);
+
+    console.log("Redirecting to /school");
+    return redirect("/school");
   } catch (error) {
+    console.error("Caught error:", error);
+
     if (error instanceof Error && error.message === "NEXT_REDIRECT") {
       throw error; // Let Next.js handle the redirect
     }
+
     handleError(error);
   }
 }

@@ -1,5 +1,4 @@
 "use client";
-import Header from "@/components/portfolio/Header";
 import React, { useState } from "react";
 
 import Link from "next/link";
@@ -11,6 +10,7 @@ import FaqCard from "@/components/portfolio/faq-card";
 import InquiryForm from "@/components/portfolio/inquiry-form";
 import Register from "./register";
 import Footer from "@/components/portfolio/footer";
+import Login from "./login";
 
 const people = [
   {
@@ -75,10 +75,31 @@ const faqs = [
 ];
 
 const LandingPage = () => {
-  const [openDialog, setOpenDialog] = useState(false);
+  const [openRegister, setOpenRegister] = useState(false);
+  const [openLogin, setOpenLogin] = useState(false);
   return (
     <div className="px-10  ">
-      <Header />
+      <div className="w-full h-16 sticky top-0 left-0 flex flex-between py-2 bg-white z-50">
+        <div className="flex items-center">
+          <Image
+            src={"/favicon.svg"}
+            alt="logo"
+            width={45}
+            height={45}
+            className="mr-2 w-[45px] h-[45px]"
+          />
+          <h1 className="text-2xl font-bold md:visible">XCUXION</h1>
+        </div>
+        <Button
+          onClick={() => {
+            setOpenLogin(true);
+          }}
+          variant={"outline"}
+          className="border-2 border-primary text-primary rounded-full h-10"
+        >
+          Log in
+        </Button>
+      </div>
       <div className="flex flex-col items-center justify-center w-3/5 mx-auto min-h-[60vh]">
         <h1 className="text-4xl font-bold">
           Empowering Dreams, Building Futures
@@ -93,7 +114,7 @@ const LandingPage = () => {
         <Button
           className="bg-primary text-white font-semibold rounded-full"
           onClick={() => {
-            setOpenDialog(true);
+            setOpenRegister(true);
           }}
         >
           Become a member
@@ -176,9 +197,16 @@ const LandingPage = () => {
         <InquiryForm />
       </div>
       <Footer />
-      {
-        openDialog? <Register show={openDialog} onClose={()=>setOpenDialog(false)} /> : ''
-      }
+      {openRegister ? (
+        <Register show={openRegister} onClose={() => setOpenRegister(false)} />
+      ) : (
+        ""
+      )}
+      {openLogin ? (
+        <Login show={openLogin} onClose={() => setOpenLogin(false)} />
+      ) : (
+        ""
+      )}
     </div>
   );
 };

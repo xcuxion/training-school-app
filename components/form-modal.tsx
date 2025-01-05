@@ -30,11 +30,11 @@ const FormModal = ({
   return (
     <Dialog open={isOpen} onOpenChange={onClose}>
       <DialogContent>
-        <DialogTitle>{title}</DialogTitle>
+        <DialogTitle className="capitalize text-2xl font-bold">{title}</DialogTitle>
         {children}
-        <Button type="submit" disabled={pending}>
+        {/* <Button type="submit" disabled={pending}>
           {buttonText}
-        </Button>
+        </Button> */}
       </DialogContent>
     </Dialog>
   );
