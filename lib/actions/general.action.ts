@@ -6,6 +6,7 @@ import { PrismaClient } from "@prisma/client";
 import { redirect } from "next/navigation";
 import { createSession } from "../session";
 
+
 const prisma = new PrismaClient();
 const loginSchema = z.object({
   email: z.string().email({ message: "Invalid email address" }).trim(),
@@ -13,6 +14,26 @@ const loginSchema = z.object({
     .string()
     .min(8, { message: "Password must be at least 8 characters" })
     .trim(),
+});
+
+const applySchema = z.object({
+  fname: z.string({ message: "field is required" }).trim(),
+  oname: z.string().trim().optional(),
+  gender: z.enum(["male", "female"]),
+  nationality: z.string({ message: "field is required" }),
+  lname: z.string({ message: "field is required" }).trim(),
+  school: z.string({ message: "Select your school" }).trim(),
+  contact: z.string({ message: "field is required" }).trim(),
+  dob: z.date(),
+  email: z
+    .string()
+    .email({ message: "field is required" })
+    .trim(),
+  programme: z.string({ message: "field is required" }).min(2),
+  year: z.enum(["1", "2", "3", "4", "5", "6"]),
+  reason: z.string(),
+  balance: z.string(),
+  scholarship: z.enum(["yes", "no"]),
 });
 
 const enquirySchema = z.object({
@@ -32,9 +53,12 @@ const registrationSchema = z.object({
     .trim(),
 });
 
-export default async function makeEnquiry(prevState: string | any, formData: FormData) {
+export default async function makeEnquiry(
+  prevState: string | any,
+  formData: FormData
+) {
   try {
-    console.log(formData)
+    console.log(formData);
     const result = enquirySchema.safeParse(Object.fromEntries(formData));
     if (!result.success) {
       return {
@@ -43,10 +67,12 @@ export default async function makeEnquiry(prevState: string | any, formData: For
     }
     const { email, name, question } = result.data;
 
-    await prisma.enquiry.create({data: {email, name, question}})
-    return JSON.parse(JSON.stringify({
-      message: "Enquiry sent successfully!"
-    }))
+    await prisma.enquiry.create({ data: { email, name, question } });
+    return JSON.parse(
+      JSON.stringify({
+        message: "Enquiry sent successfully!",
+      })
+    );
   } catch (error) {
     handleError(error);
   }
@@ -55,8 +81,7 @@ export default async function makeEnquiry(prevState: string | any, formData: For
 export async function login(prevState: any, formData: FormData) {
   try {
     const result = loginSchema.safeParse(Object.fromEntries(formData));
-    console.log(formData)
-
+    console.log(formData);
 
     if (!result.success) {
       return {
@@ -66,7 +91,9 @@ export async function login(prevState: any, formData: FormData) {
 
     const { email, password } = result.data;
 
-    const existingProfile = await prisma.profile.findFirst({ where: {email} });
+    const existingProfile = await prisma.profile.findFirst({
+      where: { email },
+    });
     if (!existingProfile) {
       return {
         errors: {
@@ -125,7 +152,7 @@ export async function login(prevState: any, formData: FormData) {
 //     const hashedPassword = await bcrypt.hash(password, 10);
 //     const newUser = await prisma.profile.create({
 //       data: {
-//         name, 
+//         name,
 //         password:hashedPassword,
 //         email: email
 //       }
@@ -143,10 +170,24 @@ export async function login(prevState: any, formData: FormData) {
 //   }
 // }
 
+export async function apply(prevState: any, formData: FormData) {
+  try {
+    const result = applySchema.safeParse(Object.fromEntries(formData));
+    console.log("reach 0");
+
+    if (!result.success) {
+      console.log("reach 0.1");
+      return {
+        errors: result.error.flatten().fieldErrors,
+      };
+    }
+  } catch (error) {}
+}
+
 export async function register(prevState: any, formData: FormData) {
   try {
     console.log("Received formData:", Object.fromEntries(formData));
-    
+
     const result = registrationSchema.safeParse(Object.fromEntries(formData));
     console.log("Validation result:", result);
 
@@ -160,7 +201,9 @@ export async function register(prevState: any, formData: FormData) {
     const { name, email, password } = result.data;
     console.log("Parsed data:", { name, email });
 
-    const existingProfile = await prisma.profile.findFirst({ where: { email } });
+    const existingProfile = await prisma.profile.findFirst({
+      where: { email },
+    });
     console.log("Existing profile:", existingProfile);
 
     if (!existingProfile) {
