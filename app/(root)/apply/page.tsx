@@ -31,6 +31,7 @@ const initial = {
   reason: "",
   balance: "",
   scholarship: "",
+  statement: ""
 };
 const page = () => {
   const [state, action] = useFormState(apply, undefined);
@@ -299,8 +300,29 @@ const page = () => {
               <p className="text-sm text-red-500">{state.errors.lname}</p>
             )}
           </div>
+          {
+            value.scholarship === "yes" ? (
+              <div className="">
+              <Label>
+                Why should we give you this scholarship?*
+              </Label>
+              <Textarea
+                value={value.balance}
+                name="statement"
+                id="statement"
+                onChange={(e) =>
+                  setValue({ ...initial, statement: e.target.value })
+                }
+                className="h-40"
+              />
+              {state?.errors?.statement && (
+                <p className="text-sm text-red-500">{state.errors.statement}</p>
+              )}
+            </div>
+            ): ''
+          }
         </div>
-        <Button type="submit">Apply!</Button>
+        <Button type="submit" className="w-40 rounded-full">Apply!</Button>
       </form>
     </div>
   );
