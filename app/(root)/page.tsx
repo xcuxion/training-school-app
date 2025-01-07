@@ -12,6 +12,7 @@ import Register from "./register";
 import Footer from "@/components/portfolio/footer";
 import Login from "./login";
 
+
 const people = [
   {
     image: "/images/p1.jpg",
@@ -119,6 +120,7 @@ const LandingPage = () => {
         >
           Become a member
         </Button>
+
       </div>
       <div className=" rounded-lg my-8 p-6 w-full bg-secondary">
         <div className="flex items-center justify-between">
@@ -207,6 +209,7 @@ const LandingPage = () => {
       ) : (
         ""
       )}
+
     </div>
   );
 };

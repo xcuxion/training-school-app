@@ -23,6 +23,7 @@ const TestimonialCard = ({
 }: TestimonialCardProps) => {
   return (
     <Card className="bg-primary-light  ">
+
       <CardHeader>
         <CardTitle className="flex text-base md:text-2xl font-semibold items-center">
           <Image

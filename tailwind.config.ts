@@ -22,6 +22,7 @@ const config: Config = {
 			neutral: '#f5f5f6',
 			dark: '#563553',
 			outline: '#EFC5ED',
+
 			muted: {
 				DEFAULT: 'hsl(var(--muted))',
 				foreground: 'hsl(var(--muted-foreground))'
