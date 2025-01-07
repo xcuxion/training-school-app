@@ -1,7 +1,6 @@
 import React from 'react'
 import CaseHeader from './case-header'
 import SprintField from './sprint-field'
-import TaskList from './task-list'
 import Backlog from './backlog';
 
 const caseHeaderData = {

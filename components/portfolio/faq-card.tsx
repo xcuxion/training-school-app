@@ -13,7 +13,7 @@ interface IFaq {
 
 const FaqCard = ({ question, answer }: IFaq) => {
   return (
-    <Accordion type="single" collapsible>
+    <Accordion type="single" collapsible className="border px-4 rounded-md">
       <AccordionItem value="item-1">
         <AccordionTrigger>{question}</AccordionTrigger>
         <AccordionContent>

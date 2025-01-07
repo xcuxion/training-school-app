@@ -35,7 +35,7 @@ const CaseHeader = ({title, team, startDate, deadline, supervisor}: ICaseheader)
             }
           </span>
         </div>
-
+        <p className="">Supervised by {supervisor.name}</p>
     </div>
   )
 }
