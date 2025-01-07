@@ -19,10 +19,10 @@ const loginSchema = z.object({
 const applySchema = z.object({
   fname: z.string({ message: "field is required" }).trim(),
   oname: z.string().trim().optional(),
+  lname: z.string({ message: "field is required" }).trim(),
   gender: z.enum(["male", "female"]),
   nationality: z.string({ message: "field is required" }),
-  lname: z.string({ message: "field is required" }).trim(),
-  school: z.string({ message: "Select your school" }).trim(),
+  school: z.enum(["knust", "ug", "ashesi", "none"]),
   contact: z.string({ message: "field is required" }).trim(),
   dob: z.date(),
   email: z
@@ -124,52 +124,6 @@ export async function login(prevState: any, formData: FormData) {
   }
 }
 
-// export async function register(prevState: any, formData: FormData) {
-//   try {
-//     console.log(formData)
-//     const result = registrationSchema.safeParse(Object.fromEntries(formData));
-//     console.log("reach 0")
-
-//     if (!result.success) {
-//     console.log("reach 0.1")
-//       return {
-//         errors: result.error.flatten().fieldErrors,
-//       };
-//     }
-
-//     console.log("reach 1")
-//     const { name, email, password } = result.data;
-
-//     const existingProfile = await prisma.profile.findFirst({ where: {email} });
-//     if (!existingProfile) {
-//       return {
-//         errors: {
-//           email: ["Invalid email"],
-//         },
-//       };
-//     }
-//     console.log("reach 2")
-
-//     const hashedPassword = await bcrypt.hash(password, 10);
-//     const newUser = await prisma.profile.create({
-//       data: {
-//         name,
-//         password:hashedPassword,
-//         email: email
-//       }
-//     })
-//     console.log(newUser)
-//     await createSession(newUser.id);
-//     console.log("reach 3")
-
-//     return redirect("/school");
-//   } catch (error) {
-//     if (error instanceof Error && error.message === "NEXT_REDIRECT") {
-//       throw error; // Let Next.js handle the redirect
-//     }
-//     handleError(error);
-//   }
-// }
 
 export async function apply(prevState: any, formData: FormData) {
   try {
@@ -182,6 +136,13 @@ export async function apply(prevState: any, formData: FormData) {
         errors: result.error.flatten().fieldErrors,
       };
     }
+
+    await prisma.applicant.create({data: {...result.data}})
+    return JSON.parse(
+      JSON.stringify({
+        message: "Application sent successfully!",
+      })
+    );
   } catch (error) {}
 }
 

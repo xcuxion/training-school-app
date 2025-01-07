@@ -17,6 +17,24 @@ model Enquiry {
   question  String   @db.VarChar()
 }
 
+model Applicant {
+  id  String  @id @default(uuid())
+  fname String @db.VarChar()
+  lname String @db.VarChar()
+  oname String? @db.VarChar()
+  dob DateTime @db.Date()
+  gender     Gender
+  nationality String @db.VarChar()
+  school     School
+  contact    String  @db.VarChar(10)
+  programme  String  @db.VarChar()
+  year      String  @db.VarChar()
+  reason String @db.VarChar()
+  balance      String  @db.VarChar()
+  scholarship Scholarship
+  statement String? @db.VarChar()
+}
+
 model Student {
   reference  String  @id @default(uuid())
   gender     String  @db.VarChar(8)
@@ -78,12 +96,18 @@ model Case {
 // }
 
 enum Gender {
-  MALE
-  FEMALE
-  OTHER
+  male
+  female
 }
 
 enum School {
-  KNUST
-  UG
+  knust
+  ug
+  ashesi
+  none
+}
+
+enum Scholarship {
+  yes
+  no
 }
