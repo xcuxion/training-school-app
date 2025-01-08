@@ -3,11 +3,7 @@ import React from "react";
 import {
   Dialog,
   DialogContent,
-  DialogFooter,
-  DialogHeader,
 } from "@/components/ui/dialog";
-import { Button } from "./ui/button";
-import { useFormStatus } from "react-dom";
 import { DialogTitle } from "@radix-ui/react-dialog";
 
 interface IFormModal {
@@ -25,16 +21,11 @@ const FormModal = ({
   title,
   buttonText,
 }: IFormModal) => {
-  const { pending } = useFormStatus();
-
   return (
     <Dialog open={isOpen} onOpenChange={onClose}>
       <DialogContent>
         <DialogTitle className="capitalize text-2xl font-bold">{title}</DialogTitle>
         {children}
-        {/* <Button type="submit" disabled={pending}>
-          {buttonText}
-        </Button> */}
       </DialogContent>
     </Dialog>
   );

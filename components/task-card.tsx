@@ -1,5 +1,4 @@
 import React from "react";
-import FacilitatorCard from "./facilitator-card";
 import Link from "next/link";
 import { FaRegFilePdf } from "react-icons/fa";
 
@@ -19,7 +18,6 @@ const TaskCard = () => {
   return (
     <div className="w-full">
       <div className="mb-6">
-        <FacilitatorCard {...facilitatorData} />
       </div>
 
       <div className="flex flex-row gap-3">

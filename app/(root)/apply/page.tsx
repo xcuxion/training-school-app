@@ -33,7 +33,7 @@ const initial = {
   scholarship: "",
   statement: ""
 };
-const page = () => {
+const ApplicationPage = () => {
   const [state, action] = useFormState(apply, undefined);
   const [value, setValue] = useState(initial);
   return (
@@ -328,4 +328,4 @@ const page = () => {
   );
 };
 
-export default page;
+export default ApplicationPage;
