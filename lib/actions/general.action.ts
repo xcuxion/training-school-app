@@ -77,7 +77,7 @@ export default async function makeEnquiry(
   } catch (error) {
     handleError(error);
   }
-}
+} 
 
 export async function login(prevState: any, formData: FormData) {
   try {
@@ -143,7 +143,9 @@ export async function apply(prevState: any, formData: FormData) {
         message: "Application sent successfully!",
       })
     );
-  } catch (error) {}
+  } catch (error) {
+    handleError(error);
+  }
 }
 
 export async function register(prevState: any, formData: FormData) {
