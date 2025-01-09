@@ -31,7 +31,8 @@ const initial = {
   reason: "",
   balance: "",
   scholarship: "",
-  statement: ""
+  statement: "",
+  laptop: ""
 };
 const ApplicationPage = () => {
   const [state, action] = useFormState(apply, undefined);
@@ -273,6 +274,31 @@ const ApplicationPage = () => {
             />
             {state?.errors?.balance && (
               <p className="text-sm text-red-500">{state.errors.balance}</p>
+            )}
+          </div>
+          <div className="bg-secondary rounded-md p-4">
+            <p className="font-semibold">
+              Do you have a working laptop of at least 4GB RAM?*
+            </p>
+            <RadioGroup
+              defaultValue="no"
+              className="flex mt-2 gap-x-10"
+              onValueChange={(value) => {
+                setValue({ ...initial, laptop: value });
+              }}
+            >
+              <span className="flex items-center space-x-2 ">
+                <RadioGroupItem value="yes" id="yes" />
+                <Label htmlFor="yes">Yes</Label>
+              </span>
+              <span className="flex items-center space-x-2">
+                <RadioGroupItem value="no" id="no" />
+                <Label htmlFor="no">No</Label>
+              </span>
+            </RadioGroup>
+
+            {state?.errors?.lname && (
+              <p className="text-sm text-red-500">{state.errors.lname}</p>
             )}
           </div>
           <div className="bg-secondary rounded-md p-4">

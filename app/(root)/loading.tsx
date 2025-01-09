@@ -3,8 +3,8 @@ import React from 'react'
 
 const loading = () => {
   return (
-    <Skeleton>
-        <Skeleton className=''/>
+    <Skeleton className='bg-gray-200'>
+        <Skeleton className='w-40 h-2'/>
     </Skeleton>
   )
 }

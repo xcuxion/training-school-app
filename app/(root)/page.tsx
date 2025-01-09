@@ -108,7 +108,7 @@ const LandingPage = () => {
         </Button>
       </div>
       <div className="flex flex-col items-center justify-center w-3/5 mx-auto min-h-[60vh]">
-        <h1 className="text-4xl font-bold">
+        <h1 className="text-4xl font-bold text-center md:text-start">
           Empowering Dreams, Building Futures
         </h1>
         <p className="text-lg text-center my-4">
@@ -129,8 +129,8 @@ const LandingPage = () => {
       </div>
       <div className="px-10">
         <div className=" rounded-lg my-8 p-6 w-full bg-secondary">
-          <div className="flex items-center justify-between">
-            <span className="w-2/3 ">
+          <div className="flex flex-col md:flex-row items-center justify-between">
+            <span className="md:w-2/3 ">
               <h2 className="text-2xl font-semibold w-4/5">
                 School of Engineering & Techpreneurship
               </h2>
@@ -151,7 +151,7 @@ const LandingPage = () => {
               alt="image"
               width={450}
               height={350}
-              className="w-[450px] h-[300px] object-cover rounded-md"
+              className="w-full mt-3 md:t-0 md:w-[450px] md:h-[300px] object-cover rounded-md"
             />
           </div>
           <div className="bg-white py-4 px-6 rounded-md mt-8">
@@ -174,7 +174,7 @@ const LandingPage = () => {
       </div>
       <div className="px-10 flex flex-col flex-center min-h-[60vh]">
         <h2 className="text-2xl font-bold mb-4">Our Team</h2>
-        <div className="grid grid-cols-4 gap-4">
+        <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
           {people.map((member, index) => (
             <TeamMemberCard
               key={index}
@@ -202,8 +202,8 @@ const LandingPage = () => {
 
         </div>
       </div>
-      <div className="px-10 flex items-start justify-between my-4 gap-x-6 min-h-[50vh]">
-        <div className="w-1/2">
+      <div className="px-10 flex flex-col md:flex-row items-start justify-between my-4 gap-x-6 min-h-[50vh]">
+        <div className="w-full md:w-1/2">
           <h4 className="text-lg font-semibold">
             Frequently Asked Questions (FAQs)
           </h4>

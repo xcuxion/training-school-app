@@ -35,6 +35,7 @@ const applySchema = z.object({
   balance: z.string(),
   statement: z.string(),
   scholarship: z.enum(["yes", "no"]),
+  laptop: z.enum(["yes", "no"])
 });
 
 const enquirySchema = z.object({

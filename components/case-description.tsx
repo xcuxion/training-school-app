@@ -13,12 +13,12 @@ export const CaseDescriptionSkeleton = () => {
     <div className="">
       <Skeleton />
       <div className="space-y-4">
-        <Skeleton>
+        <Skeleton className="bg-gray-200">
           <Skeleton className="w-40 h-2" />
           <Skeleton className="w-40 h-2" />
         </Skeleton>
 
-        <Skeleton>
+        <Skeleton className="bg-gray-200">
           <Skeleton className="w-40 h-2" />
           <Skeleton className="w-40 h-2" />
         </Skeleton>

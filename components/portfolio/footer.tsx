@@ -34,8 +34,8 @@ const redirects = [
 
 const Footer = () => {
   return (
-    <footer className="flex flex-between bg-dark text-light p-10">
-      <div className="w-2/5">
+    <footer className="flex flex-col md:flex-between bg-dark text-light p-10">
+      <div className="md:w-2/5">
         <Image src={"/logo.svg"} alt="" width={150} height={45} className="" />
         <p className="">
           XCUXION is a forward-thinking company dedicated to empowering
