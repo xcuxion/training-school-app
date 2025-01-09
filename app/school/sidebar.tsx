@@ -32,7 +32,7 @@ const Sidebar = () => {
   const pathname = usePathname();
 
   return (
-    <div className="h-screen w-[250px] sticky top-0 left-0 p-4 flex flex-col items-center justify-between bg-white border-r">
+    <div className="hidden h-screen w-[250px] sticky top-0 left-0 p-4 md:flex flex-col items-center justify-between bg-white border-r">
       {/* Top Section */}
       <div className="flex items-center mb-12">
         <Image

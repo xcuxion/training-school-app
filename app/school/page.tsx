@@ -28,8 +28,8 @@ const moduleData = {
   facilitator: 'Yaw Offeh'
 }
 const profile = {
-  name: "Jessica Jones",
-  image: "/images/jess/jpeg",
+  name: "Mans Watzen",
+  image: "/images/p1.jpg",
   aspiration: "Software Engineer"
 }
 const page = () => {
@@ -50,8 +50,8 @@ const page = () => {
             <h1 className="text-4xl font-semibold">237</h1>
             <p className="text-lg">Achievement Points</p>
           </div>
-          <Image src={"/images/trophy.svg"} alt="" width={80} height={80} />
-        </div>
+          <Image src={"/images/trophy.svg"} alt="" width={80} height={80} className="w-[80px] h-[80px] object-cover" />
+        </div>  
       </SideSection>
     </div>
   );
