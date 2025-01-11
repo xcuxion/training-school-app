@@ -6,8 +6,12 @@ import { handleError } from "../utils";
 import { PrismaClient } from "@prisma/client";
 
 const prisma = new PrismaClient();
-export async function retrieve_profile() {
+export async function retrieve_profile(reference: string) {
   try {
+    const user = await prisma.student.findUnique({
+      where: { reference },
+    });
+    return user;
   } catch (error) {
     handleError(error);
   }

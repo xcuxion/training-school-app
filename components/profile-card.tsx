@@ -22,7 +22,7 @@ const ProfileCard = ({name, image, aspiration}: IUserProfile) => {
             alt="user image"
             width={100}
             height={100}
-            className="rounded-full object-cover"
+            className="w-[100px] h-[100px] rounded-full object-cover"
           />
           <h3 className="text-xl font-medium">{name}</h3>
           <p>{aspiration}</p>

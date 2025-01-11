@@ -7,7 +7,7 @@ import { redirect } from "next/navigation";
 import { createSession } from "../session";
 
 const prisma = new PrismaClient();
-const loginSchema = z.object({
+const formSchema = z.object({
   email: z.string().email({ message: "Invalid email address" }).trim(),
   password: z
     .string()
@@ -23,17 +23,9 @@ const enquirySchema = z.object({
     .trim(),
   question: z.string({ message: "question field cannot be empty" }).min(2),
 });
-const registrationSchema = z.object({
-  name: z.string().min(2),
-  email: z.string().email({ message: "Invalid email address" }).trim(),
-  password: z
-    .string()
-    .min(8, { message: "Password must be at least 8 characters" })
-    .trim(),
-});
 
 export default async function makeEnquiry(
-  prevState: string | any,
+  prevState: any,
   formData: FormData
 ) {
   try {
@@ -59,7 +51,7 @@ export default async function makeEnquiry(
 
 export async function login(prevState: any, formData: FormData) {
   try {
-    const result = loginSchema.safeParse(Object.fromEntries(formData));
+    const result = formSchema.safeParse(Object.fromEntries(formData));
     console.log(formData);
 
     if (!result.success) {
@@ -106,7 +98,7 @@ export async function register(prevState: any, formData: FormData) {
   try {
     console.log("Received formData:", Object.fromEntries(formData));
 
-    const result = registrationSchema.safeParse(Object.fromEntries(formData));
+    const result = formSchema.safeParse(Object.fromEntries(formData));
     console.log("Validation result:", result);
 
     if (!result.success) {
@@ -116,19 +108,19 @@ export async function register(prevState: any, formData: FormData) {
       };
     }
 
-    const { name, email, password } = result.data;
-    console.log("Parsed data:", { name, email });
+    const { email, password } = result.data;
+    console.log("Parsed data:", {  email });
 
     const existingProfile = await prisma.profile.findFirst({
       where: { email },
     });
     console.log("Existing profile:", existingProfile);
 
-    if (!existingProfile) {
-      console.log("No profile found for email:", email);
+    if (existingProfile) {
+      console.log("profile found for email:", email);
       return {
         errors: {
-          email: ["Invalid email"],
+          email: ["email already exists"],
         },
       };
     }
@@ -138,7 +130,6 @@ export async function register(prevState: any, formData: FormData) {
 
     const newUser = await prisma.profile.create({
       data: {
-        name,
         password: hashedPassword,
         email: email,
       },
@@ -149,7 +140,7 @@ export async function register(prevState: any, formData: FormData) {
     console.log("Session created for user:", newUser.id);
 
     console.log("Redirecting to /school");
-    return redirect("/school");
+    return redirect("/landing");
   } catch (error) {
     console.error("Caught error:", error);
 
