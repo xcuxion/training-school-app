@@ -32,7 +32,7 @@ const initial = {
   balance: "",
   scholarship: "",
   statement: "",
-  laptop: ""
+  laptop: "",
 };
 const ApplicationPage = () => {
   const [state, action] = useFormState(apply, undefined);
@@ -128,9 +128,11 @@ const ApplicationPage = () => {
               <RadioGroup
                 defaultValue="male"
                 className="flex gap-x-6 h-9 items-center"
+                name="gender"
                 onValueChange={(value) => {
                   setValue({ ...initial, gender: value });
-                }}              >
+                }}
+              >
                 <div className="flex items-center space-x-2">
                   <RadioGroupItem value="male" id="male" />
                   <Label htmlFor="male">Male</Label>
@@ -194,13 +196,22 @@ const ApplicationPage = () => {
           <div className="grid grid-cols-3 gap-x-6">
             <span className="">
               <Label>School</Label>
-              <Select onValueChange={(value)=>setValue({...initial, school: value})} >
+              <Select
+                onValueChange={(value) =>
+                  setValue({ ...initial, school: value })
+                }
+                name="school"
+              >
                 <SelectTrigger className="">
-                  <SelectValue placeholder="Select"/>
+                  <SelectValue placeholder="Select" />
                 </SelectTrigger>
                 <SelectContent className="bg-white">
-                  <SelectItem value="knust">Kwame Nkrumah University of Science and Technology</SelectItem>
-                  <SelectItem value="ug">University of Ghana - Legon</SelectItem>
+                  <SelectItem value="knust">
+                    Kwame Nkrumah University of Science and Technology
+                  </SelectItem>
+                  <SelectItem value="ug">
+                    University of Ghana - Legon
+                  </SelectItem>
                   <SelectItem value="ashesi">Ashesi University</SelectItem>
                   <SelectItem value="none">Not a student</SelectItem>
                 </SelectContent>
@@ -281,6 +292,7 @@ const ApplicationPage = () => {
               Do you have a working laptop of at least 4GB RAM?*
             </p>
             <RadioGroup
+              name="latop"
               defaultValue="no"
               className="flex mt-2 gap-x-10"
               onValueChange={(value) => {
@@ -308,6 +320,7 @@ const ApplicationPage = () => {
             <RadioGroup
               defaultValue="no"
               className="flex mt-2 gap-x-10"
+              name="scholarship"
               onValueChange={(value) => {
                 setValue({ ...initial, scholarship: value });
               }}
@@ -326,12 +339,9 @@ const ApplicationPage = () => {
               <p className="text-sm text-red-500">{state.errors.lname}</p>
             )}
           </div>
-          {
-            value.scholarship === "yes" ? (
-              <div className="">
-              <Label>
-                Why should we give you this scholarship?*
-              </Label>
+          {value.scholarship === "yes" ? (
+            <div className="">
+              <Label>Why should we give you this scholarship?*</Label>
               <Textarea
                 value={value.balance}
                 name="statement"
@@ -345,10 +355,13 @@ const ApplicationPage = () => {
                 <p className="text-sm text-red-500">{state.errors.statement}</p>
               )}
             </div>
-            ): ''
-          }
+          ) : (
+            ""
+          )}
         </div>
-        <Button type="submit" className="w-40 rounded-full">Apply!</Button>
+        <Button type="submit" className="w-40 rounded-full">
+          Apply!
+        </Button>
       </form>
     </div>
   );
