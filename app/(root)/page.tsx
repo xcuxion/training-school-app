@@ -1,7 +1,12 @@
+<<<<<<< Updated upstream
 "use client";
 import React, { useState } from "react";
 
 import Link from "next/link";
+=======
+import Header from "../../components/portfolio/Header";
+import React from "react";
+>>>>>>> Stashed changes
 import Image from "next/image";
 import { Button } from "@/components/ui/button";
 import TeamMemberCard from "@/components/portfolio/TeamMemberCard";
