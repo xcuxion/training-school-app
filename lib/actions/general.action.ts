@@ -6,7 +6,6 @@ import { PrismaClient } from "@prisma/client";
 import { redirect } from "next/navigation";
 import { createSession } from "../session";
 
-
 const prisma = new PrismaClient();
 const loginSchema = z.object({
   email: z.string().email({ message: "Invalid email address" }).trim(),
@@ -14,28 +13,6 @@ const loginSchema = z.object({
     .string()
     .min(8, { message: "Password must be at least 8 characters" })
     .trim(),
-});
-
-const applySchema = z.object({
-  fname: z.string({ message: "field is required" }).trim(),
-  oname: z.string().trim().optional(),
-  lname: z.string({ message: "field is required" }).trim(),
-  gender: z.enum(["male", "female"]),
-  nationality: z.string({ message: "field is required" }),
-  school: z.enum(["knust", "ug", "ashesi", "none"]),
-  contact: z.string({ message: "field is required" }).trim(),
-  dob: z.date(),
-  email: z
-    .string()
-    .email({ message: "field is required" })
-    .trim(),
-  programme: z.string({ message: "field is required" }).min(2),
-  year: z.enum(["1", "2", "3", "4", "5", "6"]),
-  reason: z.string(),
-  balance: z.string(),
-  statement: z.string(),
-  scholarship: z.enum(["yes", "no"]),
-  laptop: z.enum(["yes", "no"])
 });
 
 const enquirySchema = z.object({
@@ -78,7 +55,7 @@ export default async function makeEnquiry(
   } catch (error) {
     handleError(error);
   }
-} 
+}
 
 export async function login(prevState: any, formData: FormData) {
   try {
@@ -121,30 +98,6 @@ export async function login(prevState: any, formData: FormData) {
     if (error instanceof Error && error.message === "NEXT_REDIRECT") {
       throw error; // Let Next.js handle the redirect
     }
-    handleError(error);
-  }
-}
-
-
-export async function apply(prevState: any, formData: FormData) {
-  try {
-    const result = applySchema.safeParse(Object.fromEntries(formData));
-    console.log("reach 0");
-
-    if (!result.success) {
-      console.log("reach 0.1");
-      return {
-        errors: result.error.flatten().fieldErrors,
-      };
-    }
-
-    await prisma.applicant.create({data: {...result.data}})
-    return JSON.parse(
-      JSON.stringify({
-        message: "Application sent successfully!",
-      })
-    );
-  } catch (error) {
     handleError(error);
   }
 }
