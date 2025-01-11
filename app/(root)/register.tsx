@@ -14,7 +14,6 @@ const Register = ({
   show: boolean;
   onClose: () => void;
 }) => {
-  const [name, setName] = useState<string>("");
   const [email, setEmail] = useState<string>("");
   const [password, setPassword] = useState<string>("");
   const [state, action] = useFormState(register, undefined);
@@ -38,18 +37,6 @@ const Register = ({
       <span className="flex flex-center text-lg font-semibold italic">OR</span>
       <div className="">
         <form action={action} className="space-y-2">
-          <>
-            <Input
-              id="name"
-              name="name"
-              placeholder="Name"
-              value={name}
-              onChange={(e) => setName(e.target.value)}
-            />
-            {state?.errors?.name && (
-              <p className="text-red-500">{state.errors.name}</p>
-            )}
-          </>
           <>
             <Input
               id="email"

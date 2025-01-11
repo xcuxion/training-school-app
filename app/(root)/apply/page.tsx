@@ -4,7 +4,6 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
 import { Textarea } from "@/components/ui/textarea";
-import { apply } from "@/lib/actions/general.action";
 import Image from "next/image";
 import React, { useState } from "react";
 import { useFormState } from "react-dom";
@@ -15,6 +14,7 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
+import { new_application } from "@/lib/actions/admission.actions";
 
 const initial = {
   fname: "",
@@ -35,7 +35,7 @@ const initial = {
   laptop: "",
 };
 const ApplicationPage = () => {
-  const [state, action] = useFormState(apply, undefined);
+  const [state, action] = useFormState(new_application, undefined);
   const [value, setValue] = useState(initial);
   return (
     <div className="py-5 px-10 w-2/3 mx-auto">
