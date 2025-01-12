@@ -18,89 +18,93 @@ model Enquiry {
 }
 
 model Applicant {
-  profile     Profile? @relation(fields: [profileId], references: [id])
-  profileId   String?  @unique
-  id          String   @id @default(uuid())
-  fname       String   @db.VarChar(255)
-  lname       String   @db.VarChar(255)
-  oname       String?  @db.VarChar(255)
-  dob         DateTime 
+  profile     Profile?        @relation(fields: [profileId], references: [id])
+  profileId   String?         @unique
+  id          String          @id @default(uuid())
+  fname       String          @db.VarChar(255)
+  lname       String          @db.VarChar(255)
+  oname       String?         @db.VarChar(255)
+  dob         DateTime
   gender      Gender
-  nationality String   @db.VarChar(255)
+  nationality String          @db.VarChar(255)
   school      School
-  contact     String   @db.VarChar(10)
-  programme   String   @db.VarChar(255)
-  year        String   @db.VarChar(4)
-  reason      String   @db.VarChar(255)
-  balance     String   @db.VarChar(255)
+  contact     String          @db.VarChar(10)
+  programme   String          @db.VarChar(255)
+  year        String          @db.VarChar(4)
+  reason      String          @db.VarChar(255)
+  balance     String          @db.VarChar(255)
   scholarship Scholarship
-  statement   String?  @db.VarChar(255)
+  status      AdmissionStatus @default(pending)
+  statement   String?         @db.VarChar(255)
   student     Student?
 }
 
 model Student {
-  reference   String    @id @default(uuid())
-  fees        Fee       @relation(fields: [feeId], references: [id])
-  feeId       String    @unique
-  batch       String    @db.VarChar(255)
-  applicant   Applicant? @relation(fields: [applicantId], references: [id])
-  applicantId String?   @unique
+  applicant    Applicant? @relation(fields: [applicantId], references: [id])
+  applicantId  String?    @unique
+  reference    String     @id
+  rewardPoints Int        @default(0) @db.Integer()
+  fees         Fee        @relation(fields: [feeId], references: [id])
+  feeId        String     @unique
+  batch        String     @db.VarChar(255)
+  tasks        Task[]     @relation("StudentTasks")
+}
+
+model Fee {
+  id          String    @id @default(uuid())
+  scholarship Boolean   @default(false) @db.Boolean()
+  balance     Float     @db.DoublePrecision()
+  receipts    Receipt[]
+  student     Student?
 }
 
 model Profile {
-  id          String      @id @default(uuid())
-  createdAt   DateTime    @default(now())
-  updatedAt   DateTime    @updatedAt
-  email       String      @unique @db.VarChar(80)
-  password    String      @db.VarChar(255)
+  id          String       @id @default(uuid())
+  createdAt   DateTime     @default(now())
+  updatedAt   DateTime     @updatedAt
+  email       String       @unique @db.VarChar(80)
+  password    String       @db.VarChar(255)
   facilitator Facilitator?
   applicant   Applicant?
 }
 
 model Facilitator {
-  profile     Profile? @relation(fields: [profileId], references: [id])
-  profileId   String?  @unique
-  id          String   @id @default(uuid())
-  bio         String   @db.VarChar(255)
-  module      Module   @relation(fields: [moduleId], references: [id])
-  moduleId    String
-}
-
-model Fee {
-  id          String   @id @default(uuid())
-  scholarship Int      @db.Integer()
-  balance     Float    @db.DoublePrecision()
-  receipts    Receipt[]
-  student     Student?
+  profile   Profile? @relation(fields: [profileId], references: [id])
+  profileId String?  @unique
+  id        String   @id @default(uuid())
+  bio       String   @db.VarChar(255)
+  module    Module   @relation(fields: [moduleId], references: [id])
+  moduleId  String
 }
 
 model Receipt {
-  id          String   @id @default(uuid())
-  amount      Float    @db.DoublePrecision()
-  paymentMode String   @db.VarChar(255)
-  fee         Fee?     @relation(fields: [feeId], references: [id])
+  id          String  @id @default(uuid())
+  amount      Float   @db.DoublePrecision()
+  paymentMode String  @db.VarChar(255)
+  fee         Fee?    @relation(fields: [feeId], references: [id])
   feeId       String?
 }
 
 model Case {
-  id              String       @id @default(uuid())
-  title           String       @db.VarChar(255)
-  description     String       @db.VarChar(255)
+  id               String     @id @default(uuid())
+  title            String     @db.VarChar(255)
+  description      String     @db.VarChar(255)
   responsibilities String[]
-  module          Module       @relation(fields: [moduleId], references: [id])
-  moduleId        String
-  resources       Resource[]
+  module           Module?    @relation(fields: [moduleId], references: [id])
+  moduleId         String?
+  resources        Resource[]
 }
 
 model Resource {
-  id          String     @id @default(uuid())
-  name        String     @db.VarChar(255)
-  description String     @db.VarChar(255)
+  id          String       @id @default(uuid())
+  name        String       @db.VarChar(255)
+  description String       @db.VarChar(255)
   type        ResourceType
   category    Category
-  module      Module?    @relation(fields: [moduleId], references: [id])
+  url         String       @db.VarChar(255)
+  module      Module?      @relation(fields: [moduleId], references: [id])
   moduleId    String?
-  case        Case?      @relation(fields: [caseId], references: [id])
+  case        Case?        @relation(fields: [caseId], references: [id])
   caseId      String?
 }
 
@@ -110,14 +114,22 @@ model Module {
   facilitators Facilitator[]
   cases        Case[]
   resources    Resource[]
+  Task         Task[]
 }
 
 model Task {
-  id      String   @id @default(uuid())
-  title   String   @db.VarChar(255)
-  summary String   @db.VarChar(255)
-  sprint  Sprint?  @relation(fields: [sprintId], references: [id])
-  sprintId String?
+  id        String       @id @default(uuid())
+  title     String       @db.VarChar(255)
+  summary   String       @db.VarChar(255)
+  dueDate   DateTime
+  status    TaskStatus   @default(todo)
+  priority  TaskPriority @default(medium)
+  comments  String[]
+  module    Module?      @relation(fields: [moduleId], references: [id])
+  moduleId  String?
+  sprint    Sprint?      @relation(fields: [sprintId], references: [id])
+  sprintId  String?
+  assignees Student[]    @relation("StudentTasks")
 }
 
 model Sprint {
@@ -153,4 +165,22 @@ enum Category {
   technology
   entrepreneurship
   strategy
+}
+
+enum TaskStatus {
+  todo
+  in_progress
+  completed
+}
+
+enum TaskPriority {
+  low
+  medium
+  high
+}
+
+enum AdmissionStatus {
+  pending
+  admitted
+  rejected
 }

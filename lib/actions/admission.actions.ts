@@ -1,7 +1,7 @@
 "use server";
 import { z } from "zod";
 import { handleError } from "../utils";
-import { PrismaClient } from "@prisma/client";
+import { PrismaClient, Scholarship } from "@prisma/client";
 
 const prisma = new PrismaClient();
 
@@ -23,6 +23,11 @@ const newApplicationSchema = z.object({
   scholarship: z.enum(["yes", "no"]),
   laptop: z.enum(["yes", "no"]),
 });
+
+const admissionSchema = z.object({
+  scholarship: z.boolean(),
+  outstandingBalance: z.number()
+})
 
 export async function new_application(prevState: any, formData: FormData) {
   try {
@@ -47,6 +52,15 @@ export async function new_application(prevState: any, formData: FormData) {
   }
 }
 
+export async function fetch_all_applications() {
+  try {
+    const applications = await prisma.applicant.findMany();
+    return applications;
+  } catch (error) {
+    handleError(error);
+  }
+}
+
 export async function edit_application() {
   try {
   } catch (error) {
@@ -61,15 +75,76 @@ export async function delete_application() {
   }
 }
 
-export async function admit_applicant() {
+export async function admit_applicant(id: string, formData: FormData) {
   try {
+    const result = admissionSchema.safeParse(Object.fromEntries(formData));
+    
+    if (!result.success) {
+      return {
+        errors: result.error.flatten().fieldErrors,
+      };
+    }
+    const {scholarship, outstandingBalance} = result.data
+    
+    // Step 1: Fetch the applicant's data
+    const applicant = await prisma.applicant.findUnique({
+      where: { id },
+    });
+
+    if (!applicant) {
+      throw new Error("Applicant not found.");
+    }
+
+    // Step 2: Update the applicant's status to "admitted"
+    await prisma.applicant.update({
+      where: { id },
+      data: { status: "admitted" },
+    });
+
+    // Step 3: Create a Fee record
+    const fee = await prisma.fee.create({
+      data: {
+        scholarship: scholarship,
+        balance: outstandingBalance,
+      },
+    });
+
+    // Step 4: Create a Student record
+    await prisma.student.create({
+      data: {
+        reference: `25${Math.floor(Math.random() * 10000)}`, // Generate a unique reference
+        applicantId: id, // Link the student to the applicant
+        batch: "Batch'25",
+        feeId: fee.id, // Link the fee record
+      },
+    });
+
+    return {
+      message: "Applicant admitted successfully!",
+    };
   } catch (error) {
-    handleError(error);
+    console.error(error);
+    throw new Error("Error admitting applicant.");
   }
 }
 
-export async function reject_applicant() {
+
+export async function reject_applicant(id:string) {
   try {
+        // Step 1: Fetch the applicant's data
+        const applicant = await prisma.applicant.findUnique({
+          where: { id },
+        });
+    
+        if (!applicant) {
+          throw new Error("Applicant not found.");
+        }
+    
+        // Step 2: Update the applicant's status to "admitted"
+        await prisma.applicant.update({
+          where: { id },
+          data: { status: "rejected" },
+        });
   } catch (error) {
     handleError(error);
   }
