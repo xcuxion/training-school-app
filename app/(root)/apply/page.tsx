@@ -71,7 +71,7 @@ const ApplicationPage = () => {
                 name="fname"
                 id="fname"
                 onChange={(e) =>
-                  setValue({ ...initial, fname: e.target.value })
+                  setValue({ ...value, fname: e.target.value })
                 }
               />
               {state?.errors?.fname && (
@@ -86,7 +86,7 @@ const ApplicationPage = () => {
                 name="oname"
                 id="oname"
                 onChange={(e) =>
-                  setValue({ ...initial, oname: e.target.value })
+                  setValue({ ...value, oname: e.target.value })
                 }
               />
               {state?.errors?.oname && (
@@ -101,7 +101,7 @@ const ApplicationPage = () => {
                 name="lname"
                 id="lname"
                 onChange={(e) =>
-                  setValue({ ...initial, lname: e.target.value })
+                  setValue({ ...value, lname: e.target.value })
                 }
               />
               {state?.errors?.lname && (
@@ -117,7 +117,7 @@ const ApplicationPage = () => {
                 value={value.dob}
                 name="dob"
                 id="dob"
-                onChange={(e) => setValue({ ...initial, dob: e.target.value })}
+                onChange={(e) => setValue({ ...value, dob: e.target.value })}
               />
               {state?.errors?.dob && (
                 <p className="text-sm text-red-500">{state.errors.dob}</p>
@@ -129,8 +129,8 @@ const ApplicationPage = () => {
                 defaultValue="male"
                 className="flex gap-x-6 h-9 items-center"
                 name="gender"
-                onValueChange={(value) => {
-                  setValue({ ...initial, gender: value });
+                onValueChange={(choice) => {
+                  setValue({ ...value, gender: choice });
                 }}
               >
                 <div className="flex items-center space-x-2">
@@ -151,7 +151,7 @@ const ApplicationPage = () => {
                 name="nationality"
                 id="nationality"
                 onChange={(e) =>
-                  setValue({ ...initial, nationality: e.target.value })
+                  setValue({ ...value, nationality: e.target.value })
                 }
               />
               {state?.errors?.nationality && (
@@ -170,7 +170,7 @@ const ApplicationPage = () => {
                 name="email"
                 id="email"
                 onChange={(e) =>
-                  setValue({ ...initial, email: e.target.value })
+                  setValue({ ...value, email: e.target.value })
                 }
               />
               {state?.errors?.email && (
@@ -185,7 +185,7 @@ const ApplicationPage = () => {
                 name="contact"
                 id="contact"
                 onChange={(e) =>
-                  setValue({ ...initial, contact: e.target.value })
+                  setValue({ ...value, contact: e.target.value })
                 }
               />
               {state?.errors?.contact && (
@@ -197,8 +197,8 @@ const ApplicationPage = () => {
             <span className="">
               <Label>School</Label>
               <Select
-                onValueChange={(value) =>
-                  setValue({ ...initial, school: value })
+                onValueChange={(choice) =>
+                  setValue({ ...value, school: choice })
                 }
                 name="school"
               >
@@ -229,7 +229,7 @@ const ApplicationPage = () => {
                 name="programme"
                 id="programme"
                 onChange={(e) =>
-                  setValue({ ...initial, programme: e.target.value })
+                  setValue({ ...value, programme: e.target.value })
                 }
               />
               {state?.errors?.programme && (
@@ -243,7 +243,7 @@ const ApplicationPage = () => {
                 value={value.year}
                 name="year"
                 id="year"
-                onChange={(e) => setValue({ ...initial, year: e.target.value })}
+                onChange={(e) => setValue({ ...value, year: e.target.value })}
               />
               {state?.errors?.year && (
                 <p className="text-sm text-red-500">{state.errors.year}</p>
@@ -262,7 +262,7 @@ const ApplicationPage = () => {
               value={value.reason}
               name="reason"
               id="reason"
-              onChange={(e) => setValue({ ...initial, reason: e.target.value })}
+              onChange={(e) => setValue({ ...value, reason: e.target.value })}
               className="h-40"
             />
             {state?.errors?.reason && (
@@ -279,7 +279,7 @@ const ApplicationPage = () => {
               name="balance"
               id="balance"
               onChange={(e) =>
-                setValue({ ...initial, balance: e.target.value })
+                setValue({ ...value, balance: e.target.value })
               }
               className="h-40"
             />
@@ -292,11 +292,11 @@ const ApplicationPage = () => {
               Do you have a working laptop of at least 4GB RAM?*
             </p>
             <RadioGroup
-              name="latop"
+              name="laptop"
               defaultValue="no"
               className="flex mt-2 gap-x-10"
-              onValueChange={(value) => {
-                setValue({ ...initial, laptop: value });
+              onValueChange={(choice) => {
+                setValue({ ...value, laptop: choice });
               }}
             >
               <span className="flex items-center space-x-2 ">
@@ -321,8 +321,8 @@ const ApplicationPage = () => {
               defaultValue="no"
               className="flex mt-2 gap-x-10"
               name="scholarship"
-              onValueChange={(value) => {
-                setValue({ ...initial, scholarship: value });
+              onValueChange={(choice) => {
+                setValue({ ...value, scholarship: choice });
               }}
             >
               <span className="flex items-center space-x-2 ">
@@ -343,11 +343,11 @@ const ApplicationPage = () => {
             <div className="">
               <Label>Why should we give you this scholarship?*</Label>
               <Textarea
-                value={value.balance}
+                value={value.statement}
                 name="statement"
                 id="statement"
                 onChange={(e) =>
-                  setValue({ ...initial, statement: e.target.value })
+                  setValue({ ...value, statement: e.target.value })
                 }
                 className="h-40"
               />

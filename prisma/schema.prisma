@@ -24,7 +24,7 @@ model Applicant {
   fname       String          @db.VarChar(255)
   lname       String          @db.VarChar(255)
   oname       String?         @db.VarChar(255)
-  dob         DateTime
+  dob         DateTime        @db.Date()
   gender      Gender
   nationality String          @db.VarChar(255)
   school      School
