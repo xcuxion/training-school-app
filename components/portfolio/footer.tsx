@@ -34,7 +34,7 @@ const redirects = [
 
 const Footer = () => {
   return (
-    <footer className="flex flex-col md:flex-row md:flex-between bg-dark text-light p-10">
+    <footer className="flex flex-col md:flex-row md:flex-between bg-dark text-light p-4 md:p-10 gap-y-4 md:gap-y-0">
       <div className="md:w-2/5">
         <Image src={"/logo.svg"} alt="" width={150} height={45} className="" />
         <p className="">
