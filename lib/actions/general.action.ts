@@ -25,7 +25,7 @@ const enquirySchema = z.object({
 });
 
 export default async function makeEnquiry(
-  prevState: any,
+  prevState: unknown,
   formData: FormData
 ) {
   try {
@@ -49,7 +49,7 @@ export default async function makeEnquiry(
   }
 }
 
-export async function login(prevState: any, formData: FormData) {
+export async function login(prevState: unknown, formData: FormData) {
   try {
     const result = formSchema.safeParse(Object.fromEntries(formData));
     console.log(formData);
@@ -94,7 +94,7 @@ export async function login(prevState: any, formData: FormData) {
   }
 }
 
-export async function register(prevState: any, formData: FormData) {
+export async function register(prevState: unknown, formData: FormData) {
   try {
     console.log("Received formData:", Object.fromEntries(formData));
 

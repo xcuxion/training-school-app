@@ -29,7 +29,7 @@ const admissionSchema = z.object({
   outstandingBalance: z.number(),
 });
 
-export async function new_application(prevState: any, formData: FormData) {
+export async function new_application(prevState: unknown, formData: FormData) {
   try {
     // Log the incoming formData for debugging
     console.log("FormData received:", Array.from(formData.entries()));
