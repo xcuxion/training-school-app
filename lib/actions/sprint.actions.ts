@@ -6,7 +6,7 @@ import { handleError } from "../utils";
 import { PrismaClient } from "@prisma/client";
 
 const prisma = new PrismaClient();
-export async function new_task() {
+export async function new_task(prevState: unknown, formData: FormData) {
   try {
   } catch (error) {
     handleError(error);

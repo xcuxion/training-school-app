@@ -21,7 +21,7 @@ const InquiryForm = () => {
           <Input
             id="name"
             name="name"
-            placeholder="Your name"
+            placeholder="Full name"
             title="Enter your full name as reference"
             onChange={(e)=>setName(e.target.value)}
             value={name}
@@ -34,7 +34,7 @@ const InquiryForm = () => {
           <Input 
           id="email" 
           name="email" 
-          placeholder="" 
+          placeholder="Email address" 
           value={email}
           title="" 
           onChange={(e)=>setEmail(e.target.value)}
@@ -48,6 +48,7 @@ const InquiryForm = () => {
           <Textarea
             id="question"
             name="question"
+            placeholder="ENter your message..."
             className="bg-light boder- min-h-20"
             value={question}
             onChange={(e)=>setQuestion(e.target.value)}
