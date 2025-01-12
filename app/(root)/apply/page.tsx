@@ -38,15 +38,15 @@ const ApplicationPage = () => {
   const [state, action] = useFormState(new_application, undefined);
   const [value, setValue] = useState(initial);
   return (
-    <div className="py-5 px-10 w-2/3 mx-auto">
-      <div className="flex flex-between py-4">
-        <h1 className="text-4xl font-bold">Application Form</h1>
+    <div className="p-4 md:py-5 md:px-10 md:w-2/3 mx-auto">
+      <div className="flex flex-col-reverse md:flex-row md:flex-between py-2 md:py-4">
+        <h1 className="text-3xl md:text-4xl font-bold">Application Form</h1>
         <Image
           src={"/logo.svg"}
           alt="logo"
           width={200}
           height={60}
-          className=""
+          className="w-[150px] h-[45px] md:w-[200px] h-[]60px"
         />
       </div>
       <p className="font-sm">
@@ -62,7 +62,7 @@ const ApplicationPage = () => {
         <div className="my-4 space-y-3">
           <h2 className="text-2xl font-semibold">Personal Information</h2>
           <p className="text-xs">Fields with * are required</p>
-          <div className="grid grid-cols-3 gap-x-6">
+          <div className="grid gap-y-2 md:gap-y-0 md:grid-cols-3 md:gap-x-6">
             <span className="">
               <Label>First name*</Label>
               <Input
@@ -109,13 +109,14 @@ const ApplicationPage = () => {
               )}
             </span>
           </div>
-          <div className="grid grid-cols-3 gap-x-6">
-            <span className="">
+          <div className="grid grid-cols-2 gap-y-2 md:gap-y-0 gap-x-4 md:grid-cols-3 md:gap-x-6">
+            <span className="w-full">
               <Label>Date of Birth*</Label>
               <Input
                 type="date"
                 value={value.dob}
                 name="dob"
+                className=""
                 id="dob"
                 onChange={(e) => setValue({ ...value, dob: e.target.value })}
               />
@@ -143,7 +144,7 @@ const ApplicationPage = () => {
                 </div>
               </RadioGroup>
             </span>
-            <span className="">
+            <span className="col-span-2 md:col-span-1">
               <Label>Nationality</Label>
               <Input
                 type="text"
@@ -161,7 +162,7 @@ const ApplicationPage = () => {
               )}
             </span>
           </div>
-          <div className="grid grid-cols-2 gap-x-6">
+          <div className="grid md:grid-cols-2 md:gap-x-6">
             <span className="">
               <Label>Email</Label>
               <Input
@@ -193,7 +194,7 @@ const ApplicationPage = () => {
               )}
             </span>
           </div>
-          <div className="grid grid-cols-3 gap-x-6">
+          <div className="grid md:grid-cols-3 gap-y-2 md:gap-y-0 md:gap-x-6">
             <span className="">
               <Label>School</Label>
               <Select
@@ -319,7 +320,7 @@ const ApplicationPage = () => {
             </p>
             <RadioGroup
               defaultValue="no"
-              className="flex mt-2 gap-x-10"
+              className="flex flex-col md:flex-row mt-2 gap-y-2 md:gap-y-0 md:gap-x-10"
               name="scholarship"
               onValueChange={(choice) => {
                 setValue({ ...value, scholarship: choice });

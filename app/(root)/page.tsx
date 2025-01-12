@@ -86,7 +86,7 @@ const LandingPage = () => {
   const [openLogin, setOpenLogin] = useState(false);
   return (
     <div className="">
-      <div className="px-10 w-full h-16 sticky top-0 left-0 flex flex-between py-2 bg-white z-50">
+      <div className="px-4 md:px-10 w-full h-16 sticky top-0 left-0 flex flex-between py-2 bg-white z-50">
         <div className="flex items-center">
           <Image
             src={"/favicon.svg"}
@@ -107,8 +107,8 @@ const LandingPage = () => {
           Log in
         </Button>
       </div>
-      <div className="flex flex-col items-center justify-center w-3/5 mx-auto min-h-[60vh]">
-        <h1 className="text-4xl font-bold text-center md:text-start">
+      <div className="px-4 md:px-0 flex flex-col items-center justify-center md:w-3/5 mx-auto min-h-[60vh]">
+        <h1 className="text-2xl md:text-4xl font-bold text-center md:text-start">
           Empowering Dreams, Building Futures
         </h1>
         <p className="text-lg text-center my-4">
@@ -127,14 +127,14 @@ const LandingPage = () => {
           Become a member
         </Button>
       </div>
-      <div className="px-10">
-        <div className=" rounded-lg my-8 p-6 w-full bg-secondary">
+      <div className="px-4 md:px-10">
+        <div className=" rounded-lg mb-4 md:mb-8 p-2 md:p-6 w-full bg-secondary">
           <div className="flex flex-col md:flex-row items-center justify-between">
             <span className="md:w-2/3 ">
-              <h2 className="text-2xl font-semibold w-4/5">
+              <h2 className=" text-xl md:text-2xl font-semibold md:w-4/5">
                 School of Engineering & Techpreneurship
               </h2>
-              <p className="pr-6">
+              <p className="md:pr-6">
                 The XCUXION School of Engineering and Techpreneurship is a
                 transformative educational program designed to empower aspiring
                 technologists and entrepreneurs. By providing hands-on training
@@ -154,9 +154,9 @@ const LandingPage = () => {
               className="w-full mt-3 md:t-0 md:w-[450px] md:h-[300px] object-cover rounded-md"
             />
           </div>
-          <div className="bg-white py-4 px-6 rounded-md mt-8">
-            <h3 className="text-3xl font-bold">Admissions In Progress!</h3>
-            <p className="my-2">
+          <div className="bg-white p-3 md:py-4 md:px-6 rounded-md mt-4 md:mt-8">
+            <h3 className="text-2xl md:text-3xl font-bold">Admissions In Progress!</h3>
+            <p className="md:my-2">
               Good news! We are currently admitting people to kickstart our next
               batch of training starting March and ending in August. Our 6
               months intensive training program focuses on the fundamentals
@@ -166,13 +166,13 @@ const LandingPage = () => {
               while it is still available. Simply click the button below to get
               started!
             </p>
-            <Button variant={"default"} className=" rounded-full" asChild>
+            <Button variant={"default"} className="mt-1 md:mt-0 rounded-full" asChild>
               <Link href={"/apply"}>Start Your Application!</Link>
             </Button>
           </div>
         </div>
       </div>
-      <div className="px-10 flex flex-col flex-center min-h-[60vh]">
+      <div className="px-4 md:px-10 flex flex-col flex-center min-h-[60vh]">
         <h2 className="text-2xl font-bold mb-4">Our Team</h2>
         <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
           {people.map((member, index) => (
@@ -185,9 +185,9 @@ const LandingPage = () => {
           ))}
         </div>
       </div>
-      <div className="px-10 flex flex-col flex-center min-h-[70vh]">
+      <div className="px-4 md:px-10 flex flex-col flex-center my-8 md:my-8 md:min-h-[70vh]">
         <h2 className="text-2xl font-bold mb-2">Testimonials</h2>
-        <div className="px-10">
+        <div className="md:px-10">
           <Carousel className="w-full ">
             <CarouselContent className="">
           {testimonials.map((testimonial, index) => (
@@ -196,13 +196,13 @@ const LandingPage = () => {
               </CarouselItem>
           ))}
             </CarouselContent>
-            <CarouselPrevious />
-            <CarouselNext />
+            <CarouselPrevious className="hidden md:flex" />
+            <CarouselNext className="hidden md:flex"/>
           </Carousel>
 
         </div>
       </div>
-      <div className="px-10 flex flex-col md:flex-row items-start justify-between my-4 gap-x-6 min-h-[50vh]">
+      <div className="px-4 md:px-10 flex flex-col md:flex-row items-start justify-between my-4 gap-y-4 md:gap-y-0 md:gap-x-6 md:min-h-[50vh]">
         <div className="w-full md:w-1/2">
           <h4 className="text-lg font-semibold">
             Frequently Asked Questions (FAQs)
