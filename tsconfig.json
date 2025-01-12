@@ -19,8 +19,7 @@
     ],
     "baseUrl": ".",
     "paths": {
-      // ...
-      "^@/components/(.*)$": ["<rootDir>/components/$1"]
+      "@/*": ["./*"]
     }
   },
   "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", ".next/types/**/*.ts", "app/school/assignment"],
