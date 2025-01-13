@@ -5,8 +5,12 @@ import * as bcrypt from "bcrypt";
 import { PrismaClient } from "@prisma/client";
 import { redirect } from "next/navigation";
 import { createSession } from "../session";
+import { Resend } from "resend";
+import { ReactElement } from "react";
 
+const resend = new Resend(process.env.RESEND_KEY);
 const prisma = new PrismaClient();
+
 const formSchema = z.object({
   email: z.string().email({ message: "Invalid email address" }).trim(),
   password: z
@@ -14,15 +18,163 @@ const formSchema = z.object({
     .min(8, { message: "Password must be at least 8 characters" })
     .trim(),
 });
-
 const enquirySchema = z.object({
   name: z.string({ message: "Enter your name" }).trim(),
   email: z
-    .string()
-    .email({ message: "Please enter a valid email address" })
-    .trim(),
+  .string()
+  .email({ message: "Please enter a valid email address" })
+  .trim(),
   question: z.string({ message: "question field cannot be empty" }).min(2),
 });
+
+const mailSchema = z.object({
+  sender: z.string().email(),
+  receivers: z.array(z.string().email()),
+  subject: z.string().min(1, 'Subject is required'),
+  content: z.any()  // Allow ReactElement to be passed
+    .refine((val) => val !== null && val !== undefined, 'Content is required'),
+});
+
+// Type for the function parameters
+type EmailContent = {
+  sender: string;
+  receivers: string[];
+  subject: string;
+  content: ReactElement;
+};
+
+type SendMailResponse = {
+  success?: boolean;
+  errors?: Record<string, string[]>;
+  message?: string;
+};
+
+export async function sendMail(
+  prevState: unknown, 
+  formData: FormData,
+  EmailComponent: ReactElement  // Accept React component separately
+): Promise<SendMailResponse> {
+  try {
+    // Parse and validate the form data
+    const rawData = Object.fromEntries(formData);
+    
+    // Convert receivers string to array if it comes as comma-separated string
+    const processedData = {
+      ...rawData,
+      receivers: Array.isArray(rawData.receivers) 
+        ? rawData.receivers 
+        : String(rawData.receivers).split(',').map(email => email.trim()),
+      content: EmailComponent  // Add the React component to the processed data
+    };
+
+    const result = mailSchema.safeParse(processedData);
+
+    if (!result.success) {
+      console.error("Validation errors:", result.error.flatten().fieldErrors);
+      return {
+        success: false,
+        errors: result.error.flatten().fieldErrors,
+      };
+    }
+
+    const { sender, receivers, subject, content } = result.data as EmailContent;
+
+    // Send email using Resend
+    const response = await resend.emails.send({
+      from: sender,
+      to: receivers,
+      subject: subject,
+      react: content,  // Pass the React component directly
+    });
+
+    if (response.error) {
+      throw new Error(response.error.message);
+    }
+
+    return {
+      success: true,
+      message: 'Email sent successfully'
+    };
+
+  } catch (error) {
+    console.error('Error sending email:', error);
+    return {
+      success: false,
+      message: error instanceof Error ? error.message : 'Failed to send email'
+    };
+  }
+}
+
+
+// // Email schema with proper validation
+// const mailSchema = z.object({
+//   sender: z.string().email(),
+//   receivers: z.array(z.string().email()),  // Validate each receiver email
+//   subject: z.string().min(1, 'Subject is required'),
+//   content: z.string().min(1, 'Content is required'),  // Changed from any to string
+// });
+
+// // Type for the success/error response
+// type SendMailResponse = {
+//   success?: boolean;
+//   errors?: Record<string, string[]>;
+//   message?: string;
+// };
+
+// export async function sendMail(
+//   prevState: unknown, 
+//   formData: FormData
+// ): Promise<SendMailResponse> {
+//   try {
+//     // Parse and validate the form data
+//     const rawData = Object.fromEntries(formData);
+    
+//     // Convert receivers string to array if it comes as comma-separated string
+//     const processedData = {
+//       ...rawData,
+//       receivers: Array.isArray(rawData.receivers) 
+//         ? rawData.receivers 
+//         : String(rawData.receivers).split(',').map(email => email.trim())
+//     };
+
+//     const result = mailSchema.safeParse(processedData);
+
+//     if (!result.success) {
+//       console.error("Validation errors:", result.error.flatten().fieldErrors);
+//       return {
+//         success: false,
+//         errors: result.error.flatten().fieldErrors,
+//       };
+//     }
+
+//     const { sender, receivers, subject, content } = result.data;
+
+//     // Send email using Resend
+//     const response = await resend.emails.send({
+//       from: sender,
+//       to: receivers,  // Resend expects an array of email addresses
+//       subject: subject,
+//       react: content,  // If you want to send HTML content, you might want to create a proper React component
+//     });
+
+//     if (response.error) {
+//       throw new Error(response.error.message);
+//     }
+
+//     return {
+//       success: true,
+//       message: 'Email sent successfully'
+//     };
+
+//   } catch (error) {
+//     console.error('Error sending email:', error);
+//     return {
+//       success: false,
+//       message: error instanceof Error ? error.message : 'Failed to send email'
+//     };
+//   }
+// }
+
 
 export default async function makeEnquiry(
   prevState: unknown,
@@ -109,7 +261,7 @@ export async function register(prevState: unknown, formData: FormData) {
     }
 
     const { email, password } = result.data;
-    console.log("Parsed data:", {  email });
+    console.log("Parsed data:", { email });
 
     const existingProfile = await prisma.profile.findFirst({
       where: { email },
@@ -145,9 +297,12 @@ export async function register(prevState: unknown, formData: FormData) {
     console.error("Caught error:", error);
 
     if (error instanceof Error && error.message === "NEXT_REDIRECT") {
+      const resend = new Resend(process.env.RESEND_KEY);
+
       throw error; // Let Next.js handle the redirect
     }
 
     handleError(error);
   }
 }
+
