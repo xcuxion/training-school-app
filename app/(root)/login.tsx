@@ -1,7 +1,7 @@
 import FormModal from "@/components/form-modal";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
-import { login } from "@/lib/actions/general.action";
+import { googleAuth, login } from "@/lib/actions/general.action";
 import React, { useState } from "react";
 import { useFormState } from "react-dom";
 import { BsApple, BsGoogle } from "react-icons/bs";
@@ -17,17 +17,25 @@ const Login = ({ show, onClose }: { show: boolean; onClose: () => void }) => {
       title="Sign in to Account"
       buttonText="Login"
     >
-     <div className="grid gap-y-2 md:gap-y-0 md:grid-cols-2 md:gap-x-6">
-        <span className="rounded-full border border-outline hover:bg-outline hover:cursor-pointer p-2 md:text-sm flex flex-center gap-x-4">
+      <form
+        action={googleAuth}
+        className="grid gap-y-2 md:gap-y-0 md:grid-cols-2 md:gap-x-6"
+      >
+        <Button
+          type="submit"
+          className="rounded-full border border-outline hover:bg-outline hover:cursor-pointer p-2 md:text-sm flex flex-center gap-x-4"
+        >
           <BsGoogle />
           Sign in with Google
-        </span>
-        <span className="rounded-full border border-outline hover:bg-outline hover:cursor-pointer p-2 md:text-sm flex flex-center gap-x-4">
+        </Button>
+        {/* <span className="rounded-full border border-outline hover:bg-outline hover:cursor-pointer p-2 md:text-sm flex flex-center gap-x-4">
           <BsApple />
           Sign in with Apple
-        </span>
-      </div>
-      <span className="flex flex-center text-lg leading-tight font-semibold italic">OR</span>
+        </span> */}
+      </form>
+      <span className="flex flex-center text-lg leading-tight font-semibold italic">
+        OR
+      </span>
       <div className="">
         <form action={action} className="space-y-2">
           <>

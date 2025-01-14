@@ -7,6 +7,7 @@ import { redirect } from "next/navigation";
 import { createSession } from "../session";
 import { Resend } from "resend";
 import { ReactElement } from "react";
+import { signIn } from "../auth";
 
 const resend = new Resend(process.env.RESEND_KEY);
 const prisma = new PrismaClient();
@@ -21,18 +22,19 @@ const formSchema = z.object({
 const enquirySchema = z.object({
   name: z.string({ message: "Enter your name" }).trim(),
   email: z
-  .string()
-  .email({ message: "Please enter a valid email address" })
-  .trim(),
+    .string()
+    .email({ message: "Please enter a valid email address" })
+    .trim(),
   question: z.string({ message: "question field cannot be empty" }).min(2),
 });
 
 const mailSchema = z.object({
   sender: z.string().email(),
   receivers: z.array(z.string().email()),
-  subject: z.string().min(1, 'Subject is required'),
-  content: z.any()  // Allow ReactElement to be passed
-    .refine((val) => val !== null && val !== undefined, 'Content is required'),
+  subject: z.string().min(1, "Subject is required"),
+  content: z
+    .any() // Allow ReactElement to be passed
+    .refine((val) => val !== null && val !== undefined, "Content is required"),
 });
 
 // Type for the function parameters
@@ -49,22 +51,32 @@ type SendMailResponse = {
   message?: string;
 };
 
+export async function googleAuth() {
+  try {
+    await signIn("google");
+  } catch (error) {
+    console.log(error);
+  }
+}
+
 export async function sendMail(
-  prevState: unknown, 
+  prevState: unknown,
   formData: FormData,
-  EmailComponent: ReactElement  // Accept React component separately
+  EmailComponent: ReactElement // Accept React component separately
 ): Promise<SendMailResponse> {
   try {
     // Parse and validate the form data
     const rawData = Object.fromEntries(formData);
-    
+
     // Convert receivers string to array if it comes as comma-separated string
     const processedData = {
       ...rawData,
-      receivers: Array.isArray(rawData.receivers) 
-        ? rawData.receivers 
-        : String(rawData.receivers).split(',').map(email => email.trim()),
-      content: EmailComponent  // Add the React component to the processed data
+      receivers: Array.isArray(rawData.receivers)
+        ? rawData.receivers
+        : String(rawData.receivers)
+            .split(",")
+            .map((email) => email.trim()),
+      content: EmailComponent, // Add the React component to the processed data
     };
 
     const result = mailSchema.safeParse(processedData);
@@ -84,7 +96,7 @@ export async function sendMail(
       from: sender,
       to: receivers,
       subject: subject,
-      react: content,  // Pass the React component directly
+      react: content, // Pass the React component directly
     });
 
     if (response.error) {
@@ -93,18 +105,16 @@ export async function sendMail(
 
     return {
       success: true,
-      message: 'Email sent successfully'
+      message: "Email sent successfully",
     };
-
   } catch (error) {
-    console.error('Error sending email:', error);
+    console.error("Error sending email:", error);
     return {
       success: false,
-      message: error instanceof Error ? error.message : 'Failed to send email'
+      message: error instanceof Error ? error.message : "Failed to send email",
     };
   }
 }
-
 
 // // Email schema with proper validation
 // const mailSchema = z.object({
@@ -122,18 +132,18 @@ export async function sendMail(
 // };
 
 // export async function sendMail(
-//   prevState: unknown, 
+//   prevState: unknown,
 //   formData: FormData
 // ): Promise<SendMailResponse> {
 //   try {
 //     // Parse and validate the form data
 //     const rawData = Object.fromEntries(formData);
-    
+
 //     // Convert receivers string to array if it comes as comma-separated string
 //     const processedData = {
 //       ...rawData,
-//       receivers: Array.isArray(rawData.receivers) 
-//         ? rawData.receivers 
+//       receivers: Array.isArray(rawData.receivers)
+//         ? rawData.receivers
 //         : String(rawData.receivers).split(',').map(email => email.trim())
 //     };
 
@@ -174,7 +184,6 @@ export async function sendMail(
 //     };
 //   }
 // }
-
 
 export default async function makeEnquiry(
   prevState: unknown,
@@ -305,4 +314,3 @@ export async function register(prevState: unknown, formData: FormData) {
     handleError(error);
   }
 }
-
