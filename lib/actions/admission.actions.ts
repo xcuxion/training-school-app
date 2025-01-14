@@ -19,7 +19,7 @@ const newApplicationSchema = z.object({
   year: z.enum(["1", "2", "3", "4", "5", "6"]),
   reason: z.string(),
   balance: z.string(),
-  statement: z.string(),
+  statement: z.string().optional(),
   scholarship: z.enum(["yes", "no"]),
   laptop: z.enum(["yes", "no"]),
 });
