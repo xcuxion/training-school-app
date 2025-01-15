@@ -29,10 +29,10 @@ const case_content = {
 const page = () => {
   return (
     <>
-      <MainContent>
+      <MainContent className="w-2/3">
         <CaseDescription {...case_content}/>
       </MainContent>
-      <SideSection>
+      <SideSection className="w-1/3">
         <CaseResources/>
       </SideSection>
     </>

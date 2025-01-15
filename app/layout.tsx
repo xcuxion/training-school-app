@@ -29,7 +29,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body
-        className={`${nunito.className} ${poppins.className} antialiased  text-color-light`}
+        className={`${nunito.className} ${poppins.className} antialiased  text-dark`}
       >
         <Toaster/>
         {children}

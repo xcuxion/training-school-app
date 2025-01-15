@@ -1,9 +1,10 @@
+import { cn } from '@/lib/utils'
 import React from 'react'
 
-const SideSection = ({children}: {children?:React.ReactNode}) => {
+const SideSection = ({children, className}: {children?:React.ReactNode, className?: string}) => {
   return (
-    <div className='hidden h-screen w-1/3 md:flex flex-col justify-between gap-4 sticky top-0 right-0 p-4 '>
-      {children}
+    <div className={cn(`hidden h-screen md:flex flex-col justify-between gap-4 sticky top-0 right-0 p-4 `, className )}>
+      {children && children}
     </div>
   )
 }

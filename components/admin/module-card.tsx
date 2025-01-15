@@ -19,7 +19,7 @@ const ModelueCard = ({title, facilitator, image}: IModuleCard) => {
                 <p className="">{facilitator}</p>
             </span>
         </div>
-        <span className="w-8 h-8 rounded-full border bg-brand-light flex flex-center">
+        <span className="w-8 h-8 rounded-full border bg-light flex flex-center">
             <Image src={'/arrow-right.svg'} alt='icon' width={24} height={24} className='' />
         </span>
     </div>

@@ -33,7 +33,7 @@ const TestimonialCard = ({
             height={60}
             className="w-[60px] h-[60px] border-2 rounded-full mr-2 object-cover"
           />
-          <span className="text-lg text-color-light">
+          <span className="text-lg text-light">
             <h3 className="text-xl">{name}</h3>
             <p className="text-sm">{position}</p>
           </span>

@@ -35,14 +35,14 @@ const profile = {
 const page = () => {
   return (
     <div className="w-full flex flex-row gapx-4 items-start ">
-      <MainContent>
+      <MainContent className="w-2/3">
         <UpcomingSession/>
         <div className="w-full mt-4">
           <ModuleDetails {...moduleData}/>
         </div>
         <PastSessionSection/>
       </MainContent>
-      <SideSection>
+      <SideSection className="w-1/3">
         <ProfileCard {...profile}/>
         <TodoSection />
         <div className="w-full h-[125px] bg-primary rounded-md flex px-6 items-center justify-between">

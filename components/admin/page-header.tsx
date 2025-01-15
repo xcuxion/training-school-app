@@ -23,7 +23,7 @@ const PageHeader = ({title, navs}: PageHeaderProps) => {
                 navs.map((link, index)=>{
                 const active = (link.route === '/school' && pathname === '/school') || (pathname.startsWith(link.route) && link.route !== '/school');
                 return(
-                    <Link key={index} href={link.route} className={active? 'text-brand-primary font-medium': 'font-medium opacity-50'}>{link.label}</Link>
+                    <Link key={index} href={link.route} className={active? 'text-primary font-medium': 'font-medium opacity-50'}>{link.label}</Link>
                 )
                 })
             }

@@ -15,7 +15,7 @@ interface HighlightCardProps {
 
 const HighlightCard = ({title, rate, updated, link}: HighlightCardProps) => {
   return (
-    <div className='flex flex-col items-start p-3 h-[125px] rounded-lg gap-2 bg-brand-light border'>
+    <div className='flex flex-col items-start p-3 h-[125px] rounded-lg gap-2 bg-light border'>
         <h3 className="text-base font-medium capitalize">{title}</h3>
         <p className="text-2xl font-bold">{rate}</p>
         {
@@ -24,7 +24,7 @@ const HighlightCard = ({title, rate, updated, link}: HighlightCardProps) => {
         }
         {
           link && (
-            <Link href={link.href} className='py-1 px-2 text-white rounded-full text-xs hover:bg-brand-primary/80 font-semibold bg-brand-primary underline'>{link.label}</Link>
+            <Link href={link.href} className='py-1 px-2 text-white rounded-full text-xs hover:bg-primary/80 font-semibold bg-primary underline'>{link.label}</Link>
           )
         }
     </div>

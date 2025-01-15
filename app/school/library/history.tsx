@@ -3,13 +3,13 @@ import Image from "next/image";
 
 export const HistorySkeleton = () => {
   return (
-    <Skeleton className="rounded-md shadow-md w-full flex">
-      <Skeleton className="max-w-[300px] h-[200px] " />
+    <div className="flex flex-col">
+      <Skeleton className="w-[300px] h-[200px] " />
       <span className="">
-        <Skeleton className="w-[150px] h-[10px]" />
-        <Skeleton className="w-[80px] h-[10px]" />
+        <Skeleton className="w-[200px] h-[24px] mb-2" />
+        <Skeleton className="w-[80px] h-[16px] " />
       </span>
-    </Skeleton>
+    </div>
   );
 };
 
