@@ -2,19 +2,19 @@ import type { Metadata } from "next";
 import "./globals.css";
 import { Poppins, Nunito } from "next/font/google";
 import { Toaster } from "@/components/ui/sonner";
-
+import { EdgeStoreProvider } from "@/lib/edgestore";
 
 const poppins = Poppins({
   subsets: ["latin"],
   variable: "--font-Poppins",
-  weight: "400"
+  weight: "400",
 });
 
 const nunito = Nunito({
   subsets: ["latin"],
   variable: "--font-Nunito",
-  weight: ["300", "400", "500", "600", "800"]
-})
+  weight: ["300", "400", "500", "600", "800"],
+});
 
 export const metadata: Metadata = {
   title: "XCUXION School",
@@ -31,8 +31,8 @@ export default function RootLayout({
       <body
         className={`${nunito.className} ${poppins.className} antialiased  text-dark`}
       >
-        <Toaster/>
-        {children}
+        <Toaster />
+        <EdgeStoreProvider>{children}</EdgeStoreProvider>
       </body>
     </html>
   );

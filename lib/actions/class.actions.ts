@@ -23,6 +23,7 @@ export async function schedule_class_session(
         errors: result.error.flatten().fieldErrors,
       };
     }
+    
   } catch (error) {
     handleError(error);
   }
