@@ -3,18 +3,38 @@ import React, {useState} from 'react'
 import { Input } from './ui/input'
 import { Button } from './ui/button'
 import { useEdgeStore } from '@/lib/edgestore'
+import { SingleImageDropzone } from './sinle-image-drpzone'
 
 const ImageUploader = () => {
     const [file, setFile] = useState<File>()
     const {edgestore} = useEdgeStore()
+    const [progress, setProgess] = useState<number>()
     const [urls, setUrls] = useState<{url: string; thumbnailUrl: string|null}>()
   return (
     <div className='flex flex-col items-center m-6 gap-2
     '>
-        <Input type='file' onChange={(e) => {setFile(e.target.files?.[0])}}/>
+      <SingleImageDropzone
+        width={200}
+        height={200}
+        value={file}
+        onChange={(file) => {
+          setFile(file);
+        }}
+        dropzoneOptions={{
+            maxSize: 1024 * 1024 * 4
+        }}
+      />
+        <div className='h-1.5 w-44 border rounded overflow-hidden'>
+            <div className="h-full bg-white transition-all duration-150" style={{
+                width: `${progress}%`
+            }}></div>
+        </div>
         <Button className="bg-white text-black rounded px-2 hover:opacity-80" onClick={async()=>{
             if (file){
-                const res = await edgestore.myPublicImages.upload({file})
+                const res = await edgestore.myPublicImages.upload({file, onProgressChange: (progress) => {
+                    setProgess(progress)
+                }})
+
                 setUrls({
                     url: res.url,
                     thumbnailUrl: res.thumbnailUrl
