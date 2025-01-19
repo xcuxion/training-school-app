@@ -15,7 +15,6 @@ const Login = ({ show, onClose }: { show: boolean; onClose: () => void }) => {
       isOpen={show}
       onClose={onClose}
       title="Sign in to Account"
-      buttonText="Login"
     >
       <form
         action={googleAuth}
@@ -28,10 +27,6 @@ const Login = ({ show, onClose }: { show: boolean; onClose: () => void }) => {
           <BsGoogle />
           Sign in with Google
         </Button>
-        {/* <span className="rounded-full border border-outline hover:bg-outline hover:cursor-pointer p-2 md:text-sm flex flex-center gap-x-4">
-          <BsApple />
-          Sign in with Apple
-        </span> */}
       </form>
       <span className="flex flex-center text-lg leading-tight font-semibold italic">
         OR

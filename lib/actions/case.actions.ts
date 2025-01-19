@@ -16,6 +16,8 @@ const caseSchema = z.object({
     .min(10, { message: "Description must be at least 10 characters" })
     .trim(),
   responsibilities: z.array(z.string()),
+  makePublic: z.boolean(),
+  module: z.string(),
 });
 
 export async function publicize_case(id: string) {
