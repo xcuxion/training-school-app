@@ -8,6 +8,7 @@ import { createSession } from "../session";
 import { Resend } from "resend";
 import { ReactElement } from "react";
 import { signIn } from "../auth";
+import { IUser } from "@/store/user-store";
 
 const resend = new Resend(process.env.RESEND_KEY);
 const prisma = new PrismaClient();
@@ -210,6 +211,16 @@ export default async function makeEnquiry(
   }
 }
 
+type Fields = {
+  email: string;
+  password: string;
+}
+
+export type FormState = {
+  message: string;
+  errors?: Record<keyof Fields, string> | undefined;
+}
+
 export async function login(prevState: unknown, formData: FormData) {
   try {
     const result = formSchema.safeParse(Object.fromEntries(formData));
@@ -217,6 +228,7 @@ export async function login(prevState: unknown, formData: FormData) {
 
     if (!result.success) {
       return {
+        message: "Failed to login",
         errors: result.error.flatten().fieldErrors,
       };
     }
@@ -246,7 +258,12 @@ export async function login(prevState: unknown, formData: FormData) {
 
     await createSession(existingProfile.id);
 
-    return redirect("/landing");
+    const { createdAt, updatedAt, ...profileWithoutTimestamps } = existingProfile;
+
+    return {
+        data: profileWithoutTimestamps,
+        message: "success",
+    };
   } catch (error) {
     if (error instanceof Error && error.message === "NEXT_REDIRECT") {
       throw error; // Let Next.js handle the redirect

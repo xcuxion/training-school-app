@@ -1,22 +1,30 @@
+"use client";
 import FormModal from "@/components/form-modal";
+import SubmitButton from "@/components/submit-button";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { googleAuth, login } from "@/lib/actions/general.action";
-import React, { useState } from "react";
-import { useFormState } from "react-dom";
-import { BsApple, BsGoogle } from "react-icons/bs";
+import { useUserStore } from "@/store/user-store";
+import React, { useEffect, useRef, useState } from "react";
+import { useFormState, useFormStatus } from "react-dom";
+import { BsGoogle } from "react-icons/bs";
 
 const Login = ({ show, onClose }: { show: boolean; onClose: () => void }) => {
-  const [state, action] = useFormState(login, undefined);
+  const [formState, formAction] = useFormState(login, undefined);
   const [email, setEmail] = useState<string>("");
   const [password, setPassword] = useState<string>("");
+  const {update } = useUserStore()
+  const formRef = useRef<HTMLFormElement>(null);
+  useEffect(() => {
+    if (formState?.message === "success" && formState?.data) {
+      update(formState.data);
+      formRef.current?.reset();
+    }
+  }, []);
   return (
-    <FormModal
-      isOpen={show}
-      onClose={onClose}
-      title="Sign in to Account"
-    >
+    <FormModal isOpen={show} onClose={onClose} title="Sign in to Account">
       <form
+        ref={formRef}
         action={googleAuth}
         className="grid gap-y-2 md:gap-y-0 md:grid-cols-2 md:gap-x-6"
       >
@@ -32,7 +40,7 @@ const Login = ({ show, onClose }: { show: boolean; onClose: () => void }) => {
         OR
       </span>
       <div className="">
-        <form action={action} className="space-y-2">
+        <form action={formAction} className="space-y-2">
           <>
             <Input
               id="email"
@@ -42,8 +50,8 @@ const Login = ({ show, onClose }: { show: boolean; onClose: () => void }) => {
               value={email}
               onChange={(e) => setEmail(e.target.value)}
             />
-            {state?.errors?.email && (
-              <p className="text-red-500">{state.errors.email}</p>
+            {formState?.errors?.email && (
+              <p className="text-red-500">{formState.errors.email}</p>
             )}
           </>
           <>
@@ -55,11 +63,11 @@ const Login = ({ show, onClose }: { show: boolean; onClose: () => void }) => {
               value={password}
               onChange={(e) => setPassword(e.target.value)}
             />
-            {state?.errors?.email && (
-              <p className="text-red-500">{state.errors.email}</p>
+            {formState?.errors?.email && (
+              <p className="text-red-500">{formState.errors.email}</p>
             )}
           </>
-          <Button type="submit">Login </Button>
+          <SubmitButton buttonText="Login" />
         </form>
       </div>
     </FormModal>
