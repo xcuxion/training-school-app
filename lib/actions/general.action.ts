@@ -318,7 +318,7 @@ export async function register(prevState: unknown, formData: FormData) {
     console.log("Session created for user:", newUser.id);
 
     console.log("Redirecting to /school");
-    return redirect("/landing");
+    return redirect("/admission-portal");
   } catch (error) {
     console.error("Caught error:", error);
 

@@ -5,7 +5,7 @@ import { Label } from "@/components/ui/label";
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
 import { Textarea } from "@/components/ui/textarea";
 import Image from "next/image";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useFormState } from "react-dom";
 import {
   Select,
@@ -37,6 +37,9 @@ const initial = {
 const ApplicationPage = () => {
   const [state, action] = useFormState(new_application, undefined);
   const [value, setValue] = useState(initial);
+  useEffect(()=>{
+    
+  }, [])
   return (
     <div className="p-4 md:py-5 md:px-10 md:w-2/3 mx-auto">
       <div className="flex flex-col-reverse md:flex-row md:flex-between py-2 md:py-4">

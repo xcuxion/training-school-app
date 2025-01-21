@@ -1,7 +1,8 @@
 "use server";
 import { z } from "zod";
 import { handleError } from "../utils";
-import { PrismaClient, Scholarship } from "@prisma/client";
+import { PrismaClient } from "@prisma/client";
+import { redirect } from "next/navigation";
 
 const prisma = new PrismaClient();
 
@@ -32,11 +33,11 @@ const admissionSchema = z.object({
 export async function new_application(prevState: unknown, formData: FormData) {
   try {
     // Log the incoming formData for debugging
-    console.log("FormData received:", Array.from(formData.entries()));
+    // console.log("FormData received:", Array.from(formData.entries()));
 
     // Parse and validate the input using the schema
     const result = newApplicationSchema.safeParse(Object.fromEntries(formData));
-    console.log("Schema validation result:", result);
+    // console.log("Schema validation result:", result);
 
     if (!result.success) {
       console.log(
@@ -49,7 +50,7 @@ export async function new_application(prevState: unknown, formData: FormData) {
     }
 
     // If validation passes, proceed to create the applicant
-    console.log("Validation successful. Parsed data:", result.data);
+    // console.log("Validation successful. Parsed data:", result.data);
 
     // Convert dob to an ISO-8601 DateTime
     const dob = result.data.dob;
@@ -65,18 +66,25 @@ export async function new_application(prevState: unknown, formData: FormData) {
         data: { email: result.data.email, password: "1234567890" },
       });
 
+      const {email, ...remainingFields} = result.data
       await prisma.applicant.create({
         data: {
-          ...result.data,
+          ...remainingFields,
           dob: dobDateTime,
           profileId: profile.id,
+          laptop: remainingFields.laptop === "yes"? true: false,
+          scholarship: remainingFields.scholarship === "yes"? true: false,
         },
       });
     } else {
+      const {email, ...remainingFields} = result.data
+
       await prisma.applicant.create({
         data: {
-          ...result.data,
+          ...remainingFields,
           dob: dobDateTime,
+          laptop: remainingFields.laptop === "yes"? true: false,
+          scholarship: remainingFields.scholarship === "yes"? true: false,
           profileId: existingProfile.id,
         },
       });

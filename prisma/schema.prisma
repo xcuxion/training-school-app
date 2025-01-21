@@ -33,7 +33,8 @@ model Applicant {
   year        String          @db.VarChar(4)
   reason      String          @db.VarChar(255)
   balance     String          @db.VarChar(255)
-  scholarship Scholarship
+  laptop      Boolean         @db.Boolean()
+  scholarship Boolean         @db.Boolean()
   status      AdmissionStatus @default(pending)
   statement   String?         @db.VarChar(255)
   student     Student?
@@ -55,10 +56,10 @@ model Class {
   link         String       @db.VarChar(255)
   instructor   Facilitator? @relation(fields: [instructorId], references: [id])
   instructorId String
-  date DateTime @db.Date()
-  time DateTime @db.Time()
-  module Module @relation(fields: [moduleId], references: [id])
-  moduleId String
+  date         DateTime     @db.Date()
+  time         DateTime     @db.Time()
+  module       Module       @relation(fields: [moduleId], references: [id])
+  moduleId     String
 }
 
 model Fee {
@@ -128,7 +129,7 @@ model Module {
   cases        Case[]
   resources    Resource[]
   task         Task[]
-  classes Class[]
+  classes      Class[]
 }
 
 model Task {
@@ -161,11 +162,6 @@ enum School {
   ug
   ashesi
   none
-}
-
-enum Scholarship {
-  yes
-  no
 }
 
 enum ResourceType {
