@@ -6,7 +6,7 @@ const layout = ({children}: {children:React.ReactNode}) => {
   return (
     <>
     <AdminHeader/>
-    <HeaderTitle/>
+    <HeaderTitle navs={[]} title='Admin Title'/>
     <main className='px-10'>{children}</main>
     </>
   )
