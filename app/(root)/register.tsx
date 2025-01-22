@@ -22,17 +22,10 @@ const Register = ({
       isOpen={show}
       onClose={onClose}
       title="Become An xcuxioner"
-      buttonText="Register Account"
     >
-      <div className="grid gap-y-2 md:gap-y-0 md:grid-cols-2 md:gap-x-6">
-        <span className="rounded-full border border-outline hover:bg-outline hover:cursor-pointer p-2 md:text-sm flex flex-center gap-x-4">
+      <div className="rounded-full border border-outline hover:bg-outline hover:cursor-pointer p-2 md:text-sm flex flex-center gap-x-4">
           <BsGoogle />
           Sign in with Google
-        </span>
-        <span className="rounded-full border border-outline hover:bg-outline hover:cursor-pointer p-2 md:text-sm flex flex-center gap-x-4">
-          <BsApple />
-          Sign in with Apple
-        </span>
       </div>
       <span className="flex flex-center text-lg leading-tight font-semibold italic">OR</span>
       <div className="">

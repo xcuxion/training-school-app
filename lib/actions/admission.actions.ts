@@ -1,9 +1,12 @@
 "use server";
 import { z } from "zod";
 import { handleError } from "../utils";
-import { PrismaClient, Scholarship } from "@prisma/client";
+import { PrismaClient } from "@prisma/client";
+import * as bcrypt from "bcrypt";
+import { Resend } from "resend";
 
 const prisma = new PrismaClient();
+const resend = new Resend(process.env.RESEND_KEY);
 
 const newApplicationSchema = z.object({
   fname: z.string({ message: "field is required" }).trim(),
@@ -31,12 +34,7 @@ const admissionSchema = z.object({
 
 export async function new_application(prevState: unknown, formData: FormData) {
   try {
-    // Log the incoming formData for debugging
-    console.log("FormData received:", Array.from(formData.entries()));
-
-    // Parse and validate the input using the schema
     const result = newApplicationSchema.safeParse(Object.fromEntries(formData));
-    console.log("Schema validation result:", result);
 
     if (!result.success) {
       console.log(
@@ -48,45 +46,54 @@ export async function new_application(prevState: unknown, formData: FormData) {
       };
     }
 
-    // If validation passes, proceed to create the applicant
-    console.log("Validation successful. Parsed data:", result.data);
-
-    // Convert dob to an ISO-8601 DateTime
     const dob = result.data.dob;
     const dobDateTime = new Date(dob).toISOString();
 
-    // Check if member has a membership profile
     const existingProfile = await prisma.profile.findFirst({
       where: { email: result.data.email },
     });
-
+    const hashedPassword = await bcrypt.hash("1234567890", 10);
     if (!existingProfile) {
       const profile = await prisma.profile.create({
-        data: { email: result.data.email, password: "1234567890" },
+        data: { email: result.data.email, password: hashedPassword },
       });
 
+      const { email, ...remainingFields } = result.data;
       await prisma.applicant.create({
         data: {
-          ...result.data,
+          ...remainingFields,
           dob: dobDateTime,
           profileId: profile.id,
+          laptop: remainingFields.laptop === "yes" ? true : false,
+          scholarship: remainingFields.scholarship === "yes" ? true : false,
         },
       });
     } else {
+      const { email, ...remainingFields } = result.data;
+
       await prisma.applicant.create({
         data: {
-          ...result.data,
+          ...remainingFields,
           dob: dobDateTime,
+          laptop: remainingFields.laptop === "yes" ? true : false,
+          scholarship: remainingFields.scholarship === "yes" ? true : false,
           profileId: existingProfile.id,
         },
       });
     }
-
-    return JSON.parse(
-      JSON.stringify({
-        message: "Application sent successfully!",
-      })
-    );
+    try {
+      const response = await resend.emails.send({
+        from: "xcuxiongh@gmail.com",
+        to: result.data.email,
+        subject: "New Application Received",
+        html: "<h1>Application submitted successfully</h1>",
+      });
+      console.log(response)
+    } catch (error) {
+      console.log(error);
+    } finally {
+      return { message: "success", data: result.data };
+    }
   } catch (error) {
     console.error("Error during application submission:", error);
 

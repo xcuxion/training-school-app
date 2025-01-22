@@ -11,7 +11,6 @@ interface IFormModal {
   onClose: () => void;
   children: React.ReactNode;
   title: string;
-  buttonText: string;
 }
 
 const FormModal = ({

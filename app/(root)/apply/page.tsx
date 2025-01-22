@@ -5,7 +5,7 @@ import { Label } from "@/components/ui/label";
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
 import { Textarea } from "@/components/ui/textarea";
 import Image from "next/image";
-import React, { useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { useFormState } from "react-dom";
 import {
   Select,
@@ -15,6 +15,9 @@ import {
   SelectValue,
 } from "@/components/ui/select";
 import { new_application } from "@/lib/actions/admission.actions";
+import { useRouter } from "next/navigation";
+import { toast } from "@/components/ui/use-toast";
+import SubmitButton from "@/components/submit-button";
 
 const initial = {
   fname: "",
@@ -37,6 +40,18 @@ const initial = {
 const ApplicationPage = () => {
   const [state, action] = useFormState(new_application, undefined);
   const [value, setValue] = useState(initial);
+  const formRef = useRef<HTMLFormElement>(null);
+  const router = useRouter();
+  useEffect(() => {
+    console.log(state)
+    if (state?.message === "success" && state?.data) {      
+      formRef.current?.reset();
+      toast({
+        title: "Application Submitted Successfully",
+      });
+      router.push("/admission-portal");
+    }
+  }, []);
   return (
     <div className="p-4 md:py-5 md:px-10 md:w-2/3 mx-auto">
       <div className="flex flex-col-reverse md:flex-row md:flex-between py-2 md:py-4">
@@ -58,7 +73,7 @@ const ApplicationPage = () => {
         technical skills but also with the entrepreneurial mindset needed to
         scale their ventures.
       </p>
-      <form action={action} className="">
+      <form action={action} ref={formRef} className="">
         <div className="my-4 space-y-3">
           <h2 className="text-2xl font-semibold">Personal Information</h2>
           <p className="text-xs">Fields with * are required</p>
@@ -70,9 +85,7 @@ const ApplicationPage = () => {
                 value={value.fname}
                 name="fname"
                 id="fname"
-                onChange={(e) =>
-                  setValue({ ...value, fname: e.target.value })
-                }
+                onChange={(e) => setValue({ ...value, fname: e.target.value })}
               />
               {state?.errors?.fname && (
                 <p className="text-sm text-red-500">{state.errors.fname}</p>
@@ -85,9 +98,7 @@ const ApplicationPage = () => {
                 value={value.oname}
                 name="oname"
                 id="oname"
-                onChange={(e) =>
-                  setValue({ ...value, oname: e.target.value })
-                }
+                onChange={(e) => setValue({ ...value, oname: e.target.value })}
               />
               {state?.errors?.oname && (
                 <p className="text-sm text-red-500">{state.errors.oname}</p>
@@ -100,9 +111,7 @@ const ApplicationPage = () => {
                 value={value.lname}
                 name="lname"
                 id="lname"
-                onChange={(e) =>
-                  setValue({ ...value, lname: e.target.value })
-                }
+                onChange={(e) => setValue({ ...value, lname: e.target.value })}
               />
               {state?.errors?.lname && (
                 <p className="text-sm text-red-500">{state.errors.lname}</p>
@@ -170,9 +179,7 @@ const ApplicationPage = () => {
                 value={value.email}
                 name="email"
                 id="email"
-                onChange={(e) =>
-                  setValue({ ...value, email: e.target.value })
-                }
+                onChange={(e) => setValue({ ...value, email: e.target.value })}
               />
               {state?.errors?.email && (
                 <p className="text-sm text-red-500">{state.errors.email}</p>
@@ -279,9 +286,7 @@ const ApplicationPage = () => {
               value={value.balance}
               name="balance"
               id="balance"
-              onChange={(e) =>
-                setValue({ ...value, balance: e.target.value })
-              }
+              onChange={(e) => setValue({ ...value, balance: e.target.value })}
               className="h-40"
             />
             {state?.errors?.balance && (
@@ -360,9 +365,7 @@ const ApplicationPage = () => {
             ""
           )}
         </div>
-        <Button type="submit" className="w-40 rounded-full">
-          Apply!
-        </Button>
+        <SubmitButton buttonText="Submit" />
       </form>
     </div>
   );

@@ -1,8 +1,14 @@
 import React from 'react'
+import AdminHeader from './admin-header'
+import HeaderTitle from './header-title'
 
 const layout = ({children}: {children:React.ReactNode}) => {
   return (
-    <div>{children}</div>
+    <>
+    <AdminHeader/>
+    <HeaderTitle navs={[]} title='Admin Title'/>
+    <main className='px-10'>{children}</main>
+    </>
   )
 }
 
