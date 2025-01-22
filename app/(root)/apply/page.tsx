@@ -23,7 +23,7 @@ const initial = {
   fname: "",
   oname: "",
   lname: "",
-  nationality: "",
+  country: "ghana",
   dob: "",
   contact: "",
   gender: "",
@@ -43,8 +43,8 @@ const ApplicationPage = () => {
   const formRef = useRef<HTMLFormElement>(null);
   const router = useRouter();
   useEffect(() => {
-    console.log(state)
-    if (state?.message === "success" && state?.data) {      
+    console.log(state);
+    if (state?.message === "success" && state?.data) {
       formRef.current?.reset();
       toast({
         title: "Application Submitted Successfully",
@@ -154,19 +154,23 @@ const ApplicationPage = () => {
               </RadioGroup>
             </span>
             <span className="col-span-2 md:col-span-1">
-              <Label>Nationality</Label>
-              <Input
-                type="text"
-                value={value.nationality}
-                name="nationality"
-                id="nationality"
-                onChange={(e) =>
-                  setValue({ ...value, nationality: e.target.value })
+              <Label>Country</Label>
+              <Select
+                onValueChange={(choice) =>
+                  setValue({ ...value, country: choice })
                 }
-              />
-              {state?.errors?.nationality && (
+                name="country"
+              >
+                <SelectTrigger className="">
+                  <SelectValue placeholder="Select" />
+                </SelectTrigger>
+                <SelectContent className="bg-white">
+                  <SelectItem value="ghana">Ghana</SelectItem>
+                </SelectContent>
+              </Select>
+              {state?.errors?.country && (
                 <p className="text-sm text-red-500">
-                  {state.errors.nationality}
+                  {state.errors.country}
                 </p>
               )}
             </span>
@@ -240,19 +244,29 @@ const ApplicationPage = () => {
                   setValue({ ...value, programme: e.target.value })
                 }
               />
+
               {state?.errors?.programme && (
                 <p className="text-sm text-red-500">{state.errors.programme}</p>
               )}
             </span>
             <span className="">
               <Label>Current Year</Label>
-              <Input
-                type="text"
-                value={value.year}
+              <Select
+                onValueChange={(choice) => setValue({ ...value, year: choice })}
                 name="year"
-                id="year"
-                onChange={(e) => setValue({ ...value, year: e.target.value })}
-              />
+              >
+                <SelectTrigger className="">
+                  <SelectValue placeholder="Select" />
+                </SelectTrigger>
+                <SelectContent className="bg-white">
+                  <SelectItem value="1">1</SelectItem>
+                  <SelectItem value="2">2</SelectItem>
+                  <SelectItem value="3">3</SelectItem>
+                  <SelectItem value="4">4</SelectItem>
+                  <SelectItem value="5">5</SelectItem>
+                  <SelectItem value="6">6</SelectItem>
+                </SelectContent>
+              </Select>
               {state?.errors?.year && (
                 <p className="text-sm text-red-500">{state.errors.year}</p>
               )}
@@ -273,6 +287,7 @@ const ApplicationPage = () => {
               onChange={(e) => setValue({ ...value, reason: e.target.value })}
               className="h-40"
             />
+            <p className="text-xs">Not more than 300 words</p>
             {state?.errors?.reason && (
               <p className="text-sm text-red-500">{state.errors.reason}</p>
             )}
@@ -289,6 +304,7 @@ const ApplicationPage = () => {
               onChange={(e) => setValue({ ...value, balance: e.target.value })}
               className="h-40"
             />
+            <p className="text-xs">Not more than 300 words</p>
             {state?.errors?.balance && (
               <p className="text-sm text-red-500">{state.errors.balance}</p>
             )}
@@ -357,6 +373,7 @@ const ApplicationPage = () => {
                 }
                 className="h-40"
               />
+              <p className="text-xs">Not more than 300 words</p>
               {state?.errors?.statement && (
                 <p className="text-sm text-red-500">{state.errors.statement}</p>
               )}

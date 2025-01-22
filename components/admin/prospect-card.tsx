@@ -1,7 +1,29 @@
 import Image from "next/image";
 import React from "react";
 
-const ProspectCard = () => {
+interface IProspectCard {
+  fname: string;
+  lname: string;
+  oname: string;
+  createdAt: string;
+  school: string;
+  programme: string;
+  scholarship: boolean;
+  laptop: boolean;
+  gender: "male" | "female";
+}
+
+const ProspectCard = ({
+  fname,
+  createdAt,
+  laptop,
+  lname,
+  oname,
+  programme,
+  scholarship,
+  school,
+  gender,
+}: IProspectCard) => {
   return (
     <div className="border">
       <div className="flex">
@@ -13,16 +35,14 @@ const ProspectCard = () => {
           className="w-20 h-20 rounded-full object-cover"
         />
         <span className="">
-          <h3 className="text-lg">Prospect Name</h3>
-          <p className="text-sm">Prospect Position</p>
+          <h3 className="text-lg">{fname + " " + oname + " " + lname}</h3>
+          <p className="text-sm">{gender}</p>
         </span>
       </div>
-      <p className="">
-        School - Programme
-      </p>
+      <p className="">{school} - {programme}</p>
       <div className="grid grid-cols-2">
-        <p className="">Scholarship: Yes</p>
-        <p className="">Laptop: Yes</p>
+        <p className="">{scholarship === true ? "Yes" : "No"}: Yes</p>
+        <p className="">{laptop === true ? "Yes" : "No"}</p>
       </div>
     </div>
   );

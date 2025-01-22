@@ -5,9 +5,6 @@ CREATE TYPE "Gender" AS ENUM ('male', 'female');
 CREATE TYPE "School" AS ENUM ('knust', 'ug', 'ashesi', 'none');
 
 -- CreateEnum
-CREATE TYPE "Scholarship" AS ENUM ('yes', 'no');
-
--- CreateEnum
 CREATE TYPE "ResourceType" AS ENUM ('video', 'audiobook', 'ebook');
 
 -- CreateEnum
@@ -18,6 +15,9 @@ CREATE TYPE "TaskStatus" AS ENUM ('todo', 'in_progress', 'completed');
 
 -- CreateEnum
 CREATE TYPE "TaskPriority" AS ENUM ('low', 'medium', 'high');
+
+-- CreateEnum
+CREATE TYPE "Countries" AS ENUM ('ghana');
 
 -- CreateEnum
 CREATE TYPE "AdmissionStatus" AS ENUM ('pending', 'admitted', 'rejected');
@@ -43,14 +43,15 @@ CREATE TABLE "Applicant" (
     "oname" VARCHAR(255),
     "dob" DATE NOT NULL,
     "gender" "Gender" NOT NULL,
-    "nationality" VARCHAR(255) NOT NULL,
+    "country" "Countries" NOT NULL,
     "school" "School" NOT NULL,
     "contact" VARCHAR(10) NOT NULL,
     "programme" VARCHAR(255) NOT NULL,
     "year" VARCHAR(4) NOT NULL,
     "reason" VARCHAR(255) NOT NULL,
     "balance" VARCHAR(255) NOT NULL,
-    "scholarship" "Scholarship" NOT NULL,
+    "laptop" BOOLEAN NOT NULL,
+    "scholarship" BOOLEAN NOT NULL,
     "status" "AdmissionStatus" NOT NULL DEFAULT 'pending',
     "statement" VARCHAR(255),
 
@@ -66,6 +67,18 @@ CREATE TABLE "Student" (
     "batch" VARCHAR(255) NOT NULL,
 
     CONSTRAINT "Student_pkey" PRIMARY KEY ("reference")
+);
+
+-- CreateTable
+CREATE TABLE "Class" (
+    "id" TEXT NOT NULL,
+    "link" VARCHAR(255) NOT NULL,
+    "instructorId" TEXT NOT NULL,
+    "date" DATE NOT NULL,
+    "time" TIME NOT NULL,
+    "moduleId" TEXT NOT NULL,
+
+    CONSTRAINT "Class_pkey" PRIMARY KEY ("id")
 );
 
 -- CreateTable
@@ -115,6 +128,7 @@ CREATE TABLE "Case" (
     "description" VARCHAR(255) NOT NULL,
     "responsibilities" TEXT[],
     "moduleId" TEXT,
+    "isPublic" BOOLEAN NOT NULL DEFAULT false,
 
     CONSTRAINT "Case_pkey" PRIMARY KEY ("id")
 );
@@ -197,6 +211,12 @@ ALTER TABLE "Student" ADD CONSTRAINT "Student_applicantId_fkey" FOREIGN KEY ("ap
 
 -- AddForeignKey
 ALTER TABLE "Student" ADD CONSTRAINT "Student_feeId_fkey" FOREIGN KEY ("feeId") REFERENCES "Fee"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
+
+-- AddForeignKey
+ALTER TABLE "Class" ADD CONSTRAINT "Class_instructorId_fkey" FOREIGN KEY ("instructorId") REFERENCES "Facilitator"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
+
+-- AddForeignKey
+ALTER TABLE "Class" ADD CONSTRAINT "Class_moduleId_fkey" FOREIGN KEY ("moduleId") REFERENCES "Module"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
 
 -- AddForeignKey
 ALTER TABLE "Facilitator" ADD CONSTRAINT "Facilitator_profileId_fkey" FOREIGN KEY ("profileId") REFERENCES "Profile"("id") ON DELETE SET NULL ON UPDATE CASCADE;

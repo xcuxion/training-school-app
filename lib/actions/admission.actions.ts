@@ -13,16 +13,16 @@ const newApplicationSchema = z.object({
   oname: z.string().trim().optional(),
   lname: z.string({ message: "field is required" }).trim(),
   gender: z.enum(["male", "female"]),
-  nationality: z.string({ message: "field is required" }),
+  country: z.enum(["ghana"]),
   school: z.enum(["knust", "ug", "ashesi", "none"]),
   contact: z.string({ message: "field is required" }).trim(),
   dob: z.string(),
   email: z.string().email({ message: "field is required" }).trim(),
   programme: z.string({ message: "field is required" }).min(2),
   year: z.enum(["1", "2", "3", "4", "5", "6"]),
-  reason: z.string(),
-  balance: z.string(),
-  statement: z.string().optional(),
+  reason: z.string().max(300),
+  balance: z.string().max(300),
+  statement: z.string().max(300).optional(),
   scholarship: z.enum(["yes", "no"]),
   laptop: z.enum(["yes", "no"]),
 });
@@ -83,7 +83,7 @@ export async function new_application(prevState: unknown, formData: FormData) {
     }
     try {
       const response = await resend.emails.send({
-        from: "xcuxiongh@gmail.com",
+        from: "onboard@resend.dev",
         to: result.data.email,
         subject: "New Application Received",
         html: "<h1>Application submitted successfully</h1>",
@@ -111,7 +111,7 @@ export async function fetch_all_applications() {
   }
 }
 
-export async function edit_application() {
+export async function edit_application(id: string, formData: FormData) {
   try {
   } catch (error) {
     handleError(error);

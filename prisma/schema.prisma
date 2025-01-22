@@ -26,7 +26,7 @@ model Applicant {
   oname       String?         @db.VarChar(255)
   dob         DateTime        @db.Date()
   gender      Gender
-  nationality String          @db.VarChar(255)
+  country     Countries        
   school      School
   contact     String          @db.VarChar(10)
   programme   String          @db.VarChar(255)
@@ -187,6 +187,10 @@ enum TaskPriority {
   low
   medium
   high
+}
+
+enum Countries {
+  ghana
 }
 
 enum AdmissionStatus {
