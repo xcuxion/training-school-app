@@ -9,11 +9,12 @@ import { useUserStore } from "@/store/user-store";
 
 const AdmissionPortal = () => {
   const {user, update} = useUserStore()
-  const [data, setData] = useState<unknown>();
+  const [data, setData] = useState<any>();
   useEffect(() => {
     const fetchData = async () => {
       const result = await fetch_applicant_data(user?.id as string);
       setData(result);
+      update(data)
     }
     fetchData();
   }, []);
@@ -25,7 +26,7 @@ const AdmissionPortal = () => {
           {user !== null && (
             <Avatar className={`w-6 h-6 `}>
               <AvatarImage src={user.image} />
-              <AvatarFallback className="bg-pink-300">
+              <AvatarFallback className="bg-secondary">
                 {user.email!.slice(0, 1)}
               </AvatarFallback>
             </Avatar>
@@ -40,7 +41,8 @@ const AdmissionPortal = () => {
         </span>
       </section>
       <section>
-        <span className="">
+
+        <span className="flex">
           <h3 className="text-lg">Field</h3>
           <p className="text-base">Field input from database</p>
         </span>

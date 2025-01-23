@@ -40,7 +40,7 @@ const AdmissionPage = () => {
     fetch();
   }, []);
   return (
-    <div>
+    <div className="grid grid-cols-4 gap-4">
       {applicants.map((applicant, index) => (
         <ProspectCard key={index} {...applicant}/>
       ))}

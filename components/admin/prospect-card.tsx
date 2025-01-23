@@ -31,31 +31,31 @@ const ProspectCard = ({
   gender,
 }: IProspectCard) => {
   return (
-    <div className="border">
-      <div className="flex">
+    <div className="hover:cursor-pointer border rounded-md p-2 bg-light space-y-2">
+      <div className="flex items-center">
         <Image
-          src={""}
+          src={"/images/p2.jpg"}
           alt="image"
           width={60}
           height={60}
-          className="w-20 h-20 rounded-full object-cover"
+          className="w-16 h-16 rounded-full object-cover"
         />
         <span className="">
-          <h3 className="text-lg">{fname + " " + oname && oname + " " + lname}</h3>
-          <p className="text-sm">{gender}</p>
+          <h3 className="text-lg">{fname} { oname && oname } {lname}</h3>
+          <p className="text-sm capitalize">{gender}</p>
         </span>
       </div>
-      <p className="">
+      <p className="capitalize">
         {school} - {programme}
       </p>
       <div className="grid grid-cols-2">
-        <p className="">{scholarship === true ? "Yes" : "No"}: Yes</p>
-        <p className="">{laptop === true ? "Yes" : "No"}</p>
+        <p className="">Scholarship:{scholarship === true ? "Yes" : "No"}</p>
+        <p className="">Laptop: {laptop === true ? "Yes" : "No"}</p>
       </div>
 
       <hr />
-      <span>
-        Applied on: {new Date(profile.createdAt).toISOString()}
+      <span className="text-xs">
+        Applied on: {new Date(profile.createdAt).toLocaleDateString()}
       </span>
     </div>
   );

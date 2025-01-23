@@ -219,7 +219,7 @@ const ApplicationPage = () => {
                 </SelectTrigger>
                 <SelectContent className="bg-white">
                   <SelectItem value="knust">
-                    Kwame Nkrumah University of Science and Technology
+                    KNUST
                   </SelectItem>
                   <SelectItem value="ug">
                     University of Ghana - Legon
