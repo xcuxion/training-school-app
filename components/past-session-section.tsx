@@ -13,7 +13,7 @@ const sessionInfo = {
 
 const PastSessionSection = () => {
   return (
-    <div className='grid grid-cols-2 gap-x-4 mt-4'>
+    <div className='grid md:grid-cols-2 gap-y-2 md:ga-y-0 md:gap-x-4 mt-4'>
         <SessionCard {...sessionInfo}/>
         <SessionCard {...sessionInfo}/>
     </div>

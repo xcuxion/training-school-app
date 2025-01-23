@@ -4,7 +4,7 @@ import Link from "next/link";
 import React from "react";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { useUserStore } from "@/store/user-store";
-import { usePathname } from 'next/navigation'
+import { usePathname } from "next/navigation";
 
 const links = [
   {
@@ -26,7 +26,7 @@ const links = [
 ];
 
 const AdminHeader = () => {
-  const pathname = usePathname()
+  const pathname = usePathname();
 
   const { user } = useUserStore();
   return (
@@ -39,14 +39,24 @@ const AdminHeader = () => {
         className=""
       />
       <nav className="space-x-4">
-      {
-                links.map((link, index)=>{
-                const active = (link.href === '/administrator-office' && pathname === '/administrator-office') || (pathname.startsWith(link.href) && link.href !== '/administrator-office');
-                return(
-                    <Link key={index} href={link.href} className={active? 'text-primary font-medium': 'font-medium opacity-50'}>{link.label}</Link>
-                )
-                })
-            }
+        {links.map((link, index) => {
+          const active =
+            (link.href === "/administrator-office" &&
+              pathname === "/administrator-office") ||
+            (pathname.startsWith(link.href) &&
+              link.href !== "/administrator-office");
+          return (
+            <Link
+              key={index}
+              href={link.href}
+              className={
+                active ? "text-primary font-medium" : "font-medium opacity-50"
+              }
+            >
+              {link.label}
+            </Link>
+          );
+        })}
       </nav>
       <span>
         {user !== null && (

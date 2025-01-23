@@ -34,8 +34,8 @@ const profile = {
 }
 const page = () => {
   return (
-    <div className="w-full flex flex-row gapx-4 items-start ">
-      <MainContent className="w-2/3">
+    <div className="w-full flex flex-row gap-x-4 items-start ">
+      <MainContent className="w-full md:w-2/3">
         <UpcomingSession/>
         <div className="w-full mt-4">
           <ModuleDetails {...moduleData}/>
