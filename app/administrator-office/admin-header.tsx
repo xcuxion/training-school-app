@@ -16,7 +16,7 @@ const links = [
   },
   {
     label: "HR",
-    href: "/administrator-office/humn-resource",
+    href: "/administrator-office/human-resource",
   },
   {
     label: "Resources",

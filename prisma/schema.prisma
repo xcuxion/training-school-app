@@ -26,17 +26,17 @@ model Applicant {
   oname       String?         @db.VarChar(255)
   dob         DateTime        @db.Date()
   gender      Gender
-  country     Countries        
+  country     Countries        @default(ghana)
   school      School
   contact     String          @db.VarChar(10)
-  programme   String          @db.VarChar(255)
+  programme   String          @db.VarChar()
   year        String          @db.VarChar(4)
-  reason      String          @db.VarChar(255)
-  balance     String          @db.VarChar(255)
+  reason      String          @db.VarChar()
+  balance     String          @db.VarChar()
   laptop      Boolean         @db.Boolean()
   scholarship Boolean         @db.Boolean()
   status      AdmissionStatus @default(pending)
-  statement   String?         @db.VarChar(255)
+  statement   String?         @db.VarChar()
   student     Student?
 }
 

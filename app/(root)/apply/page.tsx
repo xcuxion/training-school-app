@@ -44,14 +44,14 @@ const ApplicationPage = () => {
   const router = useRouter();
   useEffect(() => {
     console.log(state);
-    if (state?.message === "success" && state?.data) {
+    if (state?.success && state?.data) {
       formRef.current?.reset();
       toast({
         title: "Application Submitted Successfully",
       });
       router.push("/admission-portal");
     }
-  }, []);
+  }, [state]);
   return (
     <div className="p-4 md:py-5 md:px-10 md:w-2/3 mx-auto">
       <div className="flex flex-col-reverse md:flex-row md:flex-between py-2 md:py-4">

@@ -15,7 +15,7 @@ const newApplicationSchema = z.object({
   gender: z.enum(["male", "female"]),
   country: z.enum(["ghana"]),
   school: z.enum(["knust", "ug", "ashesi", "none"]),
-  contact: z.string({ message: "field is required" }).trim(),
+  contact: z.string({ message: "field is required" }).trim().min(10).max(10),
   dob: z.string(),
   email: z.string().email({ message: "field is required" }).trim(),
   programme: z.string({ message: "field is required" }).min(2),
@@ -34,6 +34,7 @@ const admissionSchema = z.object({
 
 export async function new_application(prevState: unknown, formData: FormData) {
   try {
+    console.log(formData);
     const result = newApplicationSchema.safeParse(Object.fromEntries(formData));
 
     if (!result.success) {
@@ -57,6 +58,7 @@ export async function new_application(prevState: unknown, formData: FormData) {
       const profile = await prisma.profile.create({
         data: { email: result.data.email, password: hashedPassword },
       });
+      console.log(profile);
 
       const { email, ...remainingFields } = result.data;
       await prisma.applicant.create({
@@ -88,23 +90,41 @@ export async function new_application(prevState: unknown, formData: FormData) {
         subject: "New Application Received",
         html: "<h1>Application submitted successfully</h1>",
       });
-      console.log(response)
+      // console.log(response)
     } catch (error) {
       console.log(error);
     } finally {
-      return { message: "success", data: result.data };
+      console.log(result);
+      return { success: result.success, data: result.data };
     }
   } catch (error) {
     console.error("Error during application submission:", error);
 
-    // Use your error handling mechanism or throw the error
     handleError(error);
   }
 }
 
+export async function fetch_applicant_data (id: string) {
+  try {
+    const applicant = await prisma.applicant.findFirst({
+      where: {id},
+      include: {
+        profile: true, 
+      },
+    });
+    return applicant;
+  } catch (error) {
+    handleError(error);
+  }
+} 
+
 export async function fetch_all_applications() {
   try {
-    const applications = await prisma.applicant.findMany();
+    const applications = await prisma.applicant.findMany({
+      include: {
+        profile: true, 
+      },
+    });
     return applications;
   } catch (error) {
     handleError(error);
