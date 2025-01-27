@@ -36,14 +36,14 @@ const CaseDescription = ({
   return (
     <div className="">
       <div
-        className="w-full h-[200px] bg-cover bg-top flex items-center justify-center mb-4"
+        className="w-full h-28 md:h-[200px] bg-cover bg-top flex items-center justify-center mb-2 md:mb-4"
         style={{ backgroundImage: `url(${coverImage})` }}
       >
-        <h2 className="text-primary bg-secondary p-2 text-lg text-center w-4/5 mx-auto ">
+        <h2 className="text-primary bg-secondary p-2 text-lg text-center w-[90%] md:w-4/5 mx-auto ">
           {title}
         </h2>
       </div>
-      <div className="space-y-4">
+      <div className="space-y-2 md:space-y-4">
         <section>
           <h3 className="font-semibold text-lg">Problem Statement</h3>
           <p className="font-normal">{problemStatement}</p>

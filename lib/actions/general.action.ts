@@ -236,6 +236,10 @@ export async function login(prevState: unknown, formData: FormData) {
 
     const existingProfile = await prisma.profile.findFirst({
       where: { email },
+      include: {
+        applicant:true,
+        facilitator: true
+      }
     });
     if (!existingProfile) {
       return {
@@ -262,7 +266,7 @@ export async function login(prevState: unknown, formData: FormData) {
 
     return {
       data: profileWithoutTimestamps,
-      message: "success",
+      success: result?.success,
     };
   } catch (error) {
     if (error instanceof Error && error.message === "NEXT_REDIRECT") {

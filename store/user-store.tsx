@@ -6,6 +6,21 @@ export interface IUser {
   name?: string;
   email: string;
   image?: string;
+  balance: string;
+  contact: string;
+  country: "ghana";
+  dob: string | Date;
+  fname: string;
+  gender: "male"|"female";
+  laptop: "yes"|"no";
+  lname: string;
+  oname: string;
+  programme: string;
+  reason: string;
+  scholarship: "yes"|"no";
+  school: "ashesi";
+  statement: string;
+  year: "1" | "2" | "3" | "4" | "5" | "6";
 }
 
 interface UserStore {

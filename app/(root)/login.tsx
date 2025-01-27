@@ -5,6 +5,7 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { googleAuth, login } from "@/lib/actions/general.action";
 import { useUserStore } from "@/store/user-store";
+import { useRouter } from "next/navigation";
 import React, { useEffect, useRef, useState } from "react";
 import { useFormState, useFormStatus } from "react-dom";
 import { BsGoogle } from "react-icons/bs";
@@ -13,12 +14,18 @@ const Login = ({ show, onClose }: { show: boolean; onClose: () => void }) => {
   const [formState, formAction] = useFormState(login, undefined);
   const [email, setEmail] = useState<string>("");
   const [password, setPassword] = useState<string>("");
-  const {update } = useUserStore()
+  const { update } = useUserStore();
   const formRef = useRef<HTMLFormElement>(null);
+  const router = useRouter();
   useEffect(() => {
-    if (formState?.message==="success" && formState?.data) {
+    if (formState?.success && formState?.data) {
       update(formState.data);
       formRef.current?.reset();
+      if (formState?.data.applicant?.id) {
+        router.push("/admission-portal");
+      } else if (formState?.data.facilitator?.id) {
+        router.push("/admission-portal");
+      }
     }
   }, [formState]);
   return (

@@ -7,30 +7,28 @@ import { BsTwitterX } from "react-icons/bs";
 interface IUserProfile {
   name: string;
   image: string;
-  aspiration: string
+  aspiration: string;
 }
 
-
-
-const ProfileCard = ({name, image, aspiration}: IUserProfile) => {
+const ProfileCard = ({ name, image, aspiration }: IUserProfile) => {
   return (
     <>
-      <div className="bg-light border rounded-md w-full p-2">
-        <div className="flex flex-col flex-center">
-          <Image
-            src={image}
-            alt="user image"
-            width={100}
-            height={100}
-            className="w-[100px] h-[100px] rounded-full object-cover"
-          />
-          <h3 className="text-xl font-medium">{name}</h3>
-          <p>{aspiration}</p>
-        </div>
-        <div className="flex justify-center space-x-4 m-2">
-          <FaLinkedin />
-          <MdOutlineEmail />
-          <BsTwitterX />
+      <div className="bg-light border flex items-center rounded-md w-full p-2 gap-x-6">
+        <Image
+          src={image}
+          alt="user image"
+          width={85}
+          height={85}
+          className="w-[85px] h-[85px] rounded-full object-cover"
+        />
+        <div className="space-y-1">
+          <h3 className="text-lg font-semibold leading-none">{name}</h3>
+          <p className=" font-medium leading-none">{aspiration}</p>
+          <div className="flex space-x-3">
+            <FaLinkedin />
+            <MdOutlineEmail />
+            <BsTwitterX />
+          </div>
         </div>
       </div>
     </>

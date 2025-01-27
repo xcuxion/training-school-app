@@ -3,6 +3,8 @@ import HighlightCard from '@/components/admin/highlight-card'
 import ModuleCard from '@/components/admin/module-card'
 import React from 'react'
 
+
+
 const highlights = [
   {
     title: 'Pending Admission',
@@ -26,41 +28,41 @@ const modules = [
   {
     title: 'Foundations of Techpreneurship',
     facilitator: 'Bayat Osman',
-    image: '/techpreneur.png'
+    image: '/images/techpreneur.png'
   },
   {
     title: 'Product Management',
     facilitator: 'Peter Jonah',
-    image: '/pm.png'
+    image: '/images/pm.png'
   },
   {
     title: 'Software Engineering',
     facilitator: 'Samuel Inkoom',
-    image: '/se.png'
+    image: '/images/se.png'
   },
   {
     title: 'Marketing & Strategy',
     facilitator: 'Solomon Ayisi',
-    image: '/market-strategy.png'
+    image: '/images/market-strategy.png'
   },
 ]
 
 const facilitators = [
   {
     name: 'Musah Iddrisu',
-    image: '/p2.jpg',
+    image: '/images/p2.jpg',
     course: 'Web Development Concepts',
     email: 'mussah.id@gmail.com'
   },
   {
     name: 'Mansah Barnes',
-    image: '/p2.jpg',
+    image: '/images/p2.jpg',
     course: 'UI/UX Designing',
     email: 'mbarnes@gmail.com'
   },
   {
     name: 'Caleb Darkwah',
-    image: '/p2.jpg',
+    image: '/images/p2.jpg',
     course: 'Marketing',
     email: 'callydark.id@gmail.com'
   },

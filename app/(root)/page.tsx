@@ -86,7 +86,7 @@ const LandingPage = () => {
   const [openLogin, setOpenLogin] = useState(false);
   return (
     <div className="">
-      <div className="px-4 md:px-10 w-full h-16 sticky top-0 left-0 flex flex-between py-2 bg-white z-50">
+      <div className="px-4 md:px-10 w-full h-12 md:h-16 sticky top-0 left-0 flex flex-between py-2 bg-white z-50">
         <div className="flex items-center">
           <Image
             src={"/favicon.svg"}
@@ -95,23 +95,23 @@ const LandingPage = () => {
             height={45}
             className="mr-2 w-[45px] h-[45px]"
           />
-          <h1 className="text-2xl font-bold md:visible">XCUXION</h1>
+          <h1 className="hidden text-2xl font-bold md:block">XCUXION</h1>
         </div>
         <Button
           onClick={() => {
             setOpenLogin(true);
           }}
           variant={"outline"}
-          className="border-2 border-primary text-primary rounded-full h-10"
+          className="border-2 border-primary text-primary rounded-full h-8 md:h-10"
         >
           Log in
         </Button>
       </div>
-      <div className="px-4 md:px-0 flex flex-col items-center justify-center md:w-3/5 mx-auto min-h-[60vh]">
+      <div className="px-4 md:px-0 flex flex-col items-center justify-center md:w-3/5 mx-auto min-h-[75vh] md:min-h-[60vh]">
         <h1 className="text-2xl md:text-4xl font-bold text-center md:text-start">
           Empowering Dreams, Building Futures
         </h1>
-        <p className="text-lg text-center my-4">
+        <p className="text-lg text-center my-2 md:my-4">
           At XCUXION, we turn aspirations into achievements. Whether you’re an
           aspiring technologist, a budding entrepreneur, or a skilled engineer,
           we provide the tools, knowledge, and opportunities you need to
@@ -173,7 +173,7 @@ const LandingPage = () => {
         </div>
       </div>
       <div className="px-4 md:px-10 flex flex-col flex-center min-h-[60vh]">
-        <h2 className="text-2xl font-bold mb-4">Our Team</h2>
+        <h2 className=" text-xl md:text-2xl font-bold mb-2 md:mb-4">Our Team</h2>
         <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
           {people.map((member, index) => (
             <TeamMemberCard
@@ -186,7 +186,7 @@ const LandingPage = () => {
         </div>
       </div>
       <div className="px-4 md:px-10 flex flex-col flex-center my-8 md:my-8 md:min-h-[70vh]">
-        <h2 className="text-2xl font-bold mb-2">Testimonials</h2>
+        <h2 className="text-xl md:text-2xl font-bold mb-2">Testimonials</h2>
         <div className="md:px-10">
           <Carousel className="w-full ">
             <CarouselContent className="">
@@ -204,7 +204,7 @@ const LandingPage = () => {
       </div>
       <div className="px-4 md:px-10 flex flex-col md:flex-row items-start justify-between my-4 gap-y-4 md:gap-y-0 md:gap-x-6 md:min-h-[50vh]">
         <div className="w-full md:w-1/2">
-          <h4 className="text-lg font-semibold">
+          <h4 className="text-xl text-center md:text-start md:text-2xl  font-bold">
             Frequently Asked Questions (FAQs)
           </h4>
           <div className="space-y-1 5">

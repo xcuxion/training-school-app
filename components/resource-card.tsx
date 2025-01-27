@@ -9,9 +9,9 @@ export type TResource = {
 
 const ResourceCard = ({url, title}: TResource) => {
   return (
-    <Link href={url} className='flex items-center h-16 border'>
-      <Image src={'/icons/pdf.svg'} alt='' width={45} height={45} className=''/>
-      <p className="text-base">{title}</p>
+    <Link href={url} className='flex items-center md:h-16 border rounded-sm p-1 md:p-0'>
+      <Image src={'/icons/pdf.svg'} alt='' width={45} height={45} className='mr-2'/>
+      <p className="text-sm md:text-base font-medium">{title}</p>
 
     </Link>
   )
