@@ -1,4 +1,5 @@
-import React from 'react'
+"use client"
+import React, {useState} from 'react'
 import { Button } from '@/components/ui/button'
 import Image from 'next/image'
 import {
@@ -8,9 +9,11 @@ import {
 } from "@/components/ui/popover"
 import TaskList from './task-list'
 import { FaFilter } from 'react-icons/fa'
+import TaskForm from './task-form'
 
 
 const Backlog = ({roles}: {roles: string[]}) => {
+    const [showPopUp, setShowPopUp] = useState<boolean>(false)
   return (
     <div className='space-y-6'>
         <div className="border-2 p-2 rounded-md">
@@ -27,7 +30,7 @@ const Backlog = ({roles}: {roles: string[]}) => {
                     }
                 </span>
                 <span className='flex items-center gap-x-2'>            
-                    <Button variant={"default"} className="bg-primary rounded-full">
+                    <Button variant={"default"} className="bg-primary rounded-full" onClick={()=>setShowPopUp(true)}>
                         New Task
                         <Image src={'/icons/plus.svg'} alt='icon' width={16} height={16} className='w-4 h-4'/>
                     </Button>
@@ -45,7 +48,9 @@ const Backlog = ({roles}: {roles: string[]}) => {
             </div>
         </div>
         <TaskList/>
-
+    {
+        showPopUp === true && <TaskForm onClose={()=>setShowPopUp(false)} show={showPopUp}/>
+    }
   </div>
   )
 }

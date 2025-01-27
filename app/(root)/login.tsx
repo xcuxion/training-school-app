@@ -19,7 +19,7 @@ const Login = ({ show, onClose }: { show: boolean; onClose: () => void }) => {
   const router = useRouter();
   useEffect(() => {
     if (formState?.success && formState?.data) {
-      update(formState.data);
+      // update(formState.data);
       formRef.current?.reset();
       if (formState?.data.applicant?.id) {
         router.push("/admission-portal");

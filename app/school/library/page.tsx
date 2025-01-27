@@ -107,14 +107,11 @@ const historylog = [
   { image: "/images/ad-bg.jpg", title: "Book 1", date: new Date("2021-01-01") },
   { image: "/images/ad-bg.jpg", title: "Book 2", date: new Date("2021-02-01") },
   { image: "/images/ad-bg.jpg", title: "Book 3", date: new Date("2021-03-01") },
-  { image: "/images/ad-bg.jpg", title: "Book 4", date: new Date("2021-04-01") },
-  { image: "/images/ad-bg.jpg", title: "Book 5", date: new Date("2021-05-01") },
-  { image: "/images/ad-bg.jpg", title: "Book 6", date: new Date("2021-06-01") },
 ];
 
 const Page = () => {
   const [books, setBooks] = useState(bookStore);
-  const [history, setHistory] = useState<IHistroy[]>([]);
+  const [history, setHistory] = useState<IHistroy[]>(historylog);
   const [sortItem, setSortItem] = useState("");
   // useEffect(() => {
   //   const fetchData = async () => {
@@ -145,28 +142,46 @@ const Page = () => {
         </div>
       </div>
 
+      <h1 className="font-semibold text-lg">Recently Accessed</h1>
+      <div className=" grid grid-cols-3 gap-x-8 gap-y-1">
+        {history.length > 0 ? (
+          history.map((book, index) => {
+            return <BookHistory key={index} {...book} />;
+          })
+        ) : (
+          <>
+            <HistorySkeleton />
+            <HistorySkeleton />
+            <HistorySkeleton />
+          </>
+        )}
+      </div>
+
       <div className="">
-        <p className="font-semibold text-xl">Category</p>
+        <p className="font-semibold text-xl">Catalog</p>
         <div className="flex items-center justify-between my-2">
           <div className="w-full rounded-md px-2 text-sm space-x-2 ">
             {categoryfetch.map((category) => (
-              <span key={category.id} className="rounded-3xl border p-2 hover:bg-dark hover:text-light hover:cursor-pointer">
+              <span
+                key={category.id}
+                className="rounded-3xl border p-2 hover:bg-dark hover:text-light hover:cursor-pointer"
+              >
                 {" "}
                 {category.name}
               </span>
             ))}
           </div>
-            <Select onValueChange={(value) => setSortItem(value)}>
-              <SelectTrigger className="w-40">
-                <SelectValue placeholder="Sort by" />
-              </SelectTrigger>
-              <SelectContent className="bg-white">
-                <SelectItem value="audiobook">Audiobook</SelectItem>
-                <SelectItem value="ebook">Ebook</SelectItem>
-                <SelectItem value="podcast">podcast</SelectItem>
-                <SelectItem value="video">Video Tutorial</SelectItem>
-              </SelectContent>
-            </Select>
+          <Select onValueChange={(value) => setSortItem(value)}>
+            <SelectTrigger className="w-40">
+              <SelectValue placeholder="Sort by" />
+            </SelectTrigger>
+            <SelectContent className="bg-white">
+              <SelectItem value="audiobook">Audiobook</SelectItem>
+              <SelectItem value="ebook">Ebook</SelectItem>
+              <SelectItem value="podcast">podcast</SelectItem>
+              <SelectItem value="video">Video Tutorial</SelectItem>
+            </SelectContent>
+          </Select>
         </div>
       </div>
       <div className="grid grid-cols-2 md:grid-cols-4 gap-4 ">
@@ -183,22 +198,6 @@ const Page = () => {
             <ResourceSkeleton />
             <ResourceSkeleton />
             <ResourceSkeleton />
-          </>
-        )}
-      </div>
-
-      <h1 className="font-semibold text-lg">History</h1>
-      <div className=" grid grid-cols-3 gap-x-8 gap-y-1">
-        {history.length > 0 ? (
-          history.map((book, index) => {
-            return <BookHistory key={index} {...book} />;
-          })
-        ) : (
-          <>
-            <HistorySkeleton />
-            <HistorySkeleton />
-            <HistorySkeleton />
-            <HistorySkeleton />
           </>
         )}
       </div>

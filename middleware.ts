@@ -19,7 +19,7 @@ export default async function middleware(req: NextRequest){
   }
 
   if (isPublicRoute && session?.userId) {
-    return NextResponse.redirect(new URL("/landing", req.nextUrl))
+    return NextResponse.redirect(new URL("/school", req.nextUrl))
   }
 
   return NextResponse.next()
