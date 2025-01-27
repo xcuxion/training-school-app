@@ -1,49 +1,26 @@
-// export { auth as middleware } from "@/lib/auth"
-
+import { cookies } from "next/headers";
 import { NextRequest, NextResponse } from "next/server";
+import { decrypt } from "./lib/session";
 
-const user = {
-  id: "",
-};
+const protectedRoutes = ["/school", "/guild", "/administrator-office"]
+const publicRoutes = ["/", "/apply", "/about"]
 
-export function middleware(request: NextRequest) {
-  // if(user.id === null | user.id === undefined) {
 
-  // }
-  return NextResponse.next();
+export default async function middleware(req: NextRequest){
+  const path = req.nextUrl.pathname;
+  const isProtectedRoute = protectedRoutes.includes(path);
+  const isPublicRoute = publicRoutes.includes(path)
+
+  const cookie = cookies().get('session')?.value;
+  const session = await decrypt(cookie);
+
+  if(isProtectedRoute && !session?.userId){
+    return NextResponse.redirect(new URL("/", req.nextUrl))
+  }
+
+  if (isPublicRoute && session?.userId) {
+    return NextResponse.redirect(new URL("/landing", req.nextUrl))
+  }
+
+  return NextResponse.next()
 }
-
-export const config = {
-  matcher: ["/school/:path*", "/administrator-office/:path*"],
-};
-
-
-// import { NextResponse } from 'next/server'
-// import type { NextRequest } from 'next/server'
- 
-// export function middleware(request: NextRequest) {
-//   // Assume a "Cookie:nextjs=fast" header to be present on the incoming request
-//   // Getting cookies from the request using the `RequestCookies` API
-//   let cookie = request.cookies.get('nextjs')
-//   console.log(cookie) // => { name: 'nextjs', value: 'fast', Path: '/' }
-//   const allCookies = request.cookies.getAll()
-//   console.log(allCookies) // => [{ name: 'nextjs', value: 'fast' }]
- 
-//   request.cookies.has('nextjs') // => true
-//   request.cookies.delete('nextjs')
-//   request.cookies.has('nextjs') // => false
- 
-//   // Setting cookies on the response using the `ResponseCookies` API
-//   const response = NextResponse.next()
-//   response.cookies.set('vercel', 'fast')
-//   response.cookies.set({
-//     name: 'vercel',
-//     value: 'fast',
-//     path: '/',
-//   })
-//   cookie = response.cookies.get('vercel')
-//   console.log(cookie) // => { name: 'vercel', value: 'fast', Path: '/' }
-//   // The outgoing response will have a `Set-Cookie:vercel=fast;path=/` header.
- 
-//   return response
-// }

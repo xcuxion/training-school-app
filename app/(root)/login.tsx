@@ -37,6 +37,7 @@ const Login = ({ show, onClose }: { show: boolean; onClose: () => void }) => {
       >
         <Button
           type="submit"
+          variant={"outline"}
           className="rounded-full border border-outline hover:bg-outline hover:cursor-pointer p-2 md:text-sm flex flex-center gap-x-4"
         >
           <BsGoogle />

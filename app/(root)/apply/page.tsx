@@ -49,6 +49,7 @@ const ApplicationPage = () => {
       toast({
         title: "Application Submitted Successfully",
       });
+      formRef.current?.reset();
       router.push("/admission-portal");
     }
   }, [state]);
