@@ -16,11 +16,11 @@ const Login = ({ show, onClose }: { show: boolean; onClose: () => void }) => {
   const {update } = useUserStore()
   const formRef = useRef<HTMLFormElement>(null);
   useEffect(() => {
-    if (formState?.message === "success" && formState?.data) {
+    if (formState?.message==="success" && formState?.data) {
       update(formState.data);
       formRef.current?.reset();
     }
-  }, []);
+  }, [formState]);
   return (
     <FormModal isOpen={show} onClose={onClose} title="Sign in to Account">
       <form
@@ -30,6 +30,7 @@ const Login = ({ show, onClose }: { show: boolean; onClose: () => void }) => {
       >
         <Button
           type="submit"
+          variant={"outline"}
           className="rounded-full border border-outline hover:bg-outline hover:cursor-pointer p-2 md:text-sm flex flex-center gap-x-4"
         >
           <BsGoogle />

@@ -45,10 +45,10 @@ const ApplicationPage = () => {
   useEffect(() => {
     console.log(state)
     if (state?.message === "success" && state?.data) {      
-      formRef.current?.reset();
       toast({
         title: "Application Submitted Successfully",
       });
+      formRef.current?.reset();
       router.push("/admission-portal");
     }
   }, []);
