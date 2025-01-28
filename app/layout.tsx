@@ -13,7 +13,7 @@ const poppins = Poppins({
 const nunito = Nunito({
   subsets: ["latin"],
   variable: "--font-Nunito",
-  weight: ["300", "400", "500", "600", "800"],
+  weight: ["300", "400"],
 });
 
 export const metadata: Metadata = {

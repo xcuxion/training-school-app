@@ -14,6 +14,7 @@ import {
 } from "@/components/ui/select";
 import { Textarea } from "@/components/ui/textarea";
 import Tiptap from "@/components/Tiptap";
+import SubmitButton from "@/components/submit-button";
 
 const initials = {
   status: "todo",
@@ -91,7 +92,9 @@ const TaskForm = ({
             <Tiptap description={values.description} onChange={(e)=>setValues({...values, description: e})}/>
           </div>
         </section>
+        <SubmitButton buttonText="Save"/>
       </form>
+
     </FormModal>
   );
 };

@@ -7,27 +7,28 @@ import TodoSection from "@/components/todo-section";
 import UpcomingSession from "@/components/upcoming-session";
 import PastSessionSection from "@/components/past-session-section";
 import ModuleDetails from "@/components/module-details";
+import MobileSheet from "./mobile-sheet";
 
 const moduleData = {
   name: 'Software Engineering',
   image: '/images/se.png',
   resources: [
     {
-      url: '',
+      url: 'https://drive.google.com/file/d/1Myzohru5vX73ku2UasZcbcosQ80-V6Tl/view?t=3',
       title: 'Activities'
     },
     {
-      url: '',
+      url: 'https://drive.google.com/file/d/1khREi9R77t4z8VgLKGH_PLGDc9aSlG5m/view?usp=sharing',
       title: 'Assignments'
     },
     {
-      url: '',
+      url: 'https://drive.google.com/file/d/1PMn4TsvxsZoyO-MWO1VVEmRUmA9bCqDZ/view?usp=sharing',
       title: 'Course Materials'
     },
   ],
   facilitator: 'Yaw Offeh'
 }
-const profile = {
+export const profile = {
   name: "Mans Watzen",
   image: "/images/p1.jpg",
   aspiration: "Software Engineer"
@@ -43,7 +44,7 @@ const page = () => {
         <PastSessionSection/>
       </MainContent>
       <SideSection className="w-1/3">
-        <ProfileCard {...profile}/>
+          <ProfileCard {...profile}/>
         <TodoSection />
         <div className="w-full h-[125px] bg-primary rounded-md flex px-6 items-center justify-between">
           <div className="text-white">

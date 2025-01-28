@@ -38,7 +38,7 @@ const TodoSection = () => {
       <div className="w-full bg-light border rounded-md p-3">
         <div className="flex justify-between">
           <h1 className="text-lg font-semibold leading-tight">To-Dos</h1>
-          <span className="w-6 h-6 flex flex-center bg-secondary rounded-sm">
+          <span className="w-6 h-6 flex flex-center bg-secondary hover:bg-fuchsia-300 hover:cursor-pointer rounded-sm" >
             <FiPlus/>
           </span>
         </div>
