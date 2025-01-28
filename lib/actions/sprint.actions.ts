@@ -6,6 +6,7 @@ import { handleError } from "../utils";
 import { PrismaClient } from "@prisma/client";
 
 const prisma = new PrismaClient();
+
 const taskSchema = z.object({
   title: z.string().min(5, { message: "Title must be at least 5 characters" }),
   summary: z
@@ -17,6 +18,7 @@ const taskSchema = z.object({
   assignees: z.array(z.string()).optional(),
   comments: z.array(z.string()).optional(),
 });
+
 export async function new_task(prevState: unknown, formData: FormData) {
   try {
     const result = taskSchema.safeParse(Object.fromEntries(formData));
@@ -42,7 +44,7 @@ export async function new_task(prevState: unknown, formData: FormData) {
         comments,
       },
     });
-    return { message: "Task added successfully" };
+    return { success: result?.success, data: {} };
   } catch (error) {
     handleError(error);
   }

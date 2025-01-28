@@ -32,6 +32,7 @@
     "@radix-ui/react-slot": "^1.1.1",
     "@radix-ui/react-tabs": "^1.1.1",
     "@radix-ui/react-toast": "^1.2.4",
+    "@radix-ui/react-toggle": "^1.1.1",
     "@react-email/components": "^0.0.32",
     "@stream-io/node-sdk": "^0.4.3",
     "@stream-io/video-react-sdk": "^1.4.4",

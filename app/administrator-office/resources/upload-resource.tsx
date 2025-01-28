@@ -16,18 +16,7 @@ const UploadResource = ({
       const formRef = useRef<HTMLFormElement>(null);
       const router = useRouter();
       const [formState, formAction] = useFormState(post_resource, undefined);
-    
-      useEffect(() => {
-        if (formState?.success && formState?.data) {
-          // update(formState.data);
-          formRef.current?.reset();
-          if (formState?.data.applicant?.id) {
-            router.push("/admission-portal");
-          } else if (formState?.data.facilitator?.id) {
-            router.push("/admission-portal");
-          }
-        }
-      }, [formState]);
+
   return (
     <FormModal isOpen={show} onClose={onClose} title="Create New Task">
       <form action={formAction} ref={formRef}>
