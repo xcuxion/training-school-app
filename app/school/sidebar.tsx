@@ -4,6 +4,7 @@ import Image from "next/image";
 import { Button } from "@/components/ui/button";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
+import { logOut } from "@/lib/actions/general.action";
 
 const links = [
   {
@@ -74,13 +75,14 @@ const Sidebar = () => {
         />
         <div className="text-center bg-neutral h-[155px] rounded-md flex flex-col items-center justify-center">
           <p className="leading-none text-sm my-2 font-normal">
-            Explore our guild to try your hands on real-time pressing challenges!
+            
           </p>
           <Button
+            onClick={()=>{logOut()}}
             variant={"default"}
             className="bg-primary text-white rounded-full text-sm"
           >
-            Go to Guild
+            Log Out
           </Button>
         </div>
       </div>

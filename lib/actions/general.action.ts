@@ -4,7 +4,7 @@ import { handleError } from "../utils";
 import * as bcrypt from "bcrypt";
 import { PrismaClient } from "@prisma/client";
 import { redirect } from "next/navigation";
-import { createSession } from "../session";
+import { createSession, deleteSession } from "../session";
 import { Resend } from "resend";
 import { ReactElement } from "react";
 import { signIn } from "../auth";
@@ -113,6 +113,15 @@ export async function sendMail(
       success: false,
       message: error instanceof Error ? error.message : "Failed to send email",
     };
+  }
+}
+
+export async function logOut() {
+  try {
+    await deleteSession();
+    
+  } catch (error) {
+    console.log(error)
   }
 }
 
