@@ -6,8 +6,6 @@ import Image from "next/image";
 import { Button } from "@/components/ui/button";
 import TeamMemberCard from "@/components/portfolio/TeamMemberCard";
 import TestimonialCard from "@/components/portfolio/TestimonialCard";
-import FaqCard from "@/components/portfolio/faq-card";
-import InquiryForm from "@/components/portfolio/inquiry-form";
 import Register from "./register";
 import Footer from "@/components/portfolio/footer";
 import Login from "./login";
@@ -18,6 +16,8 @@ import {
   CarouselNext,
   CarouselPrevious,
 } from "@/components/ui/carousel";
+import CourseCard from "./course-card";
+import FaqList from "@/components/portfolio/faq-list";
 
 const people = [
   {
@@ -66,18 +66,58 @@ const testimonials = [
   },
 ];
 
-const faqs = [
+
+const engineeringCourses = [
   {
-    question: "How are you?",
-    answer: "I am fine please",
+    image: "",
+    title: "Mobile Development With Flutter",
+    prerequisite: ["", ""],
+    mode: "Blend - Online & In-person",
   },
   {
-    question: "How are you?",
-    answer: "I am fine please",
+    image: "",
+    title: "Full-stack Web Development With Nextjs",
+    prerequisite: ["Javascript", "React"],
+    mode: "Online",
   },
   {
-    question: "How are you?",
-    answer: "I am fine please",
+    image: "",
+    title: "Backend Engineering with Python",
+    prerequisite: ["", ""],
+    mode: "",
+  },
+  {
+    image: "",
+    title: "Frontend Deveopment with React",
+    prerequisite: ["", ""],
+    mode: "",
+  },
+];
+
+const startupCourses = [
+  {
+    image: "",
+    title: "Business Analytics",
+    prerequisite: ["", ""],
+    mode: "Online",
+  },
+  {
+    image: "",
+    title: "Business Strategy",
+    prerequisite: ["Javascript", "React"],
+    mode: "Online",
+  },
+  {
+    image: "",
+    title: "Startup Essentials",
+    prerequisite: ["", ""],
+    mode: "",
+  },
+  {
+    image: "",
+    title: "Marketing",
+    prerequisite: ["", ""],
+    mode: "",
   },
 ];
 
@@ -131,49 +171,59 @@ const LandingPage = () => {
         <div className=" rounded-lg mb-4 md:mb-8 p-2 md:p-6 w-full bg-secondary">
           <div className="flex flex-col md:flex-row items-center justify-between">
             <span className="md:w-2/3 ">
-              <h2 className=" text-xl md:text-2xl font-semibold md:w-4/5">
+              <h2 className=" text-xl md:text-5xl font-semibold md:w-4/5">
                 School of Engineering & Techpreneurship
               </h2>
-              <p className="md:pr-6">
-                The XCUXION School of Engineering and Techpreneurship is a
-                transformative educational program designed to empower aspiring
-                technologists and entrepreneurs. By providing hands-on training
-                in software engineering, product development, marketing, and
-                business strategies, the school equips students with the skills
-                and mindset needed to build and scale innovative ventures. The
-                program emphasizes practical application, guiding participants
-                from idea conception to the launch of viable startups, fostering
-                a new generation of tech leaders and changemakers.
+              <p className="md:pr-6 my-2 w-3/4">
+                An educational program designed to empower aspiring
+                technologists and entrepreneurs. We equip students with the
+                skills and mindset needed to build and scale innovative
+                ventures.
               </p>
+              <Button
+                variant={"default"}
+                className="mt-1 md:mt-0 rounded-full"
+                asChild
+              >
+                <Link href={"/apply"}>Start Your Application!</Link>
+              </Button>
             </span>
             <Image
               src={"/images/group.jpg"}
               alt="image"
               width={450}
               height={350}
-              className="w-full mt-3 md:t-0 md:w-[450px] md:h-[300px] object-cover rounded-md"
+              className="w-full mt-3 md:t-0 md:w-[550px] md:h-[400px] object-cover rounded-md"
             />
           </div>
-          <div className="bg-white p-3 md:py-4 md:px-6 rounded-md mt-4 md:mt-8">
-            <h3 className="text-2xl md:text-3xl font-bold">Admissions In Progress!</h3>
-            <p className="md:my-2">
-              Good news! We are currently admitting people to kickstart our next
-              batch of training starting March and ending in August. Our 6
-              months intensive training program focuses on the fundamentals
-              needed to start and run your own tech startup venture. We will
-              delve into interesting topics like Product management, Software
-              engineering, Marketing, and Strategy. Don’t miss this opportunity
-              while it is still available. Simply click the button below to get
-              started!
-            </p>
-            <Button variant={"default"} className="mt-1 md:mt-0 rounded-full" asChild>
-              <Link href={"/apply"}>Start Your Application!</Link>
-            </Button>
+          <div className="my-8">
+            <div className="md:min-h-[60vh]">
+              <h2 className="font-semibold text-3xl my-2">Engineering Courses</h2>
+              <div className="">
+                <div className="grid grid-cols-4 gap-4">
+                  {engineeringCourses.map((course, index) => (
+                    <CourseCard key={index} {...course} />
+                  ))}
+                </div>
+              </div>
+            </div>
+            <div className="md:min-h-[60vh]">
+              <h2 className="font-semibold text-3xl my-2">Techpreneurship Courses</h2>
+              <div className="">
+                <div className="grid grid-cols-4 gap-4">
+                  {startupCourses.map((course, index) => (
+                    <CourseCard key={index} {...course} />
+                  ))}
+                </div>
+              </div>
+            </div>
           </div>
         </div>
       </div>
       <div className="px-4 md:px-10 flex flex-col flex-center min-h-[60vh]">
-        <h2 className=" text-xl md:text-2xl font-bold mb-2 md:mb-4">Our Team</h2>
+        <h2 className=" text-xl md:text-2xl font-bold mb-2 md:mb-4">
+          Our Team
+        </h2>
         <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
           {people.map((member, index) => (
             <TeamMemberCard
@@ -190,30 +240,26 @@ const LandingPage = () => {
         <div className="md:px-10">
           <Carousel className="w-full ">
             <CarouselContent className="">
-          {testimonials.map((testimonial, index) => (
-              <CarouselItem key={index}>
-                <TestimonialCard {...testimonial} />
-              </CarouselItem>
-          ))}
+              {testimonials.map((testimonial, index) => (
+                <CarouselItem key={index}>
+                  <TestimonialCard {...testimonial} />
+                </CarouselItem>
+              ))}
             </CarouselContent>
             <CarouselPrevious className="hidden md:flex" />
-            <CarouselNext className="hidden md:flex"/>
+            <CarouselNext className="hidden md:flex" />
           </Carousel>
-
         </div>
       </div>
       <div className="px-4 md:px-10 flex flex-col md:flex-row items-start justify-between my-4 gap-y-4 md:gap-y-0 md:gap-x-6 md:min-h-[50vh]">
-        <div className="w-full md:w-1/2">
-          <h4 className="text-xl text-center md:text-start md:text-2xl  font-bold">
+        <div className="w-full">
+          <h4 className="text-xl text-center md:mb-2  md:text-4xl  font-bold">
             Frequently Asked Questions (FAQs)
           </h4>
           <div className="space-y-1 5">
-            {faqs.map((faq, index) => (
-              <FaqCard {...faq} key={index} />
-            ))}
+              <FaqList />
           </div>
         </div>
-        <InquiryForm />
       </div>
       <Footer />
       {openRegister ? (

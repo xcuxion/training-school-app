@@ -1,6 +1,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import React from "react";
+import InquiryForm from "./inquiry-form";
 
 const support = [
   {
@@ -55,16 +56,7 @@ const Footer = () => {
           ))}
         </ul>
       </div>
-      <div className="">
-        <h3 className="">Quick Links</h3>
-        <ul className="flex flex-col">
-          {support.map((link, index) => (
-            <Link href={link.href} key={index}>
-              {link.label}
-            </Link>
-          ))}
-        </ul>
-      </div>
+      <InquiryForm />
     </footer>
   );
 };
