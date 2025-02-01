@@ -25,7 +25,7 @@
 // };
 
 // export default FaqCard;
-
+"use client";
 import React, { ReactElement } from "react";
 import Link from "next/link";
 import {
@@ -34,6 +34,7 @@ import {
   AccordionItem,
   AccordionTrigger,
 } from "@/components/ui/accordion";
+import { motion } from "framer-motion";
 
 interface IFaq {
   question: string;
@@ -88,27 +89,38 @@ const faqs: IFaq[] = [
 
 const Faqs = () => {
   return (
-    <div className="">
-      <div className="">
-        <h4 className="t">
-          Frequently Asked Questions (FAQs)
-        </h4>
-        <div className="">
-          <Accordion
-            type="single"
-            collapsible
-            className="border px-4 rounded-md"
-          >
-            {faqs.map((faq, index) => (
-              <AccordionItem key={index} value={`item-${index}`}>
-                <AccordionTrigger>{faq.question}</AccordionTrigger>
-                <AccordionContent>{faq.answer}</AccordionContent>
-              </AccordionItem>
-            ))}
-          </Accordion>
-        </div>
+    <motion.div
+      id="faqs"
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      transition={{ duration: 0.5, delay: 0.5 }}
+      className="px-20 min-h-screen bg-gray-100  flex flex-col flex-center"
+    >
+      <motion.h3 className="text-4xl w-1/2 mx-auto font-semibold">
+        Frequently Asked Questions (FAQs)
+      </motion.h3>
+      <motion.p className="text-lg w-1/2 mx-auto">
+        Lorem ipsum dolor, sit amet consectetur adipisicing elit.
+      </motion.p>
+      <div className="w-2/3 mt-4">
+        <Accordion type="single" collapsible className="space-y-2">
+          {faqs.map((faq, index) => (
+            <AccordionItem
+              className="border px-4 "
+              key={index}
+              value={`item-${index}`}
+            >
+              <AccordionTrigger className="font-semibold text-lg">
+                {faq.question}
+              </AccordionTrigger>
+              <AccordionContent className="text-base">
+                {faq.answer}
+              </AccordionContent>
+            </AccordionItem>
+          ))}
+        </Accordion>
       </div>
-    </div>
+    </motion.div>
   );
 };
 

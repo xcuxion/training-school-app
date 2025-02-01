@@ -1,46 +1,50 @@
+"use client"
 import React from 'react'
 import InquiryForm from './inquiry-form'
 import ItemList from './item-list'
+import { motion } from 'framer-motion'
+import Footer from './footer'
 
 const contacts = [
     {
-        title: '',
+        title: '(+233) 207-565-990',
         image: '',
-        subtitle: ''
+        subtitle: 'Phone'
     },
     {
-        title: '',
+        title: 'school@xcuxion.org',
         image: '',
-        subtitle: ''
+        subtitle: 'Email'
     },
     {
-        title: '',
+        title: 'Connect via Slack',
         image: '',
-        subtitle: ''
+        subtitle: 'Community'
     },
     {
-        title: '',
+        title: 'KNUST & UG-Legon',
         image: '',
-        subtitle: ''
+        subtitle: 'Location'
     },
 ]
 
 const Contact = () => {
   return (
-    <div className=''>
-        <h1 className="">Contact Us</h1>
-        <p className="">Lorem ipsum dolor sit amet consectetur adipisicing elit.</p>
-        <div className="grid grid-cols-2">
-            <div className="">
+    <motion.div id='contact' className='min-h-screen py-5 flex flex-col flex-center'>
+        <motion.h3 className="text-4xl fnt-semibold">Contact Us</motion.h3>
+        <motion.p className="text-lg w-1/2 mx-auto text-center">Lorem ipsum dolor sit amet consectetur adipisicing elit.</motion.p>
+        <motion.div className="grid grid-cols-2 gap-x-10 mt-4">
+            <motion.div className="space-y-4">
             {
                 contacts.map((contact, index)=>(
                     <ItemList {...contact} key={index} />
                 ))
             }
-            </div>
+            </motion.div>
             <InquiryForm/>
-        </div>
-    </div>
+        </motion.div>
+        
+    </motion.div>
   )
 }
 

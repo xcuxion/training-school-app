@@ -6,59 +6,63 @@ import makeEnquiry from "@/lib/actions/general.action";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { Button } from "@/components/ui/button";
+import { Label } from "@/components/ui/label";
 
 const InquiryForm = () => {
   const [state, makeEnquiryAction] = useFormState(makeEnquiry, undefined);
   const { pending } = useFormStatus();
-  const [name, setName] = useState<string>('')
-  const [email, setEmail] = useState<string>('')
-  const [question, setQuestion] = useState<string>('')
+  const [name, setName] = useState<string>("");
+  const [email, setEmail] = useState<string>("");
+  const [question, setQuestion] = useState<string>("");
 
   return (
-    <div className="bg-secondary text-dark w-full md:w-[450px] rounded-md p-3 md:p-4 h-auto flex flex-col md:gap-y-4">
+    <div className="bg-secondary text-dark w-full md:w-[450px] rounded-md p-3 md:p-4 md:h-[375px] flex flex-col md:gap-y-4">
       <h1 className="font-semibold text-xl md:text-2xl">Make An Enquiry</h1>
       <form action={makeEnquiryAction} className="space-y-2">
-        <>
+        <div>
+          <Label>Full Name</Label>
           <Input
             id="name"
             name="name"
-            placeholder="Full name"
             title="Enter your full name as reference"
-            onChange={(e)=>setName(e.target.value)}
+            onChange={(e) => setName(e.target.value)}
             value={name}
           />
           {state?.errors?.name && (
             <p className="text-red-500">{state.errors.name}</p>
           )}
-        </>
-        <>
-          <Input 
-          id="email" 
-          name="email" 
-          placeholder="Email address" 
-          value={email}
-          title="" 
-          onChange={(e)=>setEmail(e.target.value)}
+        </div>
+        <div>
+          <Label>Email Address</Label>
 
+          <Input
+            id="email"
+            name="email"
+            value={email}
+            title=""
+            onChange={(e) => setEmail(e.target.value)}
           />
           {state?.errors?.email && (
             <p className="text-red-500">{state.errors.email}</p>
           )}
-        </>
-        <>
+        </div>
+        <div>
+          <Label>Message</Label>
+
           <Textarea
             id="question"
             name="question"
-            placeholder="Enter your message..."
             className="bg-light boder- min-h-20"
             value={question}
-            onChange={(e)=>setQuestion(e.target.value)}
+            onChange={(e) => setQuestion(e.target.value)}
           />
           {state?.errors?.question && (
             <p className="text-red-500">{state.errors.question}</p>
           )}
-        </>
-      <Button type="submit" disabled={pending}>Send</Button>
+        </div>
+        <Button type="submit" className="w-full" disabled={pending}>
+          Send
+        </Button>
       </form>
     </div>
   );

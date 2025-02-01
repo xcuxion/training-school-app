@@ -1,5 +1,7 @@
+"use client"
 import React from "react";
 import ItemList from "./item-list";
+import { motion } from "framer-motion";
 
 const courses = {
   sartup: [
@@ -60,18 +62,19 @@ const courses = {
 
 const CoursesSection = () => {
   return (
-    <div>
-      <span className="">
-        <h1 className="">Our COurses</h1>
-        <p className="">
-          Lorem ipsum dolor sit amet consectetur adipisicing elit. Blanditiis
-          vitae soluta eligendi omnis asperiores enim, ipsa eveniet voluptates
-          deserunt recusandae. Quae placeat sunt, repellat provident totam illo,
-          beatae maiores quibusdam velit, suscipit voluptate. Consequuntur,
-          corrupti?
-        </p>
-      </span>
-      <div className="grid grid-cols-3 gap-4">
+    <motion.div
+    id="courses"
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      transition={{ duration: 0.5 }}
+      className="px-20 h-screen bg-gray-100 flex flex-col flex-center"
+    >
+      <motion.h3 className="text-4xl">Our Courses</motion.h3>
+      <motion.p className="text-xl w-1/2 mx-auto text-center">
+        Lorem ipsum dolor sit amet consectetur adipisicing elit. Blanditiis
+        vitae soluta eligendi omnis asperiores enim, ipsa eveniet voluptates
+      </motion.p>
+      <div className="grid grid-cols-3 mt-4 gap-4">
         {courses.sartup.map((course, index) => (
           <ItemList {...course} key={index} />
         ))}
@@ -79,7 +82,7 @@ const CoursesSection = () => {
           <ItemList {...course} key={index} />
         ))}
       </div>
-    </div>
+    </motion.div>
   );
 };
 

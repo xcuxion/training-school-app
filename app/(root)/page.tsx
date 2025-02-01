@@ -1,67 +1,67 @@
 "use client";
-import { motion } from "framer-motion";
-import { Button } from "@/components/ui/button";
-import { Card, CardContent } from "@/components/ui/card";
 import { Parallax, ParallaxLayer } from "@react-spring/parallax";
-import React, { useState } from "react";
-import Link from "next/link";
-import Image from "next/image";
+import React from "react";
 import Faqs from "./portfolio/faqs";
+import Header from "./portfolio/Header";
+import Hero from "./portfolio/hero";
+import CoursesSection from "./portfolio/courses-section";
+import Team from "./portfolio/facilitators";
+import Contact from "./portfolio/contact";
+import Footer from "./portfolio/footer";
 
 const Portfolio = () => {
   return (
-    <Parallax pages={5} className="">
-      <ParallaxLayer offset={0} speed={0.5} className="">
-        <motion.header
-          className="t"
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ duration: 0.5 }}
-        ></motion.header>
-      </ParallaxLayer>
+    <div className="flex flex-col">
+      <Header />
+      {/* <Parallax pages={5} className=""> */}
+        {/* Hero Section */}
+        {/* <ParallaxLayer offset={0} speed={0.2} factor={1}> */}
+          <Hero />
+        {/* </ParallaxLayer> */}
 
-      <ParallaxLayer offset={2} speed={0.3} className="">
+        {/* Courses Section */}
+        {/* <ParallaxLayer
+          offset={1}
+          speed={0.4}
+          factor={1}
+          className="-h-[100vh] py-5"
+        > */}
+          <CoursesSection />
+        {/* </ParallaxLayer> */}
 
-      </ParallaxLayer>
+        {/* Team Section */}
+        {/* <ParallaxLayer
+          offset={2}
+          speed={0.3}
+          factor={1}
+          className=""
+        > */}
+          <Team />
+        {/* </ParallaxLayer> */}
 
-      <ParallaxLayer
-        offset={2}
-        speed={0.2}
-        className=""
-      >
+        {/* FAQs Section */}
+        {/* <ParallaxLayer
+          offset={3}
+          speed={0.2}
+          factor={1}
+          className=""
+        > */}
+          <Faqs />
+        {/* </ParallaxLayer> */}
 
-      </ParallaxLayer>
+        {/* Contact Section */}
+        {/* <ParallaxLayer
+          offset={4}
+          speed={0.1}
+          factor={1}
+          className=""
+        > */}
+          <Contact />
+        {/* </ParallaxLayer> */}
 
-      <ParallaxLayer
-        offset={3}
-        speed={0.2}
-        className=""
-      >
-
-      </ParallaxLayer>
-
-      <ParallaxLayer
-        offset={4}
-        speed={0.2}
-        className=""
-      >
-        <Faqs />
-      </ParallaxLayer>
-
-      <ParallaxLayer
-        offset={5}
-        speed={0.2}
-        className=""
-      ></ParallaxLayer>
-
-      <ParallaxLayer
-        offset={6}
-        speed={0.2}
-        className=""
-      >
-
-      </ParallaxLayer>
-    </Parallax>
+      {/* </Parallax> */}
+      <Footer />
+    </div>
   );
 };
 

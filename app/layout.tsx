@@ -7,18 +7,18 @@ import { EdgeStoreProvider } from "@/lib/edgestore";
 const poppins = Poppins({
   subsets: ["latin"],
   variable: "--font-Poppins",
-  weight: "400",
+  weight: ["400", "600"],
 });
 
 const nunito = Nunito({
   subsets: ["latin"],
   variable: "--font-Nunito",
-  weight: ["300", "400"],
+  weight: ["300", "400", "500", "600"],
 });
 
 export const metadata: Metadata = {
-  title: "XCUXION School",
-  description: "XCUXION's School of Engineering & Techpreneurship",
+  title: "Xcuxion School",
+  description: "Xcuxion's School of Engineering & Techpreneurship",
 };
 
 export default function RootLayout({
