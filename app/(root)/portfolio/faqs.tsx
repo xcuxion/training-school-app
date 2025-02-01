@@ -26,7 +26,6 @@
 
 // export default FaqCard;
 
-
 import React, { ReactElement } from "react";
 import Link from "next/link";
 import {
@@ -38,7 +37,7 @@ import {
 
 interface IFaq {
   question: string;
-  answer: string|ReactElement;
+  answer: string | ReactElement;
 }
 
 const faqs: IFaq[] = [
@@ -87,17 +86,30 @@ const faqs: IFaq[] = [
   },
 ];
 
-const FaqList = () => {
+const Faqs = () => {
   return (
-    <Accordion type="single" collapsible className="border px-4 rounded-md">
-      {faqs.map((faq, index) => (
-        <AccordionItem key={index} value={`item-${index}`}>
-          <AccordionTrigger>{faq.question}</AccordionTrigger>
-          <AccordionContent>{faq.answer}</AccordionContent>
-        </AccordionItem>
-      ))}
-    </Accordion>
+    <div className="">
+      <div className="">
+        <h4 className="t">
+          Frequently Asked Questions (FAQs)
+        </h4>
+        <div className="">
+          <Accordion
+            type="single"
+            collapsible
+            className="border px-4 rounded-md"
+          >
+            {faqs.map((faq, index) => (
+              <AccordionItem key={index} value={`item-${index}`}>
+                <AccordionTrigger>{faq.question}</AccordionTrigger>
+                <AccordionContent>{faq.answer}</AccordionContent>
+              </AccordionItem>
+            ))}
+          </Accordion>
+        </div>
+      </div>
+    </div>
   );
 };
 
-export default FaqList;
+export default Faqs;

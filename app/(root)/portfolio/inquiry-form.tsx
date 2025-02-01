@@ -1,10 +1,11 @@
 "use client";
 import React, { useState } from "react";
-import { Input } from "../ui/input";
-import { Textarea } from "../ui/textarea";
-import { Button } from "../ui/button";
+
 import { useFormState, useFormStatus } from "react-dom";
 import makeEnquiry from "@/lib/actions/general.action";
+import { Input } from "@/components/ui/input";
+import { Textarea } from "@/components/ui/textarea";
+import { Button } from "@/components/ui/button";
 
 const InquiryForm = () => {
   const [state, makeEnquiryAction] = useFormState(makeEnquiry, undefined);
