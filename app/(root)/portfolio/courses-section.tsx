@@ -6,56 +6,56 @@ import { motion } from "framer-motion";
 const courses = {
   sartup: [
     {
-      image: "/images/business-analytics.jpg",
+      image: "/images/busana.jpg",
       title: "Business Analytics",
-      subtitle: "Business",
+      subtitle: "Track",
     },
     {
-      image: "/images/business-strategy.jpg",
+      image: "/images/strategy.jpg",
       title: "Business Strategy",
-      subtitle: "Business",
+      subtitle: "General Course",
     },
     {
-      image: "/images/startup-essentials.jpg",
+      image: "/images/startupessentials.jpg",
       title: "Startup Essentials",
-      subtitle: "Business",
+      subtitle: "General Course",
     },
     {
       image: "/images/marketing.jpg",
       title: "Marketing",
-      subtitle: "Engineering",
+      subtitle: "Track",
     },
   ],
   engineering: [
     {
       image: "/images/flutter.jpg",
       title: "Mobile Development With Flutter",
-      subtitle: "Engineering",
+      subtitle: "Track",
     },
     {
-      image: "/images/nextjs.jpg",
+      image: "/images/extjs.jpg",
       title: "Full-stack Web Development With Next.js",
       subtitle: "Engineering",
     },
     {
-      image: "/images/python-backend.jpg",
+      image: "/images/python.jpg",
       title: "Backend Engineering with Python",
       subtitle: "Engineering",
     },
     {
-      image: "/images/react-frontend.jpg",
+      image: "/images/react.jpg",
       title: "Frontend Development with React",
       subtitle: "Engineering",
     },
     {
-      image: "/images/programming-fundamentals.jpg",
+      image: "/images/programming.jpg",
       title: "Fundamentals of Programming",
       subtitle: "Engineering",
     },
     {
-      image: "/images/systems-design.jpg",
+      image: "/images/systems.jpg",
       title: "Systems Design and Analysis",
-      subtitle: "",
+      subtitle: "Engineering",
     },
   ],
 };
@@ -70,9 +70,8 @@ const CoursesSection = () => {
       className="px-20 h-screen bg-gray-100 flex flex-col flex-center"
     >
       <motion.h3 className="text-4xl">Our Courses</motion.h3>
-      <motion.p className="text-xl w-1/2 mx-auto text-center">
-        Lorem ipsum dolor sit amet consectetur adipisicing elit. Blanditiis
-        vitae soluta eligendi omnis asperiores enim, ipsa eveniet voluptates
+      <motion.p className="text-xl w-3/4 mx-auto text-center">
+      Gain hands-on training in software development, business strategy, marketing, and fundraising. Our expert-led courses equip you with the tools to launch and scale your startup successfully.
       </motion.p>
       <div className="grid grid-cols-3 mt-4 gap-4">
         {courses.sartup.map((course, index) => (

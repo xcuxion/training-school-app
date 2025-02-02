@@ -16,17 +16,17 @@ const people = [
     role: "Software Engineer",
   },
   {
-    image: "/images/p1.jpg",
+    image: "/images/yaw.png",
     name: "Yaw Offeh",
     role: "Software Engineer",
   },
   {
-    image: "/images/jess.jpeg",
+    image: "/images/baze.jpeg",
     name: "Jessica Ennor",
     role: "Software Engineer",
   },
   {
-    image: "/images/p1.jpg",
+    image: "/images/solo.svg",
     name: "Solomon Ayisi",
     role: "Fullstack Developer",
   },
@@ -55,7 +55,7 @@ export const TeamMemberCard = ({ name, role, image }: TeamMemberCardProps) => {
         alt=""
         width={300}
         height={300}
-        className="md:w-[300px] md:h-[300px] object-cover object-top rounded-full"
+        className="md:w-[300px] md:h-[300px] bg-center object-cover object-top rounded-full"
       />
       <h1 className="text-xl font-semibold">{name}</h1>
       <p className="text-base">{role}</p>
@@ -73,9 +73,8 @@ const Team = () => {
       className="min-h-screen py-10 px-20 flex flex-col flex-center"
     >
       <motion.h1 className="text-4xl font-semibold">Our Facilitators</motion.h1>
-      <motion.p className="text-lg w-1/2 text-center">
-        Lorem ipsum dolor, sit amet consectetur adipisicing elit. Dignissimos
-        eum quod consectetur aut praesentium impedit, asperiores 
+      <motion.p className="text-lg w-3/4 text-center">
+      Our facilitators are seasoned professionals in software engineering, business strategy, product management, and marketing. They bring real-world insights, hands-on experience, and mentorship to help you navigate the startup ecosystem successfully.
       </motion.p>
       <motion.div className="mt-4 grid grid-cols-3 gap-10">
         {people.map((person, index) => (

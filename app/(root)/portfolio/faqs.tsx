@@ -1,30 +1,3 @@
-// import React from "react";
-// import {
-//   Accordion,
-//   AccordionContent,
-//   AccordionItem,
-//   AccordionTrigger,
-// } from "@/components/ui/accordion";
-
-// interface IFaq {
-//   question: string;
-//   answer: string;
-// }
-
-// const FaqCard = ({ question, answer }: IFaq) => {
-//   return (
-//     <Accordion type="single" collapsible className="border px-4 rounded-md">
-//       <AccordionItem value="item-1">
-//         <AccordionTrigger>{question}</AccordionTrigger>
-//         <AccordionContent>
-//           {answer}
-//         </AccordionContent>
-//       </AccordionItem>
-//     </Accordion>
-//   );
-// };
-
-// export default FaqCard;
 "use client";
 import React, { ReactElement } from "react";
 import Link from "next/link";
@@ -96,10 +69,10 @@ const Faqs = () => {
       transition={{ duration: 0.5, delay: 0.5 }}
       className="px-20 min-h-screen bg-gray-100  flex flex-col flex-center"
     >
-      <motion.h3 className="text-4xl w-1/2 mx-auto font-semibold">
-        Frequently Asked Questions (FAQs)
+      <motion.h3 className="text-4xl text-center w-1/2 mx-auto font-semibold">
+        Frequently Asked Questions
       </motion.h3>
-      <motion.p className="text-lg w-1/2 mx-auto">
+      <motion.p className="text-lg w-1/2 text-center mx-auto">
         Lorem ipsum dolor, sit amet consectetur adipisicing elit.
       </motion.p>
       <div className="w-2/3 mt-4">

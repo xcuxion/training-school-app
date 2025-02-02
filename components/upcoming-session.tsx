@@ -5,8 +5,12 @@ import { Button } from "./ui/button";
 import MobileSheet from "@/app/school/mobile-sheet";
 import ProfileCard from "./profile-card";
 import TodoSection from "./todo-section";
-import { profile } from "@/app/school/page";
 
+const profile = {
+  name: "Mans Watzen",
+  image: "/images/p1.jpg",
+  aspiration: "Software Engineer"
+}
 const UpcomingSession = () => {
   return (
     <>

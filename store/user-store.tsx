@@ -31,5 +31,5 @@ interface UserStore {
 export const useUserStore = create<UserStore>((set) => ({
   user: null,
   update: (user) => set((state) => ({ ...state, user })),
-  // logout: () => set((state) => ({...state, user: null })), // Uncomment to enable logout functionality.
+  logout: () => set((state) => ({...state, user: null })), 
 }));

@@ -114,7 +114,7 @@ const CaseForm = ({
             <p className="text-sm text-red-500">{state.errors.module}</p>
           )}
         </span>
-        <Tiptap/>
+        {/* <Tiptap/> */}
       </form>
     </FormModal>
   );

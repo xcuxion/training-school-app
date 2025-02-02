@@ -28,7 +28,7 @@ const moduleData = {
   ],
   facilitator: 'Yaw Offeh'
 }
-export const profile = {
+const profile = {
   name: "Mans Watzen",
   image: "/images/p1.jpg",
   aspiration: "Software Engineer"

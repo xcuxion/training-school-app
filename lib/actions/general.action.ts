@@ -119,80 +119,11 @@ export async function sendMail(
 export async function logOut() {
   try {
     await deleteSession();
-    
+    redirect('/')
   } catch (error) {
     console.log(error)
   }
 }
-
-// // Email schema with proper validation
-// const mailSchema = z.object({
-//   sender: z.string().email(),
-//   receivers: z.array(z.string().email()),  // Validate each receiver email
-//   subject: z.string().min(1, 'Subject is required'),
-//   content: z.string().min(1, 'Content is required'),  // Changed from any to string
-// });
-
-// // Type for the success/error response
-// type SendMailResponse = {
-//   success?: boolean;
-//   errors?: Record<string, string[]>;
-//   message?: string;
-// };
-
-// export async function sendMail(
-//   prevState: unknown,
-//   formData: FormData
-// ): Promise<SendMailResponse> {
-//   try {
-//     // Parse and validate the form data
-//     const rawData = Object.fromEntries(formData);
-
-//     // Convert receivers string to array if it comes as comma-separated string
-//     const processedData = {
-//       ...rawData,
-//       receivers: Array.isArray(rawData.receivers)
-//         ? rawData.receivers
-//         : String(rawData.receivers).split(',').map(email => email.trim())
-//     };
-
-//     const result = mailSchema.safeParse(processedData);
-
-//     if (!result.success) {
-//       console.error("Validation errors:", result.error.flatten().fieldErrors);
-//       return {
-//         success: false,
-//         errors: result.error.flatten().fieldErrors,
-//       };
-//     }
-
-//     const { sender, receivers, subject, content } = result.data;
-
-//     // Send email using Resend
-//     const response = await resend.emails.send({
-//       from: sender,
-//       to: receivers,  // Resend expects an array of email addresses
-//       subject: subject,
-//       react: content,  // If you want to send HTML content, you might want to create a proper React component
-//     });
-
-//     if (response.error) {
-//       throw new Error(response.error.message);
-//     }
-
-//     return {
-//       success: true,
-//       message: 'Email sent successfully'
-//     };
-
-//   } catch (error) {
-//     console.error('Error sending email:', error);
-//     return {
-//       success: false,
-//       message: error instanceof Error ? error.message : 'Failed to send email'
-//     };
-//   }
-// }
 
 export default async function makeEnquiry(
   prevState: unknown,

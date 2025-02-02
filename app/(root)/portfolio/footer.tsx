@@ -1,4 +1,4 @@
-"use client"
+"use client";
 import Image from "next/image";
 import Link from "next/link";
 import React from "react";
@@ -34,13 +34,14 @@ const Footer = () => {
             content.
           </p>
           <form className="flex">
-            <Input className="" name="subscriber" type="email" />
+            <Input className="mr-1" name="subscriber" type="email" />
             <SubmitButton buttonText="Subscribe" />
           </form>
         </span>
       </div>
-      <div className="flex">
-        <span className="flex flex-col items-center">
+
+      <div className="">
+        <div className="flex">
           <Image
             src={"/logo.svg"}
             alt=""
@@ -48,11 +49,6 @@ const Footer = () => {
             height={45}
             className=""
           />
-
-          <span className="flex text-xs">
-            <FaCopyright className="text-base"/> {new Date().getFullYear()} All rights reserved.
-          </span>
-        </span>
         <span className="">
           {redirects.map((link, index) => (
             <Link
@@ -63,6 +59,11 @@ const Footer = () => {
               {link.label}
             </Link>
           ))}
+        </span>
+        </div>
+        <span className="flex text-sm">
+          <FaCopyright className="text-base" /> {new Date().getFullYear()} All
+          rights reserved.
         </span>
       </div>
     </motion.footer>
