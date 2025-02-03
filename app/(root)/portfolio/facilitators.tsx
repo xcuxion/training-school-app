@@ -28,12 +28,12 @@ const people = [
   {
     image: "/images/solo.svg",
     name: "Solomon Ayisi",
-    role: "Fullstack Developer",
+    role: "Software Engineer",
   },
   {
     image: "/images/ned.jpeg",
     name: "Prince Nedjoh",
-    role: "Fullstack Developer",
+    role: "Software Engineer",
   },
   {
     image: "/images/p1.jpg",
@@ -55,10 +55,10 @@ export const TeamMemberCard = ({ name, role, image }: TeamMemberCardProps) => {
         alt=""
         width={300}
         height={300}
-        className="md:w-[300px] md:h-[300px] bg-center object-cover object-top rounded-full"
+        className="w-[175px] h-[125px] md:w-[300px] md:h-[300px] bg-center object-cover object-top rounded-full"
       />
-      <h1 className="text-xl font-semibold">{name}</h1>
-      <p className="text-base">{role}</p>
+      <h1 className="md:text-xl font-semibold">{name}</h1>
+      <p className="text-sm md:text-base">{role}</p>
     </motion.div>
   );
 };
@@ -70,13 +70,13 @@ const Team = () => {
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
       transition={{ duration: 0.5 }}
-      className="min-h-screen py-10 px-20 flex flex-col flex-center"
+      className="min-h-screen py-5 px-5 md:py-10 md:px-20 flex flex-col flex-center"
     >
-      <motion.h1 className="text-4xl font-semibold">Our Facilitators</motion.h1>
-      <motion.p className="text-lg w-3/4 text-center">
+      <motion.h1 className="text-xl md:text-4xl font-semibold">Our Facilitators</motion.h1>
+      <motion.p className="md:text-lg md:w-3/4 text-center">
       Our facilitators are seasoned professionals in software engineering, business strategy, product management, and marketing. They bring real-world insights, hands-on experience, and mentorship to help you navigate the startup ecosystem successfully.
       </motion.p>
-      <motion.div className="mt-4 grid grid-cols-3 gap-10">
+      <motion.div className="mt-4 grid grid-cols-2 md:grid-cols-3 gap-10">
         {people.map((person, index) => (
           <TeamMemberCard key={index} {...person} />
         ))}

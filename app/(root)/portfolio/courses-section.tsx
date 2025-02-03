@@ -1,4 +1,4 @@
-"use client"
+"use client";
 import React from "react";
 import ItemList from "./item-list";
 import { motion } from "framer-motion";
@@ -63,17 +63,19 @@ const courses = {
 const CoursesSection = () => {
   return (
     <motion.div
-    id="courses"
+      id="courses"
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
       transition={{ duration: 0.5 }}
-      className="px-20 h-screen bg-gray-100 flex flex-col flex-center"
+      className="px-5 md:px-20 py-5 md:py-0 min-h-screen md:h-screen bg-gray-100 flex flex-col flex-center"
     >
-      <motion.h3 className="text-4xl">Our Courses</motion.h3>
-      <motion.p className="text-xl w-3/4 mx-auto text-center">
-      Gain hands-on training in software development, business strategy, marketing, and fundraising. Our expert-led courses equip you with the tools to launch and scale your startup successfully.
+      <motion.h3 className="text-xl md:text-4xl">Our Courses</motion.h3>
+      <motion.p className="md:text-xl md:w-3/4 mx-auto text-center">
+        Gain hands-on training in software development, business strategy,
+        marketing, and fundraising. Our expert-led courses equip you with the
+        tools to launch and scale your startup successfully.
       </motion.p>
-      <div className="grid grid-cols-3 mt-4 gap-4">
+      <div className="grid md:grid-cols-3 mt-4 gap-4">
         {courses.sartup.map((course, index) => (
           <ItemList {...course} key={index} />
         ))}

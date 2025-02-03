@@ -36,7 +36,7 @@ const Header = () => {
 
   return (
     <motion.header
-      className="h-16 bg-white z-50 flex flex-between border-b sticky top-0 left-0 px-20"
+      className="md:h-16 bg-white z-50 flex flex-between border-b sticky top-0 left-0 md:px-20 px-5"
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
       transition={{ duration: 0.5 }}
@@ -52,15 +52,18 @@ const Header = () => {
         <h1 className="hidden text-2xl font-bold md:block">XCUXION</h1>
       </div>
       <div className="space-x-4">
-        {links.map((link, index) => (
-          <Link
-            href={link.href}
-            key={index}
-            className={` ${pathname.includes(link.href) ? "" : ""} `}
-          >
-            {link.label}
-          </Link>
-        ))}
+        <div className="hidden md:flex">
+          {links.map((link, index) => (
+            <Link
+              href={link.href}
+              key={index}
+              className={` ${pathname.includes(link.href) ? "" : ""} `}
+            >
+              {link.label}
+            </Link>
+          ))}
+          
+        </div>
         <Button
           onClick={() => {
             setOpenLogin(true);

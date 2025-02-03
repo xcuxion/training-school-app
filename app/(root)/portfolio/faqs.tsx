@@ -67,15 +67,21 @@ const Faqs = () => {
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
       transition={{ duration: 0.5, delay: 0.5 }}
-      className="px-20 min-h-screen bg-gray-100  flex flex-col flex-center"
+      className="px-5 md:px-20 min-h-screen bg-gray-100  flex flex-col flex-center"
     >
-      <motion.h3 className="text-4xl text-center w-1/2 mx-auto font-semibold">
-        Frequently Asked Questions
+      <motion.h3 className="text-xl md:text-4xl text-center md:w-1/2 mx-auto font-semibold">
+        FAQs
       </motion.h3>
-      <motion.p className="text-lg w-1/2 text-center mx-auto">
-        Lorem ipsum dolor, sit amet consectetur adipisicing elit.
-      </motion.p>
-      <div className="w-2/3 mt-4">
+      <motion.p 
+      className="md:text-lg md:w-1/2 text-center mx-auto"
+      initial={{ opacity: 0, y: 50 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      viewport={{ once: true }}
+      transition={{ duration: 0.8, ease: "easeOut" }}
+    >
+      Check out our frequently asked questions below to find the answers you're looking for
+    </motion.p>
+      <div className="md:w-2/3 mt-4">
         <Accordion type="single" collapsible className="space-y-2">
           {faqs.map((faq, index) => (
             <AccordionItem
@@ -83,7 +89,7 @@ const Faqs = () => {
               key={index}
               value={`item-${index}`}
             >
-              <AccordionTrigger className="font-semibold text-lg">
+              <AccordionTrigger className="font-semibold md:text-lg">
                 {faq.question}
               </AccordionTrigger>
               <AccordionContent className="text-base">

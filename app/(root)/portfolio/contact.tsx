@@ -31,11 +31,11 @@ const contacts = [
 ]
 const Contact = () => {
   return (
-    <motion.div id='contact' className='min-h-screen py-5 flex flex-col flex-center'>
-        <motion.h3 className="text-4xl fnt-semibold">Contact Us</motion.h3>
-        <motion.p className="text-lg w-1/2 mx-auto text-center">Get in touch with us via the following</motion.p>
-        <motion.div className="grid grid-cols-2 gap-x-10 mt-4">
-            <motion.div className="space-y-4">
+    <motion.div id='contact' className='min-h-screen px-5 md:px-0 py-5 flex flex-col md:flex-center'>
+        <motion.h3 className="text-xl md:text-4xl font-semibold text-center">Contact Us</motion.h3>
+        <motion.p className="md:text-lg md:w-1/2 mx-auto text-center">Get in touch with us via the following</motion.p>
+        <motion.div className="grid md:grid-cols-2 gap-y-4 md:gap-y-0 md:gap-x-10 mt-4">
+            <motion.div className="space-y-2 md:space-y-4">
             {
                 contacts.map((contact, index)=>(
                     <ItemList {...contact} key={index} />

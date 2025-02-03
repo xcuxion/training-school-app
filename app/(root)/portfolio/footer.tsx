@@ -61,8 +61,8 @@ const Footer = () => {
           ))}
         </span>
         </div>
-        <span className="flex text-sm">
-          <FaCopyright className="text-base" /> {new Date().getFullYear()} All
+        <span className="flex items-center mt-8 text-sm">
+          <FaCopyright className="text-base mr-1" /> {new Date().getFullYear()} All
           rights reserved.
         </span>
       </div>
