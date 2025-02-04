@@ -51,8 +51,8 @@ const Header = () => {
         />
         <h1 className="hidden text-2xl font-bold md:block">XCUXION</h1>
       </div>
-      <div className="space-x-4">
-        <div className="hidden md:flex">
+      <div className="gap-x-4 flex items-center">
+        <div className="hidden md:flex md:gap-x-4">
           {links.map((link, index) => (
             <Link
               href={link.href}

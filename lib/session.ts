@@ -67,7 +67,7 @@ export async function createSession(userId: string) {
     expires: expiresAt,
   });
 
-  console.log("✅ Session created and stored in cookies:", session);
+  // console.log("✅ Session created and stored in cookies:", session);
 }
 
 export async function deleteSession() {
@@ -91,10 +91,10 @@ export async function encrypt(payload: SessionPayload) {
 export async function decrypt() {
   // Retrieve session cookie
   const sessionCookie = cookies().get("session")?.value;
-  console.log("🔍 Retrieved session from cookies:", sessionCookie);
+  // console.log("🔍 Retrieved session from cookies:", sessionCookie);
 
   if (!sessionCookie) {
-    console.log("❌ No session token found in cookies.");
+    // console.log("❌ No session token found in cookies.");
     return null;
   }
 
@@ -103,10 +103,10 @@ export async function decrypt() {
     const { payload } = await jwtVerify(sessionCookie, encodedKey, {
       algorithms: ["HS256"],
     });
-    console.log("✅ Session verified successfully:", payload);
+    // console.log("✅ Session verified successfully:", payload);
     return payload;
   } catch (error) {
-    console.log("❌ Failed to verify session:", error);
+    // console.log("❌ Failed to verify session:", error);
     return null;
   }
 }

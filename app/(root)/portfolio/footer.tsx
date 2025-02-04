@@ -25,8 +25,8 @@ const redirects = [
 
 const Footer = () => {
   return (
-    <motion.footer className="bg-gray-100 mt-4 px-20 s py-10 flex items-center">
-      <div className="grid grid-cols-2">
+    <motion.footer className="bg-gray-100 mt-4 px-5 md:px-20 py-5 md:py-10 flex flex-col md:flex-row md:items-center">
+      <div className="grid md:grid-cols-2">
         <span className="">
           <h3 className="font-medium">Stay Updated</h3>
           <p className="opacity-75">
@@ -34,14 +34,14 @@ const Footer = () => {
             content.
           </p>
           <form className="flex">
-            <Input className="mr-1" name="subscriber" type="email" />
+            <Input className="mr-1" placeholder="Email address" name="subscriber" type="email" />
             <SubmitButton buttonText="Subscribe" />
           </form>
         </span>
       </div>
 
-      <div className="">
-        <div className="flex">
+      <div className="mt-4  md:mt-0">
+        <div className="flex md:flex-row flex-col">
           <Image
             src={"/logo.svg"}
             alt=""

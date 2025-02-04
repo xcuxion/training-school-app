@@ -11,7 +11,7 @@ import Footer from "./portfolio/footer";
 
 const Portfolio = () => {
   return (
-    <div className="flex flex-col">
+    <div className="relative flex flex-col">
       <Header />
       {/* <Parallax pages={5} className=""> */}
         {/* Hero Section */}
