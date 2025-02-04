@@ -104,19 +104,36 @@ export async function new_application(prevState: unknown, formData: FormData) {
   }
 }
 
-export async function fetch_applicant_data (id: string) {
+export async function fetch_applicant_data(id: string) {
   try {
     const applicant = await prisma.applicant.findFirst({
-      where: {id},
+      where: { id },
       include: {
-        profile: true, 
+        profile: true,
       },
     });
-    return applicant;
+
+    if (!applicant) return null;
+
+    // Exclude `password` and `id` fields from `profile`
+    const { profile, ...applicantData } = applicant;
+    const filteredProfile = profile
+      ? {
+          email: profile.email,
+          createdAt: profile.createdAt,
+          updatedAt: profile.updatedAt,
+        }
+      : null;
+
+    return {
+      ...applicantData,
+      profile: filteredProfile,
+    };
   } catch (error) {
     handleError(error);
   }
-} 
+}
+
 
 export async function fetch_all_applications() {
   try {
@@ -125,6 +142,7 @@ export async function fetch_all_applications() {
         profile: true, 
       },
     });
+    
     return applications;
   } catch (error) {
     handleError(error);

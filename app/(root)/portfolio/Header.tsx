@@ -53,16 +53,18 @@ const Header = () => {
       </div>
       <div className="gap-x-4 flex items-center">
         <div className="hidden md:flex md:gap-x-4">
-          {links.map((link, index) => (
-            <Link
-              href={link.href}
-              key={index}
-              className={` ${pathname.includes(link.href) ? "" : ""} `}
-            >
-              {link.label}
-            </Link>
-          ))}
-          
+          {links.map((link, index) => {
+            const isActive =pathname.startsWith(link.href) ;
+            return (
+              <Link
+                href={link.href}
+                key={index}
+                className={` ${isActive} ? "font-semibold text-dark" : "opacity-50"} `}
+              >
+                {link.label}
+              </Link>
+            );
+          })}
         </div>
         <Button
           onClick={() => {
