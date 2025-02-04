@@ -12,26 +12,39 @@ const AdmissionPortal = () => {
     programme: user?.programme || "",
     reason: user?.reason || "",
   });
-
   useEffect(() => {
     const fetchData = async () => {
-      if (user?.id) {
-        const result = await fetch_applicant_data(user.id);
-        if (result) {
-          console.log("Updating Zustand Store with:", result);
-          update(result);
-          setEditableData({
-            contact: result.contact,
-            programme: result.programme,
-            reason: result.reason,
-          });
-        } else {
-          console.warn("User data not found.");
-        }
+      const result = await fetch_applicant_data(user?.id as string);
+      if (result) {
+        console.log("Updating Zustand Store with:", result); // ✅ Debugging log
+        useUserStore.getState().update(result); // Update Zustand store
+        setEditableData({
+          contact: result.contact,
+          programme: result.programme,
+          reason: result.reason,
+        });
+      } else {
+        console.warn("User data not found.");
       }
-    };
+    }
     fetchData();
   }, []);
+  // useEffect(() => {
+  //   const fetchData = async () => {
+  //     console.log(user)
+  //     if (user?.id) {
+  //       const result = await fetch_applicant_data(user.id);
+  //       if (result) {
+  //         console.log("Updating Zustand Store with:", result);
+  //         update(result);
+
+  //       } else {
+  //         console.warn("User data not found.");
+  //       }
+  //     }
+  //   };
+  //   fetchData();
+  // }, []);
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     setEditableData({ ...editableData, [e.target.name]: e.target.value });
@@ -143,18 +156,7 @@ export default AdmissionPortal;
 
 // const AdmissionPortal = () => {
 //   const {user} = useUserStore()
-//   useEffect(() => {
-//     const fetchData = async () => {
-//       const result = await fetch_applicant_data(user?.id as string);
-//       if (result) {
-//         console.log("Updating Zustand Store with:", result); // ✅ Debugging log
-//         useUserStore.getState().update(result); // Update Zustand store
-//       } else {
-//         console.warn("User data not found.");
-//       }
-//     }
-//     fetchData();
-//   }, []);
+
 //   return (
 //     <div>
 //       <header className="h-16 w-full flex flex-between">
