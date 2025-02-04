@@ -61,9 +61,9 @@ const AdminHeader = () => {
       <span>
         {user !== null && (
           <Avatar className={`w-6 h-6 `}>
-            <AvatarImage src={user.image} />
+            <AvatarImage src={'/images/p.jpg'} />
             <AvatarFallback className="bg-pink-300">
-              {user.name!.slice(0, 1)}
+              {user.fname!.slice(0, 1)}
             </AvatarFallback>
           </Avatar>
         )}

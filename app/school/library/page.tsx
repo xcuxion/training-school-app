@@ -27,7 +27,7 @@ const bookStore = [
     title: "How To Code in Python 3",
     subtitle: "",
     author: "Lisa Tagliaferri",
-    image: "/images/",
+    image: "/images/p1.jpg",
     url: "",
   },
   {
@@ -35,7 +35,7 @@ const bookStore = [
     title: "A Whirlwind Tour of Python",
     subtitle: "",
     author: "Jake VanderPlas",
-    image: "/images/",
+    image: "/images/p1.jpg",
     url: "",
   },
   {
@@ -43,7 +43,7 @@ const bookStore = [
     title: "Python Notes for Professionals",
     subtitle: "",
     author: "Stack Overflow Community",
-    image: "/images/",
+    image: "/images/p1.jpg",
     url: "",
   },
   {
@@ -51,7 +51,7 @@ const bookStore = [
     title: "The Coder&#039;s Apprentice",
     subtitle: "Learning Programming with Python 3",
     author: "Pieter Spronck",
-    image: "/images/",
+    image: "/images/p1.jpg",
     url: "",
   },
   {
@@ -59,7 +59,7 @@ const bookStore = [
     title: "Introduction to Scientific Programming with Python",
     subtitle: "",
     author: "Joakim Sundnes",
-    image: "/images/",
+    image: "/images/p1.jpg",
     url: "",
   },
   {
@@ -67,7 +67,7 @@ const bookStore = [
     title: "Snake Wrangling for Kids",
     subtitle: "Learning to Program with Python",
     author: "Jason Briggs",
-    image: "/images/",
+    image: "/images/p1.jpg",
     url: "",
   },
   {
@@ -75,7 +75,7 @@ const bookStore = [
     title: "Python for Everybody",
     subtitle: "Exploring Data Using Python 3",
     author: "Dr. Charles Severance",
-    image: "/images/",
+    image: "/images/p1.jpg",
     url: "",
   },
   {
@@ -83,7 +83,7 @@ const bookStore = [
     title: "Python for You and Me",
     subtitle: "",
     author: "Kushal Das",
-    image: "/images/",
+    image: "/images/p1.jpg",
     url: "",
   },
   {
@@ -91,7 +91,7 @@ const bookStore = [
     title: "Open Workbook of Cryptology",
     subtitle: "A project-based introduction to crypto in Python",
     author: "Jonathan A. Poritz",
-    image: "/images/",
+    image: "/images/p1.jpg",
     url: "",
   },
   {
@@ -99,7 +99,7 @@ const bookStore = [
     title: "Learn Python the right way",
     subtitle: "How to think like a computer scientist",
     author: "Peter Wentworth, Jeffrey Elkner, Allen B. Downey, Chris Meyers",
-    image: "/images/",
+    image: "/images/p1.jpg",
     url: "",
   },
 ];

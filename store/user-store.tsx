@@ -32,11 +32,6 @@ interface UserStore {
   update: (user: IUser) => void;
 }
 
-// export const useUserStore = create<UserStore>((set) => ({
-//   user: null,
-//   update: (user) => set((state) => ({ ...state, user })),
-//   logout: () => set((state) => ({...state, user: null })), 
-// }));
 
 export const useUserStore = create<UserStore>((set) => ({
   user: null,
