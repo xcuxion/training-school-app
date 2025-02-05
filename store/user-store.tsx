@@ -27,9 +27,13 @@ export interface IUser {
   } | null
 }
 
+interface ILogin {
+
+}
+
 interface UserStore {
-  user: IUser | null;
-  update: (user: IUser) => void;
+  user: IUser | ILogin | null;
+  update: (user: IUser|ILogin) => void;
 }
 
 

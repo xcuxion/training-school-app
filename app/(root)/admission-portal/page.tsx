@@ -6,7 +6,7 @@ import { fetch_applicant_data } from "@/lib/actions/admission.actions";
 import { useUserStore } from "@/store/user-store";
 
 const AdmissionPortal = () => {
-  const { user, update } = useUserStore();
+  const { user } = useUserStore();
   const [editableData, setEditableData] = useState({
     contact: user?.contact || "",
     programme: user?.programme || "",
@@ -28,7 +28,7 @@ const AdmissionPortal = () => {
       }
     }
     fetchData();
-  }, []);
+  }, [user?.id]);
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     setEditableData({ ...editableData, [e.target.name]: e.target.value });
@@ -68,7 +68,7 @@ const AdmissionPortal = () => {
           </div>
           <div>
             <h3 className="text-lg font-medium">Date of Birth</h3>
-            <p className="text-base text-gray-700">{new Date(user?.dob!).toDateString()}</p>
+            <p className="text-base text-gray-700">{new Date(user?.dob as Date).toDateString()}</p>
           </div>
           <div>
             <h3 className="text-lg font-medium">Gender</h3>

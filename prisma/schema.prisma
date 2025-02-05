@@ -31,12 +31,12 @@ model Applicant {
   contact     String          @db.VarChar(10)
   programme   String          @db.VarChar()
   year        String          @db.VarChar(4)
-  reason      String          @db.VarChar()
-  balance     String          @db.VarChar()
+  reason      String          @db.Text()
+  balance     String          @db.Text()
   laptop      Boolean         @db.Boolean()
   scholarship Boolean         @db.Boolean()
   status      AdmissionStatus @default(pending)
-  statement   String?         @db.VarChar()
+  statement   String?         @db.Text()
   student     Student?
 }
 

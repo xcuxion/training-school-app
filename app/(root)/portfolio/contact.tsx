@@ -3,7 +3,6 @@ import React from 'react'
 import InquiryForm from './inquiry-form'
 import ItemList from './item-list'
 import { motion } from 'framer-motion'
-import Footer from './footer'
 import Link from 'next/link'
 
 const contacts = [

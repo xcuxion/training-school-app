@@ -1,5 +1,5 @@
 "use client";
-import { Parallax, ParallaxLayer } from "@react-spring/parallax";
+// import { Parallax, ParallaxLayer } from "@react-spring/parallax";
 import React from "react";
 import Faqs from "./portfolio/faqs";
 import Header from "./portfolio/Header";

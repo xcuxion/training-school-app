@@ -20,11 +20,30 @@ const newApplicationSchema = z.object({
   email: z.string().email({ message: "field is required" }).trim(),
   programme: z.string({ message: "field is required" }).min(2),
   year: z.enum(["1", "2", "3", "4", "5", "6"]),
-  reason: z.string().max(300),
-  balance: z.string().max(300),
-  statement: z.string().max(300).optional(),
+  reason: z.string(),
+  balance: z.string(),
+  statement: z.string().optional(),
   scholarship: z.enum(["yes", "no"]),
   laptop: z.enum(["yes", "no"]),
+});
+
+const editApplicationSchema = z.object({
+  fname: z.string({ message: "field is required" }).trim().optional(),
+  oname: z.string().trim().optional(),
+  lname: z.string({ message: "field is required" }).trim().optional(),
+  gender: z.enum(["male", "female"]),
+  country: z.enum(["ghana"]),
+  school: z.enum(["knust", "ug", "ashesi", "none"]),
+  contact: z.string({ message: "field is required" }).trim().min(10).max(10).optional(),
+  dob: z.string().optional(),
+  email: z.string().email({ message: "field is required" }).trim().optional(),
+  programme: z.string({ message: "field is required" }).min(2).optional(),
+  year: z.enum(["1", "2", "3", "4", "5", "6"]),
+  reason: z.string().optional(),
+  balance: z.string().optional(),
+  statement: z.string().optional(),
+  scholarship: z.enum(["yes", "no"]).optional(),
+  laptop: z.enum(["yes", "no"]).optional(),
 });
 
 const admissionSchema = z.object({
@@ -90,7 +109,7 @@ export async function new_application(prevState: unknown, formData: FormData) {
         subject: "New Application Received",
         html: "<h1>Application submitted successfully</h1>",
       });
-      // console.log(response)
+      console.log(response)
     } catch (error) {
       console.log(error);
     } finally {
@@ -151,6 +170,21 @@ export async function fetch_all_applications() {
 
 export async function edit_application(id: string, formData: FormData) {
   try {
+    const applicant = await prisma.applicant.findFirst({where: {id: id}})
+    if (!applicant) {
+      return { message: "Application not found" };
+    }
+    const result = newApplicationSchema.safeParse(Object.fromEntries(formData));
+
+    if (!result.success) {
+      console.log(
+        "Validation failed with errors:",
+        result.error.flatten().fieldErrors
+      );
+      return {
+        errors: result.error.flatten().fieldErrors,
+      };
+    }
   } catch (error) {
     handleError(error);
   }

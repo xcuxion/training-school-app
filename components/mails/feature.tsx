@@ -76,7 +76,7 @@ import { Section, Row, Text, Column, Img } from "@react-email/components";
       <Text className="mb-0 mt-[8px] text-[16px] leading-[24px] text-gray-500">
         Experience personalised service at Acme. Our friendly team is
         dedicated to assisting you in finding the perfect furniture pieces.
-        From fabric selection to space planning, we're here to ensure your
+        From fabric selection to space planning, we&apos;re here to ensure your
         complete satisfaction. Indulge in the luxury of personalised furniture
         shopping.
       </Text>

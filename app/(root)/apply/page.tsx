@@ -1,5 +1,4 @@
 "use client";
-import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
@@ -52,7 +51,7 @@ const ApplicationPage = () => {
       formRef.current?.reset();
       router.push("/admission-portal");
     }
-  }, [state]);
+  }, [router, state]);
   return (
     <div className="p-4 md:py-5 md:px-10 md:w-2/3 mx-auto">
       <div className="flex flex-col-reverse md:flex-row md:flex-between py-2 md:py-4">

@@ -7,7 +7,7 @@ import { googleAuth, login } from "@/lib/actions/general.action";
 import { useUserStore } from "@/store/user-store";
 import { useRouter } from "next/navigation";
 import React, { useEffect, useRef, useState } from "react";
-import { useFormState, useFormStatus } from "react-dom";
+import { useFormState } from "react-dom";
 import { BsGoogle } from "react-icons/bs";
 
 const Login = ({ show, onClose }: { show: boolean; onClose: () => void }) => {
@@ -19,15 +19,16 @@ const Login = ({ show, onClose }: { show: boolean; onClose: () => void }) => {
   const router = useRouter();
   useEffect(() => {
     if (formState?.success && formState?.data) {
-      // update(formState.data);
       formRef.current?.reset();
+      useUserStore.getState().update(formState.data); // Update Zustand store
+
       if (formState?.data.applicant?.id) {
         router.push("/admission-portal");
       } else if (formState?.data.facilitator?.id) {
         router.push("/admission-portal");
       }
     }
-  }, [formState]);
+  }, [formState, router]);
   return (
     <FormModal isOpen={show} onClose={onClose} title="Sign in to Account">
       <form

@@ -203,7 +203,7 @@ export async function login(prevState: unknown, formData: FormData) {
 
     const { createdAt, updatedAt, ...profileWithoutTimestamps } =
       existingProfile;
-
+    console.log(profileWithoutTimestamps)
     return {
       data: profileWithoutTimestamps,
       success: result?.success,
