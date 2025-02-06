@@ -34,7 +34,7 @@ const faqs: IFaq[] = [
     question: "When do applications open, and how do I apply?",
     answer: (
       <>
-        Applications for the Batch '25 program will open in February 2025.
+        Applications for the Batch&apos;25 program will open in February 2025.
         Interested applicants can apply through our official website by filling
         out an online application form <Link href={"/apply"}>here</Link>.
       </>
@@ -64,24 +64,32 @@ const Faqs = () => {
   return (
     <motion.div
       id="faqs"
-      initial={{ opacity: 0 }}
-      animate={{ opacity: 1 }}
-      transition={{ duration: 0.5, delay: 0.5 }}
+      initial={{ opacity: 0, y: 50 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      viewport={{ once: true }}
+      transition={{ duration: 0.8, ease: "easeOut" }}
       className="px-5 md:px-20 min-h-screen bg-gray-100  flex flex-col flex-center"
     >
       <motion.h3 className="text-xl md:text-4xl text-center md:w-1/2 mx-auto font-semibold">
         FAQs
       </motion.h3>
-      <motion.p 
-      className="md:text-lg md:w-1/2 text-center mx-auto"
-      initial={{ opacity: 0, y: 50 }}
-      whileInView={{ opacity: 1, y: 0 }}
-      viewport={{ once: true }}
-      transition={{ duration: 0.8, ease: "easeOut" }}
-    >
-      Check out our frequently asked questions below to find the answers you're looking for
-    </motion.p>
-      <div className="md:w-2/3 mt-4">
+      <motion.p
+        className="md:text-lg md:w-1/2 text-center mx-auto"
+        initial={{ opacity: 0, y: 50 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        viewport={{ once: true }}
+        transition={{ duration: 0.8, ease: "easeOut" }}
+      >
+        Check out our frequently asked questions below to find the answers
+        you&apos;re looking for
+      </motion.p>
+      <motion.div
+        initial={{ opacity: 0, y: 50 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        viewport={{ once: true }}
+        transition={{ duration: 0.8, ease: "easeOut" }}
+        className="md:w-2/3 mt-4"
+      >
         <Accordion type="single" collapsible className="space-y-2">
           {faqs.map((faq, index) => (
             <AccordionItem
@@ -98,7 +106,7 @@ const Faqs = () => {
             </AccordionItem>
           ))}
         </Accordion>
-      </div>
+      </motion.div>
     </motion.div>
   );
 };

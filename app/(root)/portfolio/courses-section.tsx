@@ -64,25 +64,46 @@ const CoursesSection = () => {
   return (
     <motion.div
       id="courses"
-      initial={{ opacity: 0 }}
-      animate={{ opacity: 1 }}
-      transition={{ duration: 0.5 }}
+      initial={{ opacity: 0, y: 50 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      viewport={{ once: true }}
+      transition={{ duration: 0.8, ease: "easeOut" }}
       className="px-5 md:px-20 py-5 md:py-0 min-h-screen md:h-screen bg-gray-100 flex flex-col flex-center"
     >
-      <motion.h3 className="text-xl md:text-4xl">Our Courses</motion.h3>
-      <motion.p className="md:text-xl md:w-3/4 mx-auto text-center">
+      <motion.h3
+        initial={{ opacity: 0, y: 50 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        viewport={{ once: true }}
+        transition={{ duration: 0.8, ease: "easeOut" }}
+        className="text-xl md:text-4xl"
+      >
+        Our Courses
+      </motion.h3>
+      <motion.p
+        initial={{ opacity: 0, y: 50 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        viewport={{ once: true }}
+        transition={{ duration: 0.8, ease: "easeOut" }}
+        className="md:text-xl md:w-3/4 mx-auto text-center"
+      >
         Gain hands-on training in software development, business strategy,
         marketing, and fundraising. Our expert-led courses equip you with the
         tools to launch and scale your startup successfully.
       </motion.p>
-      <div className="grid md:grid-cols-3 mt-4 gap-4">
+      <motion.div
+        initial={{ opacity: 0, y: 50 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        viewport={{ once: true }}
+        transition={{ duration: 0.8, ease: "easeOut" }}
+        className="grid md:grid-cols-3 mt-4 gap-4"
+      >
         {courses.sartup.map((course, index) => (
           <ItemList {...course} key={index} />
         ))}
         {courses.engineering.map((course, index) => (
           <ItemList {...course} key={index} />
         ))}
-      </div>
+      </motion.div>
     </motion.div>
   );
 };

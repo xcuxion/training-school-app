@@ -54,12 +54,13 @@ const Header = () => {
       <div className="gap-x-4 flex items-center">
         <div className="hidden md:flex md:gap-x-4">
           {links.map((link, index) => {
-            const isActive =pathname.startsWith(link.href) ;
+            const isActive = pathname.startsWith(link.href) ;
+            console.log(isActive)
             return (
               <Link
                 href={link.href}
                 key={index}
-                className={` ${isActive} ? "font-semibold text-dark" : "opacity-50"} `}
+                className={` ${isActive} ? "font-semibold text-blue-300" : "opacity-50 text-green-500"} `}
               >
                 {link.label}
               </Link>

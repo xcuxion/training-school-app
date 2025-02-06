@@ -21,7 +21,7 @@ const people = [
     role: "Software Engineer",
   },
   {
-    image: "/images/baze.jpeg",
+    image: "/images/baze.png",
     name: "Jessica Ennor",
     role: "Software Engineer",
   },
@@ -47,7 +47,7 @@ export const TeamMemberCard = ({ name, role, image }: TeamMemberCardProps) => {
     <motion.div
       initial={{ opacity: 0.4 }}
       animate={{ opacity: 1 }}
-      transition={{ duration: 0.5}}
+      transition={{ duration: 0.5 }}
       className="w-full text-dark flex flex-col items-center"
     >
       <Image
@@ -66,17 +66,35 @@ export const TeamMemberCard = ({ name, role, image }: TeamMemberCardProps) => {
 const Team = () => {
   return (
     <motion.div
-    id="facilitators"
-      initial={{ opacity: 0 }}
-      animate={{ opacity: 1 }}
-      transition={{ duration: 0.5 }}
+      id="facilitators"
+      initial={{ opacity: 0, y: 50 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      viewport={{ once: true }}
+      transition={{ duration: 0.8, ease: "easeOut" }}
       className="min-h-screen py-5 px-5 md:py-10 md:px-20 flex flex-col flex-center"
     >
-      <motion.h1 className="text-xl md:text-4xl font-semibold">Our Facilitators</motion.h1>
-      <motion.p className="md:text-lg md:w-3/4 text-center">
-      Our facilitators are seasoned professionals in software engineering, business strategy, product management, and marketing. They bring real-world insights, hands-on experience, and mentorship to help you navigate the startup ecosystem successfully.
+      <motion.h1 className="text-xl md:text-4xl font-semibold">
+        Our Facilitators
+      </motion.h1>
+      <motion.p
+        initial={{ opacity: 0, y: 50 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        viewport={{ once: true }}
+        transition={{ duration: 0.8, ease: "easeOut" }}
+        className="md:text-lg md:w-3/4 text-center"
+      >
+        Our facilitators are seasoned professionals in software engineering,
+        business strategy, product management, and marketing. They bring
+        real-world insights, hands-on experience, and mentorship to help you
+        navigate the startup ecosystem successfully.
       </motion.p>
-      <motion.div className="mt-4 grid grid-cols-2 md:grid-cols-3 gap-10">
+      <motion.div
+        initial={{ opacity: 0, y: 50 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        viewport={{ once: true }}
+        transition={{ duration: 0.8, ease: "easeOut" }}
+        className="mt-4 grid grid-cols-2 md:grid-cols-3 gap-10"
+      >
         {people.map((person, index) => (
           <TeamMemberCard key={index} {...person} />
         ))}

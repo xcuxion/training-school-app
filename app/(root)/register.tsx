@@ -5,7 +5,7 @@ import { Input } from "@/components/ui/input";
 import { register } from "@/lib/actions/general.action";
 import React, { useState } from "react";
 import { useFormState } from "react-dom";
-import { BsApple, BsGoogle } from "react-icons/bs";
+import {  BsGoogle } from "react-icons/bs";
 
 const Register = ({
   show,

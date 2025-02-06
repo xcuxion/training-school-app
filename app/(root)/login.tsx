@@ -14,19 +14,14 @@ const Login = ({ show, onClose }: { show: boolean; onClose: () => void }) => {
   const [formState, formAction] = useFormState(login, undefined);
   const [email, setEmail] = useState<string>("");
   const [password, setPassword] = useState<string>("");
-  const { update } = useUserStore();
   const formRef = useRef<HTMLFormElement>(null);
   const router = useRouter();
   useEffect(() => {
     if (formState?.success && formState?.data) {
       formRef.current?.reset();
-      useUserStore.getState().update(formState.data); // Update Zustand store
+      // useUserStore.getState().update(formState.data); 
 
-      if (formState?.data.applicant?.id) {
         router.push("/admission-portal");
-      } else if (formState?.data.facilitator?.id) {
-        router.push("/admission-portal");
-      }
     }
   }, [formState, router]);
   return (

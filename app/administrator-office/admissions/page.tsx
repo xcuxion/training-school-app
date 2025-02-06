@@ -1,6 +1,7 @@
 "use client";
 import ProspectCard from "@/components/admin/prospect-card";
 import { fetch_all_applications } from "@/lib/actions/admission.actions";
+import { IUser } from "@/store/user-store";
 import React, { useEffect, useState } from "react";
 
 export interface IApplicant {
@@ -34,7 +35,7 @@ const AdmissionPage = () => {
 
   useEffect(() => {
     const fetch = async () => {
-      const data: any = await fetch_all_applications();
+      const data: IUser[] | any = await fetch_all_applications();
       setApplicants(data);
     };
     fetch();

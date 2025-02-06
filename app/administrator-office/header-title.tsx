@@ -54,10 +54,7 @@ const subNavs = [
   },
 ];
 
-interface NavLink {
-  label: string;
-  href: string;
-}
+
 
 const HeaderTitle = () => {
   const pathname = usePathname();

@@ -12,7 +12,6 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
-import { Textarea } from "@/components/ui/textarea";
 import Tiptap from "@/components/Tiptap";
 import SubmitButton from "@/components/submit-button";
 

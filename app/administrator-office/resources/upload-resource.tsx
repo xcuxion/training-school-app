@@ -1,9 +1,8 @@
 "use client";
 import FormModal from "@/components/form-modal";
 import { post_resource } from "@/lib/actions/library.actions";
-import { new_task } from "@/lib/actions/sprint.actions";
-import { useRouter } from "next/navigation";
-import React, { useRef, useEffect } from "react";
+// import { useRouter } from "next/navigation";
+import React, { useRef } from "react";
 import { useFormState } from "react-dom";
 
 const UploadResource = ({
@@ -14,13 +13,13 @@ const UploadResource = ({
     onClose: () => void;
   }) => {
       const formRef = useRef<HTMLFormElement>(null);
-      const router = useRouter();
+      // const router = useRouter();
       const [formState, formAction] = useFormState(post_resource, undefined);
 
   return (
     <FormModal isOpen={show} onClose={onClose} title="Create New Task">
       <form action={formAction} ref={formRef}>
-        
+        {formState?.errors.description}
       </form>
     </FormModal>  )
 }

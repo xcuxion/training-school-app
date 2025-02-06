@@ -177,9 +177,7 @@ export async function login(prevState: unknown, formData: FormData) {
     const existingProfile = await prisma.profile.findFirst({
       where: { email },
       include: {
-        applicant:true,
-        facilitator: true
-      }
+        applicant:true      }
     });
     if (!existingProfile) {
       return {

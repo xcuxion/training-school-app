@@ -1,5 +1,5 @@
 "use client";
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import MainContent from "../main-content";
 import BookItem from "./book-item";
 import BookHistory, { HistorySkeleton, IHistroy } from "./history";
@@ -110,8 +110,12 @@ const historylog = [
 ];
 
 const Page = () => {
+
+  //@ts-ignore
   const [books, setBooks] = useState(bookStore);
   const [history, setHistory] = useState<IHistroy[]>(historylog);
+
+  //@t-ignore
   const [sortItem, setSortItem] = useState("");
   // useEffect(() => {
   //   const fetchData = async () => {

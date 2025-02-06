@@ -2,16 +2,16 @@ import { Button } from "@/components/ui/button";
 import Image from "next/image";
 import Link from "next/link";
 import React from "react";
-import CourseCard from "./item-list";
 import { motion } from "framer-motion";
 
 const Hero = () => {
   return (
     <motion.div
       id="home"
-      initial={{ opacity: 0 }}
-      animate={{ opacity: 1 }}
-      transition={{ duration: 0.5, delay: 0.5 }}
+      initial={{ opacity: 0, y: 50 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      viewport={{ once: true }}
+      transition={{ duration: 0.8, ease: "easeOut" }}
       className="min-h-screen md:h-screen px-5 md:px-20 flex md:flex-row flex-col-reverse flex-center md:flex-between"
     >
       <motion.span
@@ -20,10 +20,22 @@ const Hero = () => {
         animate={{ opacity: 1 }}
         transition={{ duration: 0.5, delay: 0.3 }}
       >
-        <motion.h1 className="text-2xl md:text-6xl font-bold">
+        <motion.h1
+          initial={{ opacity: 0, y: 50 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.8, ease: "easeOut" }}
+          className="text-2xl md:text-6xl font-bold"
+        >
           School of Engineering & Techpreneurship
         </motion.h1>
-        <motion.p className="text-base md:text-2xl my-2">
+        <motion.p
+          initial={{ opacity: 0, y: 50 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.8, ease: "easeOut" }}
+          className="text-base md:text-2xl my-2"
+        >
           An educational program designed to empower aspiring technologists and
           entrepreneurs. We equip students with the skills and mindset needed to
           build and scale innovative ventures.

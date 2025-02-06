@@ -2,7 +2,6 @@
 import Image from "next/image";
 import Link from "next/link";
 import React from "react";
-import InquiryForm from "./inquiry-form";
 import { Input } from "@/components/ui/input";
 import SubmitButton from "@/components/submit-button";
 import { FaCopyright } from "react-icons/fa";
