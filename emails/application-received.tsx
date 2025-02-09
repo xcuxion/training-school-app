@@ -17,7 +17,7 @@ import {
     ? `https://${process.env.VERCEL_URL}`
     : "";
   
-  export const XcuxionWelcomeEmail = ({userFirstname, email}: {userFirstname:string, email: string}) => (
+  const XcuxionWelcomeEmail = ({userFirstname, email}: {userFirstname:string, email: string}) => (
     <Html>
       <Head />
       <Preview>You've successfully submitted your appliction to join Batch'25 of XCUXION</Preview>
