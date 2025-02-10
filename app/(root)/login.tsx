@@ -4,7 +4,6 @@ import SubmitButton from "@/components/submit-button";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { googleAuth, login } from "@/lib/actions/general.action";
-import { useUserStore } from "@/store/user-store";
 import { useRouter } from "next/navigation";
 import React, { useEffect, useRef, useState } from "react";
 import { useFormState } from "react-dom";
@@ -19,8 +18,6 @@ const Login = ({ show, onClose }: { show: boolean; onClose: () => void }) => {
   useEffect(() => {
     if (formState?.success && formState?.data) {
       formRef.current?.reset();
-      // useUserStore.getState().update(formState.data); 
-
         router.push("/admission-portal");
     }
   }, [formState, router]);

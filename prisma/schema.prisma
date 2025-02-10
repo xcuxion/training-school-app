@@ -18,37 +18,48 @@ model Enquiry {
 }
 
 model Applicant {
-  profile     Profile?        @relation(fields: [profileId], references: [id])
-  profileId   String?         @unique
-  id          String          @id @default(uuid())
-  fname       String          @db.VarChar(255)
-  lname       String          @db.VarChar(255)
-  oname       String?         @db.VarChar(255)
-  dob         DateTime        @db.Date()
-  gender      Gender
-  country     Countries        @default(ghana)
-  school      School
-  contact     String          @db.VarChar(10)
-  programme   String          @db.VarChar()
-  year        String          @db.VarChar(4)
-  reason      String          @db.Text()
-  balance     String          @db.Text()
-  laptop      Boolean         @db.Boolean()
-  scholarship Boolean         @db.Boolean()
-  status      AdmissionStatus @default(pending)
-  statement   String?         @db.Text()
-  student     Student?
+  id            String          @id @default(uuid())
+  email         String          @db.VarChar(255)
+  fname         String          @db.VarChar(255)
+  lname         String          @db.VarChar(255)
+  oname         String?         @db.VarChar(255)
+  dob           DateTime        @db.Date()
+  gender        Gender
+  country       Countries       @default(ghana)
+  contact       String          @db.VarChar(10)
+  school        School?
+  programme     String?         @db.VarChar()
+  year          String?         @db.VarChar(4)
+  reason        String          @db.Text()
+  balance       String          @db.Text()
+  laptop        Boolean         @db.Boolean()
+  scholarship   Boolean         @db.Boolean()
+  status        AdmissionStatus @default(pending)
+  statement     String?         @db.Text()
+  student       Boolean
+  admissionType AdmissionType?
+  password      String
+  batch         String
 }
 
 model Student {
-  applicant    Applicant? @relation(fields: [applicantId], references: [id])
-  applicantId  String?    @unique
-  reference    String     @id
-  rewardPoints Int        @default(0) @db.Integer()
-  fees         Fee        @relation(fields: [feeId], references: [id])
-  feeId        String     @unique
-  batch        String     @db.VarChar(255)
-  tasks        Task[]     @relation("StudentTasks")
+  reference       String    @id @unique
+  rewardPoints    Int       @default(0) @db.Integer()
+  outstandingFees Float     @db.DoublePrecision()
+  fname           String    @db.VarChar(255)
+  lname           String    @db.VarChar(255)
+  oname           String?   @db.VarChar(255)
+  dob             DateTime  @db.Date()
+  gender          Gender
+  country         Countries @default(ghana)
+  contact         String    @db.VarChar(10)
+  school          School?
+  programme       String?   @db.VarChar()
+  year            String?   @db.VarChar(4)
+  receipts        Receipt[]
+  batch           String    @db.VarChar(255)
+  tasks           Task[]    @relation("StudentTasks")
+  track           Track
 }
 
 model Class {
@@ -62,40 +73,20 @@ model Class {
   moduleId     String
 }
 
-model Fee {
-  id          String    @id @default(uuid())
-  scholarship Boolean   @default(false) @db.Boolean()
-  balance     Float     @db.DoublePrecision()
-  receipts    Receipt[]
-  student     Student?
-}
-
-model Profile {
-  id          String       @id @default(uuid())
-  createdAt   DateTime     @default(now())
-  updatedAt   DateTime     @updatedAt
-  email       String       @unique @db.VarChar(80)
-  password    String       @db.VarChar(255)
-  facilitator Facilitator?
-  applicant   Applicant?
-}
-
 model Facilitator {
-  profile   Profile? @relation(fields: [profileId], references: [id])
-  profileId String?  @unique
-  id        String   @id @default(uuid())
-  bio       String   @db.VarChar(255)
-  module    Module   @relation(fields: [moduleId], references: [id])
-  moduleId  String
-  classes   Class[]
+  id       String  @id @default(uuid())
+  bio      String  @db.VarChar(255)
+  module   Module  @relation(fields: [moduleId], references: [id])
+  moduleId String
+  classes  Class[]
 }
 
 model Receipt {
+  payer       Student @relation(fields: [payerId], references: [reference])
+  payerId     String
   id          String  @id @default(uuid())
   amount      Float   @db.DoublePrecision()
   paymentMode String  @db.VarChar(255)
-  fee         Fee?    @relation(fields: [feeId], references: [id])
-  feeId       String?
 }
 
 model Case {
@@ -164,6 +155,12 @@ enum School {
   none
 }
 
+enum Track {
+  flutter
+  fullstack
+  backend
+}
+
 enum ResourceType {
   video
   audiobook
@@ -197,4 +194,10 @@ enum AdmissionStatus {
   pending
   admitted
   rejected
+}
+
+enum AdmissionType {
+  full
+  fifty
+  seventyfive
 }

@@ -35,6 +35,9 @@ const initial = {
   scholarship: "",
   statement: "",
   laptop: "",
+  student: "",
+  batch: "batch25",
+  password: ""
 };
 const ApplicationPage = () => {
   const [state, action] = useFormState(new_application, undefined);
@@ -204,7 +207,70 @@ const ApplicationPage = () => {
                 <p className="text-sm text-red-500">{state.errors.contact}</p>
               )}
             </span>
+            <span className="">
+              <Label>Password</Label>
+              <Input
+                type="text"
+                value={value.password}
+                name="password"
+                id="password"
+                onChange={(e) =>
+                  setValue({ ...value, password: e.target.value })
+                }
+              />
+              {state?.errors?.password && (
+                <p className="text-sm text-red-500">{state.errors.password}</p>
+              )}
+            </span>
           </div>
+          <span className="col-span-2 md:col-span-1">
+              <Label>Select Batch</Label>
+              <Select
+                onValueChange={(choice) =>
+                  setValue({ ...value, batch: choice })
+                }
+                name="batch"
+              >
+                <SelectTrigger className="">
+                  <SelectValue placeholder="Select" />
+                </SelectTrigger>
+                <SelectContent className="bg-white">
+                  <SelectItem value="ghana">Ghana</SelectItem>
+                </SelectContent>
+              </Select>
+              {state?.errors?.batch && (
+                <p className="text-sm text-red-500">
+                  {state.errors.batch}
+                </p>
+              )}
+            </span>
+          <div className="bg-secondary rounded-md p-4">
+            <p className="font-semibold">
+              Are you a student?
+            </p>
+            <RadioGroup
+              name="student"
+              defaultValue="no"
+              className="flex mt-2 gap-x-10"
+              onValueChange={(choice) => {
+                setValue({ ...value, student: choice });
+              }}
+            >
+              <span className="flex items-center space-x-2 ">
+                <RadioGroupItem value="yes" id="yes" />
+                <Label htmlFor="yes">Yes</Label>
+              </span>
+              <span className="flex items-center space-x-2">
+                <RadioGroupItem value="no" id="no" />
+                <Label htmlFor="no">No</Label>
+              </span>
+            </RadioGroup>
+
+            {state?.errors?.lname && (
+              <p className="text-sm text-red-500">{state.errors.lname}</p>
+            )}
+          </div>          {
+            value.student === "yes" ? (
           <div className="grid md:grid-cols-3 gap-y-2 md:gap-y-0 md:gap-x-6">
             <span className="">
               <Label>School</Label>
@@ -272,6 +338,12 @@ const ApplicationPage = () => {
               )}
             </span>
           </div>
+
+            ): (
+              <>
+              </>
+            )
+          }
         </div>
         <div className="my-4 space-y-2">
           <h2 className="text-2xl font-semibold">Aspiration</h2>

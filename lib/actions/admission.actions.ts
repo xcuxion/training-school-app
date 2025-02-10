@@ -14,17 +14,20 @@ const newApplicationSchema = z.object({
   lname: z.string({ message: "field is required" }).trim(),
   gender: z.enum(["male", "female"]),
   country: z.enum(["ghana"]),
-  school: z.enum(["knust", "ug", "ashesi", "none"]),
+  batch: z.enum(["batch25"]),
+  school: z.enum(["knust", "ug", "ashesi", "none"]).optional(),
   contact: z.string({ message: "field is required" }).trim().min(10).max(10),
   dob: z.string(),
   email: z.string().email({ message: "field is required" }).trim(),
-  programme: z.string({ message: "field is required" }).min(2),
-  year: z.enum(["1", "2", "3", "4", "5", "6"]),
+  programme: z.string({ message: "field is required" }).min(2).optional(),
+  year: z.enum(["1", "2", "3", "4", "5", "6"]).optional(),
   reason: z.string(),
   balance: z.string(),
   statement: z.string().optional(),
   scholarship: z.enum(["yes", "no"]),
+  student: z.enum(["yes", "no"]),
   laptop: z.enum(["yes", "no"]),
+  password: z.string({message: "Enter valid password with at least 6 characters"}).min(6)
 });
 
 const editApplicationSchema = z.object({
@@ -34,7 +37,12 @@ const editApplicationSchema = z.object({
   gender: z.enum(["male", "female"]),
   country: z.enum(["ghana"]),
   school: z.enum(["knust", "ug", "ashesi", "none"]),
-  contact: z.string({ message: "field is required" }).trim().min(10).max(10).optional(),
+  contact: z
+    .string({ message: "field is required" })
+    .trim()
+    .min(10)
+    .max(10)
+    .optional(),
   dob: z.string().optional(),
   email: z.string().email({ message: "field is required" }).trim().optional(),
   programme: z.string({ message: "field is required" }).min(2).optional(),
@@ -69,39 +77,19 @@ export async function new_application(prevState: unknown, formData: FormData) {
     const dob = result.data.dob;
     const dobDateTime = new Date(dob).toISOString();
 
-    const existingProfile = await prisma.profile.findFirst({
-      where: { email: result.data.email },
+    const hashedPassword = await bcrypt.hash(result.data.password, 10);
+    const applicant = await prisma.applicant.create({
+      data: {
+        ...result.data,
+        dob: dobDateTime,
+        laptop: result.data.laptop === "yes" ? true : false,
+        scholarship: result.data.scholarship === "yes" ? true : false,
+        student: result.data.scholarship === "yes" ? true : false,
+        password: hashedPassword,
+      },
     });
-    const hashedPassword = await bcrypt.hash("1234567890", 10);
-    if (!existingProfile) {
-      const profile = await prisma.profile.create({
-        data: { email: result.data.email, password: hashedPassword },
-      });
-      console.log(profile);
+    console.log(applicant);
 
-      const { email, ...remainingFields } = result.data;
-      await prisma.applicant.create({
-        data: {
-          ...remainingFields,
-          dob: dobDateTime,
-          profileId: profile.id,
-          laptop: remainingFields.laptop === "yes" ? true : false,
-          scholarship: remainingFields.scholarship === "yes" ? true : false,
-        },
-      });
-    } else {
-      const { email, ...remainingFields } = result.data;
-
-      await prisma.applicant.create({
-        data: {
-          ...remainingFields,
-          dob: dobDateTime,
-          laptop: remainingFields.laptop === "yes" ? true : false,
-          scholarship: remainingFields.scholarship === "yes" ? true : false,
-          profileId: existingProfile.id,
-        },
-      });
-    }
     try {
       const response = await resend.emails.send({
         from: "onboard@resend.dev",
@@ -109,7 +97,7 @@ export async function new_application(prevState: unknown, formData: FormData) {
         subject: "New Application Received",
         html: "<h1>Application submitted successfully</h1>",
       });
-      console.log(response)
+      console.log(response);
     } catch (error) {
       console.log(error);
     } finally {
@@ -127,41 +115,20 @@ export async function fetch_applicant_data(id: string) {
   try {
     const applicant = await prisma.applicant.findFirst({
       where: { id },
-      include: {
-        profile: true,
-      },
     });
 
     if (!applicant) return null;
 
-    // Exclude `password` and `id` fields from `profile`
-    const { profile, ...applicantData } = applicant;
-    const filteredProfile = profile
-      ? {
-          email: profile.email,
-          createdAt: profile.createdAt,
-          updatedAt: profile.updatedAt,
-        }
-      : null;
-
-    return {
-      ...applicantData,
-      profile: filteredProfile,
-    };
+    return applicant;
   } catch (error) {
     handleError(error);
   }
 }
 
-
 export async function fetch_all_applications() {
   try {
-    const applications = await prisma.applicant.findMany({
-      include: {
-        profile: true, 
-      },
-    });
-    
+    const applications = await prisma.applicant.findMany();
+
     return applications;
   } catch (error) {
     handleError(error);
@@ -170,7 +137,7 @@ export async function fetch_all_applications() {
 
 export async function edit_application(id: string, formData: FormData) {
   try {
-    const applicant = await prisma.applicant.findFirst({where: {id: id}})
+    const applicant = await prisma.applicant.findFirst({ where: { id: id } });
     if (!applicant) {
       return { message: "Application not found" };
     }
@@ -197,17 +164,11 @@ export async function delete_application() {
   }
 }
 
-export async function admit_applicant(id: string, formData: FormData) {
+export async function admit_applicant(
+  id: string,
+  admissionType: "full" | "fifty" | "seventyfive"
+) {
   try {
-    const result = admissionSchema.safeParse(Object.fromEntries(formData));
-
-    if (!result.success) {
-      return {
-        errors: result.error.flatten().fieldErrors,
-      };
-    }
-    const { scholarship, outstandingBalance } = result.data;
-
     // Step 1: Fetch the applicant's data
     const applicant = await prisma.applicant.findUnique({
       where: { id },
@@ -220,25 +181,7 @@ export async function admit_applicant(id: string, formData: FormData) {
     // Step 2: Update the applicant's status to "admitted"
     await prisma.applicant.update({
       where: { id },
-      data: { status: "admitted" },
-    });
-
-    // Step 3: Create a Fee record
-    const fee = await prisma.fee.create({
-      data: {
-        scholarship: scholarship,
-        balance: outstandingBalance,
-      },
-    });
-
-    // Step 4: Create a Student record
-    await prisma.student.create({
-      data: {
-        reference: `25${Math.floor(Math.random() * 10000)}`, // Generate a unique reference
-        applicantId: id, // Link the student to the applicant
-        batch: "Batch'25",
-        feeId: fee.id, // Link the fee record
-      },
+      data: { status: "admitted", admissionType: admissionType },
     });
 
     return {
@@ -247,6 +190,51 @@ export async function admit_applicant(id: string, formData: FormData) {
   } catch (error) {
     console.error(error);
     throw new Error("Error admitting applicant.");
+  }
+}
+
+export async function accept_admission(
+  id: string,
+  track: "flutter" | "fullstack" | "backend"
+) {
+  try {
+    //Step 1: Find the applicant
+    const applicant = await prisma.applicant.findUnique({ where: { id: id } });
+    if (!applicant) {
+      throw new Error("Applicant not found.");
+    }
+
+    //Step 2: remove unwanted fields from applicant data to use in creating student data
+    const { scholarship, laptop, status, statement, reason, ...studentData } =
+      applicant;
+
+    let outstandingBalance;
+    switch (applicant.admissionType) {
+      case "full":
+        outstandingBalance = 200;
+        break;
+      case "fifty":
+        outstandingBalance = 700;
+        break;
+      case "seventyfive":
+        outstandingBalance = 500;
+        break;
+      default:
+        outstandingBalance = 1500;
+        break;
+    }
+
+    // Step 3: Create student based n their applicant data
+    const newStudent = await prisma.student.create({
+      data: {
+        ...studentData,
+        reference: "",
+        track: track,
+        outstandingFees: outstandingBalance,
+      },
+    });
+  } catch (error) {
+    throw new Error("Error accepting admission");
   }
 }
 

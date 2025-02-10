@@ -1,7 +1,7 @@
 "use client";
 import ProspectCard from "@/components/admin/prospect-card";
 import { fetch_all_applications } from "@/lib/actions/admission.actions";
-import { IUser } from "@/store/user-store";
+import { IUser } from "@/store/applicant-store";
 import React, { useEffect, useState } from "react";
 
 export interface IApplicant {

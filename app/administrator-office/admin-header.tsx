@@ -3,8 +3,8 @@ import Image from "next/image";
 import Link from "next/link";
 import React from "react";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
-import { useUserStore } from "@/store/user-store";
 import { usePathname } from "next/navigation";
+import { useAdminStore } from "@/store/admin-store";
 
 const links = [
   {
@@ -28,7 +28,7 @@ const links = [
 const AdminHeader = () => {
   const pathname = usePathname();
 
-  const { user } = useUserStore();
+  const { admin } = useAdminStore();
   return (
     <header className="px-10 h-16 flex items-center justify-between">
       <Image
@@ -59,11 +59,11 @@ const AdminHeader = () => {
         })}
       </nav>
       <span>
-        {user !== null && (
+        {admin !== null && (
           <Avatar className={`w-6 h-6 `}>
             <AvatarImage src={'/images/p.jpg'} />
             <AvatarFallback className="bg-pink-300">
-              {user.fname!.slice(0, 1)}
+              {admin.fname!.slice(0, 1)}
             </AvatarFallback>
           </Avatar>
         )}
