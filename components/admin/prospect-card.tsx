@@ -1,17 +1,15 @@
+import { IApplicant } from "@/store/applicant-store";
 import Image from "next/image";
 import React from "react";
 
 interface IProspectCard {
   fname: string;
   lname: string;
-  oname?: string;
-  profile: {
-    id: string;
-    createdAt: Date;
-    updatedAt: Date;
-    email: string;
-    password: string;
-  };
+  oname?: string | null;
+  createdAt: Date;
+  updatedAt: Date;
+  email: string;
+  id: string;
   school: string;
   programme: string;
   scholarship: boolean;
@@ -21,15 +19,15 @@ interface IProspectCard {
 
 const ProspectCard = ({
   fname,
-  profile,
   laptop,
   lname,
   oname,
+  createdAt,
   programme,
   scholarship,
   school,
   gender,
-}: IProspectCard) => {
+}: IProspectCard|IApplicant) => {
   return (
     <div className="hover:cursor-pointer border rounded-md p-2 bg-light space-y-2">
       <div className="flex items-center">
@@ -55,7 +53,7 @@ const ProspectCard = ({
 
       <hr />
       <span className="text-xs">
-        Applied on: {new Date(profile.createdAt).toLocaleDateString()}
+        Applied on: {new Date(createdAt).toLocaleDateString()}
       </span>
     </div>
   );

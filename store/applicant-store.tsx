@@ -6,7 +6,7 @@ export interface IApplicant {
   email: string;
   fname: string;
   lname: string;
-  oname: string | null;
+  oname: string | null ;
   dob: string | Date;
   gender: "male" | "female";
   country: "ghana";
@@ -23,6 +23,8 @@ export interface IApplicant {
   student: boolean;
   admissionType: string | null;
   batch: "batch25" | null | string;
+  createdAt: Date;
+  updatedAt: Date;
 }
 
 interface ApplicantStore {

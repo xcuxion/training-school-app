@@ -174,12 +174,11 @@ export async function login(prevState: unknown, formData: FormData) {
 
     const { email, password } = result.data;
 
-    const existingProfile = await prisma.profile.findFirst({
+    const existingApplicant = await prisma.applicant.findFirst({
       where: { email },
-      include: {
-        applicant:true      }
+
     });
-    if (!existingProfile) {
+    if (!existingApplicant) {
       return {
         errors: {
           email: ["Invalid email"],
@@ -187,7 +186,7 @@ export async function login(prevState: unknown, formData: FormData) {
       };
     }
 
-    const comparison = await bcrypt.compare(password, existingProfile.password);
+    const comparison = await bcrypt.compare(password, existingApplicant.password);
 
     if (!comparison) {
       return {
@@ -197,10 +196,10 @@ export async function login(prevState: unknown, formData: FormData) {
       };
     }
 
-    await createSession(existingProfile.id);
+    await createSession(existingApplicant.id);
 
     const { createdAt, updatedAt, ...profileWithoutTimestamps } =
-      existingProfile;
+      existingApplicant;
     console.log(profileWithoutTimestamps)
     return {
       data: profileWithoutTimestamps,
@@ -210,66 +209,6 @@ export async function login(prevState: unknown, formData: FormData) {
     if (error instanceof Error && error.message === "NEXT_REDIRECT") {
       throw error; // Let Next.js handle the redirect
     }
-    handleError(error);
-  }
-}
-
-export async function register(prevState: unknown, formData: FormData) {
-  try {
-    console.log("Received formData:", Object.fromEntries(formData));
-
-    const result = formSchema.safeParse(Object.fromEntries(formData));
-    console.log("Validation result:", result);
-
-    if (!result.success) {
-      console.log("Validation errors:", result.error.flatten().fieldErrors);
-      return {
-        errors: result.error.flatten().fieldErrors,
-      };
-    }
-
-    const { email, password } = result.data;
-    console.log("Parsed data:", { email });
-
-    const existingProfile = await prisma.profile.findFirst({
-      where: { email },
-    });
-    console.log("Existing profile:", existingProfile);
-
-    if (existingProfile) {
-      console.log("profile found for email:", email);
-      return {
-        errors: {
-          email: ["email already exists"],
-        },
-      };
-    }
-
-    const hashedPassword = await bcrypt.hash(password, 10);
-    console.log("Hashed password:", hashedPassword);
-
-    const newUser = await prisma.profile.create({
-      data: {
-        password: hashedPassword,
-        email: email,
-      },
-    });
-    console.log("New user created:", newUser);
-
-    await createSession(newUser.id);
-    console.log("Session created for user:", newUser.id);
-
-    console.log("Redirecting to /school");
-    return redirect("/admission-portal");
-  } catch (error) {
-    console.error("Caught error:", error);
-
-    if (error instanceof Error && error.message === "NEXT_REDIRECT") {
-      const resend = new Resend(process.env.RESEND_KEY);
-
-      throw error; // Let Next.js handle the redirect
-    }
-
     handleError(error);
   }
 }
