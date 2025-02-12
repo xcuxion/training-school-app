@@ -37,7 +37,7 @@ const initial = {
   laptop: "",
   student: "",
   batch: "batch25",
-  password: ""
+  password: "",
 };
 const ApplicationPage = () => {
   const [state, action] = useFormState(new_application, undefined);
@@ -77,7 +77,7 @@ const ApplicationPage = () => {
         scale their ventures.
       </p>
       <form action={action} ref={formRef} className="">
-        <div className="my-4 space-y-3">
+        <section className="my-4 space-y-3 border p-4 rounded-md">
           <h2 className="text-2xl font-semibold">Personal Information</h2>
           <p className="text-xs">Fields with * are required</p>
           <div className="grid gap-y-2 md:gap-y-0 md:grid-cols-3 md:gap-x-6">
@@ -172,9 +172,7 @@ const ApplicationPage = () => {
                 </SelectContent>
               </Select>
               {state?.errors?.country && (
-                <p className="text-sm text-red-500">
-                  {state.errors.country}
-                </p>
+                <p className="text-sm text-red-500">{state.errors.country}</p>
               )}
             </span>
           </div>
@@ -207,10 +205,14 @@ const ApplicationPage = () => {
                 <p className="text-sm text-red-500">{state.errors.contact}</p>
               )}
             </span>
+          </div>
+        </section>
+        <section className="bg-light  border rounded-md p-4 md:my-10 space-y-3">
+          <div className="grid sm:grid-cols-1 md:grid-cols-2  md:gap-x-6 ">
             <span className="">
-              <Label>Password</Label>
+              <Label>Enter a passcode to associate with your account</Label>
               <Input
-                type="text"
+                type="password"
                 value={value.password}
                 name="password"
                 id="password"
@@ -222,8 +224,7 @@ const ApplicationPage = () => {
                 <p className="text-sm text-red-500">{state.errors.password}</p>
               )}
             </span>
-          </div>
-          <span className="col-span-2 md:col-span-1">
+            <span className="col-span-2 md:col-span-1 ">
               <Label>Select Batch</Label>
               <Select
                 onValueChange={(choice) =>
@@ -235,19 +236,16 @@ const ApplicationPage = () => {
                   <SelectValue placeholder="Select" />
                 </SelectTrigger>
                 <SelectContent className="bg-white">
-                  <SelectItem value="ghana">Ghana</SelectItem>
+                  <SelectItem value="batch25">Batch'25</SelectItem>
                 </SelectContent>
               </Select>
               {state?.errors?.batch && (
-                <p className="text-sm text-red-500">
-                  {state.errors.batch}
-                </p>
+                <p className="text-sm text-red-500">{state.errors.batch}</p>
               )}
             </span>
-          <div className="bg-secondary rounded-md p-4">
-            <p className="font-semibold">
-              Are you a student?
-            </p>
+          </div>
+          <div className="">
+            <p className="font-semibold mt-4">Are you a student?</p>
             <RadioGroup
               name="student"
               defaultValue="no"
@@ -265,87 +263,129 @@ const ApplicationPage = () => {
                 <Label htmlFor="no">No</Label>
               </span>
             </RadioGroup>
+            {value.student === "yes" ? (
+              <div className="grid md:grid-cols-3 gap-y-2 md:gap-y-0 md:gap-x-6 mt-2">
+                <span className="">
+                  <Select
+                    onValueChange={(choice) =>
+                      setValue({ ...value, school: choice })
+                    }
+                    name="school"
+                  >
+                    <SelectTrigger className="">
+                      <SelectValue placeholder="Select school" />
+                    </SelectTrigger>
+                    <SelectContent className="bg-white">
+                      <SelectItem value="knust">KNUST</SelectItem>
+                      <SelectItem value="ug">
+                        University of Ghana - Legon
+                      </SelectItem>
+                      <SelectItem value="ashesi">Ashesi University</SelectItem>
+                      <SelectItem value="none">Not a student</SelectItem>
+                    </SelectContent>
+                  </Select>
 
+                  {state?.errors?.school && (
+                    <p className="text-sm text-red-500">
+                      {state.errors.school}
+                    </p>
+                  )}
+                </span>
+                <span className="">
+                  <Input
+                    type="text"
+                    value={value.programme}
+                    placeholder="Enter programme"
+                    name="programme"
+                    id="programme"
+                    onChange={(e) =>
+                      setValue({ ...value, programme: e.target.value })
+                    }
+                  />
+
+                  {state?.errors?.programme && (
+                    <p className="text-sm text-red-500">
+                      {state.errors.programme}
+                    </p>
+                  )}
+                </span>
+                <span className="">
+                  <Select
+                    onValueChange={(choice) =>
+                      setValue({ ...value, year: choice })
+                    }
+                    name="year"
+                  >
+                    <SelectTrigger className="">
+                      <SelectValue placeholder="Select year" />
+                    </SelectTrigger>
+                    <SelectContent className="bg-white">
+                      <SelectItem value="1">1</SelectItem>
+                      <SelectItem value="2">2</SelectItem>
+                      <SelectItem value="3">3</SelectItem>
+                      <SelectItem value="4">4</SelectItem>
+                      <SelectItem value="5">5</SelectItem>
+                      <SelectItem value="6">6</SelectItem>
+                    </SelectContent>
+                  </Select>
+                  {state?.errors?.year && (
+                    <p className="text-sm text-red-500">{state.errors.year}</p>
+                  )}
+                </span>
+              </div>
+            ) : (
+              <></>
+            )}
+          </div>
+          <div className="">
+            <p className="font-semibold">
+              Do you have a working laptop of at least 4GB RAM?*
+            </p>
+            <RadioGroup
+              name="laptop"
+              defaultValue="no"
+              className="flex mt-2 gap-x-10"
+              onValueChange={(choice) => {
+                setValue({ ...value, laptop: choice });
+              }}
+            >
+              <span className="flex items-center space-x-2 ">
+                <RadioGroupItem value="yes" id="yes" />
+                <Label htmlFor="yes">Yes</Label>
+              </span>
+              <span className="flex items-center space-x-2">
+                <RadioGroupItem value="no" id="no" />
+                <Label htmlFor="no">No</Label>
+              </span>
+            </RadioGroup>
+          </div>
+          <div className="">
+            <p className="font-semibold">
+              Will you need a scholarship to join this programme?*
+            </p>
+            <RadioGroup
+              defaultValue="no"
+              className="flex flex-col md:flex-row mt-2 gap-y-2 md:gap-y-0 md:gap-x-10"
+              name="scholarship"
+              onValueChange={(choice) => {
+                setValue({ ...value, scholarship: choice });
+              }}
+            >
+              <span className="flex items-center space-x-2 ">
+                <RadioGroupItem value="yes" id="yes" />
+                <Label htmlFor="yes">Yes, I will need a scholarship</Label>
+              </span>
+              <span className="flex items-center space-x-2">
+                <RadioGroupItem value="no" id="no" />
+                <Label htmlFor="no">No, I can afford it</Label>
+              </span>
+            </RadioGroup>
             {state?.errors?.lname && (
               <p className="text-sm text-red-500">{state.errors.lname}</p>
             )}
-          </div>          {
-            value.student === "yes" ? (
-          <div className="grid md:grid-cols-3 gap-y-2 md:gap-y-0 md:gap-x-6">
-            <span className="">
-              <Label>School</Label>
-              <Select
-                onValueChange={(choice) =>
-                  setValue({ ...value, school: choice })
-                }
-                name="school"
-              >
-                <SelectTrigger className="">
-                  <SelectValue placeholder="Select" />
-                </SelectTrigger>
-                <SelectContent className="bg-white">
-                  <SelectItem value="knust">
-                    KNUST
-                  </SelectItem>
-                  <SelectItem value="ug">
-                    University of Ghana - Legon
-                  </SelectItem>
-                  <SelectItem value="ashesi">Ashesi University</SelectItem>
-                  <SelectItem value="none">Not a student</SelectItem>
-                </SelectContent>
-              </Select>
-
-              {state?.errors?.school && (
-                <p className="text-sm text-red-500">{state.errors.school}</p>
-              )}
-            </span>
-            <span className="">
-              <Label>Programme</Label>
-              <Input
-                type="text"
-                value={value.programme}
-                name="programme"
-                id="programme"
-                onChange={(e) =>
-                  setValue({ ...value, programme: e.target.value })
-                }
-              />
-
-              {state?.errors?.programme && (
-                <p className="text-sm text-red-500">{state.errors.programme}</p>
-              )}
-            </span>
-            <span className="">
-              <Label>Current Year</Label>
-              <Select
-                onValueChange={(choice) => setValue({ ...value, year: choice })}
-                name="year"
-              >
-                <SelectTrigger className="">
-                  <SelectValue placeholder="Select" />
-                </SelectTrigger>
-                <SelectContent className="bg-white">
-                  <SelectItem value="1">1</SelectItem>
-                  <SelectItem value="2">2</SelectItem>
-                  <SelectItem value="3">3</SelectItem>
-                  <SelectItem value="4">4</SelectItem>
-                  <SelectItem value="5">5</SelectItem>
-                  <SelectItem value="6">6</SelectItem>
-                </SelectContent>
-              </Select>
-              {state?.errors?.year && (
-                <p className="text-sm text-red-500">{state.errors.year}</p>
-              )}
-            </span>
           </div>
-
-            ): (
-              <>
-              </>
-            )
-          }
-        </div>
-        <div className="my-4 space-y-2">
+        </section>{" "}
+        <section className="my-4 space-y-3 border p-4 rounded-md">
           <h2 className="text-2xl font-semibold">Aspiration</h2>
           <p className="text-xs">Fields with * are required</p>
           <div className="">
@@ -381,58 +421,7 @@ const ApplicationPage = () => {
               <p className="text-sm text-red-500">{state.errors.balance}</p>
             )}
           </div>
-          <div className="bg-secondary rounded-md p-4">
-            <p className="font-semibold">
-              Do you have a working laptop of at least 4GB RAM?*
-            </p>
-            <RadioGroup
-              name="laptop"
-              defaultValue="no"
-              className="flex mt-2 gap-x-10"
-              onValueChange={(choice) => {
-                setValue({ ...value, laptop: choice });
-              }}
-            >
-              <span className="flex items-center space-x-2 ">
-                <RadioGroupItem value="yes" id="yes" />
-                <Label htmlFor="yes">Yes</Label>
-              </span>
-              <span className="flex items-center space-x-2">
-                <RadioGroupItem value="no" id="no" />
-                <Label htmlFor="no">No</Label>
-              </span>
-            </RadioGroup>
 
-            {state?.errors?.lname && (
-              <p className="text-sm text-red-500">{state.errors.lname}</p>
-            )}
-          </div>
-          <div className="bg-secondary rounded-md p-4">
-            <p className="font-semibold">
-              Will you need a scholarship to join this programme?*
-            </p>
-            <RadioGroup
-              defaultValue="no"
-              className="flex flex-col md:flex-row mt-2 gap-y-2 md:gap-y-0 md:gap-x-10"
-              name="scholarship"
-              onValueChange={(choice) => {
-                setValue({ ...value, scholarship: choice });
-              }}
-            >
-              <span className="flex items-center space-x-2 ">
-                <RadioGroupItem value="yes" id="yes" />
-                <Label htmlFor="yes">Yes, I will need a scholarship</Label>
-              </span>
-              <span className="flex items-center space-x-2">
-                <RadioGroupItem value="no" id="no" />
-                <Label htmlFor="no">No, I can afford it</Label>
-              </span>
-            </RadioGroup>
-
-            {state?.errors?.lname && (
-              <p className="text-sm text-red-500">{state.errors.lname}</p>
-            )}
-          </div>
           {value.scholarship === "yes" ? (
             <div className="">
               <Label>Why should we give you this scholarship?*</Label>
@@ -453,7 +442,7 @@ const ApplicationPage = () => {
           ) : (
             ""
           )}
-        </div>
+        </section>
         <SubmitButton buttonText="Submit" />
       </form>
     </div>

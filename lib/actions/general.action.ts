@@ -3,7 +3,7 @@ import { z } from "zod";
 import { handleError } from "../utils";
 import * as bcrypt from "bcrypt";
 import { PrismaClient } from "@prisma/client";
-import { redirect } from "next/navigation";
+import { redirect } from 'next/navigation'
 import { createSession, deleteSession } from "../session";
 import { Resend } from "resend";
 import { ReactElement } from "react";

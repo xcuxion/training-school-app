@@ -4,6 +4,8 @@ import React, { useEffect, useState } from "react";
 import { Avatar, AvatarFallback } from "@/components/ui/avatar";
 import { fetch_applicant_data } from "@/lib/actions/admission.actions";
 import { useApplicantStore } from "@/store/applicant-store";
+import { logOut } from "@/lib/actions/general.action";
+import { Button } from "@/components/ui/button";
 
 const AdmissionPortal = () => {
   const { applicant } = useApplicantStore();
@@ -26,35 +28,57 @@ const AdmissionPortal = () => {
       } else {
         console.warn("applicant data not found.");
       }
-    }
+    };
     fetchData();
   }, [applicant?.id]);
 
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+  const handleChange = (
+    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
+  ) => {
     setEditableData({ ...editableData, [e.target.name]: e.target.value });
   };
 
   return (
-    <div className="p-6">
+    <div className=" w-full md:w-4/5 mx-auto p-6">
       {/* Header */}
-      <header className="h-16 w-full flex justify-between items-center border-b pb-4">
+      <header className="h-16 w-full flex justify-between items-center border-b pb-4 sticky top-0 left-0">
         <Image src={"/logo.svg"} alt="Logo" width={150} height={45} />
-        {applicant && (
-          <Avatar className="w-10 h-10">
-            <AvatarFallback className="bg-secondary text-white">
-              {applicant.email.charAt(0).toUpperCase()}
-            </AvatarFallback>
-          </Avatar>
-        )}
+        <div className="flex items-center">
+          {applicant && (
+            <Avatar className="w-10 h-10">
+              <AvatarFallback className="bg-secondary text-dark">
+                {applicant.email.charAt(0).toUpperCase()}
+              </AvatarFallback>
+            </Avatar>
+          )}
+          <Button variant={"default"} onClick={() => logOut()}>
+            Log out
+          </Button>
+        </div>
       </header>
 
       {/* Banner Section */}
       <section className="flex items-center gap-6 my-6">
-        <Image src={"/images/p1.jpg"} alt="applicant Photo" width={150} height={150} className="rounded-full border" />
+        <Image
+          src={"/images/p1.jpg"}
+          alt="applicant Photo"
+          width={150}
+          height={150}
+          className="rounded-full border w-[150px] h-[150px] object-cover "
+        />
         <div>
-          <h1 className="text-3xl font-semibold">{applicant?.fname} {applicant?.lname}</h1>
-          <p className="text-gray-600">{applicant?.programme} - Year {applicant?.year}</p>
-          <p className="text-sm text-gray-500">Status: <span className="font-bold">{applicant?.status?.toUpperCase()}</span></p>
+          <h1 className="text-3xl font-semibold">
+            {applicant?.fname} {applicant?.lname}
+          </h1>
+          <p className="text-gray-600">
+            {applicant?.programme} - Year {applicant?.year}
+          </p>
+          <p className="text-sm text-gray-500">
+            Status:{" "}
+            <span className="font-bold">
+              {applicant?.status?.toUpperCase()}
+            </span>
+          </p>
         </div>
       </section>
 
@@ -64,19 +88,27 @@ const AdmissionPortal = () => {
         <div className="space-y-4">
           <div>
             <h3 className="text-lg font-medium">Full Name</h3>
-            <p className="text-base text-gray-700">{applicant?.fname} {applicant?.lname} {applicant?.oname}</p>
+            <p className="text-base text-gray-700">
+              {applicant?.fname} {applicant?.lname} {applicant?.oname}
+            </p>
           </div>
           <div>
             <h3 className="text-lg font-medium">Date of Birth</h3>
-            <p className="text-base text-gray-700">{new Date(applicant?.dob as Date).toDateString()}</p>
+            <p className="text-base text-gray-700">
+              {new Date(applicant?.dob as Date).toDateString()}
+            </p>
           </div>
           <div>
             <h3 className="text-lg font-medium">Gender</h3>
-            <p className="text-base text-gray-700 capitalize">{applicant?.gender}</p>
+            <p className="text-base text-gray-700 capitalize">
+              {applicant?.gender}
+            </p>
           </div>
           <div>
             <h3 className="text-lg font-medium">Country</h3>
-            <p className="text-base text-gray-700 capitalize">{applicant?.country}</p>
+            <p className="text-base text-gray-700 capitalize">
+              {applicant?.country}
+            </p>
           </div>
         </div>
 
@@ -88,21 +120,21 @@ const AdmissionPortal = () => {
           </div>
           <div>
             <h3 className="text-lg font-medium">Phone Contact</h3>
-            <input 
-              type="text" 
+            <input
+              type="text"
               name="contact"
-              value={editableData.contact} 
-              onChange={handleChange} 
+              value={editableData.contact}
+              onChange={handleChange}
               className="w-full border p-2 rounded-md"
             />
           </div>
           <div>
             <h3 className="text-lg font-medium">Programme of Study</h3>
-            <input 
-              type="text" 
+            <input
+              type="text"
               name="programme"
-              value={editableData.programme} 
-              onChange={handleChange} 
+              value={editableData.programme}
+              onChange={handleChange}
               className="w-full border p-2 rounded-md"
             />
           </div>
