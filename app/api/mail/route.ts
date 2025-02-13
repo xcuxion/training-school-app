@@ -2,7 +2,7 @@ import {render} from "@react-email/render"
 import { Resend } from "resend";
 import XcuxionWelcomeEmail from "@/emails/application-received";
 
-const resend = new Resend(process.env.RESEND_KEY)
+const resend = new Resend("re_13jjbTSx_Cq8ofMZknfMw1rZk9wA5cY1v")
 //@ts-ignore
 export async function POST (request:Request, res: Response) {
     const {email, userFirstname} = await request.json()
