@@ -3,7 +3,7 @@ name: Deploy to cPanel via FTP
 on:
   push:
     branches:
-      - main # Trigger the deploy only on pushes to the 'main' branch
+      - master # Trigger the deploy only on pushes to the 'main' branch
   # You can also trigger it for other branches or specific tags like:
   # branches:
   #   - "release/*"
