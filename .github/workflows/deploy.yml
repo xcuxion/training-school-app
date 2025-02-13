@@ -37,7 +37,14 @@ jobs:
           npm install  # Install project dependencies
           npm run build  # Build Next.js app
 
+      - name: Test FTP Connection
+        run: |
+          lftp -c "open -u ${{ secrets.FTP_USERNAME }},${{ secrets.FTP_PASSWORD }} ${{ secrets.FTP_SERVER }}; set ssl:verify-certificate no; ls; bye"
+
+      - name: Check DNS Resolution
+        run: nslookup ${{ secrets.FTP_SERVER }}
+
       - name: Deploy via FTP
         run: |
-          lftp -e "open -u ${{ secrets.FTP_USERNAME }},${{ secrets.FTP_PASSWORD }} ${{ secrets.FTP_SERVER }}; set ssl:verify-certificate no; mirror -R -e -x .git/ -x .github/ -x .next/ -x node_modules/
-            . /public_html/school; bye"
+          lftp -c "open -u ${{ secrets.FTP_USERNAME }},${{ secrets.FTP_PASSWORD }} ${{ secrets.FTP_SERVER }}; set ssl:verify-certificate no; mirror -R -e -x .git/ -x .github/ -x .next/ -x node_modules/ ./public ./public_html/school; bye"
+
