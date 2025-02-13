@@ -47,3 +47,4 @@ jobs:
       - name: Deploy via FTP
         run: |
           lftp -c "open -u ${{ secrets.FTP_USERNAME }},${{ secrets.FTP_PASSWORD }} ${{ secrets.FTP_SERVER }}; set ssl:verify-certificate no; mirror -R -e -x .git/ -x .github/ -x .next/ -x node_modules/ ./public ./public_html/school; bye"
+
