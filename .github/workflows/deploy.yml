@@ -22,8 +22,3 @@ jobs:
         ftp-server: ${{ secrets.FTP_SERVER}}
         ftp-username: ${{ secrets.FTP_USERNAME }}   # Store your FTP username in GitHub secrets
         ftp-password: ${{ secrets.FTP_PASSWORD }}   # Store your FTP password in GitHub secrets
-        local-dir: ./  # Local directory to deploy (use './' for the root of the repo)
-        remote-dir: /public_html/school  # Remote directory where your files will be deployed
-        # Optionally, you can exclude certain files or folders
-        exclude: .git, .github, node_modules  # Add any folders you don't want to deploy
-        git-ftp-args: "--insecure"  # Optional: add any extra arguments to the FTP upload command
