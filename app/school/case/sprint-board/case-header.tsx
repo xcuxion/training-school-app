@@ -20,8 +20,8 @@ const CaseHeader = ({title, team, startDate, deadline, supervisor}: ICaseheader)
   return (
     <div className='w-full'>
         <h1 className="text-3xl font-semibold ">{title}</h1>
-        <div className="flex space-x-6 items-center border-b-2 py-1">
-          <span className="border-r-2 pr-6 py-1">
+        <div className="flex space-x-6 items-center border-b-2 border-outline py-1">
+          <span className="border-r-2 border-outline pr-6 py-1">
             {new Date(startDate).toDateString()} - {new Date(deadline).toDateString()}
           </span>
           <span className="inline-flex space-x-[-10px]">

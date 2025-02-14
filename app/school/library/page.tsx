@@ -133,7 +133,7 @@ const Page = () => {
           <p className="text-3xl font-bold mb-4">
             Our Resouces & Book Collections
           </p>
-          <div className="bg-white px-2 py-1 rounded-full flex flex-between">
+          <div className="bg-black px-2 py-1 rounded-full flex flex-between">
             <Input
               type="search"
               className="w-96 border-none focus-visible:ring-0 shadow-none bg-transparent"
@@ -168,7 +168,7 @@ const Page = () => {
             {categoryfetch.map((category) => (
               <span
                 key={category.id}
-                className="rounded-3xl border p-2 hover:bg-dark hover:text-light hover:cursor-pointer"
+                className="rounded-3xl border border-outline p-2 hover:bg-secondary hover:text-dark hover:cursor-pointer"
               >
                 {" "}
                 {category.name}
@@ -179,7 +179,7 @@ const Page = () => {
             <SelectTrigger className="w-40">
               <SelectValue placeholder="Sort by" />
             </SelectTrigger>
-            <SelectContent className="bg-white">
+            <SelectContent className="bg-secondary">
               <SelectItem value="audiobook">Audiobook</SelectItem>
               <SelectItem value="ebook">Ebook</SelectItem>
               <SelectItem value="podcast">podcast</SelectItem>

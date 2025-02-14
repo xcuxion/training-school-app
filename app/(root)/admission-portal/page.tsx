@@ -42,7 +42,7 @@ const AdmissionPortal = () => {
     <div className=" w-full md:w-4/5 mx-auto p-6">
       {/* Header */}
       <header className="h-16 w-full flex justify-between items-center border-b pb-4 sticky top-0 left-0">
-        <Image src={"/logo.svg"} alt="Logo" width={150} height={45} />
+        <Image src={"/logo.png"} alt="Logo" width={150} height={45} />
         <div className="flex items-center">
           {applicant && (
             <Avatar className="w-10 h-10">

@@ -32,7 +32,7 @@ const AdminHeader = () => {
   return (
     <header className="px-10 h-16 flex items-center justify-between">
       <Image
-        src={"/logo.svg"}
+        src={"/logo.png"}
         alt="logo"
         width={150}
         height={45}

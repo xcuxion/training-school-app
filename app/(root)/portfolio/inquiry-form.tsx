@@ -16,7 +16,7 @@ const InquiryForm = () => {
   const [question, setQuestion] = useState<string>("");
 
   return (
-    <div className="bg-gray-100 text-dark w-full md:w-[450px] rounded-md p-3 md:p-4 md:h-[365px] flex flex-col ">
+    <div className="bg-secondary text-dark w-full md:w-[450px] rounded-md p-3 md:p-4 md:h-[365px] flex flex-col ">
       <h1 className="font-semibold text-lg md:text-xl">Make An Enquiry</h1>
       <form action={makeEnquiryAction} className="space-y-2">
         <div>
@@ -24,7 +24,7 @@ const InquiryForm = () => {
           <Input
             id="name"
             name="name"
-            className="bg-gray-50"
+            className=""
             onChange={(e) => setName(e.target.value)}
             value={name}
           />
@@ -39,7 +39,7 @@ const InquiryForm = () => {
             id="email"
             name="email"
             value={email}
-            className="bg-gray-50"
+            className=""
             onChange={(e) => setEmail(e.target.value)}
           />
           {state?.errors?.email && (
@@ -52,7 +52,7 @@ const InquiryForm = () => {
           <Textarea
             id="question"
             name="question"
-            className="bg-gray-50 boder- min-h-20"
+            className=" boder- min-h-20"
             value={question}
             onChange={(e) => setQuestion(e.target.value)}
           />

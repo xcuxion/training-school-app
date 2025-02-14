@@ -63,12 +63,11 @@ const faqs: IFaq[] = [
 const Faqs = () => {
   return (
     <motion.div
-      id="faqs"
       initial={{ opacity: 0, y: 50 }}
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true }}
       transition={{ duration: 0.8, ease: "easeOut" }}
-      className="px-5 md:px-20 min-h-screen bg-gray-100  flex flex-col flex-center"
+      className="px-5 md:px-20 min-h-screen bg-secondary  flex flex-col flex-center"
     >
       <motion.h3 className="text-xl md:text-4xl text-center md:w-1/2 mx-auto font-semibold">
         FAQs
@@ -93,7 +92,7 @@ const Faqs = () => {
         <Accordion type="single" collapsible className="space-y-2">
           {faqs.map((faq, index) => (
             <AccordionItem
-              className="border px-4 bg-gray-50"
+              className="border border-outline rounded-md px-4 bg-black"
               key={index}
               value={`item-${index}`}
             >

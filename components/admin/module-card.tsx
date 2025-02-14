@@ -9,7 +9,7 @@ interface IModuleCard {
 
 const ModelueCard = ({ title, facilitator, image }: IModuleCard) => {
   return (
-    <div className="bg-white p-2 border rounded-md flex flex-between ">
+    <div className="bg-black p-2 border rounded-md flex flex-between ">
       <div className="flex items-center">
         <span className="flex flex-center mr-4">
           <Image

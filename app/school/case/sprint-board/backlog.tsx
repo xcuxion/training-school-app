@@ -16,7 +16,7 @@ const Backlog = ({roles}: {roles: string[]}) => {
     const [showPopUp, setShowPopUp] = useState<boolean>(false)
   return (
     <div className='space-y-6'>
-        <div className="border-2 p-2 rounded-md">
+        <div className="border-2 border-outline p-2 rounded-md">
             <div className='flex items-center'>
                 <Image src={'/images/tasks.svg'} alt='' width={24} height={24} className='w-8 h-8 mr-1 '/>
                 <h1 className="text-lg font-semibold">Backlog</h1>

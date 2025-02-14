@@ -9,7 +9,7 @@ interface ICourse {
 
 const ItemList = ({ subtitle, image, title }: ICourse) => {
   return (
-    <div className="p-2 md:p-4 flex md:items-center bg-gray-50 rounded-lg">
+    <div className="p-2 md:p-4 flex md:items-center bg-black border border-outline rounded-lg">
       <Image
         src={image}
         alt="image"

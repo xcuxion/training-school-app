@@ -70,7 +70,7 @@ const TaskForm = ({
               <SelectTrigger>
                 <SelectValue placeholder="To-do" />
               </SelectTrigger>
-              <SelectContent className="bg-white">
+              <SelectContent className="bg-secondary">
                 <SelectItem value="todo">To-do</SelectItem>
                 <SelectItem value="in_progress">In Progress</SelectItem>
                 <SelectItem value="completed">Completed</SelectItem>

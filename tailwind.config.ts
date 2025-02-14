@@ -16,12 +16,12 @@ const config: Config = {
 
 		},
   		colors: {
-			primary: '#9D2292',
+			primary: '#FEBC10',
 			light: '#FFF9FF',
-			secondary: '#FFF0FE',
-			neutral: '#f5f5f6',
-			dark: '#563553',
-			outline: '#EFC5ED',
+			secondary: '#0E0E0E',
+			neutral: '#0E0E0E',
+			dark: '#f5f5f5',
+			outline: '#2D3748',
 
 			muted: {
 				DEFAULT: 'hsl(var(--muted))',

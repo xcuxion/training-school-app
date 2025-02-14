@@ -11,7 +11,7 @@ const ResourceCard = ({ url, title }: TResource) => {
   return (
     <Link 
       href={url} 
-      className="flex items-center md:h-16 border rounded-sm p-1 md:p-0" 
+      className="flex items-center bg-black border-outline md:h-16 border rounded-sm p-1 md:p-0" 
       target="_blank" 
       rel="noopener noreferrer"
     >

@@ -22,8 +22,8 @@ const Login = ({ show, onClose }: { show: boolean; onClose: () => void }) => {
     }
   }, [formState, router]);
   return (
-    <FormModal isOpen={show} onClose={onClose} title="Sign in to Account">
-      <form
+    <FormModal isOpen={show} onClose={onClose} title="Sign in to Account" >
+      {/* <form
         ref={formRef}
         action={googleAuth}
         className="grid gap-y-2 md:gap-y-0 md:grid-cols-2 md:gap-x-6"
@@ -39,7 +39,7 @@ const Login = ({ show, onClose }: { show: boolean; onClose: () => void }) => {
       </form>
       <span className="flex flex-center text-lg leading-tight font-semibold italic">
         OR
-      </span>
+      </span> */}
       <div className="">
         <form action={formAction} className="space-y-2">
           <>

@@ -27,7 +27,7 @@ const links = [
 const MobileNav = () => {
   const pathname = usePathname();
 
-  return <div className="w-full px-10 h-16 flex flex-between fixed bottom-0 left-0 bg-white md:hidden">
+  return <div className="w-full px-10 h-16 flex flex-between fixed bottom-0 left-0 bg-black md:hidden">
         {links.map((link, index) => {
           const active =
             (link.href === "/school" &&

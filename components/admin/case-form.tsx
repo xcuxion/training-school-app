@@ -99,7 +99,7 @@ const CaseForm = ({
             <SelectTrigger className="">
               <SelectValue placeholder="Select" />
             </SelectTrigger>
-            <SelectContent className="bg-white">
+            <SelectContent className="bg-secondary">
               <SelectItem value="productManagement">
                 Kwame Nkrumah University of Science and Technology
               </SelectItem>

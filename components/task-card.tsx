@@ -23,19 +23,19 @@ const TaskCard = () => {
       <div className="flex flex-row gap-3">
         <Link
           href={facilitatorData.link}
-          className="flex bg-white p-2 mb-2"
+          className="flex bg-black p-2 mb-2"
         >
           <FaRegFilePdf className="text-xl" /> Course Materials
         </Link>
 
         <Link href={facilitatorData.link}
-        className="flex bg-white p-2 mb-2 rounded-lg ">
+        className="flex bg-black p-2 mb-2 rounded-lg ">
           <FaRegFilePdf />
           Assignment(s)
         </Link>
 
         <Link href={facilitatorData.link}
-        className="flex bg-white p-2 mb-2 rounded-lg ">
+        className="flex bg-black p-2 mb-2 rounded-lg ">
           <FaRegFilePdf />
           Activities
         </Link>

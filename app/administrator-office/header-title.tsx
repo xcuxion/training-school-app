@@ -68,7 +68,7 @@ const HeaderTitle = () => {
   const navs = currentSection ? currentSection.navs : [];
 
   return (
-    <div className="mb-4 px-10 sticky py-1 top-0 left-0 z-10 bg-white">
+    <div className="mb-4 px-10 sticky py-1 top-0 left-0 z-10 bg-black">
       <h1 className="text-4xl font-semibold mb-2">{title}</h1>
       <nav className="flex flex-row text-lg gap-4">
         {navs.map((link, index) => {
@@ -155,7 +155,7 @@ export default HeaderTitle;
 // const HeaderTitle = () => {
 //   const pathname = usePathname();
 //   return (
-//     <div className="mb-4 px-10 sticky py-1 top-0 left-0 z-10 bg-white">
+//     <div className="mb-4 px-10 sticky py-1 top-0 left-0 z-10 bg-black">
 //       <h1 className="text-4xl font-semibold mb-2">{title}</h1>
 //       <nav className="flex flex-row text-lg gap-4">
 //         {navs.map((link, index) => {

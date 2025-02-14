@@ -60,7 +60,7 @@ const ApplicationPage = () => {
       <div className="flex flex-col-reverse md:flex-row md:flex-between py-2 md:py-4">
         <h1 className="text-3xl md:text-4xl font-bold">Application Form</h1>
         <Image
-          src={"/logo.svg"}
+          src={"/logo.pn"}
           alt="logo"
           width={200}
           height={60}
@@ -167,7 +167,7 @@ const ApplicationPage = () => {
                 <SelectTrigger className="">
                   <SelectValue placeholder="Select" />
                 </SelectTrigger>
-                <SelectContent className="bg-white">
+                <SelectContent className="bg-secondary">
                   <SelectItem value="ghana">Ghana</SelectItem>
                 </SelectContent>
               </Select>
@@ -235,7 +235,7 @@ const ApplicationPage = () => {
                 <SelectTrigger className="">
                   <SelectValue placeholder="Select" />
                 </SelectTrigger>
-                <SelectContent className="bg-white">
+                <SelectContent className="bg-secondary">
                   <SelectItem value="batch25">Batch'25</SelectItem>
                 </SelectContent>
               </Select>
@@ -275,7 +275,7 @@ const ApplicationPage = () => {
                     <SelectTrigger className="">
                       <SelectValue placeholder="Select school" />
                     </SelectTrigger>
-                    <SelectContent className="bg-white">
+                    <SelectContent className="bg-secondary">
                       <SelectItem value="knust">KNUST</SelectItem>
                       <SelectItem value="ug">
                         University of Ghana - Legon
@@ -319,7 +319,7 @@ const ApplicationPage = () => {
                     <SelectTrigger className="">
                       <SelectValue placeholder="Select year" />
                     </SelectTrigger>
-                    <SelectContent className="bg-white">
+                    <SelectContent className="bg-secondary">
                       <SelectItem value="1">1</SelectItem>
                       <SelectItem value="2">2</SelectItem>
                       <SelectItem value="3">3</SelectItem>
