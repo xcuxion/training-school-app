@@ -1,6 +1,5 @@
 "use client";
 import React, { ReactElement } from "react";
-import ItemList from "./item-list";
 import { motion } from "framer-motion";
 import Image from "next/image";
 

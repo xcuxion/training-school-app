@@ -1,3 +1,4 @@
+"use client"
 import { Button } from "@/components/ui/button";
 import Image from "next/image";
 import Link from "next/link";
@@ -19,7 +20,7 @@ const Hero = () => {
         muted
         className="absolute top-0 left-0 w-full h-full object-cover z-10 bg-cover"
       >
-        <source src="/videos/classroom.mp4" type="video/mp4" />
+        <source src="/videos/coding.mp4" type="video/mp4" />
         Your browser does not support the video tag.
       </video>
 

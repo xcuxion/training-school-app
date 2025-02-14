@@ -77,7 +77,7 @@ const ApplicationPage = () => {
         scale their ventures.
       </p>
       <form action={action} ref={formRef} className="">
-        <section className="my-4 space-y-3 border p-4 rounded-md">
+        <section className="my-4 space-y-3 border border-outline p-4 rounded-md">
           <h2 className="text-2xl font-semibold">Personal Information</h2>
           <p className="text-xs">Fields with * are required</p>
           <div className="grid gap-y-2 md:gap-y-0 md:grid-cols-3 md:gap-x-6">
@@ -207,7 +207,7 @@ const ApplicationPage = () => {
             </span>
           </div>
         </section>
-        <section className="bg-light  border rounded-md p-4 md:my-10 space-y-3">
+        <section className="bg-secondary  border border-outline rounded-md p-4 md:my-10 space-y-3">
           <div className="grid sm:grid-cols-1 md:grid-cols-2  md:gap-x-6 ">
             <span className="">
               <Label>Enter a passcode to associate with your account</Label>
@@ -385,7 +385,7 @@ const ApplicationPage = () => {
             )}
           </div>
         </section>{" "}
-        <section className="my-4 space-y-3 border p-4 rounded-md">
+        <section className="my-4 space-y-3 border border-outline p-4 rounded-md">
           <h2 className="text-2xl font-semibold">Aspiration</h2>
           <p className="text-xs">Fields with * are required</p>
           <div className="">

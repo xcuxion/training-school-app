@@ -67,7 +67,7 @@ const Faqs = () => {
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true }}
       transition={{ duration: 0.8, ease: "easeOut" }}
-      className="px-5 md:px-20 min-h-screen bg-secondary  flex flex-col flex-center"
+      className="px-5 md:px-20 min-h-screen bg-faq-bg  flex flex-col flex-center"
     >
       <motion.h3 className="text-xl md:text-4xl text-center md:w-1/2 mx-auto font-semibold">
         FAQs

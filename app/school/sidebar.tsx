@@ -33,15 +33,15 @@ const Sidebar = () => {
   const pathname = usePathname();
 
   return (
-    <div className="hidden h-screen w-[250px] sticky top-0 left-0 p-4 md:flex flex-col items-center justify-between bg-black border-r border-outline">
+    <div className="hidden h-screen w-[250px] sticky top-0 left-0 p-4 md:flex flex-col items-start justify-between bg-black border-r border-outline">
       {/* Top Section */}
-      <div className="flex items-center mb-12">
+      <div className="mb-8">
         <Image
           src={"/logo.png"}
           alt="Logo"
-          width={200}
-          height={40}
-          className="w-[200px] h-[45px]"
+          width={150}
+          height={60}
+          className="w-[150px] h-[60px]"
         />
       </div>
 

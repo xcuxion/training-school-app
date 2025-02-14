@@ -15,6 +15,10 @@ const config: Config = {
 			Nunito: ['var(--font-Nunito)'],
 
 		},
+		backgroundImage: {
+			'faq-bg': "url('/images/wallpaper.jpg')",
+			'admission-bg': "url('/images/classroom.jpg')",
+		  },
   		colors: {
 			primary: '#FEBC10',
 			light: '#FFF9FF',
