@@ -85,9 +85,6 @@ const Portfolio = () => {
         ))}
         <div className="ml-8 space-x-4">
           <Button
-            onClick={() => {
-              setOpenLogin(true);
-            }}
             variant={"default"}
             className=" rounded-full h-8 md:h-10"
             asChild
@@ -112,31 +109,31 @@ const Portfolio = () => {
       </nav>
       <section
         id="home"
-        className={`${activeSection === "home" ? "block" : "hidden"} min-h-screen`}
+        className={`${activeSection === "home" ? "block" : "hidden"} h-screen`}
       >
         <Hero />
       </section>
       <section
         id="courses"
-        className={`${activeSection === "courses" ? "block" : "hidden"} min-h-screen`}
+        className={`${activeSection === "courses" ? "block" : "hidden"} h-screen`}
       >
         <CoursesSection />
       </section>
       <section
         id="admission"
-        className={`${activeSection === "admission" ? "block" : "hidden"} min-h-screen`}
+        className={`${activeSection === "admission" ? "block" : "hidden"} h-screen`}
       >
         <Team />
       </section>
       <section
         id="faqs"
-        className={`${activeSection === "faqs" ? "block" : "hidden"} min-h-screen`}
+        className={`${activeSection === "faqs" ? "block" : "hidden"} h-screen`}
       >
         <Faqs />
       </section>
       <section
         id="contact"
-        className={`${activeSection === "contact" ? "block" : "hidden"} min-h-screen`}
+        className={`${activeSection === "contact" ? "block" : "hidden"} h-screen`}
       >
         <Contact />
       </section>

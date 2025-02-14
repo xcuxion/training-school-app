@@ -60,11 +60,11 @@ const ApplicationPage = () => {
       <div className="flex flex-col-reverse md:flex-row md:flex-between py-2 md:py-4">
         <h1 className="text-3xl md:text-4xl font-bold">Application Form</h1>
         <Image
-          src={"/logo.pn"}
+          src={"/logo.png"}
           alt="logo"
-          width={200}
-          height={60}
-          className="w-[150px] h-[45px] md:w-[200px] h-[]60px"
+          width={125}
+          height={65}
+          className="w-[125px] h-[65px] md:w-[200px] h-[]60px"
         />
       </div>
       <p className="font-sm">
