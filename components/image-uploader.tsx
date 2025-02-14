@@ -3,7 +3,7 @@ import React, {useState} from 'react'
 import { Input } from './ui/input'
 import { Button } from './ui/button'
 import { useEdgeStore } from '@/lib/edgestore'
-import { SingleImageDropzone } from './sinle-image-drpzone'
+import { SingleImageDropzone } from './single-image-drpzone'
 
 const ImageUploader = () => {
     const [file, setFile] = useState<File>()
@@ -25,11 +25,11 @@ const ImageUploader = () => {
         }}
       />
         <div className='h-1.5 w-44 border rounded overflow-hidden'>
-            <div className="h-full bg-white transition-all duration-150" style={{
+            <div className="h-full bg-black transition-all duration-150" style={{
                 width: `${progress}%`
             }}></div>
         </div>
-        <Button className="bg-white text-black rounded px-2 hover:opacity-80" onClick={async()=>{
+        <Button className="bg-black text-dark rounded px-2 hover:opacity-80" onClick={async()=>{
             if (file){
                 const res = await edgestore.myPublicImages.upload({file, onProgressChange: (progress) => {
                     setProgess(progress)

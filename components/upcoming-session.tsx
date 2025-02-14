@@ -15,7 +15,7 @@ const UpcomingSession = () => {
   return (
     <>
       <div className="flex items-center justify-between">
-        <div className="w-full bg-white sticky top-0 py-2">
+        <div className="w-full bg-black sticky top-0 py-2">
           <h1 className="font-semibold text-xl">Hello</h1>
           <p>Welcome Back, {name}! </p>
         </div>
@@ -23,7 +23,7 @@ const UpcomingSession = () => {
           <ProfileCard {...profile} />
           <TodoSection />
           <div className="w-full h-[125px] bg-primary rounded-md flex px-6 items-center justify-between">
-            <div className="text-white">
+            <div className="text-dark">
               <h1 className="text-4xl font-semibold">237</h1>
               <p className="text-lg">Achievement Points</p>
             </div>
@@ -49,7 +49,7 @@ const UpcomingSession = () => {
             </p>
             <Button
               variant="default"
-              className="bg-primary text-xs md:text-sm text-white rounded-full"
+              className="bg-primary text-xs md:text-sm rounded-full"
             >
               Preview Materials
             </Button>

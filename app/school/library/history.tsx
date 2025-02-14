@@ -22,19 +22,19 @@ export interface IHistroy {
 const BookHistory = ({image, title, date}: IHistroy) => {
   return (
     <>
-      <div className=" rounded-md border w-full flex items-center ">
+      <div className=" rounded-md border border-outline p-2 w-full flex items-center ">
         <div className="h-full mr-4">
           <Image
             src={image}
             alt="Image 1"
             width={82}
             height={16}
-            className="w-20 h-20 object-cover"
+            className="w-16 h-16 object-cover rounded-sm"
           />
         </div>
         <div className="w-1/2">
           <h2 className="font-semibold my-2">{title}</h2>
-          <p className="text-gray-600">{new Date(date).toDateString()}</p>
+          <p className="text-white opacity-75">{new Date(date).toDateString()}</p>
         </div>
       </div>
     </>

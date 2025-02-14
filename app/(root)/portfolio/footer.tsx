@@ -24,7 +24,7 @@ const redirects = [
 
 const Footer = () => {
   return (
-    <motion.footer className="bg-gray-100 mt-4 px-5 md:px-20 py-5 md:py-10 flex flex-col md:flex-row md:items-center">
+    <motion.footer className="bg-secondary mt-4 px-5 md:px-20 py-5 md:py-10 flex flex-col md:flex-row md:items-center">
       <div className="grid md:grid-cols-2">
         <span className="">
           <h3 className="font-medium">Stay Updated</h3>
@@ -42,7 +42,7 @@ const Footer = () => {
       <div className="mt-4  md:mt-0">
         <div className="flex md:flex-row flex-col">
           <Image
-            src={"/logo.svg"}
+            src={"/logo.png"}
             alt=""
             width={150}
             height={45}

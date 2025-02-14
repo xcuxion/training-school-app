@@ -22,7 +22,7 @@ const BookItem = ({ book }: { book: BookType }) => {
           height={125}
           className="w-1/2 mx-auto bg-slate-100 "
         />
-      <span className="absolute top-0 right-0 bg-slate-50 m-1 text-slate-400 text-sm font-bold p-1 rounded-full">
+      <span className="absolute top-0 right-0 bg-black m-1 text-hite text-sm font-bold py-1 px-2 rounded-full">
         hello
       </span>
       </div>

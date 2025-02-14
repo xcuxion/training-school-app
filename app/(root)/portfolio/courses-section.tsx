@@ -1,15 +1,12 @@
 "use client";
-import React from "react";
+import React, { ReactElement } from "react";
 import ItemList from "./item-list";
 import { motion } from "framer-motion";
+import Image from "next/image";
 
 const courses = {
-  sartup: [
-    {
-      image: "/images/busana.jpg",
-      title: "Business Analytics",
-      subtitle: "Track",
-    },
+  startup: [
+
     {
       image: "/images/strategy.jpg",
       title: "Business Strategy",
@@ -20,11 +17,7 @@ const courses = {
       title: "Startup Essentials",
       subtitle: "General Course",
     },
-    {
-      image: "/images/marketing.jpg",
-      title: "Marketing",
-      subtitle: "Track",
-    },
+
   ],
   engineering: [
     {
@@ -60,15 +53,39 @@ const courses = {
   ],
 };
 
+interface ICourse {
+  subtitle: string;
+  title: string | ReactElement;
+  image: string;
+}
+export const CourseCard = ({ subtitle, image, title }: ICourse) => {
+  return (
+    <div className="p-4 flex flex-col items-start bg-gradient-to-r from-gray-900  to-gray-800 border border-gray-700 rounded-2xl shadow-lg hover:scale-105 transition-transform duration-300 ease-out">
+      <Image
+        src={image}
+        alt="image"
+        width={60}
+        height={60}
+        className="mr-4 w-[60px] h-[60px] object-cover rounded-lg"
+      />
+      <div className="flex flex-col">
+        <p className="text-xs md:text-sm text-gray-400">{subtitle}</p>
+        <h2 className="text-lg md:text-xl font-semibold text-white">{title}</h2>
+        <p className="text-xs md:text-sm text-gray-500 mt-1">
+          Learn more about this course and enhance your skills.
+        </p>
+      </div>
+    </div>
+  );
+};
 const CoursesSection = () => {
   return (
     <motion.div
-      id="courses"
       initial={{ opacity: 0, y: 50 }}
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true }}
       transition={{ duration: 0.8, ease: "easeOut" }}
-      className="px-5 md:px-20 py-5 md:py-0 min-h-screen md:h-screen bg-gray-100 flex flex-col flex-center"
+      className="px-5 md:px-20 py-5 md:py-0 min-h-screen md:h-screen bg-gradient-to-br from-black via-gray-900 to-black flex flex-col flex-center"
     >
       <motion.h3
         initial={{ opacity: 0, y: 50 }}
@@ -95,13 +112,13 @@ const CoursesSection = () => {
         whileInView={{ opacity: 1, y: 0 }}
         viewport={{ once: true }}
         transition={{ duration: 0.8, ease: "easeOut" }}
-        className="grid md:grid-cols-3 mt-4 gap-4"
+        className="grid md:grid-cols-4 mt-4 gap-4"
       >
-        {courses.sartup.map((course, index) => (
-          <ItemList {...course} key={index} />
+        {courses.startup.map((course, index) => (
+          <CourseCard {...course} key={index} />
         ))}
         {courses.engineering.map((course, index) => (
-          <ItemList {...course} key={index} />
+          <CourseCard {...course} key={index} />
         ))}
       </motion.div>
     </motion.div>

@@ -13,7 +13,7 @@ interface IModuleDetails {
 
 const ModuleDetails = ({image, name, facilitator, resources}: IModuleDetails) => {
   return (
-    <div className='w-full bg-light border p-2 md:p-4 md:h-[200px] space-y-3 md:space-y-6'>
+    <div className='w-full bg-secondary border border-outline p-2 md:p-4 md:h-[200px] space-y-3 md:space-y-6'>
         <div className="flex items-center">
           <Image src={image} alt='' width={60} height={60} className='w-[60px] h-[60px] border rounded-sm mr-2 md:mr-4'/>
           <span className="flex flex-col">

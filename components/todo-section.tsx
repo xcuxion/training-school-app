@@ -20,7 +20,7 @@ interface Task {
 
 const Tasks = ({ content, state, period }: Task) => {
   return (
-    <div className="p-2 bg-white border rounded-md">
+    <div className="p-2 bg-black  rounded-md">
       <p className="font-semibold">{content}</p>
       <div className="flex items-center space-x-10 mt-1 text-sm">
         <span className="">
@@ -35,7 +35,7 @@ const Tasks = ({ content, state, period }: Task) => {
 const TodoSection = () => {
   return (
     <>
-      <div className="w-full bg-light border rounded-md p-3">
+      <div className="w-full bg-secondary border border-outline rounded-md p-3">
         <div className="flex justify-between">
           <h1 className="text-lg font-semibold leading-tight">To-Dos</h1>
           <span className="w-6 h-6 flex flex-center bg-secondary hover:bg-fuchsia-300 hover:cursor-pointer rounded-sm" >

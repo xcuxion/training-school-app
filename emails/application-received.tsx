@@ -25,7 +25,7 @@ import {
         <Container style={container}>
           <Section style={box}>
             <Img
-              src={`../public/logo.svg`}
+              src={`../public/logo.png`}
               width="49"
               height="21"
               alt="Stripe"

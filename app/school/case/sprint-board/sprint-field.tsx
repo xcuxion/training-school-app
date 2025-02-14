@@ -5,13 +5,13 @@ import React from 'react'
 const SprintField = () => {
   const tasksInSprint = []
   return (
-    <div className='w-full h-48 border-2 rounded-md'>
-      <div className="flex flex-between py-1.5 px-2 border-b-2">
+    <div className='w-full min-h-48 border-2 border-dashed border-outline bg-secondary rounded-md p-3'>
+      <div className="flex flex-between py-1.5 px-2 border-b-2 border-outline">
         <span className="flex items-center">
           <Image src={'/icons/sprint-cycle.svg'} alt='icon' width={30} height={30} className=''/>
           <h3 className="text-lg font-medium">Sprints</h3>
         </span>
-        <Button variant={"secondary"} className='border-2 border-primary text-primary bg-secondary'>
+        <Button variant={"secondary"} className='bg-black text-primary'>
           Start Sprint
         </Button>
       </div>

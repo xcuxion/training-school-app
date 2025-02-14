@@ -21,7 +21,7 @@ export function DataTable<TData, TValue>({ columns, data }: DataTableProps<TData
   });
 
   return (
-    <div className="w-full rounded-md border">
+    <div className="w-full rounded-md ">
       <Table>
         {/* Table Header */}
         <TableHeader >

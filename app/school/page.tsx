@@ -43,11 +43,11 @@ const page = () => {
         </div>
         <PastSessionSection/>
       </MainContent>
-      <SideSection className="w-1/3">
+      <SideSection className="w-1/3 ">
           <ProfileCard {...profile}/>
         <TodoSection />
         <div className="w-full h-[125px] bg-primary rounded-md flex px-6 items-center justify-between">
-          <div className="text-white">
+          <div className="text-black">
             <h1 className="text-4xl font-semibold">237</h1>
             <p className="text-lg">Achievement Points</p>
           </div>

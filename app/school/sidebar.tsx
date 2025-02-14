@@ -33,11 +33,11 @@ const Sidebar = () => {
   const pathname = usePathname();
 
   return (
-    <div className="hidden h-screen w-[250px] sticky top-0 left-0 p-4 md:flex flex-col items-center justify-between bg-white border-r">
+    <div className="hidden h-screen w-[250px] sticky top-0 left-0 p-4 md:flex flex-col items-center justify-between bg-black border-r border-outline">
       {/* Top Section */}
       <div className="flex items-center mb-12">
         <Image
-          src={"/logo.svg"}
+          src={"/logo.png"}
           alt="Logo"
           width={200}
           height={40}
@@ -80,7 +80,7 @@ const Sidebar = () => {
           <Button
             onClick={()=>{logOut()}}
             variant={"default"}
-            className="bg-primary text-white rounded-full text-sm"
+            className="bg-primary text-black rounded-full text-sm"
           >
             Log Out
           </Button>
