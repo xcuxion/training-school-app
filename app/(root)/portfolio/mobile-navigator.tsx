@@ -1,5 +1,5 @@
 "use client";
-import React from "react";
+import React, { useState } from "react";
 import {
   Sheet,
   SheetContent,
@@ -22,8 +22,15 @@ const MobileNavigator: React.FC<MobileNavigatorProps> = ({
   activeSection,
   setActiveSection,
 }) => {
+  const [isOpen, setIsOpen] = useState<boolean>(false);
+
+  const handleLinkClick = (section: string) => {
+    setActiveSection(section);
+    setIsOpen(false); // Close the sheet after clicking a link
+  };
+
   return (
-    <Sheet>
+    <Sheet open={isOpen} onOpenChange={setIsOpen}>
       <SheetTrigger>
         <MdMenu className="w-8 h-8" />
       </SheetTrigger>
@@ -43,7 +50,7 @@ const MobileNavigator: React.FC<MobileNavigatorProps> = ({
                   ? "bg-gray-900 text-black"
                   : "opacity-50"
               }`}
-              onClick={() => setActiveSection(section)}
+              onClick={() => handleLinkClick(section)}
             >
               {section.charAt(0).toUpperCase() + section.slice(1)}
             </Link>
