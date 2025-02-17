@@ -121,7 +121,7 @@ const ApplicationPage = () => {
               )}
             </span>
           </div>
-          <div className="grid grid-cols-2 gap-y-2 md:gap-y-0 gap-x-4 md:grid-cols-3 md:gap-x-6">
+          <div className="grid gap-y-2 md:gap-y-0 gap-x-4 md:grid-cols-3 md:gap-x-6">
             <span className="w-full">
               <Label>Date of Birth*</Label>
               <Input
@@ -136,7 +136,7 @@ const ApplicationPage = () => {
                 <p className="text-sm text-red-500">{state.errors.dob}</p>
               )}
             </span>
-            <span className="">
+            <span className="w-full">
               <Label>Gender</Label>
               <RadioGroup
                 defaultValue="male"
@@ -156,7 +156,7 @@ const ApplicationPage = () => {
                 </div>
               </RadioGroup>
             </span>
-            <span className="col-span-2 md:col-span-1">
+            <span className="md:col-span-1">
               <Label>Country</Label>
               <Select
                 onValueChange={(choice) =>

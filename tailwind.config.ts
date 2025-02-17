@@ -13,7 +13,6 @@ const config: Config = {
 		fontFamily: {
 			Poppins: ['var(--font-Poppins)'],
 			Nunito: ['var(--font-Nunito)'],
-
 		},
 		backgroundImage: {
 			'faq-bg': "url('/images/wallpaper.jpg')",

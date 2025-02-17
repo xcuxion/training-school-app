@@ -118,14 +118,14 @@ const Hero = () => {
           width={300}
           height={200}
           priority
-          className="mx-auto mb-4"
+          className="mx-auto mb-4 w-[200px] p[150px]"
         />
         <motion.h1
           initial={{ opacity: 0, y: 50 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.8, ease: "easeOut" }}
-          className="text-3xl md:text-6xl font-bold drop-shadow-lg"
+          className="text-2xl md:text-6xl font-bold drop-shadow-lg"
         >
           School of Engineering & Techpreneurship
         </motion.h1>
