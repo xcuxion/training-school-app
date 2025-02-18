@@ -84,6 +84,9 @@ const XcuxionWelcomeEmail = ({
 export default XcuxionWelcomeEmail;
 
 const main = {
+  backgroundImage: "url('/logo.svg`')", 
+  backgroundSize: "cover", 
+  backgroundPosition: "center", 
   backgroundColor: "#f6f9fc",
   fontFamily:
     '-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Ubuntu,sans-serif',
