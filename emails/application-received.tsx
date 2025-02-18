@@ -32,7 +32,12 @@ const XcuxionWelcomeEmail = ({
     <Body style={main}>
       <Container style={container}>
         <Section style={box}>
-          <Img src={`/home/jessica/Documents/_projects/training-school-app/public/logo.svg`} width="49" height="21" alt="Xcuxion Logo" />
+          <Img
+              src={`${baseUrl}/static/logo.png`}
+            width="49"
+            height="21"
+            alt="Xcuxion Logo"
+          />
           <Hr style={hr} />
           <Text style={header}>🌟 Thank You for Your Application! 🎉</Text>
           <Text style={paragraph}>
@@ -42,16 +47,16 @@ const XcuxionWelcomeEmail = ({
           </Text>
           <Text style={paragraph}> 🚀 What’s next? </Text>
           <Text style={paragraph}>
-           ✅ Access Your Admission Portal – Review and update
-            your application details.
+            ✅ Access Your Admission Portal – Review and update your application
+            details.
             <Link style={anchor} href="/admission-portal">
-            Access Your Admission Portal
+              Access Your Admission Portal
             </Link>{" "}
           </Text>
           <Text style={paragraph}>
             ✅ Explore Financial Aid Options – Learn about support available to
             you.,{" "}
-            <Link style={anchor} href="https://stripe.com/docs">
+            <Link style={anchor} href="https://xcuxion.org/#admissions">
               read this post.
             </Link>{" "}
           </Text>
@@ -61,12 +66,12 @@ const XcuxionWelcomeEmail = ({
             step. We’ll keep you updated on the next steps in the selection
             process. In the meantime, if you have any questions, feel free to
             reach out—we’re here to help!{" "}
-            <Link style={anchor} href="https://support.stripe.com/">
+            <Link style={anchor} href="https://xcuxion.org/#contact">
               support site
             </Link>
             .
           </Text>
-          <Text style ={paragraph}>✨ Stay tuned for what’s ahead! ✨</Text>
+          <Text style={paragraph}>✨ Stay tuned for what’s ahead! ✨</Text>
           <Text style={paragraph}>— The Admission team</Text>
           <Hr style={hr} />
           <Text style={footer}>XCUXION, Ghana</Text>
@@ -89,9 +94,8 @@ const container = {
   margin: "20px auto",
   padding: "20px 0 48px",
   marginBottom: "64px",
-  boxShadow: "0px 4px 10px rgba(0, 0, 0, 0.1)", 
+  boxShadow: "0px 4px 10px rgba(0, 0, 0, 0.1)",
 };
-
 
 const box = {
   padding: "0 48px",
@@ -100,7 +104,6 @@ const box = {
 const hr = {
   borderColor: "#e6ebf1",
   margin: "20px 0",
-  
 };
 
 const header = {
@@ -108,7 +111,7 @@ const header = {
   fontWeight: "bold",
   color: "#2c3e50",
   marginBottom: "18px",
-}
+};
 const paragraph = {
   color: "#2c3e50",
 

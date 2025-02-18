@@ -12,8 +12,13 @@ import {
   Section,
   Text,
 } from "@react-email/components";
+import { flexRender } from "@tanstack/react-table";
 import Image from "next/image";
 import * as React from "react";
+
+const baseUrl = process.env.VERCEL_URL
+  ? `https://${process.env.VERCEL_URL}`
+  : "";
 
 const AdmittedMessage = () => {
   return (
@@ -23,7 +28,13 @@ const AdmittedMessage = () => {
       <Body style={main}>
         <Container style={styles}>
           <Section style={section}>
-            <Img style={tag} src="/logo.svg" alt="XCUXION Logo" width="300" height="100" />
+            <Img
+              style={tag}
+              src={`${baseUrl}/static/logo.png`}
+              alt="XCUXION Logo"
+              width="300"
+              height="100"
+            />
             <Text style={heading}>🌟 Congratulations! 🎉</Text>
             <Text style={paragraph}>
               Your application to join Batch'25 of XCUXION has been accepted.
@@ -40,12 +51,13 @@ const AdmittedMessage = () => {
               can’t wait to see the incredible things you will accomplish! 🚀✨
               Welcome to a new chapter of success!
             </Text>
-            <Text style={paragraph}>Below are your credentials:
+            <Text style={paragraph}>
+              Below are your credentials:
               <Text>Username:</Text>
               <Text>Password:</Text>
             </Text>
-            <Image
-              src="/public/logo.png"
+            <Img
+              src={`${baseUrl}/static/congrat.jpeg`}
               alt="XCUXION Logo"
               width="250"
               height="150"
@@ -76,11 +88,13 @@ const styles = {
 
 const section = {
   padding: "0 48px",
+  display: "flex",
+  flexRender: "column",
 };
 const tag = {
-  width: "250px",  
-  height: "150px",
-  display: "block", 
+  
+  width: "150px",
+  height: "80px",
 };
 
 const heading = {

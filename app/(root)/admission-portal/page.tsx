@@ -4,7 +4,6 @@ import React, { useEffect, useState } from "react";
 import { Avatar, AvatarFallback } from "@/components/ui/avatar";
 import { edit_application, fetch_applicant_data } from "@/lib/actions/admission.actions";
 import { useApplicantStore } from "@/store/applicant-store";
-import { logOut } from "@/lib/actions/general.action";
 import { Button } from "@/components/ui/button";
 import { Textarea } from "@/components/ui/textarea";
 import { Input } from "@/components/ui/input";
@@ -33,6 +32,9 @@ const AdmissionPortal = () => {
     await edit_application(applicant?.id as string, formData);
     setEditOff(true);
   };
+  const logout = () => {
+    
+  }
   useEffect(() => {
     const fetchData = async () => {
       const result = await fetch_applicant_data(applicant?.id as string);
@@ -73,7 +75,7 @@ const AdmissionPortal = () => {
               </AvatarFallback>
             </Avatar>
           )}
-          <Button variant="outline" onClick={() => logOut()}>
+          <Button variant="outline" onClick={() => logout()}>
             Log out
           </Button>
         </div>
