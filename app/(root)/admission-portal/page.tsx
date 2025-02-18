@@ -93,9 +93,14 @@ const AdmissionPortal = () => {
             <h1 className="text-4xl font-bold">
               {applicant?.fname} {applicant?.lname}
             </h1>
+            {
+              applicant?.student && (
+
             <p className="text-xl text-dark">
               {applicant?.programme} - Year {applicant?.year}
             </p>
+              )
+            }
             <p className="text-lg text-gray-300">
               Status:{" "}
               <span className="font-semibold">

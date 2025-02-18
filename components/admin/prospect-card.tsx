@@ -27,7 +27,7 @@ const ProspectCard = ({
   scholarship,
   school,
   gender,
-}: IProspectCard|IApplicant) => {
+}: IProspectCard | IApplicant) => {
   return (
     <div className="hover:cursor-pointer border rounded-md p-2 bg-light space-y-2">
       <div className="flex items-center">
@@ -39,7 +39,9 @@ const ProspectCard = ({
           className="w-16 h-16 rounded-full object-cover"
         />
         <span className="">
-          <h3 className="text-lg">{fname} { oname && oname } {lname}</h3>
+          <h3 className="text-lg">
+            {fname} {oname && oname} {lname}
+          </h3>
           <p className="text-sm capitalize">{gender}</p>
         </span>
       </div>
@@ -52,9 +54,11 @@ const ProspectCard = ({
       </div>
 
       <hr />
-      <span className="text-xs">
-        Applied on: {new Date(createdAt).toLocaleDateString()}
-      </span>
+      {createdAt && (
+        <span className="text-xs">
+          Applied on: {new Date(createdAt).toLocaleDateString()}
+        </span>
+      )}
     </div>
   );
 };
