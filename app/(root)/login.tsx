@@ -2,7 +2,8 @@
 import FormModal from "@/components/form-modal";
 import SubmitButton from "@/components/submit-button";
 import { Input } from "@/components/ui/input";
-import {  login } from "@/lib/actions/general.action";
+import { login } from "@/lib/actions/general.action";
+import { useApplicantStore } from "@/store/applicant-store";
 import { useRouter } from "next/navigation";
 import React, { useEffect, useRef, useState } from "react";
 import { useFormState } from "react-dom";
@@ -13,14 +14,17 @@ const Login = ({ show, onClose }: { show: boolean; onClose: () => void }) => {
   const [password, setPassword] = useState<string>("");
   const formRef = useRef<HTMLFormElement>(null);
   const router = useRouter();
+  const {update} = useApplicantStore()
   useEffect(() => {
     if (formState?.success && formState?.data) {
       formRef.current?.reset();
-        router.push("/admission-portal");
+      update(formState?.data);
+
+      router.push("/admission-portal");
     }
   }, [formState, router]);
   return (
-    <FormModal isOpen={show} onClose={onClose} title="Sign in to Account" >
+    <FormModal isOpen={show} onClose={onClose} title="Sign in to Account">
       <div className="">
         <form action={formAction} className="space-y-2">
           <>

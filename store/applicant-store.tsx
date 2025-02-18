@@ -23,13 +23,14 @@ export interface IApplicant {
   student: boolean;
   admissionType: string | null;
   batch: "batch25" | null | string;
-  createdAt: Date;
-  updatedAt: Date;
+  createdAt?: Date;
+  updatedAt?: Date;
 }
 
 interface ApplicantStore {
   applicant: IApplicant | null;
   update: (applicant: IApplicant) => void;
+  logout: () => void
 }
 
 export const useApplicantStore = create<ApplicantStore>((set) => ({

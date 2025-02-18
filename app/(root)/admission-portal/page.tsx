@@ -12,6 +12,7 @@ import { FaPen } from "react-icons/fa";
 const AdmissionPortal = () => {
   const { applicant } = useApplicantStore();
   const [editOff, setEditOff] = useState(true);
+  const {update, logout} = useApplicantStore()
   const [editableData, setEditableData] = useState({
     contact: applicant?.contact || "",
     programme: applicant?.programme || "",
@@ -32,14 +33,12 @@ const AdmissionPortal = () => {
     await edit_application(applicant?.id as string, formData);
     setEditOff(true);
   };
-  const logout = () => {
-    
-  }
+
   useEffect(() => {
     const fetchData = async () => {
       const result = await fetch_applicant_data(applicant?.id as string);
       if (result) {
-        useApplicantStore.getState().update(result);
+        update(result);
         setEditableData({
           contact: result?.contact ?? "",
           programme: result?.programme ?? "",
