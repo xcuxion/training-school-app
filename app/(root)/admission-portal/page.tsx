@@ -8,9 +8,11 @@ import { Button } from "@/components/ui/button";
 import { Textarea } from "@/components/ui/textarea";
 import { Input } from "@/components/ui/input";
 import { FaPen } from "react-icons/fa";
+import { useRouter } from "next/navigation";
 
 const AdmissionPortal = () => {
   const { applicant } = useApplicantStore();
+  const router = useRouter()
   const [editOff, setEditOff] = useState(true);
   const {update, logout} = useApplicantStore()
   const [editableData, setEditableData] = useState({
@@ -61,7 +63,10 @@ const AdmissionPortal = () => {
   ) => {
     setEditableData({ ...editableData, [e.target.name]: e.target.value });
   };
-
+  const handleLogOut = () => {
+    logout()
+    router.push('/')
+  }
   return (
     <div className="w-full min-h-screen md:w-4/5 mx-auto p-6 space-y-6">
       <header className="flex justify-between items-center border-b border-outline pb-4 mb-4 sticky top-0 bg-black z-50">
@@ -74,7 +79,7 @@ const AdmissionPortal = () => {
               </AvatarFallback>
             </Avatar>
           )}
-          <Button variant="outline" onClick={() => logout()}>
+          <Button variant="outline" onClick={() => handleLogOut()}>
             Log out
           </Button>
         </div>
