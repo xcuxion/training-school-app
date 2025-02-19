@@ -4,11 +4,10 @@
   "private": true,
   "scripts": {
     "dev": "node server.js",
-    "build": "prisma generate && next build",
+    "build": "next build",
     "start": "NODE_ENV=production node server.js",
     "lint": "next lint",
-    "email": "email dev",
-    "postinstall": "prisma generate"
+    "email": "email dev"
   },
   "dependencies": {
     "@clerk/nextjs": "^5.7.5",
