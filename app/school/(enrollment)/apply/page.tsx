@@ -17,6 +17,7 @@ import { new_application } from "@/lib/actions/admission.actions";
 import { useRouter } from "next/navigation";
 import { toast } from "@/components/ui/use-toast";
 import SubmitButton from "@/components/submit-button";
+import { useApplicantStore } from "@/store/applicant-store";
 
 const initial = {
   fname: "",
@@ -44,6 +45,8 @@ const ApplicationPage = () => {
   const [value, setValue] = useState(initial);
   const formRef = useRef<HTMLFormElement>(null);
   const router = useRouter();
+  const { update } = useApplicantStore();
+
   useEffect(() => {
     console.log(state);
     if (state?.success && state?.data) {
@@ -52,7 +55,10 @@ const ApplicationPage = () => {
         title: "Application Submitted Successfully",
       });
       formRef.current?.reset();
-      router.push("/admission-portal");
+
+      update(state?.data);
+
+      router.push("/school/admission-portal");
     }
   }, [router, state]);
   return (

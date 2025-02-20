@@ -36,7 +36,7 @@ const faqs: IFaq[] = [
       <>
         Applications for the Batch&apos;25 program will open in February 2025.
         Interested applicants can apply through our official website by filling
-        out an online application form <Link href={"/apply"}>here</Link>.
+        out an <Link href={"/school/apply"} className="underline font-bold">online application form here</Link>.
       </>
     ),
   },

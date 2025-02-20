@@ -151,7 +151,7 @@ const Hero = () => {
             asChild
             aria-label="Start Your Application"
           >
-            <Link href="/apply">Start Your Application!</Link>
+            <Link href="/school/apply">Start Your Application!</Link>
           </Button>
         </motion.div>
       </motion.span>

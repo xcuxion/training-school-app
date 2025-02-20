@@ -3,15 +3,29 @@ import FormModal from "@/components/form-modal";
 import SubmitButton from "@/components/submit-button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
-import { login } from "@/lib/actions/general.action";
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select";
+import { register } from "@/lib/actions/general.action";
 import { useUserStore } from "@/store/user-store";
 import { useRouter } from "next/navigation";
 import React, { useEffect, useRef, useState } from "react";
 import { useFormState } from "react-dom";
 
-const Login = ({ show, onClose }: { show: boolean; onClose: () => void }) => {
-  const [formState, formAction] = useFormState(login, undefined);
+const Register = ({
+  show,
+  onClose,
+}: {
+  show: boolean;
+  onClose: () => void;
+}) => {
+  const [formState, formAction] = useFormState(register, undefined);
   const [email, setEmail] = useState<string>("");
+  const [interest, setInterest] = useState("school");
   const [password, setPassword] = useState<string>("");
   const formRef = useRef<HTMLFormElement>(null);
   const router = useRouter();
@@ -20,11 +34,11 @@ const Login = ({ show, onClose }: { show: boolean; onClose: () => void }) => {
     if (formState?.success && formState?.data) {
       formRef.current?.reset();
       update(formState?.data);
-      router.push("/school/admission-portal");
+      router.push("/dashboard");
     }
   }, [formState, router]);
   return (
-    <FormModal isOpen={show} onClose={onClose} title="Sign in to Account">
+    <FormModal isOpen={show} onClose={onClose} title="Register Account">
       <div className="">
         <form action={formAction} className="flex flex-col gap-y-4">
           <span>
@@ -33,7 +47,7 @@ const Login = ({ show, onClose }: { show: boolean; onClose: () => void }) => {
             <Input
               id="email"
               name="email"
-              placeholder="Email Address"
+              placeholder="example: abc@xyz.com"
               type="email"
               value={email}
               onChange={(e) => setEmail(e.target.value)}
@@ -42,12 +56,14 @@ const Login = ({ show, onClose }: { show: boolean; onClose: () => void }) => {
               <p className="text-red-500">{formState.errors.email}</p>
             )}
           </span>
+
           <span>
             <Label>Password</Label>
+
             <Input
               id="password"
               name="password"
-              placeholder="Password"
+              placeholder="example: 1A#sxccDe8"
               type="password"
               value={password}
               onChange={(e) => setPassword(e.target.value)}
@@ -56,11 +72,32 @@ const Login = ({ show, onClose }: { show: boolean; onClose: () => void }) => {
               <p className="text-red-500">{formState.errors.password}</p>
             )}
           </span>
-          <SubmitButton buttonText="Login" />
+          <span className="col-span-2 md:col-span-1 ">
+            <Label>Select Batch</Label>
+            <Select
+              onValueChange={(choice) => setInterest(choice)}
+              name="interest"
+            >
+              <SelectTrigger className="">
+                <SelectValue placeholder="Select" defaultValue={interest} />
+              </SelectTrigger>
+              <SelectContent className="bg-secondary">
+                <SelectItem value="school">School</SelectItem>
+                <SelectItem value="guild">Guild</SelectItem>
+                <SelectItem value="startupcenter">Startups Center</SelectItem>
+              </SelectContent>
+            </Select>
+            {formState?.errors?.interest && (
+              <p className="text-sm text-red-500">
+                {formState.errors.interest}
+              </p>
+            )}
+          </span>
+          <SubmitButton buttonText="Create Account" />
         </form>
       </div>
     </FormModal>
   );
 };
 
-export default Login;
+export default Register;

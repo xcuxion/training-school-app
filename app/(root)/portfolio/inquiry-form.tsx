@@ -16,7 +16,7 @@ const InquiryForm = () => {
   const [question, setQuestion] = useState<string>("");
 
   return (
-    <div className="bg-secondary text-dark w-full md:w-[450px] rounded-md p-3 md:p-4 md:h-[365px] flex flex-col ">
+    <div className="bg-secondary text-dark w-full md:w-[550px] rounded-md p-3 md:p-4 md:h-[465px] flex flex-col ">
       <h1 className="font-semibold text-lg md:text-xl">Make An Enquiry</h1>
       <form action={makeEnquiryAction} className="space-y-2">
         <div>
@@ -52,7 +52,7 @@ const InquiryForm = () => {
           <Textarea
             id="question"
             name="question"
-            className=" boder- min-h-20"
+            className=" min-h-20 md:min-h-44"
             value={question}
             onChange={(e) => setQuestion(e.target.value)}
           />

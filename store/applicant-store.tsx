@@ -6,7 +6,7 @@ export interface IApplicant {
   email: string;
   fname: string;
   lname: string;
-  oname: string | null ;
+  oname: string | null;
   dob: string | Date;
   gender: "male" | "female";
   country: "ghana";
@@ -30,7 +30,7 @@ export interface IApplicant {
 interface ApplicantStore {
   applicant: IApplicant | null;
   update: (applicant: IApplicant) => void;
-  logout: () => void
+  logout: () => void;
 }
 
 export const useApplicantStore = create<ApplicantStore>((set) => ({
@@ -40,5 +40,10 @@ export const useApplicantStore = create<ApplicantStore>((set) => ({
     set((state) => ({ ...state, applicant }));
     console.log("State After Update:", useApplicantStore.getState().applicant); // ✅ Debugging log
   },
-  logout: () => set(() => ({ applicant: null })),
+  logout: () => {
+    console.log("State Before logout:", useApplicantStore.getState().applicant); // ✅ Debugging log
+    set(() => ({ applicant: null }));
+    console.log("State After logout:", useApplicantStore.getState().applicant); // ✅ Debugging log
+
+  },
 }));

@@ -9,12 +9,15 @@ import { Textarea } from "@/components/ui/textarea";
 import { Input } from "@/components/ui/input";
 import { FaPen } from "react-icons/fa";
 import { useRouter } from "next/navigation";
+import { logOut } from "@/lib/actions/general.action";
+import { useUserStore } from "@/store/user-store";
 
 const AdmissionPortal = () => {
+  const {user} = useUserStore()
   const { applicant } = useApplicantStore();
   const router = useRouter()
   const [editOff, setEditOff] = useState(true);
-  const {update, logout} = useApplicantStore()
+  const {update, logout} = useApplicantStore();
   const [editableData, setEditableData] = useState({
     contact: applicant?.contact || "",
     programme: applicant?.programme || "",
@@ -35,12 +38,11 @@ const AdmissionPortal = () => {
     await edit_application(applicant?.id as string, formData);
     setEditOff(true);
   };
-
+  
   useEffect(() => {
     const fetchData = async () => {
       const result = await fetch_applicant_data(applicant?.id as string);
       if (result) {
-        update(result);
         setEditableData({
           contact: result?.contact ?? "",
           programme: result?.programme ?? "",
@@ -60,11 +62,12 @@ const AdmissionPortal = () => {
 
   const handleChange = (
     e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
-  ) => {
+  ) => {logout
     setEditableData({ ...editableData, [e.target.name]: e.target.value });
   };
-  const handleLogOut = () => {
+  const handleLogOut = async () => {
     logout()
+    await logOut()
     router.push('/')
   }
   return (
@@ -79,7 +82,7 @@ const AdmissionPortal = () => {
               </AvatarFallback>
             </Avatar>
           )}
-          <Button variant="outline" onClick={() => handleLogOut()}>
+          <Button variant="outline" onClick={async () => await handleLogOut()}>
             Log out
           </Button>
         </div>
@@ -228,7 +231,7 @@ const AdmissionPortal = () => {
         />
       </section>
       <section className="mt-6">
-        <h3 className="text-lg font-semibold">How you intend to balance the training with your acadeics?</h3>
+        <h3 className="text-lg font-semibold">How you intend to balance the training with your academics?</h3>
         <Textarea
           name="reason"
           value={editableData.balance}

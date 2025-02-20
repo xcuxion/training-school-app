@@ -1,13 +1,9 @@
-import React, { ReactNode } from 'react'
-import Sidebar from './sidebar'
-import MobileNav from './mobile-nav'
+import React from 'react'
 
-const layout = ({children}: {children:ReactNode}) => {
+const layout = ({children}: {children: React.ReactNode}) => {
   return (
-    <div className='w-full flex flex-row gap-x-4 bg-black font-normal'>
-        <Sidebar/>
-        <MobileNav/>
-          {children} 
+    <div className='bg-black'>
+      {children}
     </div>
   )
 }

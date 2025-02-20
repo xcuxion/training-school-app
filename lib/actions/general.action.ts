@@ -3,7 +3,6 @@ import { z } from "zod";
 import { handleError } from "../utils";
 import * as bcrypt from "bcrypt";
 import { PrismaClient } from "@prisma/client";
-import { redirect } from 'next/navigation'
 import { createSession, deleteSession } from "../session";
 import { Resend } from "resend";
 import { ReactElement } from "react";
@@ -12,13 +11,23 @@ import { signIn } from "../auth";
 const resend = new Resend(process.env.RESEND_KEY);
 const prisma = new PrismaClient();
 
-const formSchema = z.object({
+const loginSchema = z.object({
   email: z.string().email({ message: "Invalid email address" }).trim(),
   password: z
     .string()
     .min(8, { message: "Password must be at least 8 characters" })
     .trim(),
 });
+
+const registerSchema = z.object({
+  email: z.string().email({ message: "Invalid email address" }).trim(),
+  password: z
+    .string()
+    .min(8, { message: "Password must be at least 8 characters" })
+    .trim(),
+  interest: z.enum(["school", "guild", "startupcenter"], {message: "Select your interested faction"}),
+});
+
 const enquirySchema = z.object({
   name: z.string({ message: "Enter your name" }).trim(),
   email: z
@@ -119,9 +128,8 @@ export async function sendMail(
 export async function logOut() {
   try {
     await deleteSession();
-    redirect('/')
   } catch (error) {
-    console.log(error)
+    console.log(error);
   }
 }
 
@@ -162,7 +170,7 @@ export type FormState = {
 
 export async function login(prevState: unknown, formData: FormData) {
   try {
-    const result = formSchema.safeParse(Object.fromEntries(formData));
+    const result = loginSchema.safeParse(Object.fromEntries(formData));
     console.log(formData);
 
     if (!result.success) {
@@ -174,19 +182,18 @@ export async function login(prevState: unknown, formData: FormData) {
 
     const { email, password } = result.data;
 
-    const existingApplicant = await prisma.applicant.findFirst({
+    const existingUser = await prisma.user.findFirst({
       where: { email },
-
     });
-    if (!existingApplicant) {
+    if (!existingUser) {
       return {
         errors: {
-          email: ["Invalid email"],
+          email: ["User not registered"],
         },
       };
     }
 
-    const comparison = await bcrypt.compare(password, existingApplicant.password);
+    const comparison = await bcrypt.compare(password, existingUser.password);
 
     if (!comparison) {
       return {
@@ -196,11 +203,11 @@ export async function login(prevState: unknown, formData: FormData) {
       };
     }
 
-    await createSession(existingApplicant.id);
+    await createSession(existingUser.id);
 
-    const { createdAt, updatedAt, ...profileWithoutTimestamps } =
-      existingApplicant;
-    console.log(profileWithoutTimestamps)
+    const { interest, createdAt, updatedAt, ...profileWithoutTimestamps } =
+      existingUser;
+    console.log(profileWithoutTimestamps);
     return {
       data: profileWithoutTimestamps,
       success: result?.success,
@@ -208,6 +215,57 @@ export async function login(prevState: unknown, formData: FormData) {
   } catch (error) {
     if (error instanceof Error && error.message === "NEXT_REDIRECT") {
       throw error; // Let Next.js handle the redirect
+    }
+    handleError(error);
+  }
+}
+
+export async function register(prevState: unknown, formData: FormData) {
+  try {
+    const result = registerSchema.safeParse(Object.fromEntries(formData));
+    console.log(formData);
+
+    if (!result.success) {
+      return {
+        message: "Failed to register",
+        errors: result.error.flatten().fieldErrors,
+      };
+    }
+
+    const { email, password, interest } = result.data;
+
+    const existingUser = await prisma.user.findFirst({
+      where: { email },
+    });
+    if (existingUser) {
+      return {
+        errors: {
+          email: ["User already exists"],
+        },
+      };
+    }
+
+    const hashPassword = await bcrypt.hash(password, 10);
+
+    const newUser = await prisma.user.create({
+      data: {
+        email,
+        password: hashPassword,
+        interest,
+      },
+    });
+
+    await createSession(newUser.id);
+
+    const { createdAt, updatedAt, ...profileWithoutTimestamps } = newUser;
+    console.log(profileWithoutTimestamps);
+    return {
+      data: profileWithoutTimestamps,
+      success: result?.success,
+    };
+  } catch (error) {
+    if (error instanceof Error && error.message === "NEXT_REDIRECT") {
+      throw error;
     }
     handleError(error);
   }

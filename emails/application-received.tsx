@@ -17,7 +17,7 @@ const baseUrl = process.env.VERCEL_URL
   ? `https://${process.env.VERCEL_URL}`
   : "";
 
-const XcuxionWelcomeEmail = ({
+const ApplicationSubmitted = ({
   userFirstname,
   email,
 }: {
@@ -49,7 +49,7 @@ const XcuxionWelcomeEmail = ({
           <Text style={paragraph}>
             ✅ Access Your Admission Portal – Review and update your application
             details.
-            <Link style={anchor} href="/admission-portal">
+            <Link style={anchor} href="/school/admission-portal">
               Access Your Admission Portal
             </Link>{" "}
           </Text>
@@ -81,7 +81,7 @@ const XcuxionWelcomeEmail = ({
   </Html>
 );
 
-export default XcuxionWelcomeEmail;
+export default ApplicationSubmitted;
 
 const main = {
   backgroundImage: "url('/logo.svg`')", 

@@ -10,12 +10,14 @@ import Link from "next/link";
 import Login from "./login";
 import { Button } from "@/components/ui/button";
 import MobileNavigator from "./portfolio/mobile-navigator";
+import Register from "./register";
 
 const sections = ["home", "courses", "admission", "faqs", "contact"];
 
 const Portfolio: React.FC = () => {
   const [activeSection, setActiveSection] = useState<string>("home");
   const [openLogin, setOpenLogin] = useState<boolean>(false);
+  const [openRegister, setOpenRegister] = useState<boolean>(false);
 
   const handleScroll = () => {
     const scrollPosition = window.scrollY;
@@ -71,9 +73,11 @@ const Portfolio: React.FC = () => {
           <Button
             variant={"default"}
             className=" rounded-full h-8 md:h-10"
-            asChild
+            onClick={() => {
+              setOpenRegister(true);
+            }}
           >
-            <Link href="/apply">Apply</Link>
+            Register
           </Button>
           <Button
             onClick={() => {
@@ -88,12 +92,13 @@ const Portfolio: React.FC = () => {
         {openLogin && (
           <Login show={openLogin} onClose={() => setOpenLogin(false)} />
         )}
+        {openRegister && (
+          <Register show={openRegister} onClose={() => setOpenRegister(false)} />
+        )}
       </header>
       <section
         id="home"
-        className={`${
-          activeSection === "home" ? " block" : "hidden"
-        } h-screen`}
+        className={`${activeSection === "home" ? " block" : "hidden"} h-screen`}
       >
         <Hero />
       </section>

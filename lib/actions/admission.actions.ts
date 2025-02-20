@@ -4,6 +4,7 @@ import { handleError } from "../utils";
 import { PrismaClient } from "@prisma/client";
 import * as bcrypt from "bcrypt";
 import { Resend } from "resend";
+import { createSession } from "../session";
 
 const prisma = new PrismaClient();
 const resend = new Resend(process.env.RESEND_KEY);
@@ -12,22 +13,21 @@ const newApplicationSchema = z.object({
   fname: z.string({ message: "field is required" }).trim(),
   oname: z.string().trim().optional(),
   lname: z.string({ message: "field is required" }).trim(),
-  gender: z.enum(["male", "female"]),
-  country: z.enum(["ghana"]),
-  batch: z.enum(["batch25"]),
-  school: z.enum(["knust", "ug", "ashesi", "none"]).optional(),
+  gender: z.enum(["male", "female"], {message: "Select your gender"}),
+  country: z.enum(["ghana"], {message: "Select your country of residence" }),
+  school: z.enum(["knust", "ug", "ashesi", "none"],{message: "Select your school"}).optional(),
+  batch: z.enum(["batch25"], {message: "Select the batch of interest" }),
   contact: z.string({ message: "field is required" }).trim().min(10).max(10),
   dob: z.string(),
   email: z.string().email({ message: "field is required" }).trim(),
   programme: z.string({ message: "field is required" }).min(2).optional(),
-  year: z.enum(["1", "2", "3", "4", "5", "6"]).optional(),
+  year: z.enum(["1", "2", "3", "4", "5", "6"], {message: "Select your current year"}).optional(),
   reason: z.string(),
   balance: z.string(),
   statement: z.string().optional(),
-  scholarship: z.enum(["yes", "no"]),
-  student: z.enum(["yes", "no"]),
-  laptop: z.enum(["yes", "no"]),
-  password: z.string({message: "Enter valid password with at least 6 characters"}).min(6)
+  scholarship: z.enum(["yes", "no"], {message: "Select an option"}),
+  student: z.enum(["yes", "no"], {message: "Select an option"}),
+  laptop: z.enum(["yes", "no"], {message: "Select an option"}),
 });
 
 const editApplicationSchema = z.object({
@@ -73,26 +73,30 @@ export async function new_application(prevState: unknown, formData: FormData) {
         errors: result.error.flatten().fieldErrors,
       };
     }
-
+    const user =  await prisma.user.findFirst({where: {email: result.data.email}})
+    if(!user) {
+      return { errors: ["Register an account to proceed"] }
+    }
     const dob = result.data.dob;
     const dobDateTime = new Date(dob).toISOString();
 
-    const hashedPassword = await bcrypt.hash(result.data.password, 10);
     const applicant = await prisma.applicant.create({
       data: {
         ...result.data,
+        userId: user.id,
         dob: dobDateTime,
         laptop: result.data.laptop === "yes" ? true : false,
         scholarship: result.data.scholarship === "yes" ? true : false,
         student: result.data.scholarship === "yes" ? true : false,
-        password: hashedPassword,
       },
     });
     console.log(applicant);
+    await createSession(applicant.id);
 
+    const { createdAt, ...profileWithoutTimestamps } = applicant;
     try {
       const response = await resend.emails.send({
-        from: "onboard@resend.dev",
+        from: "admission@xcuxion.org",
         to: result.data.email,
         subject: "New Application Received",
         html: "<h1>Application submitted successfully</h1>",
@@ -102,7 +106,7 @@ export async function new_application(prevState: unknown, formData: FormData) {
       console.log(error);
     } finally {
       console.log(result);
-      return { success: result.success, data: result.data };
+      return { success: result.success, data: profileWithoutTimestamps };
     }
   } catch (error) {
     console.error("Error during application submission:", error);

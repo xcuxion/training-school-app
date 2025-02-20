@@ -2,8 +2,8 @@ import { cookies } from "next/headers";
 import { NextRequest, NextResponse } from "next/server";
 import { decrypt } from "./lib/session";
 
-const protectedRoutes = ["/school", "/guild", "/administrator-office"]
-const publicRoutes = ["/", "/apply", "/about"]
+const protectedRoutes = ["/school/learning-spaace", "/school/admission-portal", "/guild", "/administrator-office"]
+const publicRoutes = ["/", "/school/apply", "/guild", "/school"]
 
 
 export default async function middleware(req: NextRequest){
@@ -19,7 +19,7 @@ export default async function middleware(req: NextRequest){
   }
 
   if (isPublicRoute && session?.userId ) {
-    return NextResponse.redirect(new URL("/admission-portal", req.nextUrl))
+    return NextResponse.redirect(new URL("/school/admission-portal", req.nextUrl))
   }
 
   return NextResponse.next()

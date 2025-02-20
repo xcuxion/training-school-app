@@ -46,7 +46,7 @@ const Admission = () => {
           className="mt-6 rounded-full shadow-lg hover:shadow-xl hover:scale-105 transition-transform duration-300 bg-primary  px-6 py-3"
           asChild
         >
-          <Link href="/apply">Apply Now</Link>
+          <Link href="/school/apply">Apply Now</Link>
         </Button>
       </motion.div>
 

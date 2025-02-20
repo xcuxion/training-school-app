@@ -1,8 +1,8 @@
-import { name } from "@/app/school/main-content";
+import { name } from "@/app/school/(student)/learning-space/main-content";
 import Image from "next/image";
 import React from "react";
 import { Button } from "./ui/button";
-import MobileSheet from "@/app/school/mobile-sheet";
+import MobileSheet from "@/app/school/(student)/learning-space/mobile-sheet";
 import ProfileCard from "./profile-card";
 import TodoSection from "./todo-section";
 
