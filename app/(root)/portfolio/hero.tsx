@@ -96,6 +96,7 @@ const Hero = () => {
         muted
         playsInline
         disablePictureInPicture
+        poster="/images/wallpaper.jpg"
         controlsList="nodownload nofullscreen noremoteplayback"
         className="fixed top-0 left-0 w-full h-full object-cover z-0 bg-cover"
       >

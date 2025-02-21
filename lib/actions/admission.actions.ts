@@ -10,14 +10,15 @@ const prisma = new PrismaClient();
 const resend = new Resend(process.env.RESEND_KEY);
 
 const newApplicationSchema = z.object({
-  fname: z.string({ message: "field is required" }).trim(),
+  fname: z.string({ message: "First name is required" }).trim(),
   oname: z.string().trim().optional(),
-  lname: z.string({ message: "field is required" }).trim(),
+  lname: z.string({ message: "Last name is required" }).trim(),
   gender: z.enum(["male", "female"], {message: "Select your gender"}),
   country: z.enum(["ghana"], {message: "Select your country of residence" }),
   school: z.enum(["knust", "ug", "ashesi", "none"],{message: "Select your school"}).optional(),
   batch: z.enum(["batch25"], {message: "Select the batch of interest" }),
-  contact: z.string({ message: "field is required" }).trim().min(10).max(10),
+  track: z.enum(["web","mobile","dataanalysis","backend"], {message: "Select your preferred track" }),
+  contact: z.string({ message: "Phone number is required" }).trim().min(10).max(15),
   dob: z.string(),
   email: z.string().email({ message: "field is required" }).trim().optional(),
   programme: z.string({ message: "field is required" }).min(2).optional(),
@@ -37,6 +38,7 @@ const editApplicationSchema = z.object({
   gender: z.enum(["male", "female"]),
   country: z.enum(["ghana"]),
   school: z.enum(["knust", "ug", "ashesi", "none"]),
+  track: z.enum(["web","mobile","dataanalysis","backend"], {message: "Select your preferred track" }),
   contact: z
     .string({ message: "field is required" })
     .trim()
@@ -199,7 +201,6 @@ export async function admit_applicant(
 
 export async function accept_admission(
   id: string,
-  track: "flutter" | "fullstack" | "backend"
 ) {
   try {
     //Step 1: Find the applicant
@@ -233,7 +234,6 @@ export async function accept_admission(
       data: {
         ...studentData,
         reference: "",
-        track: track,
         outstandingFees: outstandingBalance,
       },
     });

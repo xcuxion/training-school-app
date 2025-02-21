@@ -39,6 +39,7 @@ const initial = {
   laptop: "",
   student: "",
   batch: "batch25",
+  track: "",
   password: "",
 };
 const ApplicationPage = () => {
@@ -204,7 +205,7 @@ const ApplicationPage = () => {
               )}
             </span>
             <span className="">
-              <Label>Contact</Label>
+              <Label>WhatsApp Number</Label>
               <Input
                 type="text"
                 value={value.contact}
@@ -213,6 +214,8 @@ const ApplicationPage = () => {
                 onChange={(e) =>
                   setValue({ ...value, contact: e.target.value })
                 }
+                maxLength={15}
+                minLength={10}
               />
               {state?.errors?.contact && (
                 <p className="text-sm text-red-500">{state.errors.contact}</p>
@@ -235,6 +238,28 @@ const ApplicationPage = () => {
                 </SelectTrigger>
                 <SelectContent className="bg-secondary">
                   <SelectItem value="batch25">Batch'25</SelectItem>
+                </SelectContent>
+              </Select>
+              {state?.errors?.batch && (
+                <p className="text-sm text-red-500">{state.errors.batch}</p>
+              )}
+            </span>
+            <span className="col-span-2 md:col-span-1 ">
+              <Label>What track would you prefer?</Label>
+              <Select
+                onValueChange={(choice) =>
+                  setValue({ ...value, track: choice })
+                }
+                name="batch"
+              >
+                <SelectTrigger className="">
+                  <SelectValue placeholder="Select" />
+                </SelectTrigger>
+                <SelectContent className="bg-secondary">
+                  <SelectItem value="web">Full-stack Web Development</SelectItem>
+                  <SelectItem value="dataanalysis">Data Analysis</SelectItem>
+                  <SelectItem value="backend">Backend Engineering</SelectItem>
+                  <SelectItem value="mobile">Mobile App Development</SelectItem>
                 </SelectContent>
               </Select>
               {state?.errors?.batch && (

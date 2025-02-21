@@ -29,7 +29,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body
-        className={`${nunito.className} ${poppins.className} antialiased  text-dark`}
+        className={`${nunito.className} ${poppins.className} antialiased min-h-screen bg-black  text-dark`}
       >
         <Toaster />
         <EdgeStoreProvider>{children}</EdgeStoreProvider>

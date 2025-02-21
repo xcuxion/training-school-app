@@ -55,6 +55,7 @@ model Applicant {
   student       Boolean
   admissionType AdmissionType?
   batch         String
+  track         Track
   createdAt     DateTime        @default(now())
   updatedAt     DateTime        @updatedAt
 }
@@ -199,9 +200,10 @@ enum School {
 }
 
 enum Track {
-  flutter
-  fullstack
+  mobile
+  web
   backend
+  dataanalysis
 }
 
 enum SchoolAdminPermissions {
