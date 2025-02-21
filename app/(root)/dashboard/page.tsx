@@ -1,8 +1,11 @@
 import React from 'react'
+import Banner from './banner'
 
 const page = () => {
   return (
-    <div>page</div>
+    <div className='md:w-4/5 mx-auto p-10'>
+      <Banner/>
+    </div>
   )
 }
 
