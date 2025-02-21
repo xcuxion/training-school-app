@@ -19,7 +19,7 @@ const newApplicationSchema = z.object({
   batch: z.enum(["batch25"], {message: "Select the batch of interest" }),
   contact: z.string({ message: "field is required" }).trim().min(10).max(10),
   dob: z.string(),
-  email: z.string().email({ message: "field is required" }).trim(),
+  email: z.string().email({ message: "field is required" }).trim().optional(),
   programme: z.string({ message: "field is required" }).min(2).optional(),
   year: z.enum(["1", "2", "3", "4", "5", "6"], {message: "Select your current year"}).optional(),
   reason: z.string(),
@@ -75,7 +75,7 @@ export async function new_application(prevState: unknown, formData: FormData) {
     }
     const user =  await prisma.user.findFirst({where: {email: result.data.email}})
     if(!user) {
-      return { errors: ["Register an account to proceed"] }
+      throw new Error("Register an account to proceed")
     }
     const dob = result.data.dob;
     const dobDateTime = new Date(dob).toISOString();
@@ -97,7 +97,7 @@ export async function new_application(prevState: unknown, formData: FormData) {
     try {
       const response = await resend.emails.send({
         from: "admission@xcuxion.org",
-        to: result.data.email,
+        to: result.data.email? result.data.email : user.email,
         subject: "New Application Received",
         html: "<h1>Application submitted successfully</h1>",
       });

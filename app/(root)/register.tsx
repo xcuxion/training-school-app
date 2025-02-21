@@ -10,7 +10,7 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
-import { register } from "@/lib/actions/general.action";
+import { register } from "@/lib/actions/user.action";
 import { useUserStore } from "@/store/user-store";
 import { useRouter } from "next/navigation";
 import React, { useEffect, useRef, useState } from "react";

@@ -1,8 +1,8 @@
 "use client";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 
 import { useFormState, useFormStatus } from "react-dom";
-import makeEnquiry from "@/lib/actions/general.action";
+import makeEnquiry from "@/lib/actions/user.action";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { Button } from "@/components/ui/button";
@@ -14,7 +14,9 @@ const InquiryForm = () => {
   const [name, setName] = useState<string>("");
   const [email, setEmail] = useState<string>("");
   const [question, setQuestion] = useState<string>("");
-
+  useEffect(()=>{
+    
+  }, [])
   return (
     <div className="bg-secondary text-dark w-full md:w-[550px] rounded-md p-3 md:p-4 md:h-[465px] flex flex-col ">
       <h1 className="font-semibold text-lg md:text-xl">Make An Enquiry</h1>
@@ -61,7 +63,7 @@ const InquiryForm = () => {
           )}
         </div>
         <Button type="submit" className="w-full" disabled={pending}>
-          Send
+          {pending? "Loading" : "Send"}
         </Button>
       </form>
     </div>

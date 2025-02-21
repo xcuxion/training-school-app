@@ -3,7 +3,7 @@ import { create } from "zustand";
 
 export interface IApplicant {
   id: string;
-  email: string;
+  email: string | null;
   fname: string;
   lname: string;
   oname: string | null;

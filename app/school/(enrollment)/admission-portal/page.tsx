@@ -2,22 +2,25 @@
 import Image from "next/image";
 import React, { useEffect, useState } from "react";
 import { Avatar, AvatarFallback } from "@/components/ui/avatar";
-import { edit_application, fetch_applicant_data } from "@/lib/actions/admission.actions";
+import {
+  edit_application,
+  fetch_applicant_data,
+} from "@/lib/actions/admission.actions";
 import { useApplicantStore } from "@/store/applicant-store";
 import { Button } from "@/components/ui/button";
 import { Textarea } from "@/components/ui/textarea";
 import { Input } from "@/components/ui/input";
 import { FaPen } from "react-icons/fa";
 import { useRouter } from "next/navigation";
-import { logOut } from "@/lib/actions/general.action";
+import { logOut } from "@/lib/actions/user.action";
 import { useUserStore } from "@/store/user-store";
 
 const AdmissionPortal = () => {
-  const {user} = useUserStore()
+  const { user } = useUserStore();
   const { applicant } = useApplicantStore();
-  const router = useRouter()
+  const router = useRouter();
   const [editOff, setEditOff] = useState(true);
-  const {update, logout} = useApplicantStore();
+  const { update, logout } = useApplicantStore();
   const [editableData, setEditableData] = useState({
     contact: applicant?.contact || "",
     programme: applicant?.programme || "",
@@ -29,6 +32,7 @@ const AdmissionPortal = () => {
     lname: applicant?.lname || "",
     country: applicant?.country || "",
     balance: applicant?.balance || "",
+    statement: applicant?.statement || ""
   });
   const handleSave = async () => {
     const formData = new FormData();
@@ -38,7 +42,7 @@ const AdmissionPortal = () => {
     await edit_application(applicant?.id as string, formData);
     setEditOff(true);
   };
-  
+
   useEffect(() => {
     const fetchData = async () => {
       const result = await fetch_applicant_data(applicant?.id as string);
@@ -54,6 +58,7 @@ const AdmissionPortal = () => {
           lname: result?.lname || "",
           country: result?.country || "",
           balance: result?.balance || "",
+          statement: result?.statement || ""
         });
       }
     };
@@ -62,14 +67,15 @@ const AdmissionPortal = () => {
 
   const handleChange = (
     e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
-  ) => {logout
+  ) => {
+    logout;
     setEditableData({ ...editableData, [e.target.name]: e.target.value });
   };
   const handleLogOut = async () => {
-    logout()
-    await logOut()
-    router.push('/')
-  }
+    logout();
+    await logOut();
+    router.push("/");
+  };
   return (
     <div className="w-full min-h-screen md:w-4/5 mx-auto p-6 space-y-6">
       <header className="flex justify-between items-center border-b border-outline pb-4 mb-4 sticky top-0 bg-black z-50">
@@ -78,7 +84,7 @@ const AdmissionPortal = () => {
           {applicant && (
             <Avatar className="w-10 h-10">
               <AvatarFallback className="bg-secondary text-dark">
-                {applicant.email.charAt(0).toUpperCase()}
+                {applicant.fname.charAt(0).toUpperCase()}
               </AvatarFallback>
             </Avatar>
           )}
@@ -101,14 +107,11 @@ const AdmissionPortal = () => {
             <h1 className="text-4xl font-bold">
               {applicant?.fname} {applicant?.lname}
             </h1>
-            {
-              applicant?.student && (
-
-            <p className="text-xl text-dark">
-              {applicant?.programme} - Year {applicant?.year}
-            </p>
-              )
-            }
+            {applicant?.student && (
+              <p className="text-xl text-dark">
+                {applicant?.programme} - Year {applicant?.year}
+              </p>
+            )}
             <p className="text-lg text-gray-300">
               Status:{" "}
               <span className="font-semibold">
@@ -118,27 +121,26 @@ const AdmissionPortal = () => {
           </div>
         </span>
         {applicant?.status === "admitted" ? (
-  <>
-    <Button variant={"default"}>Accept</Button>
-    <Button variant={"outline"}>Decline</Button>
-  </>
-) : (
-  editOff ? (
-    <span
-      className="flex items-center justify-center w-8 h-8 rounded-full bg-black hover:cursor-pointer hover:bg-gray-600"
-      onClick={() => setEditOff(false)}
-    >
-      <FaPen className="text-white" />
-    </span>
-  ) : (
-    <Button variant={"default"} onClick={() => handleSave()}>
-      Save
-    </Button>
-  )
-)}
-
+          <>
+            <Button variant={"default"}>Accept</Button>
+            <Button variant={"outline"}>Decline</Button>
+          </>
+        ) : editOff ? (
+          <span
+            className="flex items-center justify-center w-8 h-8 rounded-full bg-black hover:cursor-pointer hover:bg-gray-600"
+            onClick={() => setEditOff(false)}
+          >
+            <FaPen className="text-white" />
+          </span>
+        ) : (
+          <Button variant={"default"} onClick={() => handleSave()}>
+            Save
+          </Button>
+        )}
       </section>
-      <section className={`grid grid-cols-1 ${applicant?.oname !== "" ? "md:grid-cols-3" : "md:grid-cols-2"}  gap-6`}>
+      <section
+        className={`grid grid-cols-1 ${applicant?.oname !== "" ? "md:grid-cols-3" : "md:grid-cols-2"}  gap-6`}
+      >
         <div className="space-y-4">
           <h3 className="text-lg font-semibold">First Name</h3>
           <Input
@@ -207,17 +209,18 @@ const AdmissionPortal = () => {
             disabled={editOff}
           />
         </div>
-
-        <div className="space-y-4">
-          <h3 className="text-lg font-semibold">Programme of Study</h3>
-          <Input
-            type="text"
-            name="programme"
-            value={editableData.programme}
-            onChange={handleChange}
-            disabled={editOff}
-          />
-        </div>
+        {applicant?.student && (
+          <div className="space-y-4">
+            <h3 className="text-lg font-semibold">Programme of Study</h3>
+            <Input
+              type="text"
+              name="programme"
+              value={editableData.programme}
+              onChange={handleChange}
+              disabled={editOff}
+            />
+          </div>
+        )}
       </section>
 
       <section className="mt-6">
@@ -231,7 +234,9 @@ const AdmissionPortal = () => {
         />
       </section>
       <section className="mt-6">
-        <h3 className="text-lg font-semibold">How you intend to balance the training with your academics?</h3>
+        <h3 className="text-lg font-semibold">
+          How you intend to balance the training with your academics?
+        </h3>
         <Textarea
           name="reason"
           value={editableData.balance}
@@ -240,6 +245,22 @@ const AdmissionPortal = () => {
           className="w-full h-24"
         />
       </section>
+      {
+        applicant?.scholarship && (
+          <section className="mt-6">
+          <h3 className="text-lg font-semibold">
+            Why should we award you a scholarship?
+          </h3>
+          <Textarea
+            name="statement"
+            value={editableData.statement}
+            onChange={handleChange}
+            disabled={editOff}
+            className="w-full h-24"
+          />
+        </section>
+        )
+      }
     </div>
   );
 };

@@ -18,6 +18,7 @@ import { useRouter } from "next/navigation";
 import { toast } from "@/components/ui/use-toast";
 import SubmitButton from "@/components/submit-button";
 import { useApplicantStore } from "@/store/applicant-store";
+import { useUserStore } from "@/store/user-store";
 
 const initial = {
   fname: "",
@@ -46,7 +47,12 @@ const ApplicationPage = () => {
   const formRef = useRef<HTMLFormElement>(null);
   const router = useRouter();
   const { update } = useApplicantStore();
-
+  const {user} = useUserStore()
+  // useEffect(()=>(
+  //   const fetchUser = async () => {
+  //     await fetchUser()
+  //   }
+  // ),[])
   useEffect(() => {
     console.log(state);
     if (state?.success && state?.data) {
@@ -182,12 +188,13 @@ const ApplicationPage = () => {
               )}
             </span>
           </div>
+
           <div className="grid md:grid-cols-2 md:gap-x-6">
             <span className="">
               <Label>Email</Label>
               <Input
                 type="text"
-                value={value.email}
+                value={user?.email as string}
                 name="email"
                 id="email"
                 onChange={(e) => setValue({ ...value, email: e.target.value })}
@@ -215,21 +222,6 @@ const ApplicationPage = () => {
         </section>
         <section className="bg-secondary  border border-outline rounded-md p-4 md:my-10 space-y-3">
           <div className="grid sm:grid-cols-1 md:grid-cols-2  md:gap-x-6 ">
-            <span className="">
-              <Label>Enter a passcode to associate with your account</Label>
-              <Input
-                type="password"
-                value={value.password}
-                name="password"
-                id="password"
-                onChange={(e) =>
-                  setValue({ ...value, password: e.target.value })
-                }
-              />
-              {state?.errors?.password && (
-                <p className="text-sm text-red-500">{state.errors.password}</p>
-              )}
-            </span>
             <span className="col-span-2 md:col-span-1 ">
               <Label>Select Batch</Label>
               <Select

@@ -3,10 +3,10 @@ import FormModal from "@/components/form-modal";
 import SubmitButton from "@/components/submit-button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
-import { login } from "@/lib/actions/general.action";
+import { login } from "@/lib/actions/user.action";
 import { useUserStore } from "@/store/user-store";
 import { useRouter } from "next/navigation";
-import React, { useEffect, useRef, useState } from "react";
+import React, {  useEffect, useRef, useState } from "react";
 import { useFormState } from "react-dom";
 
 const Login = ({ show, onClose }: { show: boolean; onClose: () => void }) => {

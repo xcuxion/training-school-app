@@ -238,11 +238,7 @@ export async function register(prevState: unknown, formData: FormData) {
       where: { email },
     });
     if (existingUser) {
-      return {
-        errors: {
-          email: ["User already exists"],
-        },
-      };
+      throw new Error("User already exists")
     }
 
     const hashPassword = await bcrypt.hash(password, 10);
