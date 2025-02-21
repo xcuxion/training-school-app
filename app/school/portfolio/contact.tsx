@@ -41,8 +41,7 @@ const Contact = () => {
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true }}
       transition={{ duration: 0.8, ease: "easeOut" }}
-      id="contact"
-      className="min-h-screen px-5 md:px-0 py-5 flex flex-col md:flex-center bg-gradient-to-br from-black via-gray-900 to-black"
+      className="w-full min-h-screen px-5 md:px-0 py-5 flex z-10 flex-col md:flex-center bg-gradient-to-br from-black via-gray-900 to-black"
     >
       <motion.h3
         initial={{ opacity: 0, y: 50 }}

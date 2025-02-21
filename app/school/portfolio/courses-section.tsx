@@ -224,7 +224,7 @@ export const CourseCard = ({
 }: ICourse) => {
   return (
     <motion.div
-      className="p-4 flex flex-col items-start bg-gradient-to-br from-gray-800 to-gray-900 border border-gray-700 rounded-2xl shadow-lg hover:scale-105 transition-transform duration-300 ease-out"
+      className="p-4 flex flex-col items-start bg-opacity-70 bg-gradient-to-br from-gray-800 to-gray-900 border border-gray-700 rounded-2xl shadow-lg hover:scale-105 transition-transform duration-300 ease-out"
       whileHover={{ scale: 1.05 }}
     >
       <Image
@@ -252,7 +252,7 @@ const CoursesSection = () => {
       transition={{ duration: 0.8, ease: "easeOut" }}
       className="px-5 relative md:px-20 py-10 min-h-screen "
     >
-      <video
+      {/* <video
         autoPlay
         loop
         muted
@@ -260,11 +260,11 @@ const CoursesSection = () => {
         disablePictureInPicture
         poster="/images/coding.jpg"
         controlsList="nodownload nofullscreen noremoteplayback"
-        className="fixed top-0 left-0 w-full h-full object-cover z-0 bg-cover"
+        className="fixed top-0 left-0 w-full h-full object-cover -z-0 bg-cover"
       >
         <source src="/videos/codingbg.mp4" type="video/mp4" />
         Your browser does not support the video tag.
-      </video>
+      </video> */}
 
       <div className="relative z-10 text-center text-white space-y-4">
         <motion.h3 className="text-3xl md:text-5xl font-bold">

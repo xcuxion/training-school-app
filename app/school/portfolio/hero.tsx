@@ -88,7 +88,7 @@ const Hero = () => {
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true }}
       transition={{ duration: 0.8, ease: "easeOut" }}
-      className="relative min-h-screen md:h-screen px-5 md:px-20 flex md:flex-row flex-col-reverse items-center justify-center overflow-hidden"
+      className="relative h-screen px-5 md:px-20 flex md:flex-row flex-col-reverse items-center justify-center overflow-hidden"
     >
       <video
         autoPlay
