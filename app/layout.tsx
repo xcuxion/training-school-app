@@ -17,8 +17,8 @@ const nunito = Nunito({
 });
 
 export const metadata: Metadata = {
-  title: "Xcuxion School",
-  description: "Xcuxion's School of Engineering & Techpreneurship",
+  title: "Xcuxion",
+  description: "Promoting inovation and sustainable tech developments in Africa and beyond",
 };
 
 export default function RootLayout({
@@ -29,7 +29,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body
-        className={`${nunito.className} ${poppins.className} antialiased min-h-screen bg-black  text-dark`}
+        className={`${nunito.className} ${poppins.className} antialiased min-h-screen bg-black  text-fontColor`}
       >
         <Toaster />
         <EdgeStoreProvider>{children}</EdgeStoreProvider>

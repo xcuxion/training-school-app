@@ -29,7 +29,7 @@ const ImageUploader = () => {
                 width: `${progress}%`
             }}></div>
         </div>
-        <Button className="bg-black text-dark rounded px-2 hover:opacity-80" onClick={async()=>{
+        <Button className="bg-black text-fontColor rounded px-2 hover:opacity-80" onClick={async()=>{
             if (file){
                 const res = await edgestore.myPublicImages.upload({file, onProgressChange: (progress) => {
                     setProgess(progress)

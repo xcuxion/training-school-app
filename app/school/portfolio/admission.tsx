@@ -25,7 +25,7 @@ const Admission = () => {
         </h1>
         <div className="text-lg md:text-xl mb-4 leading-relaxed text-gray-300">
           Embark on your journey with{" "}
-          <span className="text-dark font-bold">XCUXION School</span> to become
+          <span className="text-fontColor font-bold">XCUXION School</span> to become
           a tech innovator! Our admission process is designed to be
           straightforward and transparent:
         </div>
@@ -61,7 +61,7 @@ const Admission = () => {
           Financial Aid & Scholarships
         </h2>
         <div className="text-lg md:text-xl mb-4 leading-relaxed text-gray-300">
-          At <span className="text-dark font-bold">XCUXION School</span>, we are
+          At <span className="text-fontColor font-bold">XCUXION School</span>, we are
           committed to making tech education accessible to talented individuals,
           regardless of financial background. Our Batch ‘25 Training Program
           offers three financial aid options:

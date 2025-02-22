@@ -17,13 +17,16 @@ const config: Config = {
 		backgroundImage: {
 			'faq-bg': "url('/images/wallpaper.jpg')",
 			'admission-bg': "url('/images/classroom.jpg')",
+			'gateway': "url('/images/gateway2.jpg')",
+			'galaxybg': "url('/images/galaxybg.svg')",
+			'mock': "url('/images/mockbg.svg')",
 		  },
   		colors: {
 			primary: '#FEBC10',
 			light: '#FFF9FF',
 			secondary: '#0E0E0E',
 			neutral: '#0E0E0E',
-			dark: '#f5f5f5',
+			fontColor: '#f5f5f5',
 			outline: '#2D3748',
 
 			muted: {

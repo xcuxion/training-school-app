@@ -67,7 +67,7 @@ const Faqs = () => {
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true }}
       transition={{ duration: 0.8, ease: "easeOut" }}
-      className="w-full px-5 md:px-20 min-h-screen z-10   flex flex-col flex-center"
+      className="w-full px-5 md:px-20 min-h-screen z-10 flex flex-col flex-center"
     >
       <motion.h3 className="text-xl md:text-4xl text-center md:w-1/2 mx-auto font-semibold">
         FAQs
@@ -87,7 +87,7 @@ const Faqs = () => {
         whileInView={{ opacity: 1, y: 0 }}
         viewport={{ once: true }}
         transition={{ duration: 0.8, ease: "easeOut" }}
-        className="md:w-2/3 mt-4"
+        className="w-full md:w-2/3 mt-4"
       >
         <Accordion type="single" collapsible className="space-y-2">
           {faqs.map((faq, index) => (

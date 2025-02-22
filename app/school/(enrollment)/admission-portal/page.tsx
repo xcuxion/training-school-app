@@ -83,7 +83,7 @@ const AdmissionPortal = () => {
         <div className="flex items-center space-x-4">
           {applicant && (
             <Avatar className="w-10 h-10">
-              <AvatarFallback className="bg-secondary text-dark">
+              <AvatarFallback className="bg-secondary text-fontColor">
                 {applicant.fname.charAt(0).toUpperCase()}
               </AvatarFallback>
             </Avatar>
@@ -108,7 +108,7 @@ const AdmissionPortal = () => {
               {applicant?.fname} {applicant?.lname}
             </h1>
             {applicant?.student && (
-              <p className="text-xl text-dark">
+              <p className="text-xl text-fontColor">
                 {applicant?.programme} - Year {applicant?.year}
               </p>
             )}

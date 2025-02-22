@@ -23,7 +23,7 @@ const UpcomingSession = () => {
           <ProfileCard {...profile} />
           <TodoSection />
           <div className="w-full h-[125px] bg-primary rounded-md flex px-6 items-center justify-between">
-            <div className="text-dark">
+            <div className="text-fontColor">
               <h1 className="text-4xl font-semibold">237</h1>
               <p className="text-lg">Achievement Points</p>
             </div>

@@ -1,122 +1,128 @@
 "use client";
-import React, { useEffect, useState, useRef } from "react";
-import CoursesSection from "./portfolio/courses-section";
-import Hero from "./portfolio/hero";
-import Faqs from "./portfolio/faqs";
-import Contact from "./portfolio/contact";
-import Link from "next/link";
-import MobileNavigator from "../(root)/portfolio/mobile-navigator";
+
+import { motion } from "framer-motion";
+import { useState } from "react";
+import Image from "next/image";
 import { Button } from "@/components/ui/button";
-import Login from "../(root)/login";
-import Register from "../(root)/register";
+import { FaArrowRight } from "react-icons/fa";
+import CoursesSection from "./portfolio/courses-section";
 
-const sections = [
-  { label: "home", component: <Hero /> },
-  { label: "school", component: < CoursesSection/> },
-  { label: "guild", component: < Faqs/> },
-  { label: "startup-center", component: < Contact/> }
-];
-
-const Portfolio: React.FC = () => {
-  const [activeSection, setActiveSection] = useState<string>("home");
-  const [openLogin, setOpenLogin] = useState<boolean>(false);
-  const [openRegister, setOpenRegister] = useState<boolean>(false);
-  const sectionRefs = useRef<{ [key: string]: HTMLElement | null }>({});
-
-  useEffect(() => {
-    const observer = new IntersectionObserver(
-      (entries) => {
-        entries.forEach((entry) => {
-          if (entry.isIntersecting) {
-            setActiveSection(entry.target.id);
-          }
-        });
-      },
-      {
-        root: null,
-        rootMargin: "-50% 0px -50% 0px", // Triggers when the section is in the middle of the viewport
-        threshold: 0.1,
-      }
-    );
-
-    sections.forEach((section) => {
-      const element = document.getElementById(section.label);
-      if (element) {
-        sectionRefs.current[section.label] = element;
-        observer.observe(element);
-      }
-    });
-
-    return () => {
-      sections.forEach((section) => {
-        const element = sectionRefs.current[section.label];
-        if (element) observer.unobserve(element);
-      });
-    };
-  }, []);
+export default function Home() {
+  const [hovered, setHovered] = useState(false);
 
   return (
-    <div className="relative">
-      <header className="fixed md:top-2 flex w-full md:w-auto flex-between text-sm md:text-base left-0 md:left-1/2 transform md:-translate-x-1/2 z-50 md:gap-4 p-3 rounded-full ">
-        <nav className="hidden md:flex">
-          {sections.map((section) => (
-            <Link
-              key={section.label}
-              href={`#${section}`}
-              className={`transition-colors duration-300 px-4 py-2 rounded-full ${
-                activeSection === section.label ? "bg-black text-white" : "opacity-50"
-              }`}
-            >
-              {section.label.charAt(0).toUpperCase() + section.label.slice(1)}
-            </Link>
-          ))}
-        </nav>
-        <span className="flex flex-center w-10 h-10 md:hidden">
-          <MobileNavigator
-            activeSection={activeSection}
-            setActiveSection={setActiveSection}
-          />
-        </span>
-        <div className="flex items-center md:ml-8 space-x-2 md:space-x-4">
-          <Button
-            className="rounded-full h-8 md:h-10"
-            onClick={() => setOpenRegister(true)}
-          >
-            Register
-          </Button>
-          <Button
-            onClick={() => setOpenLogin(true)}
-            variant="outline"
-            className="border-2 border-primary text-primary rounded-full h-8 md:h-10"
-          >
-            Log in
-          </Button>
-        </div>
-        {openLogin && (
-          <Login show={openLogin} onClose={() => setOpenLogin(false)} />
-        )}
-        {openRegister && (
-          <Register
-            show={openRegister}
-            onClose={() => setOpenRegister(false)}
-          />
-        )}
-      </header>
-
-      {/* Sections */}
-      {sections.map((section) => (
-        <section
-          key={section.label}
-          id={section.label}
-          className={`transition-opacity duration-500 ${
-            activeSection === section.label ? "opacity-100" : "opacity-100"
-          } min-h-screen flex items-center justify-center`}
+    <div className="bg-black text-white font-sans overflow-hidden">
+      {/* Hero Section */}
+      <section className="protected-bg relative bg-mock  bg-no-repeat bg-cover z-0 h-screen flex flex-col justify-center items-center text-center px-6">
+        <motion.div
+          initial={{ opacity: 0, y: 50 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 1 }}
+          className="z-10"
         >
-          {section.component}
-        </section>
-      ))}
+          <h1 className="text-6xl z-30 font-bold text-primary drop-shadow-lg">
+            Building the Future of Techpreneurs
+          </h1>
+          <p className="mt-4 z-30 text-lg max-w-2xl mx-auto">
+            Join XCUXION School to gain world-class training in software
+            engineering, business strategy, and startup development.
+          </p>
+          <Button className="mt-6 z-30 px-6 py-3 text-lg bg-primary hover:bg-white hover:scale-105 text-black">
+            Start Application <FaArrowRight className="ml-2" />
+          </Button>
+        </motion.div>
+        <div className="absolute top-0 left-0 w-full h-full bg-gradient-to-b from-black via-black/30 to-black" />
+      </section>
+
+      {/* Programs */}
+      <section className="min-h-screen py-5 md:py-10 md:px-20 px-6 bg-faq-bg bg-no-repeat bg-cover">
+        <motion.span>
+          <motion.h2
+            initial={{ opacity: 0, y: -20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 1 }}
+            className="text-4xl font-bold text-primary text-center"
+          >
+            Our Programs
+          </motion.h2>{" "}
+          <motion.p className="md:text-lg md:w-3/4 mx-auto">
+            Gain hands-on training in software development, business strategy,
+            and more. Our expert-led courses equip you to launch and scale your
+            startup successfully.
+          </motion.p>
+        </motion.span>
+        <CoursesSection />
+      </section>
+
+      {/* Admissions */}
+      <section className="min-h-screen py-5 md:py-10 md:px-20 bg-galaxybg bg-no-repeat bg-cover">
+        <motion.h2
+          initial={{ opacity: 0, y: -20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          transition={{ duration: 1 }}
+          className="text-4xl font-bold text-primary text-center"
+        >
+          Our Admissions Process
+        </motion.h2>
+
+        <div className="mt-10 flex flex-col px-6 gap-y-6 w-full md:px-20 py-5 md:py-10">
+          {[1, 2, 3].map((_, index) => (
+            <motion.div
+              key={index}
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.8, delay: index * 0.2 }}
+              className="bg-gray-800 p-6 shadow-lg shrink-0"
+            >
+              <p className="text-gray-300">
+                "XCUXION transformed my career with hands-on experience and
+                real-world projects."
+              </p>
+              <h4 className="mt-4 font-semibold text-gold-400">
+                Jane Doe, Software Engineer
+              </h4>
+            </motion.div>
+          ))}
+        </div>
+      </section>
+
+      {/* Financial Aid */}
+      <section className="h-screen py-5 md:py-10 md:px-20 bg-secondary">
+        <motion.h2
+          initial={{ opacity: 0, y: -20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          transition={{ duration: 1 }}
+          className="text-4xl font-bold text-primary text-center"
+        >
+          FInancial Assistance
+        </motion.h2>
+        <div className="mt-10 flex flex-col gap-6 px-6">
+          {[1, 2, 3].map((_, index) => (
+            <motion.div
+              key={index}
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.8, delay: index * 0.2 }}
+              className="bg-gray-800 p-6 rounded-xl shadow-lg w-80 shrink-0"
+            >
+              <p className="text-gray-300">
+                "XCUXION transformed my career with hands-on experience and
+                real-world projects."
+              </p>
+              <h4 className="mt-4 font-semibold text-gold-400">
+                Jane Doe, Software Engineer
+              </h4>
+            </motion.div>
+          ))}
+        </div>
+      </section>
+
+      {/* Footer */}
+      <footer className="py-10 text-center bg-black border-t border-gray-700">
+        <p className="text-gray-400">
+          © 2025 XCUXION School. All rights reserved.
+        </p>
+      </footer>
     </div>
   );
-};
-
-export default Portfolio;
+}

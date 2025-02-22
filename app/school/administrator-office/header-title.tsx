@@ -78,7 +78,7 @@ const HeaderTitle = () => {
               key={index}
               href={link.href}
               className={
-                active ? "text-dark font-medium" : "font-medium opacity-50"
+                active ? "text-fontColor font-medium" : "font-medium opacity-50"
               }
             >
               {link.label}
@@ -169,7 +169,7 @@ export default HeaderTitle;
 //               key={index}
 //               href={link.route}
 //               className={
-//                 active ? "text-dark font-medium" : "font-medium opacity-50"
+//                 active ? "text-fontColor font-medium" : "font-medium opacity-50"
 //               }
 //             >
 //               {link.label}

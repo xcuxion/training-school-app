@@ -168,7 +168,7 @@ const Page = () => {
             {categoryfetch.map((category) => (
               <span
                 key={category.id}
-                className="rounded-3xl border border-outline p-2 hover:bg-secondary hover:text-dark hover:cursor-pointer"
+                className="rounded-3xl border border-outline p-2 hover:bg-secondary hover:text-fontColor hover:cursor-pointer"
               >
                 {" "}
                 {category.name}

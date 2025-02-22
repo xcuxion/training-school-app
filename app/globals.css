@@ -21,3 +21,20 @@
   }
 }
 
+.protected-bg {
+
+  background-attachment: fixed;
+  pointer-events: none; /* Disables interactions */
+  user-select: none; /* Prevents selection */
+}
+
+.protected-bg::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: inherit;
+  filter: blur(0px); /* Hides direct access in Inspect */
+}

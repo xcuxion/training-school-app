@@ -1,9 +1,10 @@
 "use client";
 import React from "react";
-import InquiryForm from "./inquiry-form";
-import ItemList from "./item-list";
+
 import { motion } from "framer-motion";
 import Link from "next/link";
+import ItemList from "./item-list";
+import InquiryForm from "./inquiry-form";
 
 const contacts = [
   {
@@ -12,7 +13,7 @@ const contacts = [
     subtitle: "Phone",
   },
   {
-    title: "school@xcuxion.org",
+    title: "headoffice@xcuxion.org",
     image: "/icons/email.jpg",
     subtitle: "Email",
   },
@@ -29,7 +30,7 @@ const contacts = [
     subtitle: "Community",
   },
   {
-    title: "KNUST & UG-Legon",
+    title: "Remote",
     image: "/icons/location.jpg",
     subtitle: "Location",
   },
@@ -41,7 +42,7 @@ const Contact = () => {
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true }}
       transition={{ duration: 0.8, ease: "easeOut" }}
-      className="w-full min-h-screen px-5 md:px-0 py-5 flex z-10 flex-col md:flex-center bg-gradient-to-br from-black via-gray-900 to-black"
+      className="w-full min-h-screen px-5 md:px-0 py-5 flex z-10 flex-col md:flex-center bg-gradient-to-br from-black to-gray-950"
     >
       <motion.h3
         initial={{ opacity: 0, y: 50 }}
