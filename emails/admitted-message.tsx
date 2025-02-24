@@ -1,4 +1,3 @@
-import { HeightIcon, WidthIcon } from "@radix-ui/react-icons";
 import {
   Body,
   Button,
@@ -67,7 +66,63 @@ const AdmittedMessage = () => {
             <Button href="https://your-admission-portal-link.com">
               Visit Your Admission Portal
             </Button>
+            <Img
+              src={`${baseUrl}/static/logo.png`}
+              width="49"
+              height="21"
+              alt="Xcuxion Logo"
+              style={tagBase}
+            />
+            <Text>The Xcuxion Team</Text>
+            <Text>Accra, Ghana</Text>
           </Section>
+
+          <Section>
+                    <Link
+                      style={footerLink}
+                      href="https://slackhq.com"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                    >
+                      Our blog
+                    </Link>
+                    &nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;
+                    <Link
+                      style={footerLink}
+                      href="https://slack.com/legal"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                    >
+                      Policies
+                    </Link>
+                    &nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;
+                    <Link
+                      style={footerLink}
+                      href="https://slack.com/help"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                    >
+                      Help center
+                    </Link>
+                    &nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;
+                    <Link
+                      style={footerLink}
+                      href="https://slack.com/community"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      data-auth="NotApplicable"
+                      data-linkindex="6"
+                    >
+                      Slack Community
+                    </Link>
+                    <Text style={footerText}>
+                      ©2022 XCUXION Technologies, LLC, All rights reserved. <br />
+                      500 Howard Street, San Francisco, Kumasi, Ghana
+                      <br />
+                      <br />
+                      All rights reserved.
+                    </Text>
+                  </Section>
         </Container>
       </Body>
     </Html>
@@ -97,7 +152,11 @@ const tag = {
   width: "150px",
   height: "80px",
 };
-
+const tagBase = {
+  width: "80px",
+  height: "50px",
+  marginTop:"20px",
+};
 const congratImg = {
   width: "500px",
   height: "450px",
@@ -123,4 +182,20 @@ const paragraph = {
   marginBottom: "24px",
   maxWidth: "600px",
   margin: "0 auto",
+};
+
+const footerLink = {
+  color: "#1A56DB",
+  textDecoration: "underline",
+  marginLeft:"30px",
+};
+
+const footerText = {
+  fontSize: "12px",
+  color: "#b7b7b7",
+  lineHeight: "15px",
+  textAlign: "left" as const,
+  marginBottom: "50px",
+  marginLeft:"30px",
+
 };

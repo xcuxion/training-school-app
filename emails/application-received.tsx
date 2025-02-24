@@ -32,13 +32,13 @@ const ApplicationSubmitted = ({
     <Body style={main}>
       <Container style={container}>
         <Section style={box}>
-          <Img
-              src={`${baseUrl}/static/logo.png`}
+          {/* <Img
+            src={`${baseUrl}/static/logo.png`}
             width="49"
             height="21"
             alt="Xcuxion Logo"
             style={tag}
-          />
+          /> */}
           <Hr style={hr} />
           <Text style={header}>🌟 Thank You for Your Application! 🎉</Text>
           <Text style={paragraph}>
@@ -76,6 +76,60 @@ const ApplicationSubmitted = ({
           <Text style={paragraph}>— The Admission team</Text>
           <Hr style={hr} />
           <Text style={footer}>XCUXION, Ghana</Text>
+          <Img
+            src={`${baseUrl}/static/logo.png`}
+            width="49"
+            height="21"
+            alt="Xcuxion Logo"
+            style={tagBase}
+          />
+        </Section>
+
+        <Section>
+          <Link
+            style={footerLink}
+            href="https://slackhq.com"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            Our blog
+          </Link>
+          &nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;
+          <Link
+            style={footerLink}
+            href="https://slack.com/legal"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            Policies
+          </Link>
+          &nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;
+          <Link
+            style={footerLink}
+            href="https://slack.com/help"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            Help center
+          </Link>
+          &nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;
+          <Link
+            style={footerLink}
+            href="https://slack.com/community"
+            target="_blank"
+            rel="noopener noreferrer"
+            data-auth="NotApplicable"
+            data-linkindex="6"
+          >
+            Slack Community
+          </Link>
+          <Text style={footerText}>
+            ©2022 XCUXION Technologies, LLC, All rights reserved. <br />
+            500 Howard Street, San Francisco, Kumasi, Ghana
+            <br />
+            <br />
+            All rights reserved.
+          </Text>
         </Section>
       </Container>
     </Body>
@@ -84,10 +138,11 @@ const ApplicationSubmitted = ({
 
 export default ApplicationSubmitted;
 
+
 const main = {
-  backgroundImage: "url('/logo.svg`')", 
-  backgroundSize: "cover", 
-  backgroundPosition: "center", 
+  backgroundImage: "url('/logo.svg`')",
+  backgroundSize: "cover",
+  backgroundPosition: "center",
   backgroundColor: "#f6f9fc",
   fontFamily:
     '-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Ubuntu,sans-serif',
@@ -100,13 +155,13 @@ const container = {
   marginBottom: "64px",
   boxShadow: "0px 4px 10px rgba(0, 0, 0, 0.1)",
 };
-const tag = {
-  width: "150px",
-  height: "80px",
-};
+// const tag = {
+//   width: "150px",
+//   height: "80px",
+// };
 const box = {
   padding: "0 48px",
-  lineHeight:"1.5",
+  lineHeight: "1.5",
 };
 
 const hr = {
@@ -149,4 +204,26 @@ const footer = {
   color: "#8898aa",
   fontSize: "14px",
   lineHeight: "16px",
+ 
+};
+
+const tagBase = {
+  width: "80px",
+  height: "50px",
+   marginBottom: "40px",
+};
+
+const footerLink = {
+  color: "#1A56DB",
+  textDecoration: "underline",
+  marginLeft: "30px",
+};
+
+const footerText = {
+  fontSize: "12px",
+  color: "#b7b7b7",
+  lineHeight: "15px",
+  textAlign: "left" as const,
+  marginBottom: "50px",
+  marginLeft: "30px",
 };
