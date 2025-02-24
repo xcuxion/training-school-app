@@ -70,7 +70,7 @@ interface ICourse {
 export const CourseCard = ({ image, title, description, index }: ICourse) => {
   return (
     <motion.div
-      className="p-4 flex flex-col items-start bg-opacity-70 bg-gradient-to-br from-gray-800 to-gray-900 border-b-2 border-gray-700  shadow-lg hover:scale-105 transition-transform duration-0 ease-out"
+      className="p-4 flex flex-col items-start bg-opacity-70 bg-gradient-to-br from-gray-800 to-gray-900 border-b-4 border-outline  shadow-lg hover:scale-105 transition-transform duration-0 ease-out"
       whileHover={{ scale: 1.05 }}
       key={index}
       initial={{ opacity: 0, y: 20 }}

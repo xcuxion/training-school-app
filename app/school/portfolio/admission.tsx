@@ -25,8 +25,8 @@ const Admission = () => {
         </h1>
         <div className="text-lg md:text-xl mb-4 leading-relaxed text-gray-300">
           Embark on your journey with{" "}
-          <span className="text-fontColor font-bold">XCUXION School</span> to become
-          a tech innovator! Our admission process is designed to be
+          <span className="text-fontColor font-bold">XCUXION School</span> to
+          become a tech innovator! Our admission process is designed to be
           straightforward and transparent:
         </div>
         <ul className="list-disc list-inside text-left space-y-3 text-base md:text-lg text-gray-200">
@@ -61,30 +61,28 @@ const Admission = () => {
           Financial Aid & Scholarships
         </h2>
         <div className="text-lg md:text-xl mb-4 leading-relaxed text-gray-300">
-          At <span className="text-fontColor font-bold">XCUXION School</span>, we are
-          committed to making tech education accessible to talented individuals,
-          regardless of financial background. Our Batch ‘25 Training Program
-          offers three financial aid options:
+          At <span className="text-fontColor font-bold">XCUXION School</span>,
+          we are committed to making tech education accessible to talented
+          individuals, regardless of financial background. Our Batch ‘25
+          Training Program offers three financial aid options:
         </div>
         <div className="text-left space-y-8">
           <div>
-            <h3 className="text-2xl font-bold text-accent leading-snug">
-              1. Full Scholarship
-            </h3>
+            <h3 className="text-2xl font-bold text-accent leading-snug">1.</h3>
             <div className="text-lg leading-relaxed">
               <strong>What It Covers:</strong>
               <ul className="list-disc list-inside ml-4">
-                <li>Full tuition coverage</li>
-                <li>Mentorship and incubation support</li>
-                <li>Access to all learning materials and resources</li>
+                <li></li>
+                <li></li>
+                <li></li>
               </ul>
             </div>
             <div className="text-lg leading-relaxed">
               <strong>Eligibility:</strong>
               <ul className="list-disc list-inside ml-4">
-                <li>Demonstrated financial need</li>
-                <li>Exceptional academic or professional background</li>
-                <li>Commitment to complete the program</li>
+                <li></li>
+                <li></li>
+                <li></li>
               </ul>
             </div>
           </div>
@@ -110,9 +108,7 @@ const Admission = () => {
             </div>
           </div>
           <div>
-            <h3 className="text-2xl font-bold text-accent leading-snug">
-              3. Standard Enrollment
-            </h3>
+            <h3 className="text-2xl font-bold text-accent leading-snug">3.</h3>
             <div className="text-lg leading-relaxed">
               <strong>Fee Structure:</strong> Enrollment Fee (GHS 100) and
               Tuition Fee (GHS 750 - GHS 950), covering full training,

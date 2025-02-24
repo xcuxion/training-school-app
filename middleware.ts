@@ -2,8 +2,8 @@ import { cookies } from "next/headers";
 import { NextRequest, NextResponse } from "next/server";
 import { decrypt } from "./lib/session";
 
-const protectedRoutes = ["/school/learning-spaace", "/school/admission-portal", "/guild", "/administrator-office"]
-const publicRoutes = ["/", "/school/apply", "/guild", "/school"]
+const protectedRoutes = ["/school/learning-spaace", "/school/admission-portal", "/administrator-office"]
+const publicRoutes = ["/", "/school/apply", "/guild", "/school", "/center"]
 
 
 export default async function middleware(req: NextRequest){

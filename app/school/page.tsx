@@ -6,19 +6,84 @@ import Image from "next/image";
 import { Button } from "@/components/ui/button";
 import { FaArrowRight } from "react-icons/fa";
 import CoursesSection from "./portfolio/courses-section";
+import AidCard from "./portfolio/aid-card";
+import { title } from "process";
+import Footer from "../(root)/portfolio/footer";
+import Link from "next/link";
+import Login from "../(root)/login";
+import MobileNavigator from "../(root)/portfolio/mobile-navigator";
+import Register from "../(root)/register";
+import Navigator from "../(root)/portfolio/navigator";
 
-export default function Home() {
-  const [hovered, setHovered] = useState(false);
+const admissionSteps = [
+  {
+    title: "Submit Application",
+    description:
+      "Fill out the application form and submit it to our official web portal.",
+  },
+  {
+    title: "Selection Process",
+    description:
+      "Review the application, schedule interviews, and assess financial need of applicants.",
+  },
+  {
+    title: "Admission Confirmation",
+    description: "Receive a confirmation email with your admission details.",
+  },
+];
 
+const aid = [
+  {
+    title: "Scholarship",
+    requirements: [
+      "Must be a student",
+      "Willingness to serve as a trac-assistant",
+      "Must demonstrate prior knowledge in selected track",
+    ],
+    benefits: [
+      "Full tuition coverage",
+      "Mentorship and incubation support",
+      "Access to all learning materials and resources",
+    ],
+    eligibility: [
+      "Demonstrated financial need",
+      "Exceptional academic or professional background",
+      "Commitment to complete the program",
+    ],
+  },
+  {
+    title: "Standard Enrollment",
+    requirements: [
+      "Must be a student",
+      "Willingness to serve as a trac-assistant",
+      "Must demonstrate prior knowledge in selected track",
+    ],
+    benefits: [
+      "Full tuition coverage",
+      "Mentorship and incubation support",
+      "Access to all learning materials and resources",
+    ],
+    eligibility: [
+      "Demonstrated financial need",
+      "Exceptional academic or professional background",
+      "Commitment to complete the program",
+    ],
+  },
+];
+
+export default function School() {
   return (
-    <div className="bg-black text-white font-sans overflow-hidden">
+    <motion.div className="bg-black text-white relative  font-sans w-full">
+      {/* Navigation */}
+      <Navigator/>
+
       {/* Hero Section */}
-      <section className="protected-bg relative bg-mock  bg-no-repeat bg-cover z-0 h-screen flex flex-col justify-center items-center text-center px-6">
+      <motion.section className="z-0 protected-bg relative bg-mock  bg-no-repeat bg-cover h-screen flex flex-col justify-center items-center text-center px-6">
         <motion.div
           initial={{ opacity: 0, y: 50 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 1 }}
-          className="z-10"
+          className=""
         >
           <h1 className="text-6xl z-30 font-bold text-primary drop-shadow-lg">
             Building the Future of Techpreneurs
@@ -27,15 +92,20 @@ export default function Home() {
             Join XCUXION School to gain world-class training in software
             engineering, business strategy, and startup development.
           </p>
-          <Button className="mt-6 z-30 px-6 py-3 text-lg bg-primary hover:bg-white hover:scale-105 text-black">
-            Start Application <FaArrowRight className="ml-2" />
+          <Button
+            className="mt-6 z-30 px-6 py-3 text-lg bg-primary hover:bg-white hover:scale-105 text-black"
+            asChild
+          >
+            <Link href={"/school/apply"}>
+              Start Application <FaArrowRight className="ml-2 " />
+            </Link>
           </Button>
         </motion.div>
-        <div className="absolute top-0 left-0 w-full h-full bg-gradient-to-b from-black via-black/30 to-black" />
-      </section>
+        <motion.div className="absolute top-0 left-0 w-full h-full bg-gradient-to-b from-black via-black/30 to-black z-10" />
+      </motion.section>
 
       {/* Programs */}
-      <section className="min-h-screen py-5 md:py-10 md:px-20 px-6 bg-faq-bg bg-no-repeat bg-cover">
+      <motion.section className="z-30 min-h-screen py-5 md:py-10 md:px-20 px-6 bg-faq-bg bg-no-repeat bg-cover">
         <motion.span>
           <motion.h2
             initial={{ opacity: 0, y: -20 }}
@@ -45,17 +115,12 @@ export default function Home() {
           >
             Our Programs
           </motion.h2>{" "}
-          <motion.p className="md:text-lg md:w-3/4 mx-auto">
-            Gain hands-on training in software development, business strategy,
-            and more. Our expert-led courses equip you to launch and scale your
-            startup successfully.
-          </motion.p>
         </motion.span>
         <CoursesSection />
-      </section>
+      </motion.section>
 
       {/* Admissions */}
-      <section className="min-h-screen py-5 md:py-10 md:px-20 bg-galaxybg bg-no-repeat bg-cover">
+      <motion.section className="z-30 h-full py-5 md:py-10 md:px-20 bg-galaxybg bg-no-repeat bg-cover">
         <motion.h2
           initial={{ opacity: 0, y: -20 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -65,64 +130,63 @@ export default function Home() {
           Our Admissions Process
         </motion.h2>
 
-        <div className="mt-10 flex flex-col px-6 gap-y-6 w-full md:px-20 py-5 md:py-10">
-          {[1, 2, 3].map((_, index) => (
+        <motion.div className=" flex flex-col px-6 gap-y-6 w-full md:px-20 py-5 md:py-10">
+          {admissionSteps.map((step, index) => (
             <motion.div
               key={index}
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.8, delay: index * 0.2 }}
-              className="bg-gray-800 p-6 shadow-lg shrink-0"
+              className="flex items-center bg-secondary p-6 shrink-0"
             >
-              <p className="text-gray-300">
-                "XCUXION transformed my career with hands-on experience and
-                real-world projects."
-              </p>
-              <h4 className="mt-4 font-semibold text-gold-400">
-                Jane Doe, Software Engineer
-              </h4>
+              <span className="w-8 h-8 rounded-md font-mono text-4xl flex items-center gap-3">
+                {index}
+              </span>
+              <span className="">
+                <h4 className=" text-xl text-primary font-semibold text-gold-400">
+                  {step.title}
+                </h4>
+                <p className="text-gray-300">{step.description}</p>
+              </span>
             </motion.div>
           ))}
-        </div>
-      </section>
+        </motion.div>
+      </motion.section>
 
       {/* Financial Aid */}
-      <section className="h-screen py-5 md:py-10 md:px-20 bg-secondary">
-        <motion.h2
-          initial={{ opacity: 0, y: -20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 1 }}
-          className="text-4xl font-bold text-primary text-center"
-        >
-          FInancial Assistance
-        </motion.h2>
-        <div className="mt-10 flex flex-col gap-6 px-6">
-          {[1, 2, 3].map((_, index) => (
+      <motion.section className="z-30 h-full py-5 md:py-10 md:px-20 to-secondary bg-gradient-to-b from-black via-transparent">
+        <motion.div className=" grid md:grid-cols-3 gap-6 px-6">
+          <motion.span>
+            <motion.h2
+              initial={{ opacity: 0, y: -20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              transition={{ duration: 1 }}
+              className="text-4xl font-bold text-primary "
+            >
+              FInancial Assistance
+            </motion.h2>
+            <motion.p>
+              At XCUXION School, we are committed to making tech education
+              accessible to talented individuals, regardless of financial
+              background.
+            </motion.p>
+          </motion.span>
+          {aid.map((category, index) => (
             <motion.div
               key={index}
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.8, delay: index * 0.2 }}
-              className="bg-gray-800 p-6 rounded-xl shadow-lg w-80 shrink-0"
+              className="bg-black p-6 rounded-xl shadow-lg w-full shrink-0"
             >
-              <p className="text-gray-300">
-                "XCUXION transformed my career with hands-on experience and
-                real-world projects."
-              </p>
-              <h4 className="mt-4 font-semibold text-gold-400">
-                Jane Doe, Software Engineer
-              </h4>
+              <AidCard {...category} key={index} />
             </motion.div>
           ))}
-        </div>
-      </section>
+        </motion.div>
+      </motion.section>
 
       {/* Footer */}
-      <footer className="py-10 text-center bg-black border-t border-gray-700">
-        <p className="text-gray-400">
-          © 2025 XCUXION School. All rights reserved.
-        </p>
-      </footer>
-    </div>
+      <Footer />
+    </motion.div>
   );
 }

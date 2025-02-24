@@ -3,7 +3,31 @@
 @tailwind utilities;
 
 
-@layer utilities {
+
+.protected-bg {
+  background-attachment: fixed;
+  user-select: none; 
+}
+
+.protected-bg::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: inherit;
+  filter: blur(0px); /* Hides direct access in Inspect */
+}
+
+
+@layer base {
+  * {
+    @apply border-outline outline-ring/50;
+  }
+  body {
+    @apply bg-black text-fontColor;
+  }
   .text-balance {
     text-wrap: balance;
   }
@@ -19,22 +43,4 @@
   h1,h2,h3,h4,h5,h6{
     @apply font-Nunito
   }
-}
-
-.protected-bg {
-
-  background-attachment: fixed;
-  pointer-events: none; /* Disables interactions */
-  user-select: none; /* Prevents selection */
-}
-
-.protected-bg::before {
-  content: "";
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background: inherit;
-  filter: blur(0px); /* Hides direct access in Inspect */
 }

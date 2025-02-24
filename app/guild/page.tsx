@@ -1,9 +1,9 @@
 import React from 'react'
 
-const page = () => {
+const Guild = () => {
   return (
-    <div>page</div>
+    <div>Guild</div>
   )
 }
 
-export default page
+export default Guild

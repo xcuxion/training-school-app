@@ -24,23 +24,28 @@ const redirects = [
 
 const Footer = () => {
   return (
-    <motion.footer className="bg-secondary mt-4 px-5 md:px-20 py-5 md:py-10 flex flex-col md:flex-row md:items-center">
+    <motion.footer className="bg-secondary px-5 md:px-20 py-5 md:py-10 flex flex-col md:flex-row md:items-center">
       <div className="grid md:grid-cols-2">
         <span className="">
-          <h3 className="font-medium">Stay Updated</h3>
+          <h3 className="font-bold text-xl">Stay Updated</h3>
           <p className="opacity-75">
             Subscribe to our newsletter for updates, news, and exclusive
             content.
           </p>
-          <form className="flex">
-            <Input className="mr-1" placeholder="Email address" name="subscriber" type="email" />
+          <form className="grid grid-cols-4 gap-2 mt-4">
+            <Input
+              className="col-span-3"
+              placeholder="Email address"
+              name="subscriber"
+              type="email"
+            />
             <SubmitButton buttonText="Subscribe" />
           </form>
         </span>
       </div>
 
       <div className="mt-4  md:mt-0">
-        <div className="flex md:flex-row flex-col">
+        <div className="flex md:flex-row md:items-center flex-col">
           <Image
             src={"/logo.png"}
             alt=""
@@ -48,21 +53,21 @@ const Footer = () => {
             height={45}
             className=""
           />
-        <span className="">
-          {redirects.map((link, index) => (
-            <Link
-              key={index}
-              href={link.href}
-              className="p-3 hover:text-primary"
-            >
-              {link.label}
-            </Link>
-          ))}
-        </span>
+          <span className="">
+            {redirects.map((link, index) => (
+              <Link
+                key={index}
+                href={link.href}
+                className="p-3 hover:text-primary"
+              >
+                {link.label}
+              </Link>
+            ))}
+          </span>
         </div>
         <span className="flex items-center mt-8 text-sm">
-          <FaCopyright className="text-base mr-1" /> {new Date().getFullYear()} All
-          rights reserved.
+          <FaCopyright className="text-base mr-1" /> {new Date().getFullYear()}{" "}
+          All rights reserved.
         </span>
       </div>
     </motion.footer>
