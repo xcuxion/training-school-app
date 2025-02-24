@@ -35,6 +35,14 @@ const AdmittedMessage = () => {
               width="300"
               height="100"
             />
+
+            <Img
+              style={congratImg}
+              src={`${baseUrl}/static/congrat.jpeg`}
+              alt="XCUXION Logo"
+              width="250"
+              height="150"
+            />
             <Text style={heading}>🌟 Congratulations! 🎉</Text>
             <Text style={paragraph}>
               Your application to join Batch'25 of XCUXION has been accepted.
@@ -56,12 +64,6 @@ const AdmittedMessage = () => {
               <Text>Username:</Text>
               <Text>Password:</Text>
             </Text>
-            <Img
-              src={`${baseUrl}/static/congrat.jpeg`}
-              alt="XCUXION Logo"
-              width="250"
-              height="150"
-            />
             <Button href="https://your-admission-portal-link.com">
               Visit Your Admission Portal
             </Button>
@@ -75,7 +77,6 @@ const AdmittedMessage = () => {
 export default AdmittedMessage;
 
 const main = {
-  border: "1px solid blue",
   backgroundColor: "#f6f9fc",
   fontFamily:
     "-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Ubuntu, sans-serif",
@@ -84,19 +85,27 @@ const main = {
 const styles = {
   padding: "20px 0 48px",
   marginBottom: "64px",
+  border: "1px solid blue",
 };
 
 const section = {
-  padding: "0 48px",
+  padding: "20px 20px 48px",
   display: "flex",
   flexRender: "column",
 };
 const tag = {
-  
   width: "150px",
   height: "80px",
 };
 
+const congratImg = {
+  width: "500px",
+  height: "450px",
+  display: "block",
+  margin: "auto",
+  marginTop: "20px",
+  marginBottom: "40px",
+};
 const heading = {
   color: "#525f7f",
   fontSize: "24px",

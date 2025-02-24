@@ -37,6 +37,7 @@ const ApplicationSubmitted = ({
             width="49"
             height="21"
             alt="Xcuxion Logo"
+            style={tag}
           />
           <Hr style={hr} />
           <Text style={header}>🌟 Thank You for Your Application! 🎉</Text>
@@ -99,9 +100,13 @@ const container = {
   marginBottom: "64px",
   boxShadow: "0px 4px 10px rgba(0, 0, 0, 0.1)",
 };
-
+const tag = {
+  width: "150px",
+  height: "80px",
+};
 const box = {
   padding: "0 48px",
+  lineHeight:"1.5",
 };
 
 const hr = {
