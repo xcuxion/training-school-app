@@ -150,7 +150,7 @@ const Navigator = () => {
       </div>
       <div className="flex items-center md:ml-8 space-x-2 md:space-x-4">
         <Button
-          className="rounded-full h-8 md:h-10"
+          className="hidden md:block rounded-full h-8 md:h-10"
           onClick={() => setOpenRegister(true)}
         >
           Register
@@ -158,7 +158,7 @@ const Navigator = () => {
         <Button
           onClick={() => setOpenLogin(true)}
           variant="outline"
-          className="border-2 rounded-full h-8 md:h-10"
+          className="w-14 md:w-auto border-2 rounded-full h-8 md:h-10"
         >
           Log in
         </Button>

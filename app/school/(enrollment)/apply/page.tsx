@@ -15,10 +15,10 @@ import {
 } from "@/components/ui/select";
 import { new_application } from "@/lib/actions/admission.actions";
 import { useRouter } from "next/navigation";
-import { toast } from "@/components/ui/use-toast";
 import SubmitButton from "@/components/submit-button";
 import { useApplicantStore } from "@/store/applicant-store";
 import { useUserStore } from "@/store/user-store";
+import { toast } from "sonner";
 
 const initial = {
   fname: "",
@@ -58,9 +58,7 @@ const ApplicationPage = () => {
     console.log(state);
     if (state?.success && state?.data) {
       formRef.current?.reset();
-      toast({
-        title: "Application Submitted Successfully",
-      });
+      toast("Application Submitted Successfully");
       formRef.current?.reset();
 
       update(state?.data);

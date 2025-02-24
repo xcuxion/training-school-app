@@ -26,7 +26,7 @@ const Login = ({ show, onClose }: { show: boolean; onClose: () => void }) => {
   return (
     <FormModal isOpen={show} onClose={onClose} title="Sign in to Account">
       <div className="">
-        <form action={formAction} className="flex flex-col gap-y-4">
+        <form ref={formRef} action={formAction} className="flex flex-col gap-y-4">
           <span>
             <Label>Email Address</Label>
 

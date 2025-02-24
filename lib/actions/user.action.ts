@@ -147,12 +147,9 @@ export default async function makeEnquiry(
     }
     const { email, name, question } = result.data;
 
-    await prisma.enquiry.create({ data: { email, name, question } });
-    return JSON.parse(
-      JSON.stringify({
-        message: "Enquiry sent successfully!",
-      })
-    );
+    const newInquiry = await prisma.enquiry.create({ data: { email, name, question } });
+    console.log(newInquiry)
+    return {success: true, message: "Inquiry Sent Successfully"}
   } catch (error) {
     handleError(error);
   }

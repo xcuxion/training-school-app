@@ -1,3 +1,4 @@
+import { Toaster } from '@/components/ui/sonner';
 import { Metadata } from 'next';
 import React from 'react'
 
@@ -11,6 +12,8 @@ const layout = ({children}: {children: React.ReactNode}) => {
   return (
     <div className='bg-black'>
       {children}
+      <Toaster />
+
     </div>
   )
 }
