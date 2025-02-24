@@ -19,6 +19,7 @@ import Narrative from "./narrative";
 import Contact from "./contact";
 import { motion } from "framer-motion";
 import Register from "../register";
+import MobileNavigator from "./mobile-navigator";
 
 const pages = [
   { label: "home", href: "/" },
@@ -76,11 +77,17 @@ const Navigator = () => {
 
   return (
     <motion.header
-      className="fixed md:top-0 flex w-full flex-between text-sm md:text-base left-0  transform md:-translate-x-1/2 z-50 md:gap-4 px-20 py-3 bg-black"
+      className="fixed md:top-0 flex w-full flex-between text-sm md:text-base left-0 z-50 md:gap-4 px-5 md:px-20 py-3 bg-black"
       initial={{ y: 50, opacity: 0 }}
       animate={{ y: 0, opacity: 1 }}
       transition={{ duration: 0.5 }}
     >
+      <span className="flex flex-center w-10 h-10 md:hidden">
+        <MobileNavigator
+          activeSection={activePage}
+          setActiveSection={setActivePage}
+        />
+      </span>
       <Image
         src="/logo.png"
         alt="school logo"
@@ -89,7 +96,7 @@ const Navigator = () => {
         priority
         className="hidden md:block w-[100px] h-[45px] object-cover"
       />
-      <div className="flex gap-x-4 relative items-center">
+      <div className="hidden md:flex gap-x-4 relative items-center">
         {pages.map((link, index) => {
           const isActive = pathname === link.href;
           return (
@@ -151,7 +158,7 @@ const Navigator = () => {
         <Button
           onClick={() => setOpenLogin(true)}
           variant="outline"
-          className="border-2 border-primary text-primary rounded-full h-8 md:h-10"
+          className="border-2 rounded-full h-8 md:h-10"
         >
           Log in
         </Button>

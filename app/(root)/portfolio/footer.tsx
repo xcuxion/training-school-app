@@ -27,12 +27,12 @@ const Footer = () => {
     <motion.footer className="bg-secondary px-5 md:px-20 py-5 md:py-10 flex flex-col md:flex-row md:items-center">
       <div className="grid md:grid-cols-2">
         <span className="">
-          <h3 className="font-bold text-xl">Stay Updated</h3>
+          <h3 className="font-bold md:text-xl">Stay Updated</h3>
           <p className="opacity-75">
             Subscribe to our newsletter for updates, news, and exclusive
             content.
           </p>
-          <form className="grid grid-cols-4 gap-2 mt-4">
+          <form className="grid grid-cols-4 md:gap-2 mt-4">
             <Input
               className="col-span-3"
               placeholder="Email address"

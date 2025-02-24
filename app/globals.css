@@ -5,8 +5,11 @@
 
 
 .protected-bg {
+  background-size: cover;
+  background-position: center;
   background-attachment: fixed;
-  user-select: none; 
+  pointer-events: none; /* Disables interactions */
+  user-select: none; /* Prevents selection */
 }
 
 .protected-bg::before {
@@ -18,6 +21,7 @@
   height: 100%;
   background: inherit;
   filter: blur(0px); /* Hides direct access in Inspect */
+  z-index: -1;
 }
 
 

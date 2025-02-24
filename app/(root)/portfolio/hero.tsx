@@ -1,10 +1,12 @@
 "use client";
 import { Button } from "@/components/ui/button";
-import Link from "next/link";
-import React from "react";
+import React, { useState } from "react";
 import { motion } from "framer-motion";
+import Register from "../register";
 
 const Hero = () => {
+  const [openRegister, setOpenRegister] = useState<boolean>(false);
+
   return (
     <motion.div
       initial={{ opacity: 0, y: 50 }}
@@ -41,7 +43,7 @@ const Hero = () => {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.8, ease: "easeOut" }}
-          className="text-3xl md:text-7xl font-bold drop-shadow-lg"
+          className="text-4xl md:text-7xl font-bold drop-shadow-lg"
         >
           We help you turn your ideas into startups
         </motion.h1>
@@ -65,13 +67,15 @@ const Hero = () => {
           <Button
             variant={"default"}
             className="rounded-full md:scale-125 md:mt-4 shadow-lg hover:bg-white hover:text-black transition-colors"
-            asChild
-            aria-label="Start Your Application"
+            onClick={() => setOpenRegister(true)}
           >
-            <Link href="/school/apply">Join us!</Link>
+            Join us!
           </Button>
         </motion.div>
       </motion.span>
+      {openRegister && (
+        <Register show={openRegister} onClose={() => setOpenRegister(false)} />
+      )}
     </motion.div>
   );
 };

@@ -11,8 +11,12 @@ import { MdMenu } from "react-icons/md";
 import Link from "next/link";
 import Image from "next/image";
 
-const sections = ["home", "courses", "admission", "faqs", "contact"];
-
+const pages = [
+  { label: "home", href: "/" },
+  { label: "school", href: "/school" },
+  { label: "guild", href: "/guild" },
+  { label: "Startup Center", href: "/center" },
+];
 interface MobileNavigatorProps {
   activeSection: string;
   setActiveSection: (section: string) => void;
@@ -41,18 +45,18 @@ const MobileNavigator: React.FC<MobileNavigatorProps> = ({
           </SheetTitle>
         </SheetHeader>
         <nav className="flex flex-col">
-          {sections.map((section) => (
+          {pages.map((section) => (
             <Link
-              key={section}
-              href={`#${section}`}
+              key={section.label}
+              href={section.href}
               className={`transition-colors duration-300 px-4 py-2 rounded-full text-white ${
-                activeSection === section
+                activeSection === section.href
                   ? "bg-gray-900 text-black"
                   : "opacity-50"
               }`}
-              onClick={() => handleLinkClick(section)}
+              onClick={() => handleLinkClick(section.label)}
             >
-              {section.charAt(0).toUpperCase() + section.slice(1)}
+              {section.label.charAt(0).toUpperCase() + section.label.slice(1)}
             </Link>
           ))}
         </nav>
