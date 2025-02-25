@@ -16,7 +16,6 @@ import { logOut } from "@/lib/actions/user.action";
 import { useUserStore } from "@/store/user-store";
 
 const AdmissionPortal = () => {
-  const { user } = useUserStore();
   const { applicant } = useApplicantStore();
   const router = useRouter();
   const [editOff, setEditOff] = useState(true);

@@ -13,22 +13,30 @@ const newApplicationSchema = z.object({
   fname: z.string({ message: "First name is required" }).trim(),
   oname: z.string().trim().optional(),
   lname: z.string({ message: "Last name is required" }).trim(),
-  gender: z.enum(["male", "female"], {message: "Select your gender"}),
-  country: z.enum(["ghana"], {message: "Select your country of residence" }),
+  gender: z.enum(["male", "female"], { message: "Select your gender" }),
+  country: z.enum(["ghana"], { message: "Select your country of residence" }),
   school: z.enum(["knust", "ug", "ashesi", "none"]).optional(),
-  batch: z.enum(["batch25"], {message: "Select the batch of interest" }),
-  track: z.enum(["web","mobile","dataanalysis","backend"]),
-  contact: z.string({ message: "Phone number is required" }).trim().min(10).max(15),
+  batch: z.enum(["batch25"], { message: "Select the batch of interest" }),
+  track: z.enum(["web", "mobile", "dataanalysis", "backend"]),
+  contact: z
+    .string({ message: "Phone number is required" })
+    .trim()
+    .min(10)
+    .max(15),
   dob: z.string(),
   email: z.string().email({ message: "field is required" }).trim().optional(),
   programme: z.string({ message: "field is required" }).min(2).optional(),
-  year: z.enum(["1", "2", "3", "4", "5", "6"], {message: "Select your current year"}).optional(),
+  year: z
+    .enum(["1", "2", "3", "4", "5", "6"], {
+      message: "Select your current year",
+    })
+    .optional(),
   reason: z.string(),
   balance: z.string(),
   statement: z.string().optional(),
-  scholarship: z.enum(["yes", "no"], {message: "Select an option"}),
-  student: z.enum(["yes", "no"], {message: "Select an option"}),
-  laptop: z.enum(["yes", "no"], {message: "Select an option"}),
+  scholarship: z.enum(["yes", "no"], { message: "Select an option" }),
+  student: z.enum(["yes", "no"], { message: "Select an option" }),
+  laptop: z.enum(["yes", "no"], { message: "Select an option" }),
 });
 
 const editApplicationSchema = z.object({
@@ -38,7 +46,9 @@ const editApplicationSchema = z.object({
   gender: z.enum(["male", "female"]),
   country: z.enum(["ghana"]),
   school: z.enum(["knust", "ug", "ashesi", "none"]),
-  track: z.enum(["web","mobile","dataanalysis","backend"], {message: "Select your preferred track" }),
+  track: z.enum(["web", "mobile", "dataanalysis", "backend"], {
+    message: "Select your preferred track",
+  }),
   contact: z
     .string({ message: "field is required" })
     .trim()
@@ -75,9 +85,11 @@ export async function new_application(prevState: unknown, formData: FormData) {
         errors: result.error.flatten().fieldErrors,
       };
     }
-    const user =  await prisma.user.findFirst({where: {email: result.data.email}})
-    if(!user) {
-      return {message: "Register an account to proceed", noAccount: true}
+    const user = await prisma.user.findFirst({
+      where: { email: result.data.email },
+    });
+    if (!user) {
+      return { message: "Register an account to proceed", noAccount: true };
     }
     const dob = result.data.dob;
     const dobDateTime = new Date(dob).toISOString();
@@ -92,14 +104,18 @@ export async function new_application(prevState: unknown, formData: FormData) {
         student: result.data.scholarship === "yes" ? true : false,
       },
     });
+    await prisma.user.update({
+      where: { id: user.id }, // Ensure we target the correct user
+      data: { role: "applicant" }, // Update role to "applicant"
+    });
     console.log(applicant);
-    await createSession(applicant.id, "applicant");
+    await createSession(user.id, user.role);
 
     const { createdAt, ...profileWithoutTimestamps } = applicant;
     try {
       const response = await resend.emails.send({
         from: "admission@xcuxion.org",
-        to: result.data.email? result.data.email : user.email,
+        to: result.data.email ? result.data.email : user.email,
         subject: "New Application Received",
         html: "<h1>Application submitted successfully</h1>",
       });
@@ -181,7 +197,7 @@ export async function admit_applicant(
     });
 
     if (!applicant) {
-      return {message: "Applicant not found."};
+      return { message: "Applicant not found." };
     }
 
     // Step 2: Update the applicant's status to "admitted"
@@ -195,18 +211,16 @@ export async function admit_applicant(
     };
   } catch (error) {
     console.error(error);
-    return {message: "Error admitting applicant."};
+    return { message: "Error admitting applicant." };
   }
 }
 
-export async function accept_admission(
-  id: string,
-) {
+export async function accept_admission(id: string) {
   try {
     //Step 1: Find the applicant
     const applicant = await prisma.applicant.findUnique({ where: { id: id } });
     if (!applicant) {
-      return {message: "Applicant not found."};
+      return { message: "Applicant not found." };
     }
 
     //Step 2: remove unwanted fields from applicant data to use in creating student data
@@ -238,7 +252,7 @@ export async function accept_admission(
       },
     });
   } catch (error) {
-    return {message: "Error accepting admission"};
+    return { message: "Error accepting admission" };
   }
 }
 
@@ -250,7 +264,7 @@ export async function reject_applicant(id: string) {
     });
 
     if (!applicant) {
-      return {message: "Applicant not found."};
+      return { message: "Applicant not found." };
     }
 
     // Step 2: Update the applicant's status to "admitted"

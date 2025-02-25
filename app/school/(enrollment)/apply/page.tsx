@@ -20,6 +20,7 @@ import { useApplicantStore } from "@/store/applicant-store";
 import { useUserStore } from "@/store/user-store";
 import { toast } from "sonner";
 import Register from "@/app/(root)/register";
+import NoAccountUser from "./no-account-user";
 
 const initial = {
   fname: "",
@@ -52,11 +53,6 @@ const ApplicationPage = () => {
   const { user } = useUserStore();
   const [openRegister, setOpenRegister] = useState<boolean>(false);
 
-  // useEffect(()=>(
-  //   const fetchUser = async () => {
-  //     await fetchUser()
-  //   }
-  // ),[])
   useEffect(() => {
     console.log(state);
     if (state?.success && state?.data) {
@@ -74,7 +70,11 @@ const ApplicationPage = () => {
   return (
     <div className="p-4 md:py-5 md:px-10 md:w-2/3 mx-auto">
       {openRegister && (
-        <Register show={openRegister} onClose={() => setOpenRegister(false)} />
+        <NoAccountUser
+          emailAddress={value.email}
+          show={openRegister}
+          onClose={() => setOpenRegister(false)}
+        />
       )}
       <div className="flex flex-col-reverse md:flex-row md:flex-between py-2 md:py-4">
         <h1 className="text-3xl md:text-4xl font-bold">Application Form</h1>

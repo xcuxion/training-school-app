@@ -24,7 +24,7 @@ model User {
   email       String       @unique @db.VarChar(80)
   password    String       @db.VarChar(80)
   interest    Interest     @default(school)
-  role        Role?        @default(applicant)
+  role        Role?        @default(visitor)
   Facilitator Facilitator?
   GuildMember GuildMember?
   Applicant   Applicant?
@@ -265,4 +265,5 @@ enum Role {
   student
   facilitator
   admin
+  visitor
 }
