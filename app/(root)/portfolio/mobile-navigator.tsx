@@ -3,6 +3,7 @@ import React, { useState } from "react";
 import {
   Sheet,
   SheetContent,
+  SheetFooter,
   SheetHeader,
   SheetTitle,
   SheetTrigger,
@@ -10,6 +11,8 @@ import {
 import { MdMenu } from "react-icons/md";
 import Link from "next/link";
 import Image from "next/image";
+import { Button } from "@/components/ui/button";
+import Register from "../register";
 
 const pages = [
   { label: "home", href: "/" },
@@ -27,6 +30,7 @@ const MobileNavigator: React.FC<MobileNavigatorProps> = ({
   setActiveSection,
 }) => {
   const [isOpen, setIsOpen] = useState<boolean>(false);
+  const [openRegister, setOpenRegister] = useState<boolean>(false);
 
   const handleLinkClick = (section: string) => {
     setActiveSection(section);
@@ -38,7 +42,7 @@ const MobileNavigator: React.FC<MobileNavigatorProps> = ({
       <SheetTrigger>
         <MdMenu className="w-8 h-8" />
       </SheetTrigger>
-      <SheetContent side={"left"}>
+      <SheetContent side={"left"} className="">
         <SheetHeader>
           <SheetTitle>
             <Image src={"/logo.png"} alt="logo" width={150} height={60} />
@@ -50,8 +54,9 @@ const MobileNavigator: React.FC<MobileNavigatorProps> = ({
               key={section.label}
               href={section.href}
               className={`transition-colors duration-300 px-4 py-2 rounded-full text-white ${
-                activeSection === section.href
-                  ? "bg-gray-900 text-black"
+                activeSection.toLocaleLowerCase() ===
+                section.label.toLocaleLowerCase()
+                  ? "bg-gray-900"
                   : "opacity-50"
               }`}
               onClick={() => handleLinkClick(section.label)}
@@ -60,7 +65,18 @@ const MobileNavigator: React.FC<MobileNavigatorProps> = ({
             </Link>
           ))}
         </nav>
+      <SheetFooter>
+        <Button
+          className="w-full rounded-lg h-8 mt-20"
+          onClick={() => setOpenRegister(true)}
+        >
+          Register
+        </Button>
+      </SheetFooter>
       </SheetContent>
+      {openRegister && (
+        <Register show={openRegister} onClose={() => setOpenRegister(false)} />
+      )}
     </Sheet>
   );
 };

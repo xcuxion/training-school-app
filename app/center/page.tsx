@@ -19,14 +19,14 @@ export default function InnovationCenter() {
     <div className="relative">
       <Navigator />
 
-      <section className="min-h-screen bg-black text-white py-12 px-6 md:px-16">
+      <section className="min-h-screen bg-black text-white py-6 md:py-12 px-5 md:px-20">
         <motion.div
           initial={{ opacity: 0, y: -20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 1 }}
           className="max-w-4xl mx-auto text-center mt-10"
         >
-          <h1 className="text-4xl md:text-5xl font-bold text-primary">
+          <h1 className="text-2xl md:text-5xl font-bold text-primary">
             XCUXION Startups & Innovation Center
           </h1>
           <p className="mt-4 text-lg text-gray-300">
@@ -36,15 +36,15 @@ export default function InnovationCenter() {
         </motion.div>
 
         {/* Sections */}
-        <div className="grid md:grid-cols-2 gap-8 mt-12 max-w-5xl mx-auto">
+        <div className="grid md:grid-cols-2 gap-4 md:gap-8 mt-4 md:mt-12 max-w-5xl mx-auto">
           {/* Startup Founders Section */}
           <motion.div
             initial={{ opacity: 0, x: -20 }}
             animate={{ opacity: 1, x: 0 }}
             transition={{ duration: 1, delay: 0.2 }}
-            className="bg-secondary p-6 rounded-xl shadow-lg"
+            className="bg-secondary p-3 md:p-6 rounded-xl shadow-lg"
           >
-            <h2 className="text-2xl font-semibold text-primary">
+            <h2 className="text-xl md:text-2xl font-semibold text-primary">
               For Startup Founders
             </h2>
             <ul className="mt-3 text-gray-300 space-y-2">
@@ -58,8 +58,8 @@ export default function InnovationCenter() {
               journey.
             </p>
             <Link
-              href="#"
-              className="block mt-4 bg-primary text-black text-center py-2 rounded-lg font-semibold hover:bg-yellow-400 transition"
+              href="/center/apply"
+              className="block mt-4 bg-primary text-sm md:text-base text-black text-center py-2 rounded-md md:rounded-lg font-semibold hover:bg-yellow-400 transition"
             >
               Apply for Incubation
             </Link>
@@ -70,9 +70,9 @@ export default function InnovationCenter() {
             initial={{ opacity: 0, x: 20 }}
             animate={{ opacity: 1, x: 0 }}
             transition={{ duration: 1, delay: 0.4 }}
-            className="bg-secondary p-6 rounded-xl shadow-lg"
+            className="bg-secondary p-3 md:p-6 rounded-xl shadow-lg"
           >
-            <h2 className="text-2xl font-semibold text-primary">
+            <h2 className="text-xl md:text-2xl font-semibold text-primary">
               For Businesses & Investors
             </h2>
             <ul className="mt-3 text-gray-300 space-y-2">
@@ -86,7 +86,7 @@ export default function InnovationCenter() {
             </p>
             <Link
               href="https://wa.me/233207565990"
-              className="mt-4 bg-white text-black text-center py-2 rounded-lg font-semibold flex items-center justify-center hover:border hover:border-primary transition"
+              className="mt-4 bg-white text-sm md:text-base text-black text-center py-2 rounded-md md:rounded-lg font-semibold flex items-center justify-center hover:border hover:border-primary transition"
             >
               <FaWhatsapp className="mr-2 text-xl" /> Chat with Us on WhatsApp
             </Link>

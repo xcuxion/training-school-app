@@ -5,8 +5,8 @@ import { Button } from './ui/button'
 const SubmitButton = ({buttonText}: {buttonText: string}) => {
     const {pending} = useFormStatus()
   return (
-    <Button type='submit' className='w-full'>
-        {pending? "Loading" : buttonText}
+    <Button type='submit' className={`${pending ? 'opacity-75' : 'opacity-100'} w-full`}>
+        {pending? "Loading..." : buttonText}
     </Button>
   )
 }

@@ -17,15 +17,15 @@ const page = () => {
     router.push("/");
   };
   return (
-    <div className="h-screen flex flex-col flex-center md:w-4/5 mx-auto p-10">
-      <header className=" w-4/5 mx-auto flex flex-between">
+    <div className="h-screen flex flex-col flex-center w-full md:w-4/5 mx-auto p-5 md:p-10">
+      <header className="w-full md:w-4/5 mx-auto flex flex-between">
         <Link href={"/"}>
           <Image
             src={"/logo.png"}
             alt=""
             width={125}
             height={60}
-            className="w-[125px] h-[60px]"
+            className="w-20 md:w-[125px] h-14 md:h-[60px] object-cover"
           />
         </Link>
         <Button className="" onClick={() => handleLogOut()}>
