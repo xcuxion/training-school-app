@@ -15,12 +15,21 @@ const Login = ({ show, onClose }: { show: boolean; onClose: () => void }) => {
   const [password, setPassword] = useState<string>("");
   const formRef = useRef<HTMLFormElement>(null);
   const router = useRouter();
-  const { update } = useUserStore();
+  const { update, user } = useUserStore();
+  const roleRedirects: Record<string, string> = {
+    applicant: "/school/admission-portal",
+    admin: "/school/administrator-office",
+    facilitator: "/school/facilitator",
+  };
+  
   useEffect(() => {
     if (formState?.success && formState?.data) {
       formRef.current?.reset();
       update(formState?.data);
-      router.push("/school/admission-portal");
+  
+      // ✅ Determine redirection dynamically
+      const destination = roleRedirects[user?.role as string] || "/dashboard"; 
+      router.push(destination);
     }
   }, [formState, router]);
   return (

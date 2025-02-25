@@ -15,9 +15,9 @@ const newApplicationSchema = z.object({
   lname: z.string({ message: "Last name is required" }).trim(),
   gender: z.enum(["male", "female"], {message: "Select your gender"}),
   country: z.enum(["ghana"], {message: "Select your country of residence" }),
-  school: z.enum(["knust", "ug", "ashesi", "none"],{message: "Select your school"}).optional(),
+  school: z.enum(["knust", "ug", "ashesi", "none"]).optional(),
   batch: z.enum(["batch25"], {message: "Select the batch of interest" }),
-  track: z.enum(["web","mobile","dataanalysis","backend"], {message: "Select your preferred track" }),
+  track: z.enum(["web","mobile","dataanalysis","backend"]),
   contact: z.string({ message: "Phone number is required" }).trim().min(10).max(15),
   dob: z.string(),
   email: z.string().email({ message: "field is required" }).trim().optional(),
@@ -77,7 +77,7 @@ export async function new_application(prevState: unknown, formData: FormData) {
     }
     const user =  await prisma.user.findFirst({where: {email: result.data.email}})
     if(!user) {
-      throw new Error("Register an account to proceed")
+      return {message: "Register an account to proceed"}
     }
     const dob = result.data.dob;
     const dobDateTime = new Date(dob).toISOString();
@@ -93,7 +93,7 @@ export async function new_application(prevState: unknown, formData: FormData) {
       },
     });
     console.log(applicant);
-    await createSession(applicant.id);
+    await createSession(applicant.id, "applicant");
 
     const { createdAt, ...profileWithoutTimestamps } = applicant;
     try {
@@ -181,7 +181,7 @@ export async function admit_applicant(
     });
 
     if (!applicant) {
-      throw new Error("Applicant not found.");
+      return {message: "Applicant not found."};
     }
 
     // Step 2: Update the applicant's status to "admitted"
@@ -195,7 +195,7 @@ export async function admit_applicant(
     };
   } catch (error) {
     console.error(error);
-    throw new Error("Error admitting applicant.");
+    return {message: "Error admitting applicant."};
   }
 }
 
@@ -206,7 +206,7 @@ export async function accept_admission(
     //Step 1: Find the applicant
     const applicant = await prisma.applicant.findUnique({ where: { id: id } });
     if (!applicant) {
-      throw new Error("Applicant not found.");
+      return {message: "Applicant not found."};
     }
 
     //Step 2: remove unwanted fields from applicant data to use in creating student data
@@ -238,7 +238,7 @@ export async function accept_admission(
       },
     });
   } catch (error) {
-    throw new Error("Error accepting admission");
+    return {message: "Error accepting admission"};
   }
 }
 
@@ -250,7 +250,7 @@ export async function reject_applicant(id: string) {
     });
 
     if (!applicant) {
-      throw new Error("Applicant not found.");
+      return {message: "Applicant not found."};
     }
 
     // Step 2: Update the applicant's status to "admitted"

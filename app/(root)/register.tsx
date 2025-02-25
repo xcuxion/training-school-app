@@ -15,6 +15,7 @@ import { useUserStore } from "@/store/user-store";
 import { useRouter } from "next/navigation";
 import React, { useEffect, useRef, useState } from "react";
 import { useFormState } from "react-dom";
+import { toast } from "sonner";
 
 const Register = ({
   show,
@@ -35,6 +36,8 @@ const Register = ({
       formRef.current?.reset();
       update(formState?.data);
       router.push("/dashboard");
+    } else {
+      toast(formState?.message)
     }
   }, [formState, router]);
   return (
@@ -73,7 +76,7 @@ const Register = ({
             )}
           </span>
           <span className="col-span-2 md:col-span-1 ">
-            <Label>Select Batch</Label>
+            <Label>Which faction are you interested in?</Label>
             <Select
               onValueChange={(choice) => setInterest(choice)}
               name="interest"

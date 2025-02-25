@@ -8,7 +8,7 @@ CREATE TYPE "Gender" AS ENUM ('male', 'female');
 CREATE TYPE "School" AS ENUM ('knust', 'ug', 'ashesi', 'none');
 
 -- CreateEnum
-CREATE TYPE "Track" AS ENUM ('flutter', 'fullstack', 'backend');
+CREATE TYPE "Track" AS ENUM ('mobile', 'web', 'backend', 'dataanalysis');
 
 -- CreateEnum
 CREATE TYPE "SchoolAdminPermissions" AS ENUM ('registrar', 'librarian', 'support', 'head');
@@ -75,6 +75,7 @@ CREATE TABLE "Applicant" (
     "oname" VARCHAR(255),
     "dob" DATE NOT NULL,
     "country" "Countries" NOT NULL DEFAULT 'ghana',
+    "gender" "Gender" NOT NULL,
     "contact" VARCHAR(10) NOT NULL,
     "school" "School",
     "programme" VARCHAR,
@@ -88,6 +89,7 @@ CREATE TABLE "Applicant" (
     "student" BOOLEAN NOT NULL,
     "admissionType" "AdmissionType",
     "batch" TEXT NOT NULL,
+    "track" "Track" NOT NULL,
     "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
     "updatedAt" TIMESTAMP(3) NOT NULL,
 

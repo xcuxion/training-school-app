@@ -2,45 +2,63 @@
 // import { SignJWT, jwtVerify } from "jose";
 // import { cookies } from "next/headers";
 
+// // Ensure SESSION_SECRET is defined
 // const secretKey = process.env.SESSION_SECRET;
+// if (!secretKey) {
+//   throw new Error("SESSION_SECRET is not defined in environment variables.");
+// }
+
 // const encodedKey = new TextEncoder().encode(secretKey);
 
-// export async function createSession(userId: string) {
-//   const expiresAt = new Date(Date.now() + 7 * 24 * 60 * 60 * 1000);
-//   const session = await encrypt({ userId, expiresAt });
+// export async function createSession(userId: string, role: "admin" | "applicant" | "student" | "facilitator"|null ) {
+//   const expiresAt = new Date(Date.now() + 7 * 24 * 60 * 60 * 1000); // 7 days expiry
+//   const session = await encrypt({ userId, role, expiresAt: expiresAt.getTime() });
 
 //   cookies().set("session", session, {
 //     httpOnly: true,
-//     secure: true,
+//     secure: process.env.NODE_ENV === "production",
 //     expires: expiresAt,
+//     sameSite: "strict", // Ensure cookie is properly sent
 //   });
 // }
 
 // export async function deleteSession() {
 //   cookies().delete("session");
+//   console.log("✅ Session deleted");
 // }
 
 // type SessionPayload = {
 //   userId: string;
-//   expiresAt: Date;
+//   role: "admin" | "applicant" | "student" | "facilitator" | null; // Explicit roles
+//   expiresAt: number;
 // };
+
 
 // export async function encrypt(payload: SessionPayload) {
 //   return new SignJWT(payload)
 //     .setProtectedHeader({ alg: "HS256" })
 //     .setIssuedAt()
-//     .setExpirationTime("7d")
+//     .setExpirationTime(Math.floor(payload.expiresAt / 1000)) // Ensure correct Unix timestamp
 //     .sign(encodedKey);
 // }
 
-// export async function decrypt(session: string | undefined = "") {
+// // ✅ Modify `decrypt()` to accept sessionToken instead of reading cookies directly
+// export async function decrypt(sessionToken?: string): Promise<SessionPayload | null> {
+//   if (!sessionToken) {
+//     console.log("❌ No session token provided.");
+//     return null;
+//   }
+
 //   try {
-//     const { payload } = await jwtVerify(session, encodedKey, {
+//     console.log("🔑 Verifying session token:", sessionToken);
+//     const { payload } = await jwtVerify<SessionPayload>(sessionToken, encodedKey, {
 //       algorithms: ["HS256"],
 //     });
+//     console.log("✅ Session verified:", payload);
 //     return payload;
 //   } catch (error) {
-//     console.log("failed to verify session", error);
+//     console.error("❌ Failed to verify session:", error);
+//     return null;
 //   }
 // }
 
@@ -57,18 +75,17 @@ if (!secretKey) {
 
 const encodedKey = new TextEncoder().encode(secretKey);
 
-export async function createSession(userId: string) {
+export async function createSession(userId: string, role: string) {
   const expiresAt = new Date(Date.now() + 7 * 24 * 60 * 60 * 1000); // 7 days expiry
-  const session = await encrypt({ userId, expiresAt: expiresAt.getTime() }); // Store Unix timestamp
+  const session = await encrypt({ userId, role, expiresAt: expiresAt.getTime() }); // ✅ Include role
 
   cookies().set("session", session, {
     httpOnly: true,
-    secure: process.env.NODE_ENV === "production", // Prevent blocking on localhost
+    secure: process.env.NODE_ENV === "production",
     expires: expiresAt,
   });
-
-  // console.log("✅ Session created and stored in cookies:", session);
 }
+
 
 export async function deleteSession() {
   cookies().delete("session");
@@ -77,7 +94,8 @@ export async function deleteSession() {
 
 type SessionPayload = {
   userId: string;
-  expiresAt: number; // Changed from Date to number (Unix timestamp)
+  role: string; // ✅ Added role
+  expiresAt: number;
 };
 
 export async function encrypt(payload: SessionPayload) {

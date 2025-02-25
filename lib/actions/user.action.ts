@@ -200,7 +200,7 @@ export async function login(prevState: unknown, formData: FormData) {
       };
     }
 
-    await createSession(existingUser.id);
+    await createSession(existingUser.id, existingUser.role as string);
 
     const { interest, createdAt, updatedAt, ...profileWithoutTimestamps } =
       existingUser;
@@ -235,7 +235,9 @@ export async function register(prevState: unknown, formData: FormData) {
       where: { email },
     });
     if (existingUser) {
-      throw new Error("User already exists")
+      return {
+        message: `User already exists`
+      };
     }
 
     const hashPassword = await bcrypt.hash(password, 10);
@@ -248,7 +250,7 @@ export async function register(prevState: unknown, formData: FormData) {
       },
     });
 
-    await createSession(newUser.id);
+    await createSession(newUser.id, newUser.role as string);
 
     const { createdAt, updatedAt, ...profileWithoutTimestamps } = newUser;
     console.log(profileWithoutTimestamps);

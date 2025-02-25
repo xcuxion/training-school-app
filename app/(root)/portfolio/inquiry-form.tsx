@@ -40,7 +40,7 @@ const InquiryForm = () => {
   }, [state, toast]); // ✅ Ensure useEffect re-runs when state updates
 
   return (
-    <div className="bg-secondary text-fontColor w-full md:w-[550px] rounded-md p-3 md:p-4 md:h-[465px] flex flex-col">
+    <div className="bg-black text-fontColor w-full md:w-[550px] rounded-md p-3 md:p-4 md:h-[455px] flex flex-col">
       <h1 className="font-semibold text-lg md:text-xl">Make An Enquiry</h1>
       <form ref={formRef} action={makeEnquiryAction} className="space-y-2">
         <div>

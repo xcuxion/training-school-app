@@ -248,7 +248,7 @@ const ApplicationPage = () => {
                 onValueChange={(choice) =>
                   setValue({ ...value, track: choice })
                 }
-                name="batch"
+                name="track"
               >
                 <SelectTrigger className="">
                   <SelectValue placeholder="Select" />

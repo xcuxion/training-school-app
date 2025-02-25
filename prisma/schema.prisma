@@ -24,7 +24,7 @@ model User {
   email       String       @unique @db.VarChar(80)
   password    String       @db.VarChar(80)
   interest    Interest     @default(school)
-  role        Role?
+  role        Role?        @default(applicant)
   Facilitator Facilitator?
   GuildMember GuildMember?
   Applicant   Applicant?
