@@ -32,11 +32,11 @@ const NoAccountUser = ({
   const [password, setPassword] = useState<string>("");
   const formRef = useRef<HTMLFormElement>(null);
   const router = useRouter();
-  const { update } = useUserStore();
+  const { updateUser } = useUserStore();
   useEffect(() => {
     if (formState?.success && formState?.data) {
       formRef.current?.reset();
-      update(formState?.data);
+      updateUser(formState?.data);
       console.log(formState?.data);
     } else {
       toast(formState?.message);

@@ -109,7 +109,7 @@ export async function new_application(prevState: unknown, formData: FormData) {
       data: { role: "applicant" }, // Update role to "applicant"
     });
     console.log(applicant);
-    await createSession(user.id, "applicant");
+    await createSession(user.id);
 
     const { createdAt, ...profileWithoutTimestamps } = applicant;
     try {

@@ -30,11 +30,11 @@ const Register = ({
   const [password, setPassword] = useState<string>("");
   const formRef = useRef<HTMLFormElement>(null);
   const router = useRouter();
-  const { update } = useUserStore();
+  const { setUser } = useUserStore();
   useEffect(() => {
     if (formState?.success && formState?.data) {
       formRef.current?.reset();
-      update(formState?.data);
+      setUser(formState?.data);
       router.push("/dashboard");
     } else {
       toast(formState?.message)
