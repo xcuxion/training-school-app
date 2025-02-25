@@ -19,6 +19,7 @@ import SubmitButton from "@/components/submit-button";
 import { useApplicantStore } from "@/store/applicant-store";
 import { useUserStore } from "@/store/user-store";
 import { toast } from "sonner";
+import Register from "@/app/(root)/register";
 
 const initial = {
   fname: "",
@@ -48,7 +49,9 @@ const ApplicationPage = () => {
   const formRef = useRef<HTMLFormElement>(null);
   const router = useRouter();
   const { update } = useApplicantStore();
-  const {user} = useUserStore()
+  const { user } = useUserStore();
+  const [openRegister, setOpenRegister] = useState<boolean>(false);
+
   // useEffect(()=>(
   //   const fetchUser = async () => {
   //     await fetchUser()
@@ -64,10 +67,15 @@ const ApplicationPage = () => {
       update(state?.data);
 
       router.push("/school/admission-portal");
+    } else if (state?.noAccount) {
+      setOpenRegister(true);
     }
   }, [router, state]);
   return (
     <div className="p-4 md:py-5 md:px-10 md:w-2/3 mx-auto">
+      {openRegister && (
+        <Register show={openRegister} onClose={() => setOpenRegister(false)} />
+      )}
       <div className="flex flex-col-reverse md:flex-row md:flex-between py-2 md:py-4">
         <h1 className="text-3xl md:text-4xl font-bold">Application Form</h1>
         <Image
@@ -254,7 +262,9 @@ const ApplicationPage = () => {
                   <SelectValue placeholder="Select" />
                 </SelectTrigger>
                 <SelectContent className="bg-secondary">
-                  <SelectItem value="web">Full-stack Web Development</SelectItem>
+                  <SelectItem value="web">
+                    Full-stack Web Development
+                  </SelectItem>
                   <SelectItem value="dataanalysis">Data Analysis</SelectItem>
                   <SelectItem value="backend">Backend Engineering</SelectItem>
                   <SelectItem value="mobile">Mobile App Development</SelectItem>

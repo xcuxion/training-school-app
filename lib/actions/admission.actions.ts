@@ -77,7 +77,7 @@ export async function new_application(prevState: unknown, formData: FormData) {
     }
     const user =  await prisma.user.findFirst({where: {email: result.data.email}})
     if(!user) {
-      return {message: "Register an account to proceed"}
+      return {message: "Register an account to proceed", noAccount: true}
     }
     const dob = result.data.dob;
     const dobDateTime = new Date(dob).toISOString();

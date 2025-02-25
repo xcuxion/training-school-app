@@ -36,9 +36,9 @@ const aid = [
   {
     title: "Scholarship",
     requirements: [
-      "Must be a student",
-      "Willingness to serve as a trac-assistant",
-      "Must demonstrate prior knowledge in selected track",
+      "Must be a tertiary student or recent graduate passionate about building a startup",
+      "Willingness to serve as a track assistant",
+      "Demonstrated prior knowledge in the selected track",
     ],
     benefits: [
       "Full tuition coverage",
@@ -46,27 +46,26 @@ const aid = [
       "Access to all learning materials and resources",
     ],
     eligibility: [
-      "Demonstrated financial need",
-      "Exceptional academic or professional background",
-      "Commitment to complete the program",
+      "Proven financial need",
+      "Strong drive for innovation and problem-solving",
+      "Commitment to completing the program",
     ],
   },
   {
     title: "Standard Enrollment",
     requirements: [
-      "Must be a student",
-      "Willingness to serve as a trac-assistant",
-      "Must demonstrate prior knowledge in selected track",
+      "Open to anyone passionate about techpreneurship (students and non-students alike)",
+      "No financial need required",
     ],
     benefits: [
-      "Full tuition coverage",
+      "Full access to the program upon payment of tuition",
       "Mentorship and incubation support",
-      "Access to all learning materials and resources",
+      "Comprehensive learning materials and resources",
+      "Opportunity to network with industry professionals",
     ],
     eligibility: [
-      "Demonstrated financial need",
-      "Exceptional academic or professional background",
-      "Commitment to complete the program",
+      "Ability to fund program tuition",
+      "Commitment to completing the program",
     ],
   },
 ];
@@ -155,37 +154,39 @@ export default function School() {
         </motion.div>
       </motion.section>
 
-      {/* Financial Aid */}
-      <motion.section className="z-30 h-full py-5 md:py-10 md:px-20 to-secondary bg-gradient-to-b from-black via-transparent">
-        <motion.div className=" grid md:grid-cols-3 gap-6 px-6">
-          <motion.span>
-            <motion.h2
-              initial={{ opacity: 0, y: -20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              transition={{ duration: 1 }}
-              className="text-2xl text-center md:text-start md:text-4xl font-bold text-primary "
-            >
-              FInancial Assistance
-            </motion.h2>
-            <motion.p className="text-sm text-center md:text-start md:text-base">
-              At XCUXION School, we are committed to making tech education
-              accessible to talented individuals, regardless of financial
-              background.
-            </motion.p>
-          </motion.span>
-          {aid.map((category, index) => (
-            <motion.div
-              key={index}
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.8, delay: index * 0.2 }}
-              className="bg-black md:p-6 rounded-xl shadow-lg w-full shrink-0"
-            >
-              <AidCard {...category} key={index} />
-            </motion.div>
-          ))}
-        </motion.div>
-      </motion.section>
+{/* Financial Aid */}
+<motion.section className="z-30 h-full py-5 md:py-10 md:px-20 bg-gradient-to-b from-black via-transparent to-secondary">
+  <motion.div className="grid md:grid-cols-3 gap-6 px-6">
+    <motion.span>
+      <motion.h2
+        initial={{ opacity: 0, y: -20 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        transition={{ duration: 1 }}
+        className="text-2xl md:text-4xl font-bold text-primary text-center md:text-start"
+      >
+        Financial Assistance
+      </motion.h2>
+      <motion.p className="text-sm md:text-base text-center md:text-start mt-2">
+        At XCUXION School, we believe financial constraints should never be a
+        barrier to innovation. Our financial aid options ensure talented individuals
+        can access world-class tech education, regardless of their background.
+      </motion.p>
+    </motion.span>
+
+    {aid.map((category, index) => (
+      <motion.div
+        key={index}
+        initial={{ opacity: 0, y: 20 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.8, delay: index * 0.2 }}
+        className="bg-black p-5 md:p-6 rounded-xl shadow-lg w-full"
+      >
+        <AidCard {...category} />
+      </motion.div>
+    ))}
+  </motion.div>
+</motion.section>
+
 
       {/* Footer */}
       <Footer />
