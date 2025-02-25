@@ -38,7 +38,7 @@ CREATE TYPE "AdmissionType" AS ENUM ('full', 'fifty', 'seventyfive');
 CREATE TYPE "Interest" AS ENUM ('school', 'guild', 'startupcenter');
 
 -- CreateEnum
-CREATE TYPE "Role" AS ENUM ('applicant', 'student', 'facilitator', 'admin');
+CREATE TYPE "Role" AS ENUM ('applicant', 'student', 'facilitator', 'admin', 'visitor');
 
 -- CreateTable
 CREATE TABLE "Enquiry" (
@@ -60,7 +60,7 @@ CREATE TABLE "User" (
     "email" VARCHAR(80) NOT NULL,
     "password" VARCHAR(80) NOT NULL,
     "interest" "Interest" NOT NULL DEFAULT 'school',
-    "role" "Role",
+    "role" "Role" DEFAULT 'visitor',
 
     CONSTRAINT "User_pkey" PRIMARY KEY ("id")
 );

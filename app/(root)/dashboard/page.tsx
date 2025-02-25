@@ -6,10 +6,27 @@ import Image from "next/image";
 import Banner from "./banner";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
+import { useEffect } from "react";
 
 const page = () => {
-  const { update, logout } = useUserStore();
+  const { user, logout } = useUserStore();
   const router = useRouter();
+
+  useEffect(()=>{
+    const userRole = user?.role
+    switch (userRole) {
+      case "admin":
+        return router.push("/school/administrator-office");
+      case "applicant":
+        return router.push("/school/admission-portal");
+      case "student":
+        return router.push("/school/learning-space");
+      case "facilitator":
+        return router.push("/school/facilitator");
+      case "visitor":
+        return router.push("/dashboard")
+    }
+  }, [router, user])
 
   const handleLogOut = async () => {
     logout();

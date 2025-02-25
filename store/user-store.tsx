@@ -4,7 +4,7 @@ import { create } from "zustand";
 export interface IUser {
   id: string;
   email: string;
-  role: "applicant" | "admin" | "facilitator" | "student" | null ;
+  role: "applicant" | "admin" | "facilitator" | "student" | "visitor" | null ;
 }
 
 interface UserStore {

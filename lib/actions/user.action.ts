@@ -200,7 +200,7 @@ export async function login(prevState: unknown, formData: FormData) {
       };
     }
 
-    await createSession(existingUser.id, existingUser.role as "applicant" | "student" | "facilitator" | "admin" | null);
+    await createSession(existingUser.id, existingUser.role as "applicant" | "student" | "facilitator" | "admin" | "visitor");
 
     const { interest, createdAt, updatedAt, ...profileWithoutTimestamps } =
       existingUser;
@@ -250,7 +250,7 @@ export async function register(prevState: unknown, formData: FormData) {
       },
     });
 
-    await createSession(newUser.id, newUser.role as "applicant" | "student" | "facilitator" | "admin" | null);
+    await createSession(newUser.id, newUser.role as "applicant" | "student" | "facilitator" | "admin" | "visitor");
 
     const { createdAt, updatedAt, ...profileWithoutTimestamps } = newUser;
     console.log(profileWithoutTimestamps);
