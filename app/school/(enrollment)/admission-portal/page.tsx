@@ -6,7 +6,7 @@ import {
   edit_application,
   fetch_applicant_data,
 } from "@/lib/actions/admission.actions";
-import { useApplicantStore } from "@/store/applicant-store";
+import { IApplicant, useApplicantStore } from "@/store/applicant-store";
 import { Button } from "@/components/ui/button";
 import { Textarea } from "@/components/ui/textarea";
 import { Input } from "@/components/ui/input";
@@ -16,64 +16,129 @@ import { logOut } from "@/lib/actions/user.action";
 import { useUserStore } from "@/store/user-store";
 
 const AdmissionPortal = () => {
-  const { applicant } = useApplicantStore();
+  // const { applicant } = useApplicantStore();
+  // const { user } = useUserStore();
+  // const router = useRouter();
+  // const [editOff, setEditOff] = useState(true);
+  // const { updateApplicant, logout } = useApplicantStore();
+  // const [editableData, setEditableData] = useState({
+  //   contact: applicant?.contact || "",
+  //   programme: applicant?.programme || "",
+  //   reason: applicant?.reason || "",
+  //   dob: applicant?.dob || applicant?.dob,
+  //   gender: applicant?.gender || "",
+  //   fname: applicant?.fname || "",
+  //   oname: applicant?.oname || "",
+  //   lname: applicant?.lname || "",
+  //   country: applicant?.country || "",
+  //   balance: applicant?.balance || "",
+  //   statement: applicant?.statement || ""
+  // });
+  // const handleSave = async () => {
+  //   const formData = new FormData();
+  //   Object.entries(editableData).forEach(([key, value]) => {
+  //     formData.append(key, value as string);
+  //   });
+  //   const response = await edit_application(user?.id as string, formData);
+  //   updateApplicant(response?.data!)
+  //   setEditOff(true);
+  // };
+
+  // useEffect(() => {
+  //   const fetchData = async () => {
+  //     const result = await fetch_applicant_data(user?.id as string);
+  //     if (result) {
+  //       setEditableData({
+  //         contact: result?.contact ?? "",
+  //         programme: result?.programme ?? "",
+  //         reason: result?.reason ?? "",
+  //         dob: result?.dob || new Date(),
+  //         gender: result?.gender || "",
+  //         fname: result?.fname || "",
+  //         oname: result?.oname || "",
+  //         lname: result?.lname || "",
+  //         country: result?.country || "",
+  //         balance: result?.balance || "",
+  //         statement: result?.statement || ""
+  //       });
+  //     }
+  //   };
+  //   fetchData();
+  // }, [applicant?.id]);
+
+  // const handleChange = (
+  //   e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
+  // ) => {
+  //   logout;
+  //   setEditableData({ ...editableData, [e.target.name]: e.target.value });
+  // };
+  // const handleLogOut = async () => {
+  //   logout();
+  //   await logOut();
+  //   router.push("/");
+  // };
+  const { applicant, setApplicant, logout } = useApplicantStore();
+  const { user } = useUserStore();
   const router = useRouter();
   const [editOff, setEditOff] = useState(true);
-  const { updateApplicant, logout } = useApplicantStore();
   const [editableData, setEditableData] = useState({
-    contact: applicant?.contact || "",
-    programme: applicant?.programme || "",
-    reason: applicant?.reason || "",
-    dob: applicant?.dob || applicant?.dob,
-    gender: applicant?.gender || "",
-    fname: applicant?.fname || "",
-    oname: applicant?.oname || "",
-    lname: applicant?.lname || "",
-    country: applicant?.country || "",
-    balance: applicant?.balance || "",
-    statement: applicant?.statement || ""
+    contact: "",
+    programme: "",
+    reason: "",
+    dob: "",
+    gender: "",
+    fname: "",
+    oname: "",
+    lname: "",
+    country: "",
+    balance: "",
+    statement: "",
   });
-  const handleSave = async () => {
-    const formData = new FormData();
-    Object.entries(editableData).forEach(([key, value]) => {
-      formData.append(key, value as string);
-    });
-    const response = await edit_application(applicant?.id as string, formData);
-    updateApplicant(response?.data!)
-    setEditOff(true);
-  };
 
   useEffect(() => {
     const fetchData = async () => {
-      const result = await fetch_applicant_data(applicant?.id as string);
+      
+      const result = await fetch_applicant_data(user?.id as string);
+      setApplicant(result as IApplicant)
       if (result) {
         setEditableData({
           contact: result?.contact ?? "",
           programme: result?.programme ?? "",
           reason: result?.reason ?? "",
-          dob: result?.dob || new Date(),
+          dob: result?.dob
+            ? new Date(result.dob).toISOString().split("T")[0]
+            : "", // ✅ Convert to string
           gender: result?.gender || "",
           fname: result?.fname || "",
           oname: result?.oname || "",
           lname: result?.lname || "",
           country: result?.country || "",
           balance: result?.balance || "",
-          statement: result?.statement || ""
+          statement: result?.statement || "",
         });
       }
     };
     fetchData();
-  }, [applicant?.id]);
-
-  const handleChange = (
-    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
-  ) => {
-    logout;
+  }, [user?.id]);
+  
+  console.log(applicant)
+  const handleChange = (e:React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     setEditableData({ ...editableData, [e.target.name]: e.target.value });
   };
+
+  const handleSave = async () => {
+    const formData = new FormData();
+    Object.entries(editableData).forEach(([key, value]) => {
+      formData.append(key, value);
+    });
+    const response = await edit_application(user?.id as string, formData);
+    setApplicant(response?.data as IApplicant);
+    setEditOff(true);
+  };
+
   const handleLogOut = async () => {
-    logout();
     await logOut();
+    logout()
     router.push("/");
   };
   return (
@@ -156,7 +221,7 @@ const AdmissionPortal = () => {
             <h3 className="text-lg font-semibold">Other Name</h3>
             <Input
               type="text"
-              name="contact"
+              name="oname"
               value={editableData.oname}
               onChange={handleChange}
               disabled={editOff}
@@ -167,7 +232,7 @@ const AdmissionPortal = () => {
           <h3 className="text-lg font-semibold">Last Name</h3>
           <Input
             type="text"
-            name="contact"
+            name="lname"
             value={editableData.lname}
             onChange={handleChange}
             disabled={editOff}
@@ -179,7 +244,7 @@ const AdmissionPortal = () => {
           <h3 className="text-lg font-semibold">Gender</h3>
           <Input
             type="text"
-            name="contact"
+            name="gender"
             className="capitalize"
             value={editableData.gender}
             onChange={handleChange}
@@ -190,9 +255,9 @@ const AdmissionPortal = () => {
         <div className="space-y-4">
           <h3 className="text-lg font-semibold">Date of Birth</h3>
           <Input
-            type="text"
-            name="programme"
-            value={new Date(editableData.dob as string).toDateString()}
+            type="date" // ✅ Use date type
+            name="dob"
+            value={editableData.dob} // ✅ No need for conversion
             onChange={handleChange}
             disabled={editOff}
           />
@@ -238,16 +303,15 @@ const AdmissionPortal = () => {
           How you intend to balance the training with your academics?
         </h3>
         <Textarea
-          name="reason"
+          name="balance"
           value={editableData.balance}
           onChange={handleChange}
           disabled={editOff}
           className="w-full h-24"
         />
       </section>
-      {
-        applicant?.scholarship && (
-          <section className="mt-6">
+      {applicant?.scholarship && (
+        <section className="mt-6">
           <h3 className="text-lg font-semibold">
             Why should we award you a scholarship?
           </h3>
@@ -259,8 +323,7 @@ const AdmissionPortal = () => {
             className="w-full h-24"
           />
         </section>
-        )
-      }
+      )}
     </div>
   );
 };

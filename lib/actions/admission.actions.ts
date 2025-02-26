@@ -136,7 +136,7 @@ export async function new_application(prevState: unknown, formData: FormData) {
 export async function fetch_applicant_data(id: string) {
   try {
     const applicant = await prisma.applicant.findFirst({
-      where: { id },
+      where: { userId: id },
     });
 
     if (!applicant) return null;
@@ -159,7 +159,7 @@ export async function fetch_all_applications() {
 
 export async function edit_application(id: string, formData: FormData) {
   try {
-    const applicant = await prisma.applicant.findFirst({ where: { id: id } });
+    const applicant = await prisma.applicant.findFirst({ where: { userId: id } });
     if (!applicant) {
       return { message: "Application not found" };
     }
