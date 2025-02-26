@@ -49,7 +49,7 @@ const ApplicationPage = () => {
   const [value, setValue] = useState(initial);
   const formRef = useRef<HTMLFormElement>(null);
   const router = useRouter();
-  const { update } = useApplicantStore();
+  const { setApplicant } = useApplicantStore();
   const { user } = useUserStore();
   const [openRegister, setOpenRegister] = useState<boolean>(false);
 
@@ -60,7 +60,7 @@ const ApplicationPage = () => {
       toast("Application Submitted Successfully");
       formRef.current?.reset();
 
-      update(state?.data);
+      setApplicant(state?.data);
 
       router.push("/school/admission-portal");
     } else if (state?.noAccount) {

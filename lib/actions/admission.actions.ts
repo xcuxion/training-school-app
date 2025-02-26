@@ -174,6 +174,19 @@ export async function edit_application(id: string, formData: FormData) {
         errors: result.error.flatten().fieldErrors,
       };
     }
+    const dob = result.data.dob;
+    const dobDateTime = new Date(dob).toISOString();
+    await prisma.applicant.updateMany({
+      where: {id: applicant.id},
+      data: {...result.data,
+        dob: dobDateTime,
+        laptop: result.data.laptop === "yes" ? true : false,
+        scholarship: result.data.scholarship === "yes" ? true : false,
+        student: result.data.scholarship === "yes" ? true : false,
+       }
+    })
+    console.log(applicant);
+    return { success: result.success, data: applicant };
   } catch (error) {
     handleError(error);
   }

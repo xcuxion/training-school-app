@@ -14,27 +14,35 @@ export interface IStudent {
     contact: string;
     programme: string;
     year: "1" | "2" | "3" | "4" | "5" | "6" |string;
-
-    profile: {
-      createdAt: string | Date;
-      updatedAt: string | Date;
-      email: string;
-    } | null
+    userId: string
   }
   
   
   
   interface StudentStore {
     student: IStudent | null;
-    update: (student: IStudent) => void;
+    updateStudent: (partialStudent: IStudent) => void;
+    setStudent: (studen: IStudent | null) => void;
+    logout: () => void;
+
   }
 
 export const useStudentStore = create<StudentStore>((set) => ({
   student: null,
-  update: (student) => {
+  setStudent: (student) => {
     console.log("State Before Update:", useStudentStore.getState().student); // ✅ Debugging log
     set((state) => ({ ...state, student }));
     console.log("State After Update:", useStudentStore.getState().student); // ✅ Debugging log
   },
-  logout: () => set(() => ({ student: null })),
+  logout: () => {
+    console.log("State Before logout:", useStudentStore.getState().student); // ✅ Debugging log
+    set(() => ({ student: null }));
+    console.log("State After logout:", useStudentStore.getState().student); // ✅ Debugging log
+  },
+  updateStudent: (partialStudent) =>
+    set((state) => ({
+      student: state.student
+        ? { ...state.student, ...partialStudent }
+        : null,
+    })),
 }));

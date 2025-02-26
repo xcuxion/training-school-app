@@ -29,13 +29,13 @@ export interface IApplicant {
 
 interface ApplicantStore {
   applicant: IApplicant | null;
-  update: (applicant: IApplicant) => void;
+  setApplicant: (applicant: IApplicant | null) => void;
+  updateApplicant: (partialApplicant: IApplicant) => void;
   logout: () => void;
 }
-
 export const useApplicantStore = create<ApplicantStore>((set) => ({
   applicant: null,
-  update: (applicant) => {
+  setApplicant: (applicant) => {
     console.log("State Before Update:", useApplicantStore.getState().applicant); // ✅ Debugging log
     set((state) => ({ ...state, applicant }));
     console.log("State After Update:", useApplicantStore.getState().applicant); // ✅ Debugging log
@@ -44,6 +44,11 @@ export const useApplicantStore = create<ApplicantStore>((set) => ({
     console.log("State Before logout:", useApplicantStore.getState().applicant); // ✅ Debugging log
     set(() => ({ applicant: null }));
     console.log("State After logout:", useApplicantStore.getState().applicant); // ✅ Debugging log
-
   },
+  updateApplicant: (partialApplicant) =>
+    set((state) => ({
+      applicant: state.applicant
+        ? { ...state.applicant, ...partialApplicant }
+        : null,
+    })),
 }));
