@@ -120,9 +120,15 @@ enum GuildRank {
 }
 
 model SchoolAdmin {
-  id          String                 @id @default(uuid())
-  name        String                 @db.VarChar(255)
-  permissions SchoolAdminPermissions
+  id               String                 @id @default(uuid())
+  name             String                 @db.VarChar(255)
+  createdAt        DateTime               @default(now())
+  updatedAt        DateTime               @updatedAt
+  email            String                 @unique @db.VarChar(80)
+  password         String                 @db.VarChar(80)
+  permissions      SchoolAdminPermissions
+  verified         Boolean                @default(false)
+  verificationCode Int?                    @db.Integer()
 }
 
 model Receipt {
@@ -264,6 +270,5 @@ enum Role {
   applicant
   student
   facilitator
-  admin
   visitor
 }

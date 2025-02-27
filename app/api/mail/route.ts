@@ -7,7 +7,7 @@ const resend = new Resend(process.env.RESEND_KEY)
 export async function POST (request:Request, res: Response) {
     const {email, userFirstname} = await request.json()
     const {data, error} = await resend.emails.send({
-        from: "onboarding@resend.dev",
+        from: "admission@xcuxion.org",
         to: [email],
         subject: "XCuxion Application Received",
         html: await render(XcuxionWelcomeEmail({userFirstname, email})),

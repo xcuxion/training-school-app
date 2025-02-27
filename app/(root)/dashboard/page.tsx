@@ -15,8 +15,6 @@ const page = () => {
   useEffect(()=>{
     const userRole = user?.role
     switch (userRole) {
-      case "admin":
-        return router.push("/school/administrator-office");
       case "applicant":
         return router.push("/school/admission-portal");
       case "student":

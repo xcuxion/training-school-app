@@ -14,7 +14,7 @@
 //   } from "@react-email/components";
 //   import * as React from "react";
 
-//   interface XcuxionfirmEmailProps {
+//   interface XcuxionConfirmEmailProps {
 //     validationCode?: string;
 //   }
 
@@ -24,7 +24,7 @@
 
 //   export const XcuxionConfirmEmail= ({
 //     validationCode,
-//   }: XcuxionfirmEmailProps ) => (
+//   }: XcuxionConfirmEmailProps ) => (
 //     <Html>
 //       <Head />
 //       <Preview>Confirm your email address</Preview>
@@ -158,7 +158,7 @@
 
 //   XcuxionConfirmEmail.PreviewProps = {
 //     validationCode: "DJZ-TLX",
-//   } as XcuxionfirmEmailProps;
+//   } as XcuxionConfirmEmailProps;
 
 //   export default XcuxionConfirmEmail;
 
@@ -256,8 +256,8 @@ import {
 } from "@react-email/components";
 import * as React from "react";
 
-interface XcuxionfirmEmailProps {
-  validationCode?: string;
+interface XcuxionConfirmEmailProps {
+  validationCode?: number;
 }
 
 const baseUrl = process.env.VERCEL_URL
@@ -266,7 +266,7 @@ const baseUrl = process.env.VERCEL_URL
 
 export const XcuxionConfirmEmail = ({
   validationCode,
-}: XcuxionfirmEmailProps) => (
+}: XcuxionConfirmEmailProps) => (
   <Html>
     <Head />
     <Preview>Confirm your email address</Preview>
@@ -301,7 +301,7 @@ export const XcuxionConfirmEmail = ({
             <Column style={{ width: "100%" }}>
               <Text style={text}>
                 Connect with us
-                <Link style={anchor} href="https://xcuxion.org/#admissions">
+                <Link style={anchor} href="https://xcuxion.org/">
                        Visit our website
                 </Link>{" "}
               </Text>
@@ -321,7 +321,7 @@ export const XcuxionConfirmEmail = ({
         <Section>
           <Link
             style={footerLink}
-            href="https://slackhq.com"
+            href="https://xcuxion.org"
             target="_blank"
             rel="noopener noreferrer"
           >
@@ -370,8 +370,8 @@ export const XcuxionConfirmEmail = ({
 );
 
 XcuxionConfirmEmail.PreviewProps = {
-  validationCode: "DJZ-TLX",
-} as XcuxionfirmEmailProps;
+  validationCode: 235642,
+} as XcuxionConfirmEmailProps;
 
 export default XcuxionConfirmEmail;
 
