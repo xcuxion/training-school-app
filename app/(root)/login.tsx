@@ -18,7 +18,7 @@ const Login = ({ show, onClose }: { show: boolean; onClose: () => void }) => {
   const { setUser, user } = useUserStore();
   const roleRedirects: Record<string, string> = {
     applicant: "/school/admission-portal",
-    admin: "/school/administrator-office",
+    admin: "/school/administrator-office/login",
     facilitator: "/school/facilitator",
   };
   

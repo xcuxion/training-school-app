@@ -5,6 +5,7 @@ import { PrismaClient } from "@prisma/client";
 import * as bcrypt from "bcrypt";
 import { Resend } from "resend";
 import { createSession } from "../session";
+import ApplicationSubmitted from "@/emails/application-received";
 
 const prisma = new PrismaClient();
 const resend = new Resend(process.env.RESEND_KEY);
@@ -117,7 +118,7 @@ export async function new_application(prevState: unknown, formData: FormData) {
         from: "admission@xcuxion.org",
         to: result.data.email ? result.data.email : user.email,
         subject: "New Application Received",
-        html: "<h1>Application submitted successfully</h1>",
+        react: ApplicationSubmitted({userFirstname: result.data.fname}),
       });
       console.log(response);
     } catch (error) {

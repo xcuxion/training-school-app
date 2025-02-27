@@ -1,107 +1,69 @@
-import FaciltatorCard from '@/components/admin/faciltator-card'
-import HighlightCard from '@/components/admin/highlight-card'
-import ModuleCard from '@/components/admin/module-card'
-import React from 'react'
+"use client"
+import SubmitButton from "@/components/submit-button";
+import { Input } from "@/components/ui/input";
+import { Label } from "@/components/ui/label";
+import { login_admin } from "@/lib/actions/admin.actions";
+import { useAdminStore } from "@/store/admin-store";
+import router from "next/router";
+import React, { useEffect, useRef, useState } from "react";
+import { useFormState } from "react-dom";
 
+const AdminLoginPage = () => {
+  const [formState, formAction] = useFormState(login_admin, undefined);
+  const [email, setEmail] = useState<string>("");
+  const [password, setPassword] = useState<string>("");
+  const { setAdmin } = useAdminStore();
+  const formRef = useRef<HTMLFormElement>(null);
 
+  useEffect(() => {
+    if (formState?.success && formState?.data) {
+      formRef.current?.reset();
+      setAdmin(formState?.data);
 
-const highlights = [
-  {
-    title: 'Pending Admission',
-    rate: '24',
-    link: {
-      href: '/school/admission',
-      label: 'Admission portal'
+      router.push("");
     }
-  },
-  {
-    title: 'Total Wrights',
-    rate: '240',
-  },
-  {
-    title: 'Outstanding Balance',
-    rate: '3000',
-  },
-]
+  }, [formState, router]);
 
-const modules = [
-  {
-    title: 'Foundations of Techpreneurship',
-    facilitator: 'Bayat Osman',
-    image: '/images/techpreneur.png'
-  },
-  {
-    title: 'Product Management',
-    facilitator: 'Peter Jonah',
-    image: '/images/pm.png'
-  },
-  {
-    title: 'Software Engineering',
-    facilitator: 'Samuel Inkoom',
-    image: '/images/se.png'
-  },
-  {
-    title: 'Marketing & Strategy',
-    facilitator: 'Solomon Ayisi',
-    image: '/images/market-strategy.png'
-  },
-]
-
-const facilitators = [
-  {
-    name: 'Musah Iddrisu',
-    image: '/images/p2.jpg',
-    course: 'Web Development Concepts',
-    email: 'mussah.id@gmail.com'
-  },
-  {
-    name: 'Mansah Barnes',
-    image: '/images/p2.jpg',
-    course: 'UI/UX Designing',
-    email: 'mbarnes@gmail.com'
-  },
-  {
-    name: 'Caleb Darkwah',
-    image: '/images/p2.jpg',
-    course: 'Marketing',
-    email: 'callydark.id@gmail.com'
-  },
-]
-
-const page = () => {
   return (
-    <div className='w-full flex gap-x-4'>
-      <div className="w-2/3 space-y-6">
-        <section className="grid grid-cols-3 gap-x-10 ">
-          {
-            highlights.map((data, index)=>(
-              <HighlightCard {...data} key={index}/>
-            ))
-          }
-        </section>
-        <section className="bg-light rounded-lg w-full min-h-80 p-2">
-          <h1 className="text-lg font-semibold">Module Management</h1>
-          <div className="space-y-4">
-            {
-              modules.map((data, index)=>(
-                <ModuleCard {...data} key={index}/>
-              ))
-            }
-          </div>
-        </section>
-      </div>
-      <div className="w-1/3 bg-secondary rounded-t-lg min-h-80 p-2">
-        <h1 className="text-lg font-semibold">Facilitators</h1>
-        <section className="space-y-4">
-          {
-            facilitators.map((data, index)=>(
-              <FaciltatorCard {...data} key={index}/>
-            ))
-          }
-        </section>
-      </div>
-    </div>
-  )
-}
+    <main className="w-full h-screen bg-black flex flex-center">
+      <form
+        className="flex flex-col p-5 rounded-lg bg-secondary"
+        ref={formRef}
+        action={formAction}
+      >
+        <h1 className="text-2xl font-bold">Login</h1>
+        <div className="">
+          <Label htmlFor="email">Email</Label>
+          <Input
+            type="email"
+            id="email"
+            name="email"
+            required
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
+          />
+          {formState?.errors?.email && (
+            <p className="text-red-500">{formState.errors.email}</p>
+          )}
+        </div>
+        <div className="">
+          <Label htmlFor="password">Email</Label>
+          <Input
+            type="password"
+            id="password"
+            name="password"
+            value={password}
+            required
+            onChange={(e) => setPassword(e.target.value)}
+          />
+          {formState?.errors?.password && (
+            <p className="text-red-500">{formState.errors.password}</p>
+          )}
+        </div>
+        <SubmitButton buttonText="Proceed" />
+      </form>
+    </main>
+  );
+};
 
-export default page
+export default AdminLoginPage;

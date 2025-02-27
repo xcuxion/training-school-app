@@ -19,10 +19,8 @@ const baseUrl = process.env.VERCEL_URL
 
 const ApplicationSubmitted = ({
   userFirstname,
-  email,
 }: {
   userFirstname: string;
-  email: string;
 }) => (
   <Html>
     <Head />
@@ -40,9 +38,9 @@ const ApplicationSubmitted = ({
             style={tag}
           /> */}
           <Hr style={hr} />
-          <Text style={header}>🌟 Thank You for Your Application! 🎉</Text>
+          <Text style={header}> 🎉</Text>
           <Text style={paragraph}>
-            We’re excited to receive your application for XCUXION Batch ’25!
+            Hey {userFirstname}, we’re excited to receive your application for XCUXION Batch ’25!
             Your journey toward innovation and growth starts here, and we can’t
             wait to learn more about you.
           </Text>
@@ -57,7 +55,7 @@ const ApplicationSubmitted = ({
           <Text style={paragraph}>
             ✅ Explore Financial Aid Options – Learn about support available to
             you.,{" "}
-            <Link style={anchor} href="https://xcuxion.org/#admissions">
+            <Link style={anchor} href="https://xcuxion.org/school">
               read this post.
             </Link>{" "}
           </Text>
@@ -83,46 +81,6 @@ const ApplicationSubmitted = ({
             alt="Xcuxion Logo"
             style={tagBase}
           />
-        </Section>
-
-        <Section>
-          <Link
-            style={footerLink}
-            href="https://slackhq.com"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Our blog
-          </Link>
-          &nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;
-          <Link
-            style={footerLink}
-            href="https://slack.com/legal"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Policies
-          </Link>
-          &nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;
-          <Link
-            style={footerLink}
-            href="https://slack.com/help"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Help center
-          </Link>
-          &nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;
-          <Link
-            style={footerLink}
-            href="https://slack.com/community"
-            target="_blank"
-            rel="noopener noreferrer"
-            data-auth="NotApplicable"
-            data-linkindex="6"
-          >
-            Slack Community
-          </Link>
           <Text style={footerText}>
             ©2022 XCUXION Technologies, LLC, All rights reserved. <br />
             500 Howard Street, San Francisco, Kumasi, Ghana
@@ -203,13 +161,12 @@ const footer = {
   color: "#8898aa",
   fontSize: "14px",
   lineHeight: "16px",
- 
 };
 
 const tagBase = {
   width: "80px",
   height: "50px",
-   marginBottom: "40px",
+  marginBottom: "40px",
 };
 
 const footerLink = {

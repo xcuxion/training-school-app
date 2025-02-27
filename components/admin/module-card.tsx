@@ -25,7 +25,7 @@ const ModelueCard = ({ title, facilitator, image }: IModuleCard) => {
           <p className="">{facilitator}</p>
         </span>
       </div>
-      <span className="w-8 h-8 rounded-full border bg-light flex flex-center">
+      <span className="w-8 h-8 rounded-full border bg-secondary flex flex-center">
         <Image
           src={"/arrow-right.svg"}
           alt="icon"

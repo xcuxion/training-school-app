@@ -15,7 +15,7 @@ interface HighlightCardProps {
 
 const HighlightCard = ({title, rate, updated, link}: HighlightCardProps) => {
   return (
-    <div className='flex flex-col items-start p-3 h-[125px] rounded-lg gap-2 bg-light border'>
+    <div className='flex flex-col items-start p-3 h-[125px] rounded-lg gap-2 bg-secondary border'>
         <h3 className="text-base font-medium capitalize">{title}</h3>
         <p className="text-2xl font-bold">{rate}</p>
         {
