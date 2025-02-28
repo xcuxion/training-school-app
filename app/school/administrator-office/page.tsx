@@ -27,7 +27,7 @@ const AdminLoginPage = () => {
   return (
     <main className="w-full h-screen bg-black flex flex-center">
       <form
-        className="flex flex-col p-5 rounded-lg bg-secondary"
+        className="flex flex-col md:w-[400px] md:h-[300px] p-5 rounded-lg bg-secondary gap-y-5"
         ref={formRef}
         action={formAction}
       >
@@ -47,7 +47,7 @@ const AdminLoginPage = () => {
           )}
         </div>
         <div className="">
-          <Label htmlFor="password">Email</Label>
+          <Label htmlFor="password">Key</Label>
           <Input
             type="password"
             id="password"

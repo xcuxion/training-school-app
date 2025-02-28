@@ -1,13 +1,14 @@
 "use client";
+import { Button } from "@/components/ui/button";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import React from "react";
+import React, { useState } from "react";
+import RegisterAdmin from "./register-admin";
 
 const subNavs = [
   {
     starter: "",
-    navs: [
-    ],
+    navs: [],
     title: "",
   },
   {
@@ -54,8 +55,6 @@ const subNavs = [
   },
 ];
 
-
-
 const HeaderTitle = () => {
   const pathname = usePathname();
 
@@ -63,10 +62,10 @@ const HeaderTitle = () => {
     pathname.startsWith(`/administrator-office/${section.starter}`)
   );
 
-
   const title = currentSection ? currentSection.title : "";
   const navs = currentSection ? currentSection.navs : [];
 
+  const [openRegister, setOpenRegister] = useState<boolean>(false);
   return (
     <div className="mb-4 px-10 sticky py-1 top-0 left-0 z-10 bg-black">
       <h1 className="text-4xl font-semibold mb-2">{title}</h1>
@@ -86,6 +85,13 @@ const HeaderTitle = () => {
           );
         })}
       </nav>
+      <Button className="" onClick={() => setOpenRegister(true)}>
+        {" "}
+        New Admin
+      </Button>
+      {openRegister && (
+        <RegisterAdmin show={openRegister} onClose={() => setOpenRegister(false)} />
+      )}
     </div>
   );
 };

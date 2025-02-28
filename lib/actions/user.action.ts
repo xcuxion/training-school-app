@@ -11,7 +11,7 @@ import { signIn } from "../auth";
 const resend = new Resend(process.env.RESEND_KEY);
 const prisma = new PrismaClient();
 
-export const loginSchema = z.object({
+const loginSchema = z.object({
   email: z.string().email({ message: "Invalid email address" }).trim(),
   password: z
     .string()

@@ -6,10 +6,18 @@ import { createSession } from "../session";
 import { Resend } from "resend";
 import * as bcrypt from "bcrypt";
 import XcuxionConfirmEmail from "@/emails/confirm.email";
-import { loginSchema } from "./user.action";
 
 const prisma = new PrismaClient();
 const resend = new Resend(process.env.RESEND_KEY);
+
+
+const loginSchema = z.object({
+  email: z.string().email({ message: "Invalid email address" }).trim(),
+  password: z
+    .string()
+    .min(8, { message: "Password must be at least 8 characters" })
+    .trim(),
+});
 
 const newAdminSchema = z.object({
   name: z.string({ message: "Name is required" }),
@@ -43,7 +51,8 @@ export async function new_admin(prevState: unknown, formData: FormData) {
     });
     await resend_admin_verification_email(admin.email);
     await createSession(admin.id);
-    return { message: "Admin created successfully" };
+    const {password, ...withoutPassword} = admin 
+    return { message: "Admin created successfully", success: result.success, data: withoutPassword };
   } catch (error) {
     handleError(error);
     return { message: "Failed to create admin" };
