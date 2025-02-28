@@ -15,9 +15,9 @@ export interface ICase {
 export const useCaseStore = create<CaseStore>((set) => ({
   student: null,
   update: (student) => {
-    console.log("State Before Update:", useCaseStore.getState().student); // ✅ Debugging log
+    // console.log("State Before Update:", useCaseStore.getState().student); // ✅ Debugging log
     set((state) => ({ ...state, student }));
-    console.log("State After Update:", useCaseStore.getState().student); // ✅ Debugging log
+    // console.log("State After Update:", useCaseStore.getState().student); // ✅ Debugging log
   },
   logout: () => set(() => ({ student: null })),
 }));

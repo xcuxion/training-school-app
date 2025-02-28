@@ -128,7 +128,8 @@ model SchoolAdmin {
   password         String                 @db.VarChar(80)
   permissions      SchoolAdminPermissions
   verified         Boolean                @default(false)
-  verificationCode Int?                    @db.Integer()
+  verificationCode Int?                   @db.Integer()
+  otpRequestedAt   DateTime               @default(now())
 }
 
 model Receipt {

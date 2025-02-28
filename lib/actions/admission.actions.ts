@@ -74,14 +74,14 @@ const admissionSchema = z.object({
 
 export async function new_application(prevState: unknown, formData: FormData) {
   try {
-    console.log(formData);
+    // console.log(formData);
     const result = newApplicationSchema.safeParse(Object.fromEntries(formData));
 
     if (!result.success) {
-      console.log(
-        "Validation failed with errors:",
-        result.error.flatten().fieldErrors
-      );
+      // console.log(
+      //   "Validation failed with errors:",
+      //   result.error.flatten().fieldErrors
+      // );
       return {
         errors: result.error.flatten().fieldErrors,
       };
@@ -109,7 +109,7 @@ export async function new_application(prevState: unknown, formData: FormData) {
       where: { id: user.id }, // Ensure we target the correct user
       data: { role: "applicant" }, // Update role to "applicant"
     });
-    console.log(applicant);
+    // console.log(applicant);
     await createSession(user.id);
 
     const { createdAt, ...profileWithoutTimestamps } = applicant;
@@ -120,11 +120,11 @@ export async function new_application(prevState: unknown, formData: FormData) {
         subject: "New Application Received",
         react: ApplicationSubmitted({userFirstname: result.data.fname}),
       });
-      console.log(response);
+      // console.log(response);
     } catch (error) {
-      console.log(error);
+      // console.log(error);
     } finally {
-      console.log(result);
+      // console.log(result);
       return { success: result.success, data: profileWithoutTimestamps };
     }
   } catch (error) {
@@ -167,10 +167,10 @@ export async function edit_application(id: string, formData: FormData) {
     const result = newApplicationSchema.safeParse(Object.fromEntries(formData));
 
     if (!result.success) {
-      console.log(
-        "Validation failed with errors:",
-        result.error.flatten().fieldErrors
-      );
+      // console.log(
+      //   "Validation failed with errors:",
+      //   result.error.flatten().fieldErrors
+      // );
       return {
         errors: result.error.flatten().fieldErrors,
       };
@@ -186,7 +186,7 @@ export async function edit_application(id: string, formData: FormData) {
         student: result.data.scholarship === "yes" ? true : false,
        }
     })
-    console.log(applicant);
+    // console.log(applicant);
     return { success: result.success, data: applicant };
   } catch (error) {
     handleError(error);

@@ -36,14 +36,14 @@ interface ApplicantStore {
 export const useApplicantStore = create<ApplicantStore>((set) => ({
   applicant: null,
   setApplicant: (applicant) => {
-    console.log("State Before Update:", useApplicantStore.getState().applicant); // ✅ Debugging log
+    // console.log("State Before Update:", useApplicantStore.getState().applicant); // ✅ Debugging log
     set((state) => ({ ...state, applicant }));
-    console.log("State After Update:", useApplicantStore.getState().applicant); // ✅ Debugging log
+    // console.log("State After Update:", useApplicantStore.getState().applicant); // ✅ Debugging log
   },
   logout: () => {
-    console.log("State Before logout:", useApplicantStore.getState().applicant); // ✅ Debugging log
+    // console.log("State Before logout:", useApplicantStore.getState().applicant); // ✅ Debugging log
     set(() => ({ applicant: null }));
-    console.log("State After logout:", useApplicantStore.getState().applicant); // ✅ Debugging log
+    // console.log("State After logout:", useApplicantStore.getState().applicant); // ✅ Debugging log
   },
   updateApplicant: (partialApplicant) =>
     set((state) => ({

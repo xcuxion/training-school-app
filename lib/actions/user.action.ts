@@ -64,7 +64,8 @@ export async function googleAuth() {
   try {
     await signIn("google");
   } catch (error) {
-    console.log(error);
+    // console.log(error);
+    return {message: "Failed to authenticate"}
   }
 }
 
@@ -91,7 +92,7 @@ export async function sendMail(
     const result = mailSchema.safeParse(processedData);
 
     if (!result.success) {
-      console.error("Validation errors:", result.error.flatten().fieldErrors);
+      // console.error("Validation errors:", result.error.flatten().fieldErrors);
       return {
         success: false,
         errors: result.error.flatten().fieldErrors,
@@ -117,7 +118,7 @@ export async function sendMail(
       message: "Email sent successfully",
     };
   } catch (error) {
-    console.error("Error sending email:", error);
+    // console.error("Error sending email:", error);
     return {
       success: false,
       message: error instanceof Error ? error.message : "Failed to send email",
@@ -129,7 +130,7 @@ export async function logOut() {
   try {
     await deleteSession();
   } catch (error) {
-    console.log(error);
+    // console.log(error);
   }
 }
 
@@ -138,7 +139,7 @@ export default async function makeEnquiry(
   formData: FormData
 ) {
   try {
-    console.log(formData);
+    // console.log(formData);
     const result = enquirySchema.safeParse(Object.fromEntries(formData));
     if (!result.success) {
       return {
@@ -148,7 +149,7 @@ export default async function makeEnquiry(
     const { email, name, question } = result.data;
 
     const newInquiry = await prisma.enquiry.create({ data: { email, name, question } });
-    console.log(newInquiry)
+    // console.log(newInquiry)
     return {success: true, message: "Inquiry Sent Successfully"}
   } catch (error) {
     handleError(error);
@@ -168,7 +169,7 @@ export type FormState = {
 export async function login(prevState: unknown, formData: FormData) {
   try {
     const result = loginSchema.safeParse(Object.fromEntries(formData));
-    console.log(formData);
+    // console.log(formData);
 
     if (!result.success) {
       return {
@@ -204,7 +205,7 @@ export async function login(prevState: unknown, formData: FormData) {
 
     const { interest, createdAt, updatedAt, ...profileWithoutTimestamps } =
       existingUser;
-    console.log(profileWithoutTimestamps);
+    // console.log(profileWithoutTimestamps);
     return {
       data: profileWithoutTimestamps,
       success: result?.success,
@@ -220,7 +221,7 @@ export async function login(prevState: unknown, formData: FormData) {
 export async function register(prevState: unknown, formData: FormData) {
   try {
     const result = registerSchema.safeParse(Object.fromEntries(formData));
-    console.log(formData);
+    // console.log(formData);
 
     if (!result.success) {
       return {
@@ -253,7 +254,7 @@ export async function register(prevState: unknown, formData: FormData) {
     await createSession(newUser.id);
 
     const { createdAt, updatedAt, ...profileWithoutTimestamps } = newUser;
-    console.log(profileWithoutTimestamps);
+    // console.log(profileWithoutTimestamps);
     return {
       data: profileWithoutTimestamps,
       success: result?.success,

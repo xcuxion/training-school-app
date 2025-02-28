@@ -37,7 +37,7 @@ const NoAccountUser = ({
     if (formState?.success && formState?.data) {
       formRef.current?.reset();
       updateUser(formState?.data);
-      console.log(formState?.data);
+      // console.log(formState?.data);
     } else {
       toast(formState?.message);
     }

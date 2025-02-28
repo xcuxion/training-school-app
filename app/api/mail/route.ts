@@ -10,11 +10,11 @@ export async function POST (request:Request, res: Response) {
         from: "admission@xcuxion.org",
         to: [email],
         subject: "XCuxion Application Received",
-        html: await render(XcuxionWelcomeEmail({userFirstname, email})),
+        html: await render(XcuxionWelcomeEmail({userFirstname})),
     })
     if (error) {
         return Response.json(error)
     }
-    console.log(data)
+    // console.log(data)
     return Response.json({message: "Email sent successfully"})
 }

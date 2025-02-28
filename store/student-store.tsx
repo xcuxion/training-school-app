@@ -30,14 +30,14 @@ export interface IStudent {
 export const useStudentStore = create<StudentStore>((set) => ({
   student: null,
   setStudent: (student) => {
-    console.log("State Before Update:", useStudentStore.getState().student); // ✅ Debugging log
+    // console.log("State Before Update:", useStudentStore.getState().student); // ✅ Debugging log
     set((state) => ({ ...state, student }));
-    console.log("State After Update:", useStudentStore.getState().student); // ✅ Debugging log
+    // console.log("State After Update:", useStudentStore.getState().student); // ✅ Debugging log
   },
   logout: () => {
-    console.log("State Before logout:", useStudentStore.getState().student); // ✅ Debugging log
+    // console.log("State Before logout:", useStudentStore.getState().student); // ✅ Debugging log
     set(() => ({ student: null }));
-    console.log("State After logout:", useStudentStore.getState().student); // ✅ Debugging log
+    // console.log("State After logout:", useStudentStore.getState().student); // ✅ Debugging log
   },
   updateStudent: (partialStudent) =>
     set((state) => ({

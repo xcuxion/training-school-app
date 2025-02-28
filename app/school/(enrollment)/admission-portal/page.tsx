@@ -121,7 +121,7 @@ const AdmissionPortal = () => {
     fetchData();
   }, [user?.id]);
   
-  console.log(applicant)
+  // console.log(applicant)
   const handleChange = (e:React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     setEditableData({ ...editableData, [e.target.name]: e.target.value });
   };

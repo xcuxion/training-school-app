@@ -1,10 +1,10 @@
-"use client"
+"use client";
 import SubmitButton from "@/components/submit-button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { login_admin } from "@/lib/actions/admin.actions";
 import { useAdminStore } from "@/store/admin-store";
-import router from "next/router";
+import { useRouter } from "next/navigation";
 import React, { useEffect, useRef, useState } from "react";
 import { useFormState } from "react-dom";
 
@@ -14,13 +14,13 @@ const AdminLoginPage = () => {
   const [password, setPassword] = useState<string>("");
   const { setAdmin } = useAdminStore();
   const formRef = useRef<HTMLFormElement>(null);
-
+  const router = useRouter()
   useEffect(() => {
     if (formState?.success && formState?.data) {
       formRef.current?.reset();
       setAdmin(formState?.data);
 
-      router.push("");
+router.push("/school/administrator-office/confirmation")
     }
   }, [formState, router]);
 

@@ -15,9 +15,9 @@ export interface IResources {
 export const useResourcesStore = create<ResourcesStore>((set) => ({
   resources: null,
   updateResources: (resources) => {
-    console.log("State Before Update:", useResourcesStore.getState().resources); // ✅ Debugging log
+    // console.log("State Before Update:", useResourcesStore.getState().resources); // ✅ Debugging log
     set((state) => ({ ...state, resources }));
-    console.log("State After Update:", useResourcesStore.getState().resources); // ✅ Debugging log
+    // console.log("State After Update:", useResourcesStore.getState().resources); // ✅ Debugging log
   },
   logout: () => set(() => ({ resources: null })),
 }));

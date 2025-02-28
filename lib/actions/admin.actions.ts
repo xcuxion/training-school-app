@@ -66,18 +66,14 @@ export async function new_admin(prevState: unknown, formData: FormData) {
   }
 }
 
-export async function confirm_otp(prevState: unknown, formData: FormData) {
+export async function confirm_otp(id: string, code: number) {
   try {
-    const result = otpSchema.safeParse(Object.fromEntries(formData));
-
-    if (!result.success) {
-      return {
-        errors: result.error.flatten().fieldErrors,
-      };
+    const admin = await prisma.schoolAdmin.findUnique({ where: { id } });
+    if (!admin) {
+      return { message: "Admin not found" };
     }
-    // const admin = await prisma.schoolAdmin.findUnique({where: {id}});
   } catch (error) {
-    return {message: "Wrong OTP code"}
+    return { message: "Wrong OTP code" };
   }
 }
 
@@ -135,7 +131,10 @@ export async function generateCode(id: string) {
 
 export async function send_verification_email(email: string) {
   try {
-    const admin = await prisma.schoolAdmin.findUnique({ where: { email } });
+    const admin = await prisma.schoolAdmin.findUnique({
+      where: { email },
+    });
+
     if (!admin) {
       return { message: "Admin not found" };
     }
@@ -144,10 +143,25 @@ export async function send_verification_email(email: string) {
       return { message: "Admin already verified" };
     }
 
+    // Check if an OTP was requested within the last 5 minutes
+    const fiveMinutesAgo = new Date(Date.now() - 5 * 60 * 1000);
+    if (admin.otpRequestedAt && admin.otpRequestedAt > fiveMinutesAgo) {
+      return { message: "Please wait before requesting a new code." };
+    }
+
+    // Generate a new verification code
     const verificationCode = await generateCode(admin.id);
     if (!verificationCode) {
       return { message: "Failed to generate verification code" };
     }
+
+    // Update the timestamp for the latest OTP request
+    await prisma.schoolAdmin.update({
+      where: { email },
+      data: { otpRequestedAt: new Date() },
+    });
+
+    // Send the email
     try {
       const response = await resend.emails.send({
         from: "headoffice@xcuxion.org",
@@ -155,14 +169,14 @@ export async function send_verification_email(email: string) {
         subject: "Email Confirmation",
         react: XcuxionConfirmEmail({ validationCode: verificationCode }),
       });
-      console.log(response);
-    } catch (error) {
-      console.log(error);
-    } finally {
+      // console.log(response);
       return { message: "Verification email sent successfully" };
+    } catch (error) {
+      // console.log(error);
+      return { message: "Failed to send verification email" };
     }
   } catch (error) {
-    handleError(error);
-    return { message: "Failed to resend verification email" };
+    // console.error(error);
+    return { message: "An error occurred while processing your request." };
   }
 }

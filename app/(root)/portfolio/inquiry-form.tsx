@@ -20,7 +20,7 @@ const InquiryForm = () => {
   const [question, setQuestion] = useState<string>("");
 
   useEffect(() => {
-    console.log("Form Submission State:", state); // ✅ Debugging log
+    // console.log("Form Submission State:", state); // ✅ Debugging log
 
     if (state?.success) {
       toast("Your inquiry has been submitted successfully!");

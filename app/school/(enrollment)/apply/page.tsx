@@ -54,7 +54,7 @@ const ApplicationPage = () => {
   const [openRegister, setOpenRegister] = useState<boolean>(false);
 
   useEffect(() => {
-    console.log(state);
+    // console.log(state);
     if (state?.success && state?.data) {
       formRef.current?.reset();
       toast("Application Submitted Successfully");

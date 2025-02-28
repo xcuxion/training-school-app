@@ -24,9 +24,9 @@ export interface IAdmin {
 export const useAdminStore = create<AdminStore>((set) => ({
   admin: null,
   setAdmin: (admin) => {
-    console.log("State Before Update:", useAdminStore.getState().admin); // ✅ Debugging log
+    // console.log("State Before Update:", useAdminStore.getState().admin); // ✅ Debugging log
     set((state) => ({ ...state, admin }));
-    console.log("State After Update:", useAdminStore.getState().admin); // ✅ Debugging log
+    // console.log("State After Update:", useAdminStore.getState().admin); // ✅ Debugging log
   },
   updateAdmin: (partiaAdmin) => set((state)=>({
     admin: state.admin ? {...state.admin, ...partiaAdmin} : null

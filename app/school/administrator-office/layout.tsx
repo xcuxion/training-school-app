@@ -4,11 +4,18 @@ import AdminHeader from "./admin-header";
 import HeaderTitle from "./header-title";
 import { usePathname } from "next/navigation";
 
-const layout = ({ children }: { children: React.ReactNode }) => {
+const Layout = ({ children }: { children: React.ReactNode }) => {
   const pathname = usePathname();
 
-  // Hide the Sidebar on /school/admission-portal
-  const shouldShowHeader = pathname !== "/school/administrator-office";
+  // Define paths where the header should be hidden
+  const exclusions = [
+    "/school/administrator-office",
+    "/school/administrator-office/confirmation",
+  ];
+
+  // Check if the pathname matches exactly any exclusion
+  const shouldShowHeader = !exclusions.includes(pathname);
+
   return (
     <>
       {shouldShowHeader && (
@@ -22,4 +29,4 @@ const layout = ({ children }: { children: React.ReactNode }) => {
   );
 };
 
-export default layout;
+export default Layout;

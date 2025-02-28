@@ -11,7 +11,7 @@ type BookType = {
 };
 
 const BookItem = ({ book }: { book: BookType }) => {
-  console.log(book);
+  // console.log(book);
   return (
     <div className="  w-full">
       <div className="bg-neutral rounded-md relative py-3">
