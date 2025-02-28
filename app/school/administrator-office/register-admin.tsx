@@ -39,7 +39,7 @@ const RegisterAdmin = ({
     if (formState?.success && formState?.data) {
       formRef.current?.reset();
       setAdmin(formState?.data);
-      router.push("/school/administrator-office/overview");
+      router.push("/school/administrator-office/confirmation");
     } else {
       toast(formState?.message);
     }
@@ -92,7 +92,7 @@ const RegisterAdmin = ({
             )}
           </span>
           <span className="col-span-2 md:col-span-1 ">
-            <Label>Which faction are you interested in?</Label>
+            <Label>Add Permission</Label>
             <Select
               onValueChange={(choice) => setPermission(choice)}
               name="permission"

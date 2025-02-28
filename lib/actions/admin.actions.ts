@@ -10,13 +10,16 @@ import XcuxionConfirmEmail from "@/emails/confirm.email";
 const prisma = new PrismaClient();
 const resend = new Resend(process.env.RESEND_KEY);
 
-
 const loginSchema = z.object({
   email: z.string().email({ message: "Invalid email address" }).trim(),
   password: z
     .string()
     .min(8, { message: "Password must be at least 8 characters" })
     .trim(),
+});
+
+const otpSchema = z.object({
+  code: z.number({ message: "Invalid email address" }).max(6),
 });
 
 const newAdminSchema = z.object({
@@ -49,13 +52,32 @@ export async function new_admin(prevState: unknown, formData: FormData) {
         permissions: result.data.permission,
       },
     });
-    await resend_admin_verification_email(admin.email);
+    await send_verification_email(admin.email);
     await createSession(admin.id);
-    const {password, ...withoutPassword} = admin 
-    return { message: "Admin created successfully", success: result.success, data: withoutPassword };
+    const { password, ...withoutPassword } = admin;
+    return {
+      message: "Admin created successfully",
+      success: result.success,
+      data: withoutPassword,
+    };
   } catch (error) {
     handleError(error);
     return { message: "Failed to create admin" };
+  }
+}
+
+export async function confirm_otp(prevState: unknown, formData: FormData) {
+  try {
+    const result = otpSchema.safeParse(Object.fromEntries(formData));
+
+    if (!result.success) {
+      return {
+        errors: result.error.flatten().fieldErrors,
+      };
+    }
+    // const admin = await prisma.schoolAdmin.findUnique({where: {id}});
+  } catch (error) {
+    return {message: "Wrong OTP code"}
   }
 }
 
@@ -82,13 +104,13 @@ export async function login_admin(prevState: unknown, formData: FormData) {
       return { message: "Invalid credentials" };
     }
 
-    await resend_admin_verification_email(admin.email);
+    await send_verification_email(admin.email);
     await createSession(admin.id);
-    const {password, ...withoutPassword} = admin
+    const { password, ...withoutPassword } = admin;
     return {
       message: "Login successfully",
       success: result.success,
-      data: withoutPassword
+      data: withoutPassword,
     };
   } catch (error) {
     handleError(error);
@@ -110,7 +132,8 @@ export async function generateCode(id: string) {
     return verificationCode;
   } catch (error) {}
 }
-export async function resend_admin_verification_email(email: string) {
+
+export async function send_verification_email(email: string) {
   try {
     const admin = await prisma.schoolAdmin.findUnique({ where: { email } });
     if (!admin) {

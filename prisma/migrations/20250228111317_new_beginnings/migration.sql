@@ -38,7 +38,7 @@ CREATE TYPE "AdmissionType" AS ENUM ('full', 'fifty', 'seventyfive');
 CREATE TYPE "Interest" AS ENUM ('school', 'guild', 'startupcenter');
 
 -- CreateEnum
-CREATE TYPE "Role" AS ENUM ('applicant', 'student', 'facilitator', 'admin', 'visitor');
+CREATE TYPE "Role" AS ENUM ('applicant', 'student', 'facilitator', 'visitor');
 
 -- CreateTable
 CREATE TABLE "Enquiry" (
@@ -155,7 +155,13 @@ CREATE TABLE "GuildMember" (
 CREATE TABLE "SchoolAdmin" (
     "id" TEXT NOT NULL,
     "name" VARCHAR(255) NOT NULL,
+    "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    "updatedAt" TIMESTAMP(3) NOT NULL,
+    "email" VARCHAR(80) NOT NULL,
+    "password" VARCHAR(80) NOT NULL,
     "permissions" "SchoolAdminPermissions" NOT NULL,
+    "verified" BOOLEAN NOT NULL DEFAULT false,
+    "verificationCode" INTEGER,
 
     CONSTRAINT "SchoolAdmin_pkey" PRIMARY KEY ("id")
 );
@@ -251,6 +257,9 @@ CREATE UNIQUE INDEX "Facilitator_userId_key" ON "Facilitator"("userId");
 
 -- CreateIndex
 CREATE UNIQUE INDEX "GuildMember_userId_key" ON "GuildMember"("userId");
+
+-- CreateIndex
+CREATE UNIQUE INDEX "SchoolAdmin_email_key" ON "SchoolAdmin"("email");
 
 -- CreateIndex
 CREATE INDEX "_StudentTasks_B_index" ON "_StudentTasks"("B");
