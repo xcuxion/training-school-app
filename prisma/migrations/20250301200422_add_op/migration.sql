@@ -1,0 +1,2 @@
+-- AlterTable
+ALTER TABLE "SchoolAdmin" ADD COLUMN     "otpRequestedAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP;

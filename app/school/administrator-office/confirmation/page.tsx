@@ -1,16 +1,12 @@
 "use client";
 
 import React, { useState } from "react";
-import {
-  InputOTP,
-  InputOTPGroup,
-  InputOTPSeparator,
-  InputOTPSlot,
-} from "@/components/ui/input-otp";
+
 import { useAdminStore } from "@/store/admin-store";
 import { Button } from "@/components/ui/button";
 import { confirm_otp, send_verification_email } from "@/lib/actions/admin.actions";
 import { useRouter } from "next/navigation";
+import { InputOTP, InputOTPGroup, InputOTPSeparator, InputOTPSlot } from "@/components/ui/input-otp";
 
 const Confirmation = () => {
   const { admin } = useAdminStore();

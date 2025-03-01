@@ -9,22 +9,22 @@ import { logOut } from "@/lib/actions/user.action";
 const links = [
   {
     icon: '/icons/dashboard.svg',
-    href: '/school',
+    href: '/school/learning-space',
     label: 'Overview',
   },
   {
     icon: '/icons/discussion.svg',
-    href: '/school/discussions',
+    href: '/school/learning-space/discussions',
     label: 'Discussions',
   },
   {
     icon: '/icons/assignment-sidebar.svg',
-    href: '/school/case',
+    href: '/school/learning-space/case',
     label: 'Case Study',
   },
   {
     icon: '/icons/library.svg',
-    href: '/school/library',
+    href: '/school/learning-space/library',
     label: 'Library',
   },
 ];
