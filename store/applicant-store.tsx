@@ -25,6 +25,7 @@ export interface IApplicant {
   batch: "batch25" | null | string;
   createdAt?: Date;
   updatedAt?: Date;
+  track: string | null;
 }
 
 interface ApplicantStore {

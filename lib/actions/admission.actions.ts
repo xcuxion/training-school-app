@@ -202,7 +202,7 @@ export async function delete_application() {
 
 export async function admit_applicant(
   id: string,
-  admissionType: "full" | "fifty" | "seventyfive"
+  admissionType: "full" | "student" | "nonStudent"
 ) {
   try {
     // Step 1: Fetch the applicant's data
@@ -229,42 +229,66 @@ export async function admit_applicant(
   }
 }
 
+function generateStudentRef(name: string, batch: number, existingRefs: Set<string>): string {
+  const namePart = name.replace(/\s+/g, '').slice(0, 4).toUpperCase(); // First 4 letters, no spaces
+  const batchPart = batch.toString().slice(-2); // Last 2 digits of the batch year
+  let uniqueId: string;
+  let counter = 0;
+
+  do {
+      const randomDigits = Math.floor(100 + Math.random() * 900); // 3 random digits
+      uniqueId = `${namePart}${batchPart}${randomDigits}`;
+      counter++;
+  } while (existingRefs.has(uniqueId) && counter < 1000);
+
+  if (counter >= 1000) {
+      throw new Error("Unable to generate a unique reference number");
+  }
+
+  existingRefs.add(uniqueId); // Add to existing references
+  return uniqueId;
+}
+
 export async function accept_admission(id: string) {
   try {
-    //Step 1: Find the applicant
+    // Step 1: Find the applicant
     const applicant = await prisma.applicant.findUnique({ where: { id: id } });
     if (!applicant) {
       return { message: "Applicant not found." };
     }
 
-    //Step 2: remove unwanted fields from applicant data to use in creating student data
-    const { scholarship, laptop, status, statement, reason, ...studentData } =
-      applicant;
+    // Step 2: Remove unwanted fields from applicant data
+    const { scholarship, laptop, status, statement, reason, ...studentData } = applicant;
 
     let outstandingBalance;
     switch (applicant.admissionType) {
       case "full":
-        outstandingBalance = 200;
+        outstandingBalance = 300;
         break;
-      case "fifty":
+      case "student":
         outstandingBalance = 700;
         break;
-      case "seventyfive":
-        outstandingBalance = 500;
-        break;
-      default:
+      case "nonStudent":
         outstandingBalance = 1500;
         break;
     }
 
-    // Step 3: Create student based n their applicant data
-    const newStudent = await prisma.student.create({
+    // Step 3: Generate a unique student reference number
+    const existingRefs = new Set<string>();
+    const batchYear = new Date().getFullYear(); // Assuming batch is the current year
+    const studentReference = generateStudentRef(applicant.lname, batchYear, existingRefs);
+
+    // Step 4: Create student using applicant data
+   await prisma.student.create({
       data: {
         ...studentData,
-        reference: "",
-        outstandingFees: outstandingBalance,
+        reference: studentReference,
+        outstandingFees: outstandingBalance as number,
+        admissionOffer: applicant.admissionType as "full" | "student" | "nonStudent"
       },
     });
+
+    return { message: "Application acceptance was successful" };
   } catch (error) {
     return { message: "Error accepting admission" };
   }
@@ -286,6 +310,8 @@ export async function reject_applicant(id: string) {
       where: { id },
       data: { status: "rejected" },
     });
+
+    return {message: "Application was rejected"}
   } catch (error) {
     handleError(error);
   }

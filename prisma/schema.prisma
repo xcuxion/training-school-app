@@ -61,27 +61,28 @@ model Applicant {
 }
 
 model Student {
-  reference       String    @id @unique
-  user            User      @relation(fields: [userId], references: [id])
-  userId          String    @unique
-  rewardPoints    Int       @default(0) @db.Integer()
-  outstandingFees Float     @db.DoublePrecision()
-  fname           String    @db.VarChar(255)
-  lname           String    @db.VarChar(255)
-  oname           String?   @db.VarChar(255)
-  dob             DateTime  @db.Date()
+  reference       String         @id @unique
+  user            User           @relation(fields: [userId], references: [id])
+  userId          String         @unique
+  rewardPoints    Int            @default(0) @db.Integer()
+  outstandingFees Float          @db.DoublePrecision()
+  fname           String         @db.VarChar(255)
+  lname           String         @db.VarChar(255)
+  oname           String?        @db.VarChar(255)
+  dob             DateTime       @db.Date()
   gender          Gender
-  country         Countries @default(ghana)
-  contact         String    @db.VarChar(10)
+  country         Countries      @default(ghana)
+  contact         String         @db.VarChar(10)
   school          School?
-  programme       String?   @db.VarChar()
-  year            String?   @db.VarChar(4)
+  programme       String?        @db.VarChar()
+  year            String?        @db.VarChar(4)
   receipts        Receipt[]
-  batch           String    @db.VarChar(255)
-  tasks           Task[]    @relation("StudentTasks")
+  batch           String         @db.VarChar(255)
+  tasks           Task[]         @relation("StudentTasks")
   track           Track
-  createdAt       DateTime  @default(now())
-  updatedAt       DateTime  @updatedAt
+  createdAt       DateTime       @default(now())
+  updatedAt       DateTime       @updatedAt
+  admissionOffer  AdmissionType
 }
 
 model Class {
@@ -257,8 +258,8 @@ enum AdmissionStatus {
 
 enum AdmissionType {
   full
-  fifty
-  seventyfive
+  student
+  nonStudent
 }
 
 enum Interest {
