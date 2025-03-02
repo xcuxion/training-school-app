@@ -10,7 +10,7 @@ const highlights = [
     title: 'Pending Admission',
     rate: '24',
     link: {
-      href: '/school/admission',
+      href: '/school/administrator-office/admission',
       label: 'Admission portal'
     }
   },

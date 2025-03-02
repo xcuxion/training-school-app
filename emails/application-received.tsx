@@ -17,11 +17,7 @@ const baseUrl = process.env.VERCEL_URL
   ? `https://${process.env.VERCEL_URL}`
   : "";
 
-const ApplicationSubmitted = ({
-  userFirstname,
-}: {
-  userFirstname: string;
-}) => (
+const ApplicationSubmitted = ({ userFirstname }: { userFirstname: string }) => (
   <Html>
     <Head />
     <Preview>
@@ -40,9 +36,9 @@ const ApplicationSubmitted = ({
           <Hr style={hr} />
           <Text style={header}> 🎉</Text>
           <Text style={paragraph}>
-            Hey {userFirstname}, we’re excited to receive your application for XCUXION Batch ’25!
-            Your journey toward innovation and growth starts here, and we can’t
-            wait to learn more about you.
+            Hey {userFirstname}, we’re excited to receive your application for
+            XCUXION Batch ’25! Your journey toward innovation and growth starts
+            here, and we can’t wait to learn more about you.
           </Text>
           <Text style={paragraph}> 🚀 What’s next? </Text>
           <Text style={paragraph}>
@@ -95,7 +91,6 @@ const ApplicationSubmitted = ({
 );
 
 export default ApplicationSubmitted;
-
 
 const main = {
   backgroundImage: "url('/logo.svg`')",
@@ -162,29 +157,28 @@ const footer = {
   color: "#8898aa",
   fontSize: "14px",
   lineHeight: "16px",
- 
 };
 
-const tagBase = {
-  width: "80px",
-  height: "50px",
-   marginBottom: "40px",
-};
+// const tagBase = {
+//   width: "80px",
+//   height: "50px",
+//   marginBottom: "40px",
+// };
 
-const footerLink = {
-  color: "#1A56DB",
-  textDecoration: "underline",
-  marginLeft: "30px",
-};
+// const footerLink = {
+//   color: "#1A56DB",
+//   textDecoration: "underline",
+//   marginLeft: "30px",
+// };
 
-const footerText = {
-  fontSize: "12px",
-  color: "#b7b7b7",
-  lineHeight: "15px",
-  textAlign: "left" as const,
-  marginBottom: "50px",
-  marginLeft: "30px",
-};
+// const footerText = {
+//   fontSize: "12px",
+//   color: "#b7b7b7",
+//   lineHeight: "15px",
+//   textAlign: "left" as const,
+//   marginBottom: "50px",
+//   marginLeft: "30px",
+// };
 
 const tagBase = {
   width: "80px",

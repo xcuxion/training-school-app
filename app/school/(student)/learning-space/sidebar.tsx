@@ -49,8 +49,8 @@ const Sidebar = () => {
       <div className="space-y-4 flex-grow">
         {links.map((link, index) => {
           const isActive =
-            (link.href === '/school' && pathname === '/school') || 
-            (pathname.startsWith(link.href) && link.href !== '/school');
+            (link.href === '/school/learning-space' && pathname === '/school/learning-space') || 
+            (pathname.startsWith(link.href) && link.href !== '/school/learning-space');
 
           return (
             <Link href={link.href} className={`flex items-center gap-x-4 w-[200px] p-2 hover:bg-secondary rounded-md ${

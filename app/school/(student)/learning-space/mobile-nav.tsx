@@ -7,19 +7,19 @@ import React from "react";
 const links = [
     {
       icon: '/icons/dashboard.svg',
-      href: '/school',
+      href: '/school/learning-space',
     },
     {
       icon: '/icons/discussion.svg',
-      href: '/school/discussions',
+      href: '/school/learning-space/discussions',
     },
     {
       icon: '/icons/assignment-sidebar.svg',
-      href: '/school/case',
+      href: '/school/learning-space/case',
     },
     {
       icon: '/icons/library.svg',
-      href: '/school/library',
+      href: '/school/learning-space/library',
     },
   ];
   

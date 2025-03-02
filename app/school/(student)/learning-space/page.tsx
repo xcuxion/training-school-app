@@ -1,3 +1,4 @@
+"use client"
 import React from "react";
 import Image from "next/image";
 import MainContent from "./main-content";
@@ -46,7 +47,7 @@ const page = () => {
       <SideSection className="w-1/3 ">
           <ProfileCard {...profile}/>
         <TodoSection />
-        <div className="w-full h-[125px] bg-primary rounded-md flex px-6 items-center justify-between">
+        <div className="w-full row-span-1 bg-primary rounded-md flex px-6 items-center justify-between">
           <div className="text-black">
             <h1 className="text-4xl font-semibold">237</h1>
             <p className="text-lg">Achievement Points</p>

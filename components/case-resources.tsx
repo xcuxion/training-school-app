@@ -42,7 +42,7 @@ const CaseResources = () => {
             <h2 className="text-lg font-medium">Case Sprint Board</h2>
             <p className="text-center font-normal my-1 leading-none">Check the workflow and project task assignments from the board.</p>
             <Button className='bg-primary text-black rounded-full' asChild>
-                <Link href={'/school/case/sprint-board'}>
+                <Link href={'/school/learning-space/case/sprint-board'}>
                     Enter Sprint
                 </Link>
             </Button>           
