@@ -32,7 +32,7 @@ interface ApplicantStore {
   applicant: IApplicant | null;
   setApplicant: (applicant: IApplicant | null) => void;
   updateApplicant: (partialApplicant: IApplicant) => void;
-  logout: () => void;
+  logoutApplicant: () => void;
 }
 export const useApplicantStore = create<ApplicantStore>((set) => ({
   applicant: null,
@@ -41,7 +41,7 @@ export const useApplicantStore = create<ApplicantStore>((set) => ({
     set((state) => ({ ...state, applicant }));
     // console.log("State After Update:", useApplicantStore.getState().applicant); // ✅ Debugging log
   },
-  logout: () => {
+  logoutApplicant: () => {
     // console.log("State Before logout:", useApplicantStore.getState().applicant); // ✅ Debugging log
     set(() => ({ applicant: null }));
     // console.log("State After logout:", useApplicantStore.getState().applicant); // ✅ Debugging log

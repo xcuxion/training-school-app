@@ -77,8 +77,8 @@ const AdmissionPortal = () => {
   //   await logOut();
   //   router.push("/");
   // };
-  const { applicant, setApplicant, logout } = useApplicantStore();
-  const { user } = useUserStore();
+  const { applicant, setApplicant, logoutApplicant } = useApplicantStore();
+  const { user, logoutUser } = useUserStore();
   const router = useRouter();
   const [editOff, setEditOff] = useState(true);
   const [editableData, setEditableData] = useState({
@@ -138,7 +138,8 @@ const AdmissionPortal = () => {
 
   const handleLogOut = async () => {
     await logOut();
-    logout()
+    logoutApplicant()
+    logoutUser()
     router.push("/");
   };
   return (

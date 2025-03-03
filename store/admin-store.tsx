@@ -18,7 +18,7 @@ export interface IAdmin {
     admin: IAdmin | null;
     setAdmin: (admin: IAdmin | null) => void;
     updateAdmin: (partiaAdmin: Partial<IAdmin>) => void;
-    logout: () => void
+    logoutAdmin: () => void
   }
 
 export const useAdminStore = create<AdminStore>((set) => ({
@@ -31,5 +31,5 @@ export const useAdminStore = create<AdminStore>((set) => ({
   updateAdmin: (partiaAdmin) => set((state)=>({
     admin: state.admin ? {...state.admin, ...partiaAdmin} : null
   })),
-  logout: () => set(() => ({ admin: null }))
+  logoutAdmin: () => set(() => ({ admin: null }))
 }));

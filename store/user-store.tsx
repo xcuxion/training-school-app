@@ -11,7 +11,7 @@ interface UserStore {
   user: IUser | null;
   setUser: (user: IUser | null) => void;
   updateUser: (partialUser: Partial<IUser>) => void;
-  logout: () => void;
+  logoutUser: () => void;
 }
 
 export const useUserStore = create<UserStore>((set) => ({
@@ -21,7 +21,7 @@ export const useUserStore = create<UserStore>((set) => ({
     set((state) => ({ ...state, user }));
     // console.log("State After Update:", useUserStore.getState().user); // ✅ Debugging log
   },
-  logout: () => {
+  logoutUser: () => {
     // console.log("State Before logout:", useUserStore.getState().user); // ✅ Debugging log
     set(() => ({ user: null }));
     // console.log("State After logout:", useUserStore.getState().user); // ✅ Debugging log

@@ -9,7 +9,7 @@ import Link from "next/link";
 import { useEffect } from "react";
 
 const page = () => {
-  const { user, logout } = useUserStore();
+  const { user, logoutUser } = useUserStore();
   const router = useRouter();
 
   useEffect(()=>{
@@ -27,7 +27,7 @@ const page = () => {
   }, [router, user])
 
   const handleLogOut = async () => {
-    logout();
+    logoutUser();
     await logOut();
     router.push("/");
   };

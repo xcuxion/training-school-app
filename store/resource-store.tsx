@@ -19,5 +19,4 @@ export const useResourcesStore = create<ResourcesStore>((set) => ({
     set((state) => ({ ...state, resources }));
     // console.log("State After Update:", useResourcesStore.getState().resources); // ✅ Debugging log
   },
-  logout: () => set(() => ({ resources: null })),
 }));

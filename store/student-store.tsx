@@ -23,7 +23,7 @@ export interface IStudent {
     student: IStudent | null;
     updateStudent: (partialStudent: IStudent) => void;
     setStudent: (studen: IStudent | null) => void;
-    logout: () => void;
+    logoutStudent: () => void;
 
   }
 
@@ -34,7 +34,7 @@ export const useStudentStore = create<StudentStore>((set) => ({
     set((state) => ({ ...state, student }));
     // console.log("State After Update:", useStudentStore.getState().student); // ✅ Debugging log
   },
-  logout: () => {
+  logoutStudent: () => {
     // console.log("State Before logout:", useStudentStore.getState().student); // ✅ Debugging log
     set(() => ({ student: null }));
     // console.log("State After logout:", useStudentStore.getState().student); // ✅ Debugging log

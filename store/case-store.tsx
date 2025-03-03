@@ -19,5 +19,4 @@ export const useCaseStore = create<CaseStore>((set) => ({
     set((state) => ({ ...state, student }));
     // console.log("State After Update:", useCaseStore.getState().student); // ✅ Debugging log
   },
-  logout: () => set(() => ({ student: null })),
 }));
