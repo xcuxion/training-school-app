@@ -96,7 +96,7 @@ const ApplicationPage = () => {
         scale their ventures.
       </p>
       <form action={action} ref={formRef} className="">
-        <section className="my-4 space-y-3 border border-outline p-4 rounded-md">
+        <section className="my-4 space-y-3 bg-secondary border border-outline p-4 rounded-md">
           <h2 className="text-2xl font-semibold">Personal Information</h2>
           <p className="text-xs">Fields with * are required</p>
           <div className="grid gap-y-2 md:gap-y-0 md:grid-cols-3 md:gap-x-6">
@@ -416,7 +416,7 @@ const ApplicationPage = () => {
             )}
           </div>
         </section>{" "}
-        <section className="my-4 space-y-3 border border-outline p-4 rounded-md">
+        <section className="my-4 space-y-3 border bg-secondary border-outline p-4 rounded-md">
           <h2 className="text-2xl font-semibold">Aspiration</h2>
           <p className="text-xs">Fields with * are required</p>
           <div className="">

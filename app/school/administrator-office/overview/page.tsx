@@ -70,9 +70,9 @@ const facilitators = [
 
 const page = () => {
   return (
-    <div className='w-full flex gap-x-4'>
-      <div className="w-2/3 space-y-6">
-        <section className="grid grid-cols-3 gap-x-10 ">
+    <div className='w-full flex md:flex-row flex-col md:gap-x-4 gap-y-4 md:gap-y-0'>
+      <div className="md:w-2/3 space-y-6">
+        <section className="grid md:grid-cols-3 md:gap-x-10 md:gap-y-0 gap-y-4 ">
           {
             highlights.map((data, index)=>(
               <HighlightCard {...data} key={index}/>
@@ -90,7 +90,7 @@ const page = () => {
           </div>
         </section>
       </div>
-      <div className="w-1/3 bg-secondary rounded-t-lg min-h-80 p-2">
+      <div className="md:w-1/3 bg-secondary rounded-t-lg min-h-80 p-2">
         <h1 className="text-lg font-semibold">Facilitators</h1>
         <section className="space-y-4">
           {
