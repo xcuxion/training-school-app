@@ -38,7 +38,6 @@ const Login = ({ show, onClose }: { show: boolean; onClose: () => void }) => {
         <form ref={formRef} action={formAction} className="flex flex-col gap-y-4">
           <span>
             <Label>Email Address</Label>
-
             <Input
               id="email"
               name="email"

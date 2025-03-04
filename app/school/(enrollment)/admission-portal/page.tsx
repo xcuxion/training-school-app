@@ -97,7 +97,7 @@ const AdmissionPortal = () => {
 
   useEffect(() => {
     const fetchData = async () => {
-      
+      console.log(user, applicant)
       const result = await fetch_applicant_data(user?.id as string);
       setApplicant(result as IApplicant)
       if (result) {

@@ -11,60 +11,86 @@ const prisma = new PrismaClient();
 const resend = new Resend(process.env.RESEND_KEY);
 
 const newApplicationSchema = z.object({
-  fname: z.string({ message: "First name is required" }).trim(),
+  fname: z.string().trim().min(1, { message: "First name is required" }),
   oname: z.string().trim().optional(),
-  lname: z.string({ message: "Last name is required" }).trim(),
+  lname: z.string().trim().min(1, { message: "Last name is required" }),
   gender: z.enum(["male", "female"], { message: "Select your gender" }),
-  country: z.enum(["ghana"], { message: "Select your country of residence" }),
+  country: z.string().refine((val) => val === "ghana", {
+    message: "Select your country of residence",
+  }),
   school: z.enum(["knust", "ug", "ashesi", "none"]).optional(),
   batch: z.enum(["batch25"], { message: "Select the batch of interest" }),
-  track: z.enum(["web", "mobile", "dataanalysis", "backend"]),
+  track: z.enum(["web", "mobile", "dataanalysis", "backend"], {
+    message: "Select a track",
+  }),
   contact: z
-    .string({ message: "Phone number is required" })
+    .string()
     .trim()
-    .min(10)
-    .max(15),
-  dob: z.string(),
-  email: z.string().email({ message: "field is required" }).trim().optional(),
-  programme: z.string({ message: "field is required" }).min(2).optional(),
+    .min(10, { message: "Phone number must be at least 10 digits" })
+    .max(15, { message: "Phone number must not exceed 15 digits" }),
+  dob: z.string().min(1, { message: "Date of birth is required" }),
+  email: z.string().trim().email({ message: "Enter a valid email" }).optional(),
+  programme: z
+    .string()
+    .trim()
+    .min(2, { message: "Programme is required" })
+    .optional(),
   year: z
     .enum(["1", "2", "3", "4", "5", "6"], {
       message: "Select your current year",
     })
     .optional(),
-  reason: z.string(),
-  balance: z.string(),
-  statement: z.string().optional(),
+  reason: z.string().trim().min(1, { message: "Reason is required" }),
+  balance: z.string().trim().min(1, { message: "Balance is required" }), // Consider changing to `z.number()`
+  statement: z.string().trim().optional(),
   scholarship: z.enum(["yes", "no"], { message: "Select an option" }),
   student: z.enum(["yes", "no"], { message: "Select an option" }),
   laptop: z.enum(["yes", "no"], { message: "Select an option" }),
 });
 
 const editApplicationSchema = z.object({
-  fname: z.string({ message: "field is required" }).trim().optional(),
+  fname: z
+    .string()
+    .trim()
+    .min(1, { message: "First name is required" })
+    .optional(),
   oname: z.string().trim().optional(),
-  lname: z.string({ message: "field is required" }).trim().optional(),
-  gender: z.enum(["male", "female"]),
-  country: z.enum(["ghana"]),
-  school: z.enum(["knust", "ug", "ashesi", "none"]),
+  lname: z
+    .string()
+    .trim()
+    .min(1, { message: "Last name is required" })
+    .optional(),
+  gender: z.enum(["male", "female"], { message: "Select your gender" }),
+  country: z.string().refine((val) => val === "ghana", {
+    message: "Select your country of residence",
+  }),
+  school: z.enum(["knust", "ug", "ashesi", "none"]).optional(),
   track: z.enum(["web", "mobile", "dataanalysis", "backend"], {
     message: "Select your preferred track",
   }),
   contact: z
-    .string({ message: "field is required" })
+    .string()
     .trim()
-    .min(10)
-    .max(10)
+    .min(10, { message: "Phone number must be at least 10 digits" })
+    .max(15, { message: "Phone number must not exceed 15 digits" })
     .optional(),
   dob: z.string().optional(),
-  email: z.string().email({ message: "field is required" }).trim().optional(),
-  programme: z.string({ message: "field is required" }).min(2).optional(),
-  year: z.enum(["1", "2", "3", "4", "5", "6"]),
-  reason: z.string().optional(),
-  balance: z.string().optional(),
-  statement: z.string().optional(),
-  scholarship: z.enum(["yes", "no"]).optional(),
-  laptop: z.enum(["yes", "no"]).optional(),
+  email: z.string().trim().email({ message: "Enter a valid email" }).optional(),
+  programme: z
+    .string()
+    .trim()
+    .min(2, { message: "Programme is required" })
+    .optional(),
+  year: z.enum(["1", "2", "3", "4", "5", "6"], {
+    message: "Select your current year",
+  }),
+  reason: z.string().trim().optional(),
+  balance: z.string().trim().optional(),
+  statement: z.string().trim().optional(),
+  scholarship: z
+    .enum(["yes", "no"], { message: "Select an option" })
+    .optional(),
+  laptop: z.enum(["yes", "no"], { message: "Select an option" }).optional(),
 });
 
 const admissionSchema = z.object({
@@ -118,7 +144,7 @@ export async function new_application(prevState: unknown, formData: FormData) {
         from: "admission@xcuxion.org",
         to: result.data.email ? result.data.email : user.email,
         subject: "New Application Received",
-        react: ApplicationSubmitted({userFirstname: result.data.fname}),
+        react: ApplicationSubmitted({ userFirstname: result.data.fname }),
       });
       // console.log(response);
     } catch (error) {
@@ -160,11 +186,15 @@ export async function fetch_all_applications() {
 
 export async function edit_application(id: string, formData: FormData) {
   try {
-    const applicant = await prisma.applicant.findFirst({ where: { userId: id } });
+    const applicant = await prisma.applicant.findFirst({
+      where: { userId: id },
+    });
     if (!applicant) {
       return { message: "Application not found" };
     }
-    const result = newApplicationSchema.safeParse(Object.fromEntries(formData));
+    const result = editApplicationSchema.safeParse(
+      Object.fromEntries(formData)
+    );
 
     if (!result.success) {
       // console.log(
@@ -176,16 +206,20 @@ export async function edit_application(id: string, formData: FormData) {
       };
     }
     const dob = result.data.dob;
-    const dobDateTime = new Date(dob).toISOString();
-    await prisma.applicant.updateMany({
-      where: {id: applicant.id},
-      data: {...result.data,
-        dob: dobDateTime,
-        laptop: result.data.laptop === "yes" ? true : false,
-        scholarship: result.data.scholarship === "yes" ? true : false,
-        student: result.data.scholarship === "yes" ? true : false,
-       }
-    })
+    if (dob) {
+      const dobDateTime = new Date(dob).toISOString();
+
+      await prisma.applicant.updateMany({
+        where: { id: applicant.id },
+        data: {
+          ...result.data,
+          dob: dobDateTime,
+          laptop: result.data.laptop === "yes" ? true : false,
+          scholarship: result.data.scholarship === "yes" ? true : false,
+          student: result.data.scholarship === "yes" ? true : false,
+        },
+      });
+    }
     // console.log(applicant);
     return { success: result.success, data: applicant };
   } catch (error) {
@@ -229,20 +263,24 @@ export async function admit_applicant(
   }
 }
 
-function generateStudentRef(name: string, batch: number, existingRefs: Set<string>): string {
-  const namePart = name.replace(/\s+/g, '').slice(0, 4).toUpperCase(); // First 4 letters, no spaces
+function generateStudentRef(
+  name: string,
+  batch: number,
+  existingRefs: Set<string>
+): string {
+  const namePart = name.replace(/\s+/g, "").slice(0, 4).toUpperCase(); // First 4 letters, no spaces
   const batchPart = batch.toString().slice(-2); // Last 2 digits of the batch year
   let uniqueId: string;
   let counter = 0;
 
   do {
-      const randomDigits = Math.floor(100 + Math.random() * 900); // 3 random digits
-      uniqueId = `${namePart}${batchPart}${randomDigits}`;
-      counter++;
+    const randomDigits = Math.floor(100 + Math.random() * 900); // 3 random digits
+    uniqueId = `${namePart}${batchPart}${randomDigits}`;
+    counter++;
   } while (existingRefs.has(uniqueId) && counter < 1000);
 
   if (counter >= 1000) {
-      throw new Error("Unable to generate a unique reference number");
+    throw new Error("Unable to generate a unique reference number");
   }
 
   existingRefs.add(uniqueId); // Add to existing references
@@ -258,7 +296,8 @@ export async function accept_admission(id: string) {
     }
 
     // Step 2: Remove unwanted fields from applicant data
-    const { scholarship, laptop, status, statement, reason, ...studentData } = applicant;
+    const { scholarship, laptop, status, statement, reason, ...studentData } =
+      applicant;
 
     let outstandingBalance;
     switch (applicant.admissionType) {
@@ -276,15 +315,22 @@ export async function accept_admission(id: string) {
     // Step 3: Generate a unique student reference number
     const existingRefs = new Set<string>();
     const batchYear = new Date().getFullYear(); // Assuming batch is the current year
-    const studentReference = generateStudentRef(applicant.lname, batchYear, existingRefs);
+    const studentReference = generateStudentRef(
+      applicant.lname,
+      batchYear,
+      existingRefs
+    );
 
     // Step 4: Create student using applicant data
-   await prisma.student.create({
+    await prisma.student.create({
       data: {
         ...studentData,
         reference: studentReference,
         outstandingFees: outstandingBalance as number,
-        admissionOffer: applicant.admissionType as "full" | "student" | "nonStudent"
+        admissionOffer: applicant.admissionType as
+          | "full"
+          | "student"
+          | "nonStudent",
       },
     });
 
@@ -311,7 +357,7 @@ export async function reject_applicant(id: string) {
       data: { status: "rejected" },
     });
 
-    return {message: "Application was rejected"}
+    return { message: "Application was rejected" };
   } catch (error) {
     handleError(error);
   }

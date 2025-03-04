@@ -21,6 +21,8 @@ import { useUserStore } from "@/store/user-store";
 import { toast } from "sonner";
 import Register from "@/app/(root)/register";
 import NoAccountUser from "./no-account-user";
+import { MdArrowLeft } from "react-icons/md";
+import { ArrowLeft } from "lucide-react";
 
 const initial = {
   fname: "",
@@ -52,7 +54,6 @@ const ApplicationPage = () => {
   const { setApplicant } = useApplicantStore();
   const { user } = useUserStore();
   const [openRegister, setOpenRegister] = useState<boolean>(false);
-
   useEffect(() => {
     // console.log(state);
     if (state?.success && state?.data) {
@@ -77,13 +78,18 @@ const ApplicationPage = () => {
         />
       )}
       <div className="flex flex-col-reverse md:flex-row md:flex-between py-2 md:py-4">
-        <h1 className="text-3xl md:text-4xl font-bold">Application Form</h1>
+        <span className="flex items-center">
+          <ArrowLeft className="w-8 h-8 cursor-pointer" onClick={()=>{
+            router.back()
+          }}/>
+          <h1 className="text-3xl md:text-4xl font-bold">Application Form</h1>
+        </span>
         <Image
           src={"/logo.png"}
           alt="logo"
-          width={125}
-          height={65}
-          className="w-[125px] h-[65px] md:w-[200px] h-[]60px"
+          width={150}
+          height={60}
+          className="w-[100px] h-[40px] md:w-[150px] md:h-[60px] object-scale-down"
         />
       </div>
       <p className="font-sm">
@@ -411,8 +417,8 @@ const ApplicationPage = () => {
                 <Label htmlFor="no">No, I can afford it</Label>
               </span>
             </RadioGroup>
-            {state?.errors?.lname && (
-              <p className="text-sm text-red-500">{state.errors.lname}</p>
+            {state?.errors?.scholarship && (
+              <p className="text-sm text-red-500">{state.errors.scholarship}</p>
             )}
           </div>
         </section>{" "}

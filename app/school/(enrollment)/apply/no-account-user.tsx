@@ -20,11 +20,11 @@ import { toast } from "sonner";
 const NoAccountUser = ({
   show,
   onClose,
-  emailAddress
+  emailAddress,
 }: {
   show: boolean;
   onClose: () => void;
-  emailAddress: string
+  emailAddress: string;
 }) => {
   const [formState, formAction] = useFormState(register, undefined);
   const [email, setEmail] = useState<string>(emailAddress);
@@ -32,11 +32,12 @@ const NoAccountUser = ({
   const [password, setPassword] = useState<string>("");
   const formRef = useRef<HTMLFormElement>(null);
   const router = useRouter();
-  const { updateUser } = useUserStore();
+  const { setUser } = useUserStore();
   useEffect(() => {
     if (formState?.success && formState?.data) {
       formRef.current?.reset();
-      updateUser(formState?.data);
+      setUser(formState?.data);
+      onClose();
       // console.log(formState?.data);
     } else {
       toast(formState?.message);
@@ -48,7 +49,6 @@ const NoAccountUser = ({
         <form action={formAction} className="flex flex-col gap-y-4">
           <span>
             <Label>Email Address</Label>
-
             <Input
               id="email"
               name="email"
@@ -61,7 +61,6 @@ const NoAccountUser = ({
               <p className="text-red-500">{formState.errors.email}</p>
             )}
           </span>
-
           <span>
             <Label>Password</Label>
             <Input
