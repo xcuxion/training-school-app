@@ -7,12 +7,8 @@ import { Button } from "@/components/ui/button";
 import { FaArrowRight } from "react-icons/fa";
 import CoursesSection from "./portfolio/courses-section";
 import AidCard from "./portfolio/aid-card";
-import { title } from "process";
 import Footer from "../(root)/portfolio/footer";
 import Link from "next/link";
-import Login from "../(root)/login";
-import MobileNavigator from "../(root)/portfolio/mobile-navigator";
-import Register from "../(root)/register";
 import Navigator from "../(root)/portfolio/navigator";
 
 const admissionSteps = [
@@ -34,38 +30,68 @@ const admissionSteps = [
 
 const aid = [
   {
-    title: "Scholarship",
-    requirements: [
-      "Must be a tertiary student or recent graduate passionate about building a startup",
-      "Willingness to serve as a track assistant",
-      "Demonstrated prior knowledge in the selected track",
-    ],
+    title: "Tuition-Free Enrollment",
+    summary:
+      "For highly skilled and passionate individuals who contribute significantly to XCUXION's mission.",
     benefits: [
       "Full tuition coverage",
-      "Mentorship and incubation support",
-      "Access to all learning materials and resources",
+      "Mentorship and leadership opportunities",
+      "Hands-on experience assisting facilitators",
+      "Exclusive networking and project opportunities",
     ],
     eligibility: [
-      "Proven financial need",
-      "Strong drive for innovation and problem-solving",
-      "Commitment to completing the program",
+      "Demonstrated prior knowledge in chosen field",
+      "Strong passion for technology and entrepreneurship",
+      "Willingness to mentor and assist peers",
+      "Recommendation from a facilitator or staff member",
+    ],
+    requirements: [
+      "Must actively contribute to the XCUXION community",
+      "Provide a recommendation from a facilitator or staff",
+      "Show exceptional value beyond technical skills",
+    ],
+  },
+  {
+    title: "Student Offer",
+    summary:
+      "A significantly discounted tuition plan for tertiary students who aspire to excel in tech and leadership.",
+    benefits: [
+      "Reduced tuition fees",
+      "Real-world project experience",
+      "Mentorship from industry experts",
+      "Internship and startup opportunities",
+    ],
+    eligibility: [
+      "Must be a currently enrolled tertiary student",
+      "Demonstrated adaptability and eagerness to learn",
+      "Commitment to contributing to peer development",
+      "Desire to become a future leader in tech",
+    ],
+    requirements: [
+      "Proof of tertiary enrollment",
+      "Commitment to program engagement and peer collaboration",
+      "Demonstrate passion for innovation and problem-solving",
     ],
   },
   {
     title: "Standard Enrollment",
-    requirements: [
-      "Open to anyone passionate about techpreneurship (students and non-students alike)",
-      "No financial need required",
-    ],
+    summary:
+      "For professionals, career changers, and entrepreneurs looking to gain top-tier tech skills.",
     benefits: [
-      "Full access to the program upon payment of tuition",
-      "Mentorship and incubation support",
-      "Comprehensive learning materials and resources",
-      "Opportunity to network with industry professionals",
+      "Comprehensive tech and business training",
+      "Hands-on mentorship and real-world projects",
+      "Access to a network of tech innovators and startup founders",
+      "Flexible learning for career transitions",
     ],
     eligibility: [
-      "Ability to fund program tuition",
+      "Open to all individuals passionate about tech",
+      "Aspiring entrepreneurs, career switchers, and tech enthusiasts",
+      "No prior experience required—just a willingness to learn",
+    ],
+    requirements: [
       "Commitment to completing the program",
+      "Active participation in hands-on projects",
+      "Dedication to building a career in tech or launching a startup",
     ],
   },
 ];
@@ -141,7 +167,7 @@ export default function School() {
               className="flex flex-col md:flex-row  md:items-center bg-secondary md:p-6 p-2 shrink-0"
             >
               <span className="w-8 h-8 rounded-md font-mono font-bold text-2xl md:text-4xl flex items-center gap-3">
-                {index+1}
+                {index + 1}
               </span>
               <span className="">
                 <h4 className=" text-xl text-primary font-semibold text-gold-400">
@@ -154,39 +180,45 @@ export default function School() {
         </motion.div>
       </motion.section>
 
-{/* Financial Aid */}
-<motion.section className="z-30 h-full py-5 md:py-10 md:px-20 bg-gradient-to-b from-black via-transparent to-secondary">
-  <motion.div className="grid md:grid-cols-3 gap-6 px-6">
-    <motion.span>
-      <motion.h2
-        initial={{ opacity: 0, y: -20 }}
-        whileInView={{ opacity: 1, y: 0 }}
-        transition={{ duration: 1 }}
-        className="text-2xl md:text-4xl font-bold text-primary text-center md:text-start"
-      >
-        Financial Assistance
-      </motion.h2>
-      <motion.p className="text-sm md:text-base text-center md:text-start mt-2">
-        At XCUXION School, we believe financial constraints should never be a
-        barrier to innovation. Our financial aid options ensure talented individuals
-        can access world-class tech education, regardless of their background.
-      </motion.p>
-    </motion.span>
-
-    {aid.map((category, index) => (
-      <motion.div
-        key={index}
-        initial={{ opacity: 0, y: 20 }}
-        whileInView={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.8, delay: index * 0.2 }}
-        className="bg-black p-5 md:p-6 rounded-xl shadow-lg w-full"
-      >
-        <AidCard {...category} />
-      </motion.div>
-    ))}
-  </motion.div>
-</motion.section>
-
+      {/* Financial Aid */}
+      <motion.section className="w-full z-30 h-full py-5 md:py-10 md:px-20 px-5 bg-gradient-to-b from-black via-transparent to-secondary">
+        <motion.div className="flex flex-col">
+          <motion.span className="md:w-3/5 mx-auto text-center mb-3 md:mb-6">
+            <motion.h2
+              initial={{ opacity: 0, y: -20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              transition={{ duration: 1 }}
+              className="text-2xl md:text-4xl font-bold text-primary "
+            >
+              Financial Assistance
+            </motion.h2>
+            <motion.p
+              initial={{ opacity: 0, y: -20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              transition={{ duration: 1 }}
+              className="text-sm md:text-base mt-2"
+            >
+              At XCUXION School, we believe financial constraints should never
+              be a barrier to innovation. Our financial aid options ensure
+              talented individuals can access world-class tech education,
+              regardless of their background.
+            </motion.p>
+          </motion.span>
+          <motion.span className="grid md:grid-cols-3 gap-3 md:gap-6 ">
+            {aid.map((category, index) => (
+              <motion.div
+                key={index}
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.8, delay: index * 0.2 }}
+                className="bg-secondary p-5 md:p-6 rounded-xl shadow-lg w-full"
+              >
+                <AidCard {...category} />
+              </motion.div>
+            ))}
+          </motion.span>
+        </motion.div>
+      </motion.section>
 
       {/* Footer */}
       <Footer />
