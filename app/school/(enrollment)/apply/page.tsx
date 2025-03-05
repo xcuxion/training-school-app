@@ -318,6 +318,11 @@ const ApplicationPage = () => {
                         University of Ghana - Legon
                       </SelectItem>
                       <SelectItem value="ashesi">Ashesi University</SelectItem>
+                      <SelectItem value="ucc">Universit of Cape Coast</SelectItem>
+                      <SelectItem value="uds">University of Develomental Studies</SelectItem>
+                      <SelectItem value="uhas">University of Health & Allied Sciences</SelectItem>
+                      <SelectItem value="aamusted">AAMUSTED</SelectItem>
+                      <SelectItem value="uew">University of Winneba</SelectItem>
                       <SelectItem value="none">Not a student</SelectItem>
                     </SelectContent>
                   </Select>

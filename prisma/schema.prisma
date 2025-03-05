@@ -204,6 +204,11 @@ enum School {
   knust
   ug
   ashesi
+  uhas
+  uds
+  ucc
+  uew
+  aamusted
   none
 }
 
