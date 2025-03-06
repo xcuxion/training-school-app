@@ -56,13 +56,10 @@ export const SendCredentials = ({
               To keep your account secure, please don&apos;t share this email
               with anyone. For more tips on keeping your account safe, visit our
               Help Center{" "}
-              <Link style={anchor} href="https://slack.com/help">
+              <Link style={anchor} href="">
                 more security tips.
               </Link>
             </Text>
-            <Text style={text}>Thank you,</Text>
-            <Text>The Xcuxion Team</Text>
-            <Text>Accra, Ghana</Text>
           </Section>
         </Container>
       </Body>

@@ -73,56 +73,9 @@ const AdmittedMessage = () => {
               alt="Xcuxion Logo"
               style={tagBase}
             />
-            <Text>The Xcuxion Team</Text>
-            <Text>Accra, Ghana</Text>
           </Section>
 
-          <Section>
-                    <Link
-                      style={footerLink}
-                      href="https://slackhq.com"
-                      target="_blank"
-                      rel="noopener noreferrer"
-                    >
-                      Our blog
-                    </Link>
-                    &nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;
-                    <Link
-                      style={footerLink}
-                      href="https://slack.com/legal"
-                      target="_blank"
-                      rel="noopener noreferrer"
-                    >
-                      Policies
-                    </Link>
-                    &nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;
-                    <Link
-                      style={footerLink}
-                      href="https://slack.com/help"
-                      target="_blank"
-                      rel="noopener noreferrer"
-                    >
-                      Help center
-                    </Link>
-                    &nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;
-                    <Link
-                      style={footerLink}
-                      href="https://slack.com/community"
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      data-auth="NotApplicable"
-                      data-linkindex="6"
-                    >
-                      Slack Community
-                    </Link>
-                    <Text style={footerText}>
-                      ©2022 XCUXION Technologies, LLC, All rights reserved. <br />
-                      500 Howard Street, San Francisco, Kumasi, Ghana
-                      <br />
-                      <br />
-                      All rights reserved.
-                    </Text>
-                  </Section>
+
         </Container>
       </Body>
     </Html>

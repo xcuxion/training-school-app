@@ -72,13 +72,13 @@ export const XcuxionConfirmEmail = ({
                 alt="Xcuxion Logo"
                 style={tagBase}
               />
-                        <Text style={footerText}>
-            ©2025 XCUXION , All rights reserved. <br />
-            Ghana
-            <br />
-            <br />
-            All rights reserved.
-          </Text>
+              <Text style={footerText}>
+                ©2025 XCUXION , All rights reserved. <br />
+                Ghana
+                <br />
+                <br />
+                All rights reserved.
+              </Text>
             </Column>
           </Row>
         </Section>
@@ -129,20 +129,19 @@ const main = {
 const container = {
   margin: "0 auto",
   padding: "0px 20px",
-  border: "1px solid whitesmoke"
+  border: "1px solid whitesmoke",
 };
 
 const logoContainer = {
   marginTop: "10px",
   display: "flex",
   alignItems: "center",
-  justifyContent: "center"
+  justifyContent: "center",
 };
 
 const tag = {
   width: "150px",
   height: "80px",
-
 };
 const tagBase = {
   width: "150px",

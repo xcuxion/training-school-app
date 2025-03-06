@@ -77,13 +77,6 @@ const ApplicationSubmitted = ({ userFirstname }: { userFirstname: string }) => (
             alt="Xcuxion Logo"
             style={tagBase}
           />
-          <Text style={footerText}>
-            ©2022 XCUXION Technologies, LLC, All rights reserved. <br />
-            500 Howard Street, San Francisco, Kumasi, Ghana
-            <br />
-            <br />
-            All rights reserved.
-          </Text>
         </Section>
       </Container>
     </Body>
