@@ -2,53 +2,40 @@ import { cookies } from "next/headers";
 import { NextRequest, NextResponse } from "next/server";
 import { decrypt } from "./lib/session";
 
-const protectedRoutes = ["/school/learning-spaace", "/school/admission-portal", "/administrator-office", "/dashboard"]
-const publicRoutes = ["/", "/guild", "/school", "/center", ""]
+const protectedRoutes = [
+  "/school/learning-spaace",
+  "/school/admission-portal",
+  // "/school/administrator-office/admissions",
+  "/school/administrator-office/overview",
+  "/school/administrator-office/human-resource",
+  "/school/administrator-office/resources",
+  "/school/administrator-office/support",
+  "/dashboard",
+];
+const publicRoutes = [
+  "/",
+  "/guild",
+  "/school",
+  "/center",
+  "/school/facilitator",
+  "/school/administrator-office",
+];
 
-
-export default async function middleware(req: NextRequest){
+export default async function middleware(req: NextRequest) {
   const path = req.nextUrl.pathname;
   const isProtectedRoute = protectedRoutes.includes(path);
-  const isPublicRoute = publicRoutes.includes(path)
+  const isPublicRoute = publicRoutes.includes(path);
 
-  const cookie = cookies().get('session')?.value;
+  const cookie = cookies().get("session")?.value;
   const session = await decrypt();
 
-  if(isProtectedRoute && !session?.userId){
-    return NextResponse.redirect(new URL("/", req.nextUrl))
+  if (isProtectedRoute && !session?.userId) {
+    return NextResponse.redirect(new URL("/", req.nextUrl));
   }
 
-  if (isPublicRoute && session?.userId ) {
-    return NextResponse.redirect(new URL("/dashboard", req.nextUrl))
+  if (isPublicRoute && session?.userId) {
+    return NextResponse.redirect(new URL("/dashboard", req.nextUrl));
   }
 
-  return NextResponse.next()
+  return NextResponse.next();
 }
-
-
-// import { cookies } from "next/headers";
-// import { NextRequest, NextResponse } from "next/server";
-// import { decrypt } from "./lib/session";
-
-// const protectedRoutes = ["/school/learning-spaace", "/school/admission-portal", "/administrator-office", "/dashboard"]
-// const publicRoutes = ["/", "/school/apply", "/guild", "/school", "/center"]
-
-// export default async function middleware(req: NextRequest){
-//   const path = req.nextUrl.pathname;
-//   const isProtectedRoute = protectedRoutes.includes(path);
-//   const isPublicRoute = publicRoutes.includes(path)
-
-//   const cookie = cookies().get('session')?.value;
-//   const session = await decrypt();
-
-//   if(isProtectedRoute && !session?.userId){
-//     return NextResponse.redirect(new URL("/", req.nextUrl))
-//   }
-
-//   if (isPublicRoute && session?.userId ) {
-//     return NextResponse.redirect(new URL("/dashboard", req.nextUrl))
-//   }
-
-//   return NextResponse.next()
-// }
-

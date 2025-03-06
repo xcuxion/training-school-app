@@ -241,16 +241,16 @@ interface ICourse {
 const CourseCard = ({ title, description, topics, index }: ICourse) => {
   return (
     <motion.div
-      className="p-6 bg-white rounded-2xl shadow-md hover:shadow-lg transition-all flex flex-col gap-3"
+      className="p-6 bg-secondary rounded-2xl shadow-md hover:shadow-lg transition-all flex flex-col gap-3"
       whileHover={{ scale: 1.05 }}
       initial={{ opacity: 0, y: 20 }}
       whileInView={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.6, delay: index * 0.15 }}
     >
-      <h2 className="text-xl font-semibold text-gray-900">{title}</h2>
-      <p className="text-gray-600 text-sm">{description}</p>
-      <div className="text-xs text-gray-500 font-medium mt-2">
-        <span className="font-bold text-gray-700">Topics: </span>
+      <h2 className="text-xl font-semibold text-white">{title}</h2>
+      <p className="text-white text-sm md:text-base">{description}</p>
+      <div className="text-sm text-white font-medium mt-2">
+        <span className="font-bold text-white">Topics: </span>
         {topics.join(", ")}
       </div>
     </motion.div>
@@ -260,16 +260,8 @@ const CourseCard = ({ title, description, topics, index }: ICourse) => {
 const CoursesSection = () => {
   return (
     <div className="py-12 px-6 max-w-5xl mx-auto">
-      <motion.h1
-        className="text-3xl font-bold text-center text-gray-900 mb-8"
-        initial={{ opacity: 0, y: -10 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.5 }}
-      >
-        Explore Our Programs
-      </motion.h1>
       <motion.p
-        className="text-center text-gray-600 max-w-2xl mx-auto mb-10"
+        className="text-center text-white max-w-2xl mx-auto mb-10"
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         transition={{ duration: 0.6, delay: 0.3 }}

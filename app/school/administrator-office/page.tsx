@@ -7,6 +7,7 @@ import { useAdminStore } from "@/store/admin-store";
 import { useRouter } from "next/navigation";
 import React, { useEffect, useRef, useState } from "react";
 import { useFormState } from "react-dom";
+import { toast } from "sonner";
 
 const AdminLoginPage = () => {
   const [formState, formAction] = useFormState(login_admin, undefined);
@@ -14,13 +15,13 @@ const AdminLoginPage = () => {
   const [password, setPassword] = useState<string>("");
   const { setAdmin } = useAdminStore();
   const formRef = useRef<HTMLFormElement>(null);
-  const router = useRouter()
+  const router = useRouter();
   useEffect(() => {
     if (formState?.success && formState?.data) {
       formRef.current?.reset();
       setAdmin(formState?.data);
-
-router.push("/school/administrator-office/confirmation")
+      toast.message(formState?.message)
+      router.push("/school/administrator-office/confirmation");
     }
   }, [formState, router]);
 
