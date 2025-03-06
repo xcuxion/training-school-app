@@ -144,10 +144,10 @@ export async function send_verification_email(email: string) {
     }
 
     // Check if an OTP was requested within the last 5 minutes
-    const fiveMinutesAgo = new Date(Date.now() - 5 * 60 * 1000);
-    if (admin.otpRequestedAt && admin.otpRequestedAt > fiveMinutesAgo) {
-      return { message: "Please wait before requesting a new code." };
-    }
+    // const fiveMinutesAgo = new Date(Date.now() - (5 * 60 * 1000));
+    // if (admin.otpRequestedAt && admin.otpRequestedAt > fiveMinutesAgo) {
+    //   return { message: "Please wait before requesting a new code." };
+    // }
 
     // Generate a new verification code
     const verificationCode = await generateCode(admin.id);
@@ -158,7 +158,7 @@ export async function send_verification_email(email: string) {
     // Update the timestamp for the latest OTP request
     await prisma.schoolAdmin.update({
       where: { email },
-      data: { otpRequestedAt: new Date() },
+      data: { otpRequestedAt: new Date(), verificationCode: verificationCode },
     });
 
     // Send the email

@@ -241,7 +241,7 @@ interface ICourse {
 const CourseCard = ({ title, description, topics, index }: ICourse) => {
   return (
     <motion.div
-      className="p-6 bg-secondary rounded-2xl shadow-md hover:shadow-lg transition-all flex flex-col gap-3"
+      className="p-3 md:p-6 bg-secondary rounded-2xl shadow-md hover:shadow-lg transition-all flex flex-col gap-3"
       whileHover={{ scale: 1.05 }}
       initial={{ opacity: 0, y: 20 }}
       whileInView={{ opacity: 1, y: 0 }}
@@ -249,7 +249,7 @@ const CourseCard = ({ title, description, topics, index }: ICourse) => {
     >
       <h2 className="text-xl font-semibold text-white">{title}</h2>
       <p className="text-white text-sm md:text-base">{description}</p>
-      <div className="text-sm text-white font-medium mt-2">
+      <div className="text-sm text-gray-300 font-medium mt-2">
         <span className="font-bold text-white">Topics: </span>
         {topics.join(", ")}
       </div>
@@ -259,7 +259,7 @@ const CourseCard = ({ title, description, topics, index }: ICourse) => {
 
 const CoursesSection = () => {
   return (
-    <div className="py-12 px-6 max-w-5xl mx-auto">
+    <div className="py-12 md:px-6 max-w-5xl mx-auto">
       <motion.p
         className="text-center text-white max-w-2xl mx-auto mb-10"
         initial={{ opacity: 0 }}
@@ -268,7 +268,7 @@ const CoursesSection = () => {
       >
         Gain hands-on experience with our industry-focused courses designed to equip you with in-demand skills.
       </motion.p>
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-3 md:gap-6">
         {courses.map((course) => (
           <CourseCard key={course.index} {...course} />
         ))}

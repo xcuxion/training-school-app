@@ -202,7 +202,7 @@ const ApplicationPage = () => {
             </span>
           </div>
 
-          <div className="grid md:grid-cols-2 md:gap-x-6">
+          <div className="grid md:grid-cols-2 gap-y-2 md:gap-y-0 md:gap-x-6">
             <span className="">
               <Label>Email</Label>
               <Input
@@ -236,7 +236,7 @@ const ApplicationPage = () => {
           </div>
         </section>
         <section className="bg-secondary  border border-outline rounded-md p-4 md:my-10 space-y-3">
-          <div className="grid sm:grid-cols-1 md:grid-cols-2  md:gap-x-6 ">
+          <div className="grid sm:grid-cols-1 md:grid-cols-2 gap-y-2 md:gap-y-0 md:gap-x-6 ">
             <span className="col-span-2 md:col-span-1 ">
               <Label>Select Batch</Label>
               <Select
