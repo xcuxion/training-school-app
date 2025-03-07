@@ -6,6 +6,8 @@ import { Input } from "@/components/ui/input";
 import SubmitButton from "@/components/submit-button";
 import { FaCopyright } from "react-icons/fa";
 import { motion } from "framer-motion";
+import { useFormState } from "react-dom";
+import { subscribeToNewsletter } from "@/lib/actions/user.action";
 
 const redirects = [
   {
@@ -23,6 +25,7 @@ const redirects = [
 ];
 
 const Footer = () => {
+  const [state, action] = useFormState(subscribeToNewsletter, undefined)
   return (
     <motion.footer className="bg-secondary px-5 md:px-20 py-5 md:py-10 flex flex-col md:flex-row md:items-center">
       <div className="grid md:grid-cols-2">
@@ -32,7 +35,7 @@ const Footer = () => {
             Subscribe to our newsletter for updates, news, and exclusive
             content.
           </p>
-          <form className="grid grid-cols-4 md:gap-2 mt-4">
+          <form action={action} className="grid grid-cols-4 md:gap-2 mt-4">
             <Input
               className="col-span-3"
               placeholder="Email address"

@@ -11,8 +11,6 @@ import {
   Section,
   Text,
 } from "@react-email/components";
-import { flexRender } from "@tanstack/react-table";
-import Image from "next/image";
 import * as React from "react";
 
 const baseUrl = process.env.VERCEL_URL
@@ -74,8 +72,6 @@ const AdmittedMessage = () => {
               style={tagBase}
             />
           </Section>
-
-
         </Container>
       </Body>
     </Html>
@@ -108,7 +104,7 @@ const tag = {
 const tagBase = {
   width: "80px",
   height: "50px",
-  marginTop:"20px",
+  marginTop: "20px",
 };
 const congratImg = {
   width: "500px",
@@ -140,7 +136,7 @@ const paragraph = {
 const footerLink = {
   color: "#1A56DB",
   textDecoration: "underline",
-  marginLeft:"30px",
+  marginLeft: "30px",
 };
 
 const footerText = {
@@ -149,6 +145,5 @@ const footerText = {
   lineHeight: "15px",
   textAlign: "left" as const,
   marginBottom: "50px",
-  marginLeft:"30px",
-
+  marginLeft: "30px",
 };

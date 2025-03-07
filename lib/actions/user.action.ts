@@ -10,6 +10,9 @@ import { signIn } from "../auth";
 
 const resend = new Resend(process.env.RESEND_KEY);
 const prisma = new PrismaClient();
+const subscribeSchema = z.object({
+  email: z.string().email({ message: "Invalid email address" }).trim(),
+});
 
 const loginSchema = z.object({
   email: z.string().email({ message: "Invalid email address" }).trim(),
@@ -25,7 +28,9 @@ const registerSchema = z.object({
     .string()
     .min(8, { message: "Password must be at least 8 characters" })
     .trim(),
-  interest: z.enum(["school", "guild", "startupcenter"], {message: "Select your interested faction"}),
+  interest: z.enum(["school", "guild", "startupcenter"], {
+    message: "Select your interested faction",
+  }),
 });
 
 const enquirySchema = z.object({
@@ -65,7 +70,7 @@ export async function googleAuth() {
     await signIn("google");
   } catch (error) {
     // console.log(error);
-    return {message: "Failed to authenticate"}
+    return { message: "Failed to authenticate" };
   }
 }
 
@@ -148,9 +153,11 @@ export default async function makeEnquiry(
     }
     const { email, name, question } = result.data;
 
-    const newInquiry = await prisma.enquiry.create({ data: { email, name, question } });
+    const newInquiry = await prisma.enquiry.create({
+      data: { email, name, question },
+    });
     // console.log(newInquiry)
-    return {success: true, message: "Inquiry Sent Successfully"}
+    return { success: true, message: "Inquiry Sent Successfully" };
   } catch (error) {
     handleError(error);
   }
@@ -165,6 +172,30 @@ export type FormState = {
   message: string;
   errors?: Record<keyof Fields, string> | undefined;
 };
+
+export async function subscribeToNewsletter(
+  prevState: unknown,
+  formData: FormData
+) {
+  const result = subscribeSchema.safeParse(Object.fromEntries(formData));
+  if (!result.success) {
+    return {
+      errors: result.error.flatten().fieldErrors,
+    };
+  }
+
+  const { email } = result?.data;
+  const existingSubscriber = await prisma.emailSubscriber.findFirst({
+    where: { email },
+  });
+  if (existingSubscriber) {
+    return { message: "You are already subscribed" };
+  }
+  const newSubscriber = await prisma.emailSubscriber.create({
+    data: { email },
+  });
+  return { message: "Subscribed successfully" };
+}
 
 export async function login(prevState: unknown, formData: FormData) {
   try {
@@ -237,7 +268,7 @@ export async function register(prevState: unknown, formData: FormData) {
     });
     if (existingUser) {
       return {
-        message: `User already exists`
+        message: `User already exists`,
       };
     }
 
