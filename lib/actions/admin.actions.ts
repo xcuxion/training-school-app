@@ -6,6 +6,8 @@ import { createSession } from "../session";
 import { Resend } from "resend";
 import * as bcrypt from "bcrypt";
 import XcuxionConfirmEmail from "@/emails/confirm.email";
+import { sendMail } from "./user.action";
+import BatchInformation from "@/emails/batch-information";
 
 const prisma = new PrismaClient();
 const resend = new Resend(process.env.RESEND_KEY);
@@ -114,6 +116,36 @@ export async function login_admin(prevState: unknown, formData: FormData) {
   }
 }
 
+export async function  sendBatchInformation() {
+  try {
+    // Fetch users from the database
+    const users = await prisma.user.findMany({
+      select: { email: true }, // Get only email addresses
+    });
+
+    console.log(users)
+
+    // const users = [{email:"1serwise@gmail.com"}, {email:"solomonannanayisi@gmail.com"}, {email:"jessicaennor@gmail.com"}, {email:"yawoffeh123@gmail.com"}, {email:"mjnuvor@gmail.com"}]
+
+    if (!users || users.length === 0) {
+      return { message: "No users found to send newsletter" };
+    }
+
+    // Prepare formData
+    const formData = new FormData();
+    formData.append("sender", "school@xcuxion.org"); // Change to your sender email
+    formData.append("receivers", users.map((user) => user.email).join(",")); // Convert array to comma-separated string
+    formData.append("subject", "XCUXION School Batch'25");
+
+    // Pass data to sendMail
+    //@ts-ignore
+    const response = await sendMail(null, formData,BatchInformation() );
+    console.log(response)
+    return response;
+  } catch (error) {
+    return { success: false, message: "Failed to send newsletter" };
+  }
+}
 export async function generateCode(id: string) {
   try {
     const admin = await prisma.schoolAdmin.findFirst({ where: { id: id } });

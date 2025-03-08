@@ -16,38 +16,40 @@ const baseUrl = process.env.VERCEL_URL
   ? `https://${process.env.VERCEL_URL}`
   : "";
 
-const XCUXIONInvitation = () => {
+const BatchInformation = () => {
   return (
     <Html>
       <Head />
-      <Preview>Invitation to Join XCUXION School Batch'25</Preview>
+      <Preview>XCUXION School Batch'25</Preview>
       <Body style={styles.main}>
         <Container style={styles.container}>
           <Section style={styles.section}>
-            <Text style={styles.heading}>
-              XCUXION School Batch'25
+            <Text style={styles.heading}>XCUXION School Batch'25</Text>
+            <Text style={styles.paragraph}>
+              Please find attached an overview of the XCUXION School Batch '25
+              training program, outlining the structure and key details.{" "}
             </Text>
             <Img
-              src={`${baseUrl}/static/batch25info.jpeg`}
-              alt="XCUXION Batch'25 Roadmap"
+              src={`https://res.cloudinary.com/dskdr2jxd/image/upload/v1741379214/exe_black_cnonnq.png`}
+              alt="Logo"
               width="600"
               style={styles.image}
             />
             <Hr />
             <Text style={styles.subheading}>
-              Join Our Introductory Webinar
+              Anticipate!
             </Text>
             <Text style={styles.paragraph}>
-              Gain insights into the <b>XCUXION School Batch'25 roadmap</b> ,
+              Schedule a date with us to gain insights into the <b>XCUXION School Batch'25 </b>program,
               meet our team, and learn how we help individuals turn ideas into
               thriving startups.
             </Text>
             <Text style={styles.details}>
-              Date & Time: Saturday 22nd March, 2025 <br/> Location: Online
+              Date & Time: Saturday 22nd March, 2025 @ 6:00 p.m <br/> Location: Google Meet
             </Text>
-            <Button href="https://xcuxion.org/school/webinars" style={styles.button}>
+            {/* <Button href="https://xcuxion.org/school/webinars" style={styles.button}>
               Register for the Webinar
-            </Button>
+            </Button> */}
             <Hr />
             <Text style={styles.footer}>
               For inquiries, send us a message via{" "}
@@ -62,7 +64,7 @@ const XCUXIONInvitation = () => {
   );
 };
 
-export default XCUXIONInvitation;
+export default BatchInformation;
 
 // Styles
 const styles = {
@@ -78,7 +80,7 @@ const styles = {
     boxShadow: "0 2px 8px rgba(0, 0, 0, 0.1)",
   },
   section: {
-    textAlign: "center" as "center",
+    // textAlign: "center" as "center",
   },
   heading: {
     fontSize: "24px",
@@ -99,14 +101,15 @@ const styles = {
   },
   details: {
     fontSize: "16px",
-    fontWeight: "500",
+    fontWeight: "900",
     color: "#555",
     lineHeight: "1.6",
   },
   image: {
-    maxWidth: "100%",
+    maxWidth: "30%",
     borderRadius: "8px",
     margin: "20px 0",
+    textAlign: "center" as const,
   },
   button: {
     backgroundColor: "#0056b3",

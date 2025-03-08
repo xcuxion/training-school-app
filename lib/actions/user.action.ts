@@ -5,7 +5,7 @@ import * as bcrypt from "bcrypt";
 import { PrismaClient } from "@prisma/client";
 import { createSession, deleteSession } from "../session";
 import { Resend } from "resend";
-import { ReactElement } from "react";
+import { ReactElement, ReactNode } from "react";
 import { signIn } from "../auth";
 
 const resend = new Resend(process.env.RESEND_KEY);
@@ -77,7 +77,7 @@ export async function googleAuth() {
 export async function sendMail(
   prevState: unknown,
   formData: FormData,
-  EmailComponent: ReactElement // Accept React component separately
+  EmailComponent: any // Accept React component separately
 ): Promise<SendMailResponse> {
   try {
     // Parse and validate the form data
@@ -97,7 +97,7 @@ export async function sendMail(
     const result = mailSchema.safeParse(processedData);
 
     if (!result.success) {
-      // console.error("Validation errors:", result.error.flatten().fieldErrors);
+      console.error("Validation errors:", result.error.flatten().fieldErrors);
       return {
         success: false,
         errors: result.error.flatten().fieldErrors,
@@ -111,6 +111,12 @@ export async function sendMail(
       from: sender,
       to: receivers,
       subject: subject,
+      attachments: [
+        {
+          filename: "xcuxion-batch25.jpg",
+          path: "https://res.cloudinary.com/dskdr2jxd/image/upload/v1741377530/batch25info_zturve.jpg"
+        }
+      ],
       react: content, // Pass the React component directly
     });
 

@@ -2,7 +2,6 @@
 import { z } from "zod";
 import { handleError } from "../utils";
 import { PrismaClient } from "@prisma/client";
-import * as bcrypt from "bcrypt";
 import { Resend } from "resend";
 import { createSession } from "../session";
 import ApplicationSubmitted from "@/emails/application-received";
