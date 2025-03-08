@@ -43,7 +43,7 @@ const ApplicationSubmitted = ({ userFirstname }: { userFirstname: string }) => (
             - <strong>Access Your Admission Portal:</strong> Review your
             application status and track updates.
             <br />
-            <Link style={styles.link} href="/dashboard">
+            <Link style={styles.link} href="https://xcuxion.org/dashboard">
               Visit Your Admission Portal
             </Link>
           </Text>
@@ -51,7 +51,7 @@ const ApplicationSubmitted = ({ userFirstname }: { userFirstname: string }) => (
             - <strong>Explore Financial Aid Options:</strong> Learn about
             available support and funding opportunities.
             <br />
-            <Link style={styles.link} href="https://xcuxion.org/school">
+            <Link style={styles.link} href="https://xcuxion.org/school/#finance">
               View Financial Aid Details
             </Link>
           </Text>
@@ -80,7 +80,7 @@ const styles = {
   container: {
     backgroundColor: "#ffffff",
     margin: "20px auto",
-    padding: "20px 0 48px",
+    padding: "20px",
     boxShadow: "0px 4px 10px rgba(0, 0, 0, 0.1)",
   },
   box: {
