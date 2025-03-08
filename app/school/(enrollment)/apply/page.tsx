@@ -83,7 +83,7 @@ const ApplicationPage = () => {
 
       setApplicant(state?.data);
 
-      router.push("/school/admission-portal");
+      router.push("/dashboard");
     } else if (state?.noAccount) {
       setOpenRegister(true);
     }

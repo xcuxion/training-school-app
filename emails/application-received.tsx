@@ -43,7 +43,7 @@ const ApplicationSubmitted = ({ userFirstname }: { userFirstname: string }) => (
             - <strong>Access Your Admission Portal:</strong> Review your
             application status and track updates.
             <br />
-            <Link style={styles.link} href="/school/admission-portal">
+            <Link style={styles.link} href="/dashboard">
               Visit Your Admission Portal
             </Link>
           </Text>

@@ -201,7 +201,7 @@ async function generateReferralCode(userId: string) {
     throw new Error("User not found");
   }
 
-  const referralCode = `XCx-${user.id.substring(0, 4).toUpperCase()}`;
+  const referralCode = `XCX-${user.id.substring(0, 4).toUpperCase()}`;
   console.log(referralCode);
   return referralCode;
 }
