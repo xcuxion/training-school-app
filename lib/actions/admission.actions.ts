@@ -17,7 +17,19 @@ const newApplicationSchema = z.object({
   country: z.string().refine((val) => val === "ghana", {
     message: "Select your country of residence",
   }),
-  school: z.enum(["knust", "ug", "ashesi", "none"]).optional(),
+  school: z
+    .enum([
+      "knust",
+      "ug",
+      "ashesi",
+      "none",
+      "uew",
+      "ucc",
+      "aamusted",
+      "uds",
+      "uhas",
+    ])
+    .optional(),
   batch: z.enum(["batch25"], { message: "Select the batch of interest" }),
   track: z.enum(["web", "mobile", "dataanalysis", "backend"], {
     message: "Select a track",
@@ -45,7 +57,7 @@ const newApplicationSchema = z.object({
   scholarship: z.enum(["yes", "no"], { message: "Select an option" }),
   student: z.enum(["yes", "no"], { message: "Select an option" }),
   laptop: z.enum(["yes", "no"], { message: "Select an option" }),
-  referralCode: z.string().trim().min(11).optional(),
+  referralCode: z.string().trim().optional(),
 });
 
 const editApplicationSchema = z.object({
@@ -100,14 +112,9 @@ const admissionSchema = z.object({
 
 export async function new_application(prevState: unknown, formData: FormData) {
   try {
-    // console.log(formData);
     const result = newApplicationSchema.safeParse(Object.fromEntries(formData));
 
     if (!result.success) {
-      // console.log(
-      //   "Validation failed with errors:",
-      //   result.error.flatten().fieldErrors
-      // );
       return {
         errors: result.error.flatten().fieldErrors,
       };
@@ -130,48 +137,54 @@ export async function new_application(prevState: unknown, formData: FormData) {
         laptop: result.data.laptop === "yes" ? true : false,
         scholarship: result.data.scholarship === "yes" ? true : false,
         student: result.data.scholarship === "yes" ? true : false,
+        referralCode: await generateReferralCode(user.id),
       },
     });
 
-    if (result.data.referralCode) {
-      const referrer = await prisma.user.findUnique({
-        where: { refereeCode: result.data.referralCode },
+    if (
+      result.data.referralCode !== "") {
+      const personReferring = await prisma.applicant.findUnique({
+        where: { referralCode: result.data.referralCode },
       });
-
-      if (referrer) {
-        await prisma.user.update({
-          where: { id: referrer.id },
-          data: {
-            referredApplicants: {
-              connect: { id: applicant.id }, // Connect the applicant
-            },
-          },
-        });
-      } else {
+      if (!personReferring) {
         return { message: "Invalid referral code" };
       }
+      await prisma.applicant.update({
+        where: { id: personReferring.id },
+        data: {
+          referredApplicants: {
+            connect: {
+              id: applicant.id,
+            },
+          },
+        },
+      });
     }
-    
     await prisma.user.update({
-      where: { id: user.id }, // Ensure we target the correct user
-      data: { role: "applicant" }, // Update role to "applicant"
+      where: { id: user.id },
+      data: { role: "applicant" },
     });
-    // console.log(applicant);
+
     await createSession(user.id);
 
     const { createdAt, ...profileWithoutTimestamps } = applicant;
     try {
-      const response = await resend.emails.send({
+      await resend.emails.send({
         from: "admission@xcuxion.org",
         to: result.data.email ? result.data.email : user.email,
         subject: "New Application Received",
+        attachments: [
+          {
+            filename: "xcuxion-batch25.jpg",
+            path: "https://res.cloudinary.com/dskdr2jxd/image/upload/v1741377530/batch25info_zturve.jpg",
+          },
+        ],
         react: ApplicationSubmitted({ userFirstname: result.data.fname }),
       });
-      // console.log(response);
+      
     } catch (error) {
-      // console.log(error);
+      console.log(error);
     } finally {
-      // console.log(result);
       return { success: result.success, data: profileWithoutTimestamps };
     }
   } catch (error) {
@@ -179,6 +192,40 @@ export async function new_application(prevState: unknown, formData: FormData) {
 
     handleError(error);
   }
+}
+
+async function generateReferralCode(userId: string) {
+  const user = await prisma.user.findUnique({ where: { id: userId } });
+
+  if (!user) {
+    throw new Error("User not found");
+  }
+
+  const referralCode = `XCx-${user.id.substring(0, 4).toUpperCase()}`;
+  console.log(referralCode);
+  return referralCode;
+}
+
+async function getReferrals(userId: string) {
+  return await prisma.applicant.findUnique({
+    where: { id: userId },
+    include: { referredApplicants: true },
+  });
+}
+
+async function getReferralDiscount(userId: string) {
+  const user = await prisma.applicant.findUnique({
+    where: { id: userId },
+    include: { referredApplicants: true },
+  });
+
+  const numReferrals = user?.referredApplicants.length || 0;
+
+  if (numReferrals >= 5) return "50% discount";
+  if (numReferrals >= 3) return "30% discount";
+  if (numReferrals >= 1) return "10% discount";
+
+  return "No discount";
 }
 
 export async function fetch_applicant_data(id: string) {
@@ -283,6 +330,28 @@ export async function admit_applicant(
     return { message: "Error admitting applicant." };
   }
 }
+export async function reject_applicant(id: string) {
+  try {
+    // Step 1: Fetch the applicant's data
+    const applicant = await prisma.applicant.findUnique({
+      where: { id },
+    });
+
+    if (!applicant) {
+      return { message: "Applicant not found." };
+    }
+
+    // Step 2: Update the applicant's status to "admitted"
+    await prisma.applicant.update({
+      where: { id },
+      data: { status: "rejected" },
+    });
+
+    return { message: "Application was rejected" };
+  } catch (error) {
+    handleError(error);
+  }
+}
 
 function generateStudentRef(
   name: string,
@@ -358,28 +427,5 @@ export async function accept_admission(id: string) {
     return { message: "Application acceptance was successful" };
   } catch (error) {
     return { message: "Error accepting admission" };
-  }
-}
-
-export async function reject_applicant(id: string) {
-  try {
-    // Step 1: Fetch the applicant's data
-    const applicant = await prisma.applicant.findUnique({
-      where: { id },
-    });
-
-    if (!applicant) {
-      return { message: "Applicant not found." };
-    }
-
-    // Step 2: Update the applicant's status to "admitted"
-    await prisma.applicant.update({
-      where: { id },
-      data: { status: "rejected" },
-    });
-
-    return { message: "Application was rejected" };
-  } catch (error) {
-    handleError(error);
   }
 }

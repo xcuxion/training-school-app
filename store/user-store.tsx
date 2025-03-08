@@ -1,10 +1,12 @@
+
 "use client";
 import { create } from "zustand";
+import { persist, createJSONStorage } from "zustand/middleware";
 
 export interface IUser {
   id: string;
   email: string;
-  role: "applicant" | "admin" | "facilitator" | "student" | "visitor" | null ;
+  role: "applicant" | "admin" | "facilitator" | "student" | "visitor" | null;
 }
 
 interface UserStore {
@@ -14,19 +16,17 @@ interface UserStore {
   logoutUser: () => void;
 }
 
-export const useUserStore = create<UserStore>((set) => ({
-  user: null,
-  setUser: (user) => {
-    // console.log("State Before Update:", useUserStore.getState().user); // ✅ Debugging log
-    set((state) => ({ ...state, user }));
-    // console.log("State After Update:", useUserStore.getState().user); // ✅ Debugging log
-  },
-  logoutUser: () => {
-    // console.log("State Before logout:", useUserStore.getState().user); // ✅ Debugging log
-    set(() => ({ user: null }));
-    // console.log("State After logout:", useUserStore.getState().user); // ✅ Debugging log
-  },
-  updateUser: (partialUser) => set((state)=>({
-    user: state.user ? {...state.user, ...partialUser} : null
-  }))
-}));
+export const useUserStore = create<UserStore>()(
+  persist(
+    (set) => ({
+      user: null,
+      setUser: (user) => set({ user }),
+      updateUser: (partialUser) =>
+        set((state) => ({
+          user: state.user ? { ...state.user, ...partialUser } : null,
+        })),
+      logoutUser: () => set({ user: null }),
+    }),
+    { name: "user-storage", storage: createJSONStorage(() => localStorage) }
+  )
+);

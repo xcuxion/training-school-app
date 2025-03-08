@@ -114,8 +114,8 @@ export async function sendMail(
       attachments: [
         {
           filename: "xcuxion-batch25.jpg",
-          path: "https://res.cloudinary.com/dskdr2jxd/image/upload/v1741377530/batch25info_zturve.jpg"
-        }
+          path: "https://res.cloudinary.com/dskdr2jxd/image/upload/v1741377530/batch25info_zturve.jpg",
+        },
       ],
       react: content, // Pass the React component directly
     });
@@ -144,31 +144,6 @@ export async function logOut() {
     // console.log(error);
   }
 }
-
-async function getReferrals(userId: string) {
-  return await prisma.user.findUnique({
-    where: { id: userId },
-    include: { referredApplicants: true },
-  });
-}
-
-
-async function getReferralDiscount(userId: string) {
-  const user = await prisma.user.findUnique({
-    where: { id: userId },
-    include: { referredApplicants: true },
-  });
-
-  const numReferrals = user?.referredApplicants.length || 0;
-
-  if (numReferrals >= 5) return "50% discount";
-  if (numReferrals >= 3) return "30% discount";
-  if (numReferrals >= 1) return "10% discount";
-
-  return "No discount";
-}
-
-
 
 
 export default async function makeEnquiry(
@@ -281,22 +256,6 @@ export async function login(prevState: unknown, formData: FormData) {
   }
 }
 
-async function generateReferralCode(userId: string) {
-  const user = await prisma.user.findUnique({ where: { id: userId } });
-
-  if (!user) {
-    throw new Error("User not found");
-  }
-
-  // Generate a simple unique code (e.g., first part of UUID)
-  const refereeCode = `XC-${user.id.substring(0, 8).toUpperCase()}`;
-
-  return await prisma.user.update({
-    where: { id: userId },
-    data: { refereeCode },
-  });
-}
-
 
 export async function register(prevState: unknown, formData: FormData) {
   try {
@@ -329,8 +288,7 @@ export async function register(prevState: unknown, formData: FormData) {
         interest,
       },
     });
-    
-    await generateReferralCode(newUser.id)
+
     await createSession(newUser.id);
 
     const { createdAt, updatedAt, ...profileWithoutTimestamps } = newUser;

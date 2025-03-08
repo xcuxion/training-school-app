@@ -59,7 +59,7 @@ const AdmissionPortal = () => {
       }
     };
     fetchData();
-  }, [user, applicant, router]);
+  }, [user?.id]);
   
   // console.log(applicant)
   const handleChange = (e:React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
