@@ -16,67 +16,6 @@ import { logOut } from "@/lib/actions/user.action";
 import { useUserStore } from "@/store/user-store";
 
 const AdmissionPortal = () => {
-  // const { applicant } = useApplicantStore();
-  // const { user } = useUserStore();
-  // const router = useRouter();
-  // const [editOff, setEditOff] = useState(true);
-  // const { updateApplicant, logout } = useApplicantStore();
-  // const [editableData, setEditableData] = useState({
-  //   contact: applicant?.contact || "",
-  //   programme: applicant?.programme || "",
-  //   reason: applicant?.reason || "",
-  //   dob: applicant?.dob || applicant?.dob,
-  //   gender: applicant?.gender || "",
-  //   fname: applicant?.fname || "",
-  //   oname: applicant?.oname || "",
-  //   lname: applicant?.lname || "",
-  //   country: applicant?.country || "",
-  //   balance: applicant?.balance || "",
-  //   statement: applicant?.statement || ""
-  // });
-  // const handleSave = async () => {
-  //   const formData = new FormData();
-  //   Object.entries(editableData).forEach(([key, value]) => {
-  //     formData.append(key, value as string);
-  //   });
-  //   const response = await edit_application(user?.id as string, formData);
-  //   updateApplicant(response?.data!)
-  //   setEditOff(true);
-  // };
-
-  // useEffect(() => {
-  //   const fetchData = async () => {
-  //     const result = await fetch_applicant_data(user?.id as string);
-  //     if (result) {
-  //       setEditableData({
-  //         contact: result?.contact ?? "",
-  //         programme: result?.programme ?? "",
-  //         reason: result?.reason ?? "",
-  //         dob: result?.dob || new Date(),
-  //         gender: result?.gender || "",
-  //         fname: result?.fname || "",
-  //         oname: result?.oname || "",
-  //         lname: result?.lname || "",
-  //         country: result?.country || "",
-  //         balance: result?.balance || "",
-  //         statement: result?.statement || ""
-  //       });
-  //     }
-  //   };
-  //   fetchData();
-  // }, [applicant?.id]);
-
-  // const handleChange = (
-  //   e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
-  // ) => {
-  //   logout;
-  //   setEditableData({ ...editableData, [e.target.name]: e.target.value });
-  // };
-  // const handleLogOut = async () => {
-  //   logout();
-  //   await logOut();
-  //   router.push("/");
-  // };
   const { applicant, setApplicant, logoutApplicant } = useApplicantStore();
   const { user, logoutUser } = useUserStore();
   const router = useRouter();
@@ -98,6 +37,7 @@ const AdmissionPortal = () => {
   useEffect(() => {
     const fetchData = async () => {
       console.log(user, applicant)
+      if(!user) return
       const result = await fetch_applicant_data(user?.id as string);
       setApplicant(result as IApplicant)
       if (result) {

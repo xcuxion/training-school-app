@@ -45,6 +45,7 @@ const initial = {
   batch: "batch25",
   track: "",
   password: "",
+  referralCode: "",
 };
 const ApplicationPage = () => {
   const [state, action] = useFormState(new_application, undefined);
@@ -53,7 +54,26 @@ const ApplicationPage = () => {
   const router = useRouter();
   const { setApplicant } = useApplicantStore();
   const { user } = useUserStore();
+  const [countries, setCountries] = useState([]);
   const [openRegister, setOpenRegister] = useState<boolean>(false);
+  useEffect(() => {
+    // Fetch country list from REST Countries API
+    fetch("https://restcountries.com/v3.1/all")
+      .then((res) => res.json())
+      .then((data) => {
+        // Extract country names and codes
+        const countryList = data
+          .map((country: any) => ({
+            name: country.name.common,
+            code: country.cca2.toLowerCase(), // Convert to lowercase for consistency
+          }))
+          .sort((a: any, b: any) => a.name.localeCompare(b.name)); // Sort alphabetically
+
+        setCountries(countryList);
+      })
+      .catch((err) => console.error("Error fetching countries:", err));
+  }, []);
+
   useEffect(() => {
     // console.log(state);
     if (state?.success && state?.data) {
@@ -79,9 +99,12 @@ const ApplicationPage = () => {
       )}
       <div className="flex flex-col-reverse md:flex-row md:flex-between py-2 md:py-4">
         <span className="flex items-center">
-          <ArrowLeft className="w-8 h-8 cursor-pointer" onClick={()=>{
-            router.back()
-          }}/>
+          <ArrowLeft
+            className="w-8 h-8 cursor-pointer"
+            onClick={() => {
+              router.back();
+            }}
+          />
           <h1 className="text-3xl md:text-4xl font-bold">Application Form</h1>
         </span>
         <Image
@@ -182,7 +205,7 @@ const ApplicationPage = () => {
               </RadioGroup>
             </span>
             <span className="md:col-span-1">
-              <Label>Country</Label>
+              <Label>Country of Residence</Label>
               <Select
                 onValueChange={(choice) =>
                   setValue({ ...value, country: choice })
@@ -200,6 +223,35 @@ const ApplicationPage = () => {
                 <p className="text-sm text-red-500">{state.errors.country}</p>
               )}
             </span>
+            {/* <span className="md:col-span-1">
+              <Label>Country</Label>
+              <Select
+                onValueChange={(choice) =>
+                  setValue({ ...value, country: choice })
+                }
+                name="country"
+              >
+                <SelectTrigger>
+                  <SelectValue placeholder="Select" />
+                </SelectTrigger>
+                <SelectContent className="bg-secondary">
+                  {countries.length > 0 ? (
+                    countries.map((country: any) => (
+                      <SelectItem key={country.code} value={country.name}>
+                        {country.name}
+                      </SelectItem>
+                    ))
+                  ) : (
+                    <SelectItem value="null" disabled>
+                      Loading...
+                    </SelectItem>
+                  )}
+                </SelectContent>
+              </Select>
+              {state?.errors?.country && (
+                <p className="text-sm text-red-500">{state.errors.country}</p>
+              )}
+            </span> */}
           </div>
 
           <div className="grid md:grid-cols-2 gap-y-2 md:gap-y-0 md:gap-x-6">
@@ -235,7 +287,7 @@ const ApplicationPage = () => {
             </span>
           </div>
         </section>
-        <section className="bg-secondary  border border-outline rounded-md p-4 md:my-10 space-y-3">
+        <section className="bg-secondary  border border-outline rounded-md p-4 md:my-10 space-y-4">
           <div className="grid sm:grid-cols-1 md:grid-cols-2 gap-y-2 md:gap-y-0 md:gap-x-6 ">
             <span className="col-span-2 md:col-span-1 ">
               <Label>Select Batch</Label>
@@ -318,12 +370,18 @@ const ApplicationPage = () => {
                         University of Ghana - Legon
                       </SelectItem>
                       <SelectItem value="ashesi">Ashesi University</SelectItem>
-                      <SelectItem value="ucc">Universit of Cape Coast</SelectItem>
-                      <SelectItem value="uds">University of Develomental Studies</SelectItem>
-                      <SelectItem value="uhas">University of Health & Allied Sciences</SelectItem>
+                      <SelectItem value="ucc">
+                        Universit of Cape Coast
+                      </SelectItem>
+                      <SelectItem value="uds">
+                        University of Develomental Studies
+                      </SelectItem>
+                      <SelectItem value="uhas">
+                        University of Health & Allied Sciences
+                      </SelectItem>
                       <SelectItem value="aamusted">AAMUSTED</SelectItem>
                       <SelectItem value="uew">University of Winneba</SelectItem>
-                      <SelectItem value="none">Not a student</SelectItem>
+                      <SelectItem value="none">Other</SelectItem>
                     </SelectContent>
                   </Select>
 
@@ -424,6 +482,23 @@ const ApplicationPage = () => {
             </RadioGroup>
             {state?.errors?.scholarship && (
               <p className="text-sm text-red-500">{state.errors.scholarship}</p>
+            )}
+          </div>
+          <div className="">
+            <Input
+              type="text"
+              value={value.referralCode}
+              placeholder="Enter referral code (if any)"
+              name="referralCode"
+              id="referralCode"
+              onChange={(e) =>
+                setValue({ ...value, referralCode: e.target.value })
+              }
+            />
+            {state?.errors?.referralCode && (
+              <p className="text-sm text-red-500">
+                {state.errors.referralCode}
+              </p>
             )}
           </div>
         </section>{" "}
