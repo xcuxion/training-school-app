@@ -99,28 +99,18 @@ const ProspectData = ({
     <>
       <Sheet>
         <SheetTrigger>
-          <div className="hover:cursor-pointer border rounded-md p-2 bg-secondary space-y-2">
-            <div className="">
-              <h3 className="text-lg opacity-50">
+          <div className="border p-4 rounded-md">
+              <h3 className="text-lg text-start uppercase">
                 {fname} {oname && oname} {lname}
               </h3>
-              <p className="text-sm capitalize">{gender}</p>
-            </div>
-            {student && (
-              <p className="capitalize">
-                {school} - {programme}
-              </p>
-            )}
-            <div className="grid md:grid-cols-2">
-              <p className="">
-                Scholarship:{scholarship === true ? "Yes" : "No"}
-              </p>
-              <p className="">Laptop: {laptop === true ? "Yes" : "No"}</p>
+            <div className="grid grid-cols-2 text-start">
+              <p className="capitalize opacity-50">Gender: {gender}</p>
+              <p className="opacity-50">Laptop: {laptop === true ? "Yes" : "No"}</p>
             </div>
 
-            <hr />
+            <hr className="my-2" />
             {createdAt && (
-              <span className="text-xs">
+              <span className="text-start text-sm">
                 Applied on: {new Date(createdAt).toLocaleDateString()}
               </span>
             )}

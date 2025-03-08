@@ -2,7 +2,6 @@
 import { z } from "zod";
 import { handleError } from "../utils";
 import { PrismaClient } from "@prisma/client";
-import * as bcrypt from "bcrypt";
 import { Resend } from "resend";
 import { createSession } from "../session";
 import ApplicationSubmitted from "@/emails/application-received";
@@ -46,6 +45,7 @@ const newApplicationSchema = z.object({
   scholarship: z.enum(["yes", "no"], { message: "Select an option" }),
   student: z.enum(["yes", "no"], { message: "Select an option" }),
   laptop: z.enum(["yes", "no"], { message: "Select an option" }),
+  referralCode: z.string().trim().min(11).optional(),
 });
 
 const editApplicationSchema = z.object({
@@ -118,6 +118,7 @@ export async function new_application(prevState: unknown, formData: FormData) {
     if (!user) {
       return { message: "Register an account to proceed", noAccount: true };
     }
+
     const dob = result.data.dob;
     const dobDateTime = new Date(dob).toISOString();
 
@@ -131,6 +132,26 @@ export async function new_application(prevState: unknown, formData: FormData) {
         student: result.data.scholarship === "yes" ? true : false,
       },
     });
+
+    if (result.data.referralCode) {
+      const referrer = await prisma.user.findUnique({
+        where: { refereeCode: result.data.referralCode },
+      });
+
+      if (referrer) {
+        await prisma.user.update({
+          where: { id: referrer.id },
+          data: {
+            referredApplicants: {
+              connect: { id: applicant.id }, // Connect the applicant
+            },
+          },
+        });
+      } else {
+        return { message: "Invalid referral code" };
+      }
+    }
+    
     await prisma.user.update({
       where: { id: user.id }, // Ensure we target the correct user
       data: { role: "applicant" }, // Update role to "applicant"

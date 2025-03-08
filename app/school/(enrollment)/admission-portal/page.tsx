@@ -16,67 +16,6 @@ import { logOut } from "@/lib/actions/user.action";
 import { useUserStore } from "@/store/user-store";
 
 const AdmissionPortal = () => {
-  // const { applicant } = useApplicantStore();
-  // const { user } = useUserStore();
-  // const router = useRouter();
-  // const [editOff, setEditOff] = useState(true);
-  // const { updateApplicant, logout } = useApplicantStore();
-  // const [editableData, setEditableData] = useState({
-  //   contact: applicant?.contact || "",
-  //   programme: applicant?.programme || "",
-  //   reason: applicant?.reason || "",
-  //   dob: applicant?.dob || applicant?.dob,
-  //   gender: applicant?.gender || "",
-  //   fname: applicant?.fname || "",
-  //   oname: applicant?.oname || "",
-  //   lname: applicant?.lname || "",
-  //   country: applicant?.country || "",
-  //   balance: applicant?.balance || "",
-  //   statement: applicant?.statement || ""
-  // });
-  // const handleSave = async () => {
-  //   const formData = new FormData();
-  //   Object.entries(editableData).forEach(([key, value]) => {
-  //     formData.append(key, value as string);
-  //   });
-  //   const response = await edit_application(user?.id as string, formData);
-  //   updateApplicant(response?.data!)
-  //   setEditOff(true);
-  // };
-
-  // useEffect(() => {
-  //   const fetchData = async () => {
-  //     const result = await fetch_applicant_data(user?.id as string);
-  //     if (result) {
-  //       setEditableData({
-  //         contact: result?.contact ?? "",
-  //         programme: result?.programme ?? "",
-  //         reason: result?.reason ?? "",
-  //         dob: result?.dob || new Date(),
-  //         gender: result?.gender || "",
-  //         fname: result?.fname || "",
-  //         oname: result?.oname || "",
-  //         lname: result?.lname || "",
-  //         country: result?.country || "",
-  //         balance: result?.balance || "",
-  //         statement: result?.statement || ""
-  //       });
-  //     }
-  //   };
-  //   fetchData();
-  // }, [applicant?.id]);
-
-  // const handleChange = (
-  //   e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
-  // ) => {
-  //   logout;
-  //   setEditableData({ ...editableData, [e.target.name]: e.target.value });
-  // };
-  // const handleLogOut = async () => {
-  //   logout();
-  //   await logOut();
-  //   router.push("/");
-  // };
   const { applicant, setApplicant, logoutApplicant } = useApplicantStore();
   const { user, logoutUser } = useUserStore();
   const router = useRouter();
@@ -98,6 +37,7 @@ const AdmissionPortal = () => {
   useEffect(() => {
     const fetchData = async () => {
       console.log(user, applicant)
+      if(!user) return
       const result = await fetch_applicant_data(user?.id as string);
       setApplicant(result as IApplicant)
       if (result) {
@@ -119,7 +59,7 @@ const AdmissionPortal = () => {
       }
     };
     fetchData();
-  }, [user?.id]);
+  }, [user, applicant, router]);
   
   // console.log(applicant)
   const handleChange = (e:React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
@@ -145,10 +85,10 @@ const AdmissionPortal = () => {
   return (
     <div className="w-full min-h-screen md:w-4/5 mx-auto p-6 space-y-6">
       <header className="flex justify-between items-center border-b border-outline pb-4 mb-4 sticky top-0 bg-black z-50">
-        <Image src="/logo.png" alt="Logo" width={150} height={45} />
+        <Image src="/logo.png" alt="Logo" width={150} height={45} className="w-[100px] h-[36px] md:w-[150px] md:h-[45px] object-cover"/>
         <div className="flex items-center space-x-4">
           {applicant && (
-            <Avatar className="w-10 h-10">
+            <Avatar className="hidden md:block w-10 h-10">
               <AvatarFallback className="bg-secondary text-fontColor">
                 {applicant.fname.charAt(0).toUpperCase()}
               </AvatarFallback>
@@ -160,25 +100,25 @@ const AdmissionPortal = () => {
         </div>
       </header>
 
-      <section className="bg-secondary p-6 rounded-lg shadow-md flex gap-6 items-center justify-between">
-        <span className="flex items-center gap-x-8">
+      <section className="bg-secondary p-4 md:p-6 rounded-lg shadow-md md:flex md:flex-row md:gap-6 md:items-center md:justify-between">
+        <span className="flex flex-col md:flex-row items-center gap-x-8">
           <Image
             src="/images/dummy.jpeg"
             alt="applicant Photo"
             width={150}
             height={150}
-            className="rounded-full border border-outline w-[150px] h-[150px] object-cover"
+            className="rounded-full border border-outline w-[80px] md:w-[150px] h-[80px] md:h-[150px] object-cover"
           />
           <div>
-            <h1 className="text-4xl font-bold">
+            <h1 className="text-2xl md:text-4xl font-bold">
               {applicant?.fname} {applicant?.lname}
             </h1>
             {applicant?.student && (
-              <p className="text-xl text-fontColor">
+              <p className="text-base md:text-xl text-fontColor">
                 {applicant?.programme} - Year {applicant?.year}
               </p>
             )}
-            <p className="text-lg text-gray-300">
+            <p className="text-sm text-center md:text-start md:text-lg text-gray-300">
               Status:{" "}
               <span className="font-semibold">
                 {applicant?.status?.toUpperCase()}
@@ -193,10 +133,10 @@ const AdmissionPortal = () => {
           </>
         ) : editOff ? (
           <span
-            className="flex items-center justify-center w-8 h-8 rounded-full bg-black hover:cursor-pointer hover:bg-gray-600"
+            className="hidden md:flex items-center justify-center w-8 h-8 rounded-full bg-black hover:cursor-pointer hover:bg-gray-600"
             onClick={() => setEditOff(false)}
           >
-            <FaPen className="text-white" />
+            <FaPen className="text-white " />
           </span>
         ) : (
           <Button variant={"default"} onClick={() => handleSave()}>

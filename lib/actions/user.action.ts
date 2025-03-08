@@ -5,11 +5,14 @@ import * as bcrypt from "bcrypt";
 import { PrismaClient } from "@prisma/client";
 import { createSession, deleteSession } from "../session";
 import { Resend } from "resend";
-import { ReactElement } from "react";
+import { ReactElement, ReactNode } from "react";
 import { signIn } from "../auth";
 
 const resend = new Resend(process.env.RESEND_KEY);
 const prisma = new PrismaClient();
+const subscribeSchema = z.object({
+  email: z.string().email({ message: "Invalid email address" }).trim(),
+});
 
 const loginSchema = z.object({
   email: z.string().email({ message: "Invalid email address" }).trim(),
@@ -25,7 +28,9 @@ const registerSchema = z.object({
     .string()
     .min(8, { message: "Password must be at least 8 characters" })
     .trim(),
-  interest: z.enum(["school", "guild", "startupcenter"], {message: "Select your interested faction"}),
+  interest: z.enum(["school", "guild", "startupcenter"], {
+    message: "Select your interested faction",
+  }),
 });
 
 const enquirySchema = z.object({
@@ -65,14 +70,14 @@ export async function googleAuth() {
     await signIn("google");
   } catch (error) {
     // console.log(error);
-    return {message: "Failed to authenticate"}
+    return { message: "Failed to authenticate" };
   }
 }
 
 export async function sendMail(
   prevState: unknown,
   formData: FormData,
-  EmailComponent: ReactElement // Accept React component separately
+  EmailComponent: any // Accept React component separately
 ): Promise<SendMailResponse> {
   try {
     // Parse and validate the form data
@@ -92,7 +97,7 @@ export async function sendMail(
     const result = mailSchema.safeParse(processedData);
 
     if (!result.success) {
-      // console.error("Validation errors:", result.error.flatten().fieldErrors);
+      console.error("Validation errors:", result.error.flatten().fieldErrors);
       return {
         success: false,
         errors: result.error.flatten().fieldErrors,
@@ -106,6 +111,12 @@ export async function sendMail(
       from: sender,
       to: receivers,
       subject: subject,
+      attachments: [
+        {
+          filename: "xcuxion-batch25.jpg",
+          path: "https://res.cloudinary.com/dskdr2jxd/image/upload/v1741377530/batch25info_zturve.jpg"
+        }
+      ],
       react: content, // Pass the React component directly
     });
 
@@ -134,6 +145,32 @@ export async function logOut() {
   }
 }
 
+async function getReferrals(userId: string) {
+  return await prisma.user.findUnique({
+    where: { id: userId },
+    include: { referredApplicants: true },
+  });
+}
+
+
+async function getReferralDiscount(userId: string) {
+  const user = await prisma.user.findUnique({
+    where: { id: userId },
+    include: { referredApplicants: true },
+  });
+
+  const numReferrals = user?.referredApplicants.length || 0;
+
+  if (numReferrals >= 5) return "50% discount";
+  if (numReferrals >= 3) return "30% discount";
+  if (numReferrals >= 1) return "10% discount";
+
+  return "No discount";
+}
+
+
+
+
 export default async function makeEnquiry(
   prevState: unknown,
   formData: FormData
@@ -148,9 +185,11 @@ export default async function makeEnquiry(
     }
     const { email, name, question } = result.data;
 
-    const newInquiry = await prisma.enquiry.create({ data: { email, name, question } });
+    const newInquiry = await prisma.enquiry.create({
+      data: { email, name, question },
+    });
     // console.log(newInquiry)
-    return {success: true, message: "Inquiry Sent Successfully"}
+    return { success: true, message: "Inquiry Sent Successfully" };
   } catch (error) {
     handleError(error);
   }
@@ -165,6 +204,30 @@ export type FormState = {
   message: string;
   errors?: Record<keyof Fields, string> | undefined;
 };
+
+export async function subscribeToNewsletter(
+  prevState: unknown,
+  formData: FormData
+) {
+  const result = subscribeSchema.safeParse(Object.fromEntries(formData));
+  if (!result.success) {
+    return {
+      errors: result.error.flatten().fieldErrors,
+    };
+  }
+
+  const { email } = result?.data;
+  const existingSubscriber = await prisma.emailSubscriber.findFirst({
+    where: { email },
+  });
+  if (existingSubscriber) {
+    return { message: "You are already subscribed" };
+  }
+  const newSubscriber = await prisma.emailSubscriber.create({
+    data: { email },
+  });
+  return { message: "Subscribed successfully" };
+}
 
 export async function login(prevState: unknown, formData: FormData) {
   try {
@@ -218,6 +281,23 @@ export async function login(prevState: unknown, formData: FormData) {
   }
 }
 
+async function generateReferralCode(userId: string) {
+  const user = await prisma.user.findUnique({ where: { id: userId } });
+
+  if (!user) {
+    throw new Error("User not found");
+  }
+
+  // Generate a simple unique code (e.g., first part of UUID)
+  const refereeCode = `XC-${user.id.substring(0, 8).toUpperCase()}`;
+
+  return await prisma.user.update({
+    where: { id: userId },
+    data: { refereeCode },
+  });
+}
+
+
 export async function register(prevState: unknown, formData: FormData) {
   try {
     const result = registerSchema.safeParse(Object.fromEntries(formData));
@@ -237,12 +317,11 @@ export async function register(prevState: unknown, formData: FormData) {
     });
     if (existingUser) {
       return {
-        message: `User already exists`
+        message: `User already exists`,
       };
     }
 
     const hashPassword = await bcrypt.hash(password, 10);
-
     const newUser = await prisma.user.create({
       data: {
         email,
@@ -250,7 +329,8 @@ export async function register(prevState: unknown, formData: FormData) {
         interest,
       },
     });
-
+    
+    await generateReferralCode(newUser.id)
     await createSession(newUser.id);
 
     const { createdAt, updatedAt, ...profileWithoutTimestamps } = newUser;

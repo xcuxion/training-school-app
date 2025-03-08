@@ -25,7 +25,6 @@ const Confirmation = () => {
     if (isNaN(otpNumber)) {
       // console.error("Invalid OTP format");
       return {message: "Invalid OTP format"}
-      return;
     }
 
     try {
@@ -55,10 +54,11 @@ const Confirmation = () => {
 
   // Request new OTP
   const handleRequestNewOTP = async () => {
+    console.log(admin)
     if (!admin?.email) return;
     try {
       const response = await send_verification_email(admin.email);
-      // console.log("New OTP Requested:", response);
+      console.log("New OTP Requested:", response);
     } catch (error) {
       console.error("Failed to request new OTP:", error);
     }

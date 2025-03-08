@@ -1,10 +1,12 @@
 "use client";
 import Image from "next/image";
 import Link from "next/link";
-import React from "react";
+import React, { useState } from "react";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { usePathname } from "next/navigation";
 import { useAdminStore } from "@/store/admin-store";
+import { Button } from "@/components/ui/button";
+import RegisterAdmin from "./register-admin";
 
 const links = [
   {
@@ -27,6 +29,7 @@ const links = [
 
 const AdminHeader = () => {
   const pathname = usePathname();
+  const [openRegister, setOpenRegister] = useState<boolean>(false);
 
   const { admin } = useAdminStore();
   return (
@@ -61,11 +64,26 @@ const AdminHeader = () => {
       <span>
         {admin !== null && (
           <Avatar className={`w-6 h-6 `}>
-            <AvatarImage src={'/images/p.jpg'} />
+            <AvatarImage src={"/images/p.jpg"} />
             <AvatarFallback className="bg-pink-300">
               {admin.name!.slice(0, 1)}
             </AvatarFallback>
           </Avatar>
+        )}
+        {
+          admin?.permissions === "head" ? (
+
+        <Button className="" onClick={() => setOpenRegister(true)}>
+          {" "}
+          New Admin
+        </Button>
+          ): ''
+        }
+        {openRegister && (
+          <RegisterAdmin
+            show={openRegister}
+            onClose={() => setOpenRegister(false)}
+          />
         )}
       </span>
     </header>
