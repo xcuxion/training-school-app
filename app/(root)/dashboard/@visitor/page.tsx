@@ -9,22 +9,8 @@ import Link from "next/link";
 import { useEffect } from "react";
 
 const page = () => {
-  const { user, logoutUser } = useUserStore();
+  const {  logoutUser } = useUserStore();
   const router = useRouter();
-
-  useEffect(()=>{
-    const userRole = user?.role
-    switch (userRole) {
-      case "applicant":
-        return router.push("/school/admission-portal");
-      case "student":
-        return router.push("/school/learning-space");
-      case "facilitator":
-        return router.push("/school/facilitator");
-      case "visitor":
-        return router.push("/dashboard")
-    }
-  }, [router, user])
 
   const handleLogOut = async () => {
     logoutUser();

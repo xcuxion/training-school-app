@@ -125,17 +125,10 @@ export async function  sendBatchInformation() {
 
     console.log(users)
 
-    // const users = [{email:"1serwise@gmail.com"}, {email:"solomonannanayisi@gmail.com"}, {email:"jessicaennor@gmail.com"}, {email:"yawoffeh123@gmail.com"}, {email:"mjnuvor@gmail.com"}]
 
     if (!users || users.length === 0) {
       return { message: "No users found to send newsletter" };
     }
-
-    // Prepare formData
-    const formData = new FormData();
-    formData.append("sender", "school@xcuxion.org"); // Change to your sender email
-    formData.append("receivers", users.map((user) => user.email).join(",")); // Convert array to comma-separated string
-    formData.append("subject", "XCUXION School Batch'25");
 
     // Pass data to sendMail
     //@ts-ignore

@@ -4,7 +4,6 @@ import { decrypt } from "./lib/session";
 
 const protectedRoutes = [
   "/school/learning-spaace",
-  "/school/admission-portal",
   // "/school/administrator-office/admissions",
   "/school/administrator-office/overview",
   "/school/administrator-office/human-resource",
