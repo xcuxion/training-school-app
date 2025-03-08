@@ -181,7 +181,7 @@ export default function School() {
       </motion.section>
 
       {/* Financial Aid */}
-      <motion.section className="w-full z-30 h-full py-5 md:py-10 md:px-20 px-5 bg-gradient-to-b from-black via-transparent to-secondary">
+      <motion.section id="finance" className="w-full z-30 h-full py-5 md:py-10 md:px-20 px-5 bg-gradient-to-b from-black via-transparent to-secondary">
         <motion.div className="flex flex-col">
           <motion.span className="md:w-3/5 mx-auto text-center mb-3 md:mb-6">
             <motion.h2
