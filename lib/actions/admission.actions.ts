@@ -134,6 +134,7 @@ export async function new_application(prevState: unknown, formData: FormData) {
         ...result.data,
         userId: user.id,
         dob: dobDateTime,
+        email: result.data.email?.toLocaleLowerCase(),
         laptop: result.data.laptop === "yes" ? true : false,
         scholarship: result.data.scholarship === "yes" ? true : false,
         student: result.data.scholarship === "yes" ? true : false,

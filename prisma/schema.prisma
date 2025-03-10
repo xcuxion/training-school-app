@@ -29,10 +29,7 @@ model User {
   GuildMember    GuildMember?
   Student        Student?     @relation(name: "UserToStudent")
   Applicant      Applicant?   @relation(name: "UserToApplicant")
-
   attendedEvents EventAttendee[]
-
-
 }
 
 model Applicant {

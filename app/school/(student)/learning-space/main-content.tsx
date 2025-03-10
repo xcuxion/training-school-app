@@ -1,10 +1,5 @@
-// import Image from 'next/image'
 import { cn } from '@/lib/utils';
 import React from 'react'
-// import { GoMail } from "react-icons/go";
-// import { BiLogoLinkedinSquare } from "react-icons/bi";
-// import { BsTwitterX } from "react-icons/bs";
-
 export const name = "Jessica";
 const MainContent = ({children, className}: {children: React.ReactNode, className?:string}) => {
 
