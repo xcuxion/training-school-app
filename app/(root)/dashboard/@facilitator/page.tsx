@@ -4,8 +4,8 @@ import React from 'react'
 
 const FacilitatorDashboard = () => {
   return (
-    <div>
-        <MainContent>
+    <div className='w-full '>
+        <MainContent className=''>
             Heya, I am the main
         </MainContent>
         <SideSection>

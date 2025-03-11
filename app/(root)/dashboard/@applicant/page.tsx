@@ -10,7 +10,7 @@ import { IApplicant, useApplicantStore } from "@/store/applicant-store";
 import { Button } from "@/components/ui/button";
 import { Textarea } from "@/components/ui/textarea";
 import { Input } from "@/components/ui/input";
-import { FaPen } from "react-icons/fa";
+import { FaPen, FaCopy, FaShareAlt } from "react-icons/fa";
 import { useRouter } from "next/navigation";
 import { logOut } from "@/lib/actions/user.action";
 import { useUserStore } from "@/store/user-store";
@@ -36,10 +36,10 @@ const AdmissionPortal = () => {
 
   useEffect(() => {
     const fetchData = async () => {
-      console.log(user, applicant)
-      if(!user) return
+      console.log(user, applicant);
+      if (!user) return;
       const result = await fetch_applicant_data(user?.id as string);
-      setApplicant(result as IApplicant)
+      setApplicant(result as IApplicant);
       if (result) {
         setEditableData({
           contact: result?.contact ?? "",
@@ -60,9 +60,11 @@ const AdmissionPortal = () => {
     };
     fetchData();
   }, [user?.id]);
-  
+
   // console.log(applicant)
-  const handleChange = (e:React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+  const handleChange = (
+    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
+  ) => {
     setEditableData({ ...editableData, [e.target.name]: e.target.value });
   };
 
@@ -75,17 +77,48 @@ const AdmissionPortal = () => {
     setApplicant(response?.data as IApplicant);
     setEditOff(true);
   };
+  const [copied, setCopied] = useState(false);
 
+  const handleCopy = () => {
+    if (applicant?.referralCode) {
+      navigator.clipboard.writeText(applicant.referralCode.toUpperCase());
+      setCopied(true);
+      setTimeout(() => setCopied(false), 2000); // Reset after 2 seconds
+    }
+  };
+
+  const handleShare = () => {
+    const shareText = `Join me at the XCUXION School Batch'25 program! \nUse my referral code: ${applicant?.referralCode?.toUpperCase()} when applying to get a waiver on your tuition fees. 🚀 \nLink: https://xcuxion.org/school/apply`;
+    const shareUrl = `https://wa.me/?text=${encodeURIComponent(shareText)}`;
+
+    if (navigator.share) {
+      navigator
+        .share({
+          title: "SWAM Masterclass Referral",
+          text: shareText,
+          url: "https://xcuxion.org/school", // You can customize this
+        })
+        .catch((err) => console.log("Sharing failed:", err));
+    } else {
+      window.open(shareUrl, "_blank");
+    }
+  };
   const handleLogOut = async () => {
     await logOut();
-    logoutApplicant()
-    logoutUser()
+    logoutApplicant();
+    logoutUser();
     router.push("/");
   };
   return (
     <div className="w-full min-h-screen md:w-4/5 mx-auto p-6 space-y-6">
       <header className="flex justify-between items-center border-b border-outline pb-4 mb-4 sticky top-0 bg-black z-50">
-        <Image src="/logo.png" alt="Logo" width={150} height={45} className="w-[100px] h-[36px] md:w-[150px] md:h-[45px] object-cover"/>
+        <Image
+          src="/logo.png"
+          alt="Logo"
+          width={150}
+          height={45}
+          className="w-[100px] h-[36px] md:w-[150px] md:h-[45px] object-cover"
+        />
         <div className="flex items-center space-x-4">
           {applicant && (
             <Avatar className="hidden md:block w-10 h-10">
@@ -100,17 +133,18 @@ const AdmissionPortal = () => {
         </div>
       </header>
 
-      <section className="bg-secondary p-4 md:p-6 rounded-lg shadow-md md:flex md:flex-row md:gap-6 md:items-center md:justify-between">
+    
+      <section className="bg-secondary relative p-4 md:p-6 rounded-lg shadow-md md:flex md:flex-row md:gap-6 md:items-center md:justify-between">
         <span className="flex flex-col md:flex-row items-center gap-x-8">
           <Image
             src="/images/dummy.jpeg"
-            alt="applicant Photo"
+            alt="Applicant Photo"
             width={150}
             height={150}
             className="rounded-full border border-outline w-[80px] md:w-[150px] h-[80px] md:h-[150px] object-cover"
           />
           <div>
-            <h1 className="text-2xl md:text-4xl font-bold">
+            <h1 className="text-2xl text-center md:text-start md:text-4xl font-bold">
               {applicant?.fname} {applicant?.lname}
             </h1>
             {applicant?.student && (
@@ -118,32 +152,56 @@ const AdmissionPortal = () => {
                 {applicant?.programme} - Year {applicant?.year}
               </p>
             )}
-            <p className="text-sm text-center md:text-start md:text-lg text-gray-300">
+            <p className="text-sm  text-center md:text-start md:text-lg text-gray-300">
               Status:{" "}
               <span className="font-semibold">
                 {applicant?.status?.toUpperCase()}
               </span>
             </p>
+            <p className="text-sm text-center md:text-start md:text-lg text-gray-300 flex items-center gap-2">
+              Referral Code:{" "}
+              <span className="font-semibold">
+                {applicant?.referralCode?.toUpperCase()}
+              </span>
+              <span
+                onClick={handleCopy}
+                className="text-white bg-gray-700 hover:bg-gray-500 p-1 rounded"
+              >
+                <FaCopy />
+              </span>
+              {copied && (
+                <span className="text-green-400 text-xs">Copied!</span>
+              )}
+              <span
+                className=" flex items-center justify-center p-1 rounded  bg-gray-700 hover:bg-gray-500"
+                onClick={() => handleShare()}
+              >
+                <FaShareAlt className="text-white" />
+              </span>
+            </p>
           </div>
         </span>
-        {applicant?.status === "admitted" ? (
-          <>
-            <Button variant={"default"}>Accept</Button>
-            <Button variant={"outline"}>Decline</Button>
-          </>
-        ) : editOff ? (
-          <span
-            className="hidden md:flex items-center justify-center w-8 h-8 rounded-full bg-black hover:cursor-pointer hover:bg-gray-600"
-            onClick={() => setEditOff(false)}
-          >
-            <FaPen className="text-white " />
-          </span>
-        ) : (
-          <Button variant={"default"} onClick={() => handleSave()}>
-            Save
-          </Button>
-        )}
+        <div className="flex gap-3">
+          {applicant?.status === "admitted" ? (
+            <>
+              <Button variant={"default"}>Accept</Button>
+              <Button variant={"outline"}>Decline</Button>
+            </>
+          ) : editOff ? (
+            <span
+              className="absolute top-4 right-4 flex items-center justify-center w-8 h-8 rounded-full bg-black hover:cursor-pointer hover:bg-gray-600"
+              onClick={() => setEditOff(false)}
+            >
+              <FaPen className="text-white " />
+            </span>
+          ) : (
+            <Button variant={"default"} onClick={handleSave}>
+              Save
+            </Button>
+          )}
+        </div>
       </section>
+
       <section
         className={`grid grid-cols-1 ${applicant?.oname !== "" ? "md:grid-cols-3" : "md:grid-cols-2"}  gap-6`}
       >
@@ -152,7 +210,7 @@ const AdmissionPortal = () => {
           <Input
             type="text"
             name="contact"
-            value={editableData.fname}
+            defaultValue={editableData.fname}
             onChange={handleChange}
             disabled={editOff}
           />
@@ -163,7 +221,7 @@ const AdmissionPortal = () => {
             <Input
               type="text"
               name="oname"
-              value={editableData.oname}
+              defaultValue={editableData.oname}
               onChange={handleChange}
               disabled={editOff}
             />
@@ -174,7 +232,7 @@ const AdmissionPortal = () => {
           <Input
             type="text"
             name="lname"
-            value={editableData.lname}
+            defaultValue={editableData.lname}
             onChange={handleChange}
             disabled={editOff}
           />
@@ -187,7 +245,7 @@ const AdmissionPortal = () => {
             type="text"
             name="gender"
             className="capitalize"
-            value={editableData.gender}
+            defaultValue={editableData.gender}
             onChange={handleChange}
             disabled={editOff}
           />
@@ -198,7 +256,7 @@ const AdmissionPortal = () => {
           <Input
             type="date" // ✅ Use date type
             name="dob"
-            value={editableData.dob} // ✅ No need for conversion
+            defaultValue={editableData.dob} // ✅ No need for conversion
             onChange={handleChange}
             disabled={editOff}
           />
@@ -210,7 +268,7 @@ const AdmissionPortal = () => {
           <Input
             type="text"
             name="contact"
-            value={editableData.contact}
+            defaultValue={editableData.contact}
             onChange={handleChange}
             disabled={editOff}
           />
@@ -221,7 +279,7 @@ const AdmissionPortal = () => {
             <Input
               type="text"
               name="programme"
-              value={editableData.programme}
+              defaultValue={editableData.programme}
               onChange={handleChange}
               disabled={editOff}
             />
@@ -233,7 +291,7 @@ const AdmissionPortal = () => {
         <h3 className="text-lg font-semibold">Reason for Application</h3>
         <Textarea
           name="reason"
-          value={editableData.reason}
+          defaultValue={editableData.reason}
           onChange={handleChange}
           disabled={editOff}
           className="w-full h-24"
@@ -245,7 +303,7 @@ const AdmissionPortal = () => {
         </h3>
         <Textarea
           name="balance"
-          value={editableData.balance}
+          defaultValue={editableData.balance}
           onChange={handleChange}
           disabled={editOff}
           className="w-full h-24"
@@ -258,7 +316,7 @@ const AdmissionPortal = () => {
           </h3>
           <Textarea
             name="statement"
-            value={editableData.statement}
+            defaultValue={editableData.statement}
             onChange={handleChange}
             disabled={editOff}
             className="w-full h-24"

@@ -27,6 +27,8 @@ export interface IApplicant {
   createdAt?: Date;
   updatedAt?: Date;
   track: string | null;
+  referralCode: string | null;
+  referredBy?: string | null;
 }
 
 interface ApplicantStore {
