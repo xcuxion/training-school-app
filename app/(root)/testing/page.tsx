@@ -4,6 +4,7 @@ import { Input } from "@/components/ui/input";
 import Image from "next/image";
 import Link from "next/link";
 import React from "react";
+import PublicationCard from "./publication-card";
 
 const navigations = [
   {
@@ -16,7 +17,7 @@ const navigations = [
   },
   {
     label: "Network",
-    href: "/",
+    href: "/  ",
   },
   {
     label: "Publications",
@@ -28,14 +29,6 @@ const navigations = [
   },
 ];
 
-export const PublicationCard = ({title, description}:{title: string, description: string}) => {
-    // Publication Card Component
-    return (
-        <div className="w-full">
-            Publication Card Component
-        </div>
-    )
-}
 
 const page = () => {
   return (
