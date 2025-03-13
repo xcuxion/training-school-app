@@ -209,7 +209,7 @@ const AdmissionPortal = () => {
           <h3 className="text-lg font-semibold">First Name</h3>
           <Input
             type="text"
-            name="contact"
+            name="fname"
             defaultValue={editableData.fname}
             onChange={handleChange}
             disabled={editOff}
