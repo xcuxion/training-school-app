@@ -79,7 +79,7 @@ const editApplicationSchema = z.object({
   school: z.enum(["knust", "ug", "ashesi", "none"]).optional(),
   track: z.enum(["web", "mobile", "dataanalysis", "backend"], {
     message: "Select your preferred track",
-  }),
+  }).optional(),
   contact: z
     .string()
     .trim()
@@ -91,11 +91,10 @@ const editApplicationSchema = z.object({
   programme: z
     .string()
     .trim()
-    .min(2, { message: "Programme is required" })
     .optional(),
   year: z.enum(["1", "2", "3", "4", "5", "6"], {
     message: "Select your current year",
-  }),
+  }).optional(),
   reason: z.string().trim().optional(),
   balance: z.string().trim().optional(),
   statement: z.string().trim().optional(),
@@ -258,6 +257,7 @@ export async function edit_application(id: string, formData: FormData) {
     const applicant = await prisma.applicant.findFirst({
       where: { userId: id },
     });
+    console.log(applicant)
     if (!applicant) {
       return { message: "Application not found" };
     }
@@ -266,10 +266,10 @@ export async function edit_application(id: string, formData: FormData) {
     );
 
     if (!result.success) {
-      // console.log(
-      //   "Validation failed with errors:",
-      //   result.error.flatten().fieldErrors
-      // );
+      console.log(
+        "Validation failed with errors:",
+        result.error.flatten().fieldErrors
+      );
       return {
         errors: result.error.flatten().fieldErrors,
       };
@@ -289,7 +289,7 @@ export async function edit_application(id: string, formData: FormData) {
         },
       });
     }
-    // console.log(applicant);
+    console.log(applicant);
     return { success: result.success, data: applicant };
   } catch (error) {
     handleError(error);
