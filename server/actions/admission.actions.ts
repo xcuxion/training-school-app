@@ -244,7 +244,11 @@ export async function fetch_applicant_data(id: string) {
 
 export async function fetch_all_applications() {
   try {
-    const applications = await prisma.applicant.findMany();
+    const applications = await prisma.applicant.findMany({
+      where: {
+        status: "pending"
+      }
+    });
 
     return applications;
   } catch (error) {

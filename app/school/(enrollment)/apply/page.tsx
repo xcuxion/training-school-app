@@ -13,7 +13,7 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
-import { new_application } from "@/lib/actions/admission.actions";
+import { new_application } from "@/server/actions/admission.actions";
 import { useRouter } from "next/navigation";
 import SubmitButton from "@/components/submit-button";
 import { useApplicantStore } from "@/store/applicant-store";
@@ -54,25 +54,25 @@ const ApplicationPage = () => {
   const router = useRouter();
   const { setApplicant } = useApplicantStore();
   const { user } = useUserStore();
-  const [countries, setCountries] = useState([]);
+  // const [countries, setCountries] = useState([]);
   const [openRegister, setOpenRegister] = useState<boolean>(false);
-  useEffect(() => {
-    // Fetch country list from REST Countries API
-    fetch("https://restcountries.com/v3.1/all")
-      .then((res) => res.json())
-      .then((data) => {
-        // Extract country names and codes
-        const countryList = data
-          .map((country: any) => ({
-            name: country.name.common,
-            code: country.cca2.toLowerCase(), // Convert to lowercase for consistency
-          }))
-          .sort((a: any, b: any) => a.name.localeCompare(b.name)); // Sort alphabetically
+  // useEffect(() => {
+  //   // Fetch country list from REST Countries API
+  //   fetch("https://restcountries.com/v3.1/all")
+  //     .then((res) => res.json())
+  //     .then((data) => {
+  //       // Extract country names and codes
+  //       const countryList = data
+  //         .map((country: any) => ({
+  //           name: country.name.common,
+  //           code: country.cca2.toLowerCase(), // Convert to lowercase for consistency
+  //         }))
+  //         .sort((a: any, b: any) => a.name.localeCompare(b.name)); // Sort alphabetically
 
-        setCountries(countryList);
-      })
-      .catch((err) => console.error("Error fetching countries:", err));
-  }, []);
+  //       setCountries(countryList);
+  //     })
+  //     .catch((err) => console.error("Error fetching countries:", err));
+  // }, []);
 
   useEffect(() => {
     // console.log(state);

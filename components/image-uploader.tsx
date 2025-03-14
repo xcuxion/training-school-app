@@ -2,7 +2,7 @@
 import React, {useState} from 'react'
 import { Input } from './ui/input'
 import { Button } from './ui/button'
-import { useEdgeStore } from '@/lib/edgestore'
+import { useEdgeStore } from '@/server/edgestore'
 import { SingleImageDropzone } from './single-image-drpzone'
 
 const ImageUploader = () => {

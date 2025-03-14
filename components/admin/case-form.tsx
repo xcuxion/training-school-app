@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import FormModal from "../form-modal";
 import { useFormState } from "react-dom";
-import { new_case } from "@/lib/actions/case.actions";
+import { new_case } from "@/server/actions/case.actions";
 import { Input } from "../ui/input";
 import { Textarea } from "../ui/textarea";
 import { Label } from "../ui/label";

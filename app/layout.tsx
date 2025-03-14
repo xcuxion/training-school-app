@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import "./globals.css";
 import { Poppins, Nunito } from "next/font/google";
-import { EdgeStoreProvider } from "@/lib/edgestore";
+import { EdgeStoreProvider } from "@/server/edgestore";
 import { Toaster } from "@/components/ui/sonner";
 
 const poppins = Poppins({

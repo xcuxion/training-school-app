@@ -1,4 +1,4 @@
-import { cn } from '@/lib/utils';
+import { cn } from '@/server/utils';
 import React from 'react'
 export const name = "Jessica";
 const MainContent = ({children, className}: {children: React.ReactNode, className?:string}) => {

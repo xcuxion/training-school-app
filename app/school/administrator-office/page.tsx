@@ -2,7 +2,7 @@
 import SubmitButton from "@/components/submit-button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
-import { login_admin } from "@/lib/actions/admin.actions";
+import { login_admin } from "@/server/actions/admin.actions";
 import { useAdminStore } from "@/store/admin-store";
 import { useRouter } from "next/navigation";
 import React, { useEffect, useRef, useState } from "react";

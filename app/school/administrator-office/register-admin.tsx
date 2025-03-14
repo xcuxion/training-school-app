@@ -10,8 +10,8 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
-import { new_admin } from "@/lib/actions/admin.actions";
-import { register } from "@/lib/actions/user.action";
+import { new_admin } from "@/server/actions/admin.actions";
+import { register } from "@/server/actions/user.action";
 import { useAdminStore } from "@/store/admin-store";
 import { useUserStore } from "@/store/user-store";
 import { useRouter } from "next/navigation";

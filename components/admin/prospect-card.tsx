@@ -20,7 +20,7 @@ import {
   accept_admission,
   admit_applicant,
   reject_applicant,
-} from "@/lib/actions/admission.actions";
+} from "@/server/actions/admission.actions";
 import { toast } from "sonner";
 import { ScrollArea } from "@/components/ui/scroll-area";
 
@@ -84,8 +84,8 @@ const ProspectData = ({
     toast(response?.message);
   };
   const handleAcceptance = async () => {
-    setLoading(true);
     try {
+      setLoading(true);
       const response = await admit_applicant(id, admissionType);
       console.log(response);
       toast(response?.message);
@@ -201,8 +201,8 @@ const ProspectData = ({
             <section className="grid md:grid-cols-3 gap-y-2 md:gap-y-0 md:gap-x-10 my-4">
               <Button
                 variant={"outline"}
-                onClick={() => {
-                  handleRejection;
+                onClick={async() => {
+                  await handleRejection;
                 }}
               >
                 Decline
@@ -226,14 +226,14 @@ const ProspectData = ({
                 </SelectContent>
               </Select>
               <Button
-              disabled={loading === true? true: false}
+                disabled={loading}
                 variant={"default"}
-                onClick={() => {
-                  handleAcceptance;
+                onClick={async () => {
+                  await handleAcceptance();
                 }}
                 className={`${loading === true ? 'opacity-50': ''}`}
               >
-                {loading === true ? 'Accept' : 'Accepting...'}
+                {loading === true ? 'Admitting' : 'Admit'}
               </Button>
             </section>
           </ScrollArea>

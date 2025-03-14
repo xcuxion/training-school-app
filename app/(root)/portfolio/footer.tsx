@@ -7,7 +7,7 @@ import SubmitButton from "@/components/submit-button";
 import { FaCopyright } from "react-icons/fa";
 import { motion } from "framer-motion";
 import { useFormState } from "react-dom";
-import { subscribeToNewsletter } from "@/lib/actions/user.action";
+import { subscribeToNewsletter } from "@/server/actions/user.action";
 
 const redirects = [
   {
