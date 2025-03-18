@@ -5,14 +5,14 @@ import { Avatar, AvatarFallback } from "@/components/ui/avatar";
 import {
   edit_application,
   fetch_applicant_data,
-} from "@/server/actions/admission.actions";
+} from "@/lib/actions/admission.actions";
 import { IApplicant, useApplicantStore } from "@/store/applicant-store";
 import { Button } from "@/components/ui/button";
 import { Textarea } from "@/components/ui/textarea";
 import { Input } from "@/components/ui/input";
 import { FaPen, FaCopy, FaShareAlt } from "react-icons/fa";
 import { useRouter } from "next/navigation";
-import { logOut } from "@/server/actions/user.action";
+import { logOut } from "@/lib/actions/user.action";
 import { useUserStore } from "@/store/user-store";
 import AdmissionDetails from "./admission-details";
 

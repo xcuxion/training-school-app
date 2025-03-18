@@ -1,7 +1,7 @@
 "use client";
 import React, { useEffect, useState, useRef } from "react";
 import { useFormState } from "react-dom";
-import makeEnquiry from "@/server/actions/user.action";
+import makeEnquiry from "@/lib/actions/user.action";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { Label } from "@/components/ui/label";

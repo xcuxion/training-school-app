@@ -1,4 +1,4 @@
-import { cn } from '@/server/utils'
+import { cn } from '@/lib/utils'
 import React from 'react'
 
 const SideSection = ({children, className}: {children?:React.ReactNode, className?: string}) => {

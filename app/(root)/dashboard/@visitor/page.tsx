@@ -1,6 +1,6 @@
 "use client";
 import { Button } from "@/components/ui/button";
-import { logOut } from "@/server/actions/user.action";
+import { logOut } from "@/lib/actions/user.action";
 import { useUserStore } from "@/store/user-store";
 import Image from "next/image";
 import Banner from "./banner";

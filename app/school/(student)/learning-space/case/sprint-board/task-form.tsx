@@ -2,7 +2,7 @@
 import FormModal from "@/components/form-modal";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
-import { new_task } from "@/server/actions/sprint.actions";
+import { new_task } from "@/lib/actions/sprint.actions";
 import React, { useRef, useEffect, useState } from "react";
 import { useFormState } from "react-dom";
 import {

@@ -2,8 +2,8 @@
 import ProspectCard from "@/components/admin/prospect-card";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
-import { sendBatchInformation } from "@/server/actions/admin.actions";
-import { fetch_all_applications } from "@/server/actions/admission.actions";
+import { sendBatchInformation } from "@/lib/actions/admin.actions";
+import { fetch_all_applications } from "@/lib/actions/admission.actions";
 import { IApplicant } from "@/store/applicant-store";
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import React, { useEffect, useState } from "react";

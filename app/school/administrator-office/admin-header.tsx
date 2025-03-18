@@ -7,6 +7,7 @@ import { usePathname } from "next/navigation";
 import { useAdminStore } from "@/store/admin-store";
 import { Button } from "@/components/ui/button";
 import RegisterAdmin from "./register-admin";
+import Announcement from "./announcements/announcement-form";
 
 const links = [
   {
@@ -30,6 +31,7 @@ const links = [
 const AdminHeader = () => {
   const pathname = usePathname();
   const [openRegister, setOpenRegister] = useState<boolean>(false);
+  const [openAnnouncement, setOpenAnnouncement] = useState<boolean>(false);
 
   const { admin } = useAdminStore();
   return (
@@ -41,27 +43,34 @@ const AdminHeader = () => {
         height={45}
         className=""
       />
-      <nav className="space-x-4">
-        {links.map((link, index) => {
-          const active =
-            (link.href === "/administrator-office" &&
-              pathname === "/administrator-office") ||
-            (pathname.startsWith(link.href) &&
-              link.href !== "/administrator-office");
-          return (
-            <Link
-              key={index}
-              href={link.href}
-              className={
-                active ? "text-primary font-medium" : "font-medium opacity-50"
-              }
-            >
-              {link.label}
-            </Link>
-          );
-        })}
-      </nav>
-      <span>
+      {admin?.permissions === "head" ? (
+        <nav className="space-x-4">
+          {links.map((link, index) => {
+            const active =
+              (link.href === "/administrator-office" &&
+                pathname === "/administrator-office") ||
+              (pathname.startsWith(link.href) &&
+                link.href !== "/administrator-office");
+            return (
+              <Link
+                key={index}
+                href={link.href}
+                className={
+                  active ? "text-primary font-medium" : "font-medium opacity-50"
+                }
+              >
+                {link.label}
+              </Link>
+            );
+          })}
+        </nav>
+      ) : admin?.permissions === "registrar" ? (
+        <></>
+      ) : (
+        ""
+      )}
+
+      <span className="flex items-center gap-x-4">
         {admin !== null && (
           <Avatar className={`w-6 h-6 `}>
             <AvatarImage src={"/images/p.jpg"} />
@@ -70,19 +79,39 @@ const AdminHeader = () => {
             </AvatarFallback>
           </Avatar>
         )}
-        {
-          admin?.permissions === "head" ? (
+        {admin?.permissions === "head" ? (
+          <span>
+            <Button className="" onClick={() => setOpenRegister(true)}>
+              {" "}
+              New Admin
+            </Button>
 
-        <Button className="" onClick={() => setOpenRegister(true)}>
-          {" "}
-          New Admin
-        </Button>
-          ): ''
-        }
+          </span>
+        ) : admin?.permissions === "registrar" ? (
+          <div className="flex items-center space-x-2">
+            <span>{admin?.name}</span>
+            <Button className="" onClick={() => setOpenRegister(true)}>
+              {" "}
+              Logout
+            </Button>
+            <Button className="" onClick={() => setOpenAnnouncement(true)}>
+              {" "}
+              Announce
+            </Button>
+          </div>
+        ) : (
+          ""
+        )}
         {openRegister && (
           <RegisterAdmin
             show={openRegister}
             onClose={() => setOpenRegister(false)}
+          />
+        )}
+                {openAnnouncement && (
+          <Announcement
+            show={openAnnouncement}
+            onClose={() => setOpenAnnouncement(false)}
           />
         )}
       </span>

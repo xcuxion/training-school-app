@@ -4,7 +4,7 @@ import Image from "next/image";
 import { Button } from "@/components/ui/button";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { logOut } from "@/server/actions/user.action";
+import { logOut } from "@/lib/actions/user.action";
 
 const links = [
   {

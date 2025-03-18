@@ -20,7 +20,7 @@ import {
   accept_admission,
   admit_applicant,
   reject_applicant,
-} from "@/server/actions/admission.actions";
+} from "@/lib/actions/admission.actions";
 import { toast } from "sonner";
 import { ScrollArea } from "@/components/ui/scroll-area";
 

@@ -1,6 +1,6 @@
 "use client";
 import FormModal from "@/components/form-modal";
-import { post_resource } from "@/server/actions/library.actions";
+import { post_resource } from "@/lib/actions/library.actions";
 // import { useRouter } from "next/navigation";
 import React, { useRef } from "react";
 import { useFormState } from "react-dom";

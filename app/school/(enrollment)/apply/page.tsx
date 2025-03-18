@@ -13,7 +13,7 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
-import { new_application } from "@/server/actions/admission.actions";
+import { new_application } from "@/lib/actions/admission.actions";
 import { useRouter } from "next/navigation";
 import SubmitButton from "@/components/submit-button";
 import { useApplicantStore } from "@/store/applicant-store";
