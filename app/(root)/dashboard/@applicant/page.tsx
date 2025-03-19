@@ -97,7 +97,7 @@ const AdmissionPortal = () => {
         .share({
           title: "SWAM Masterclass Referral",
           text: shareText,
-          url: "https://xcuxion.org/school", // You can customize this
+          url: "https://xcuxion.org/school/apply", // You can customize this
         })
         .catch((err) => console.log("Sharing failed:", err));
     } else {
