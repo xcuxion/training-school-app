@@ -3,7 +3,7 @@ import React, {useState} from 'react'
 import { Input } from './ui/input'
 import { Button } from './ui/button'
 import { useEdgeStore } from '@/lib/edgestore'
-import { SingleImageDropzone } from './single-image-drpzone'
+import { SingleImageDropzone } from './single-image-dropzone'
 
 const ImageUploader = () => {
     const [file, setFile] = useState<File>()

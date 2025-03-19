@@ -38,8 +38,8 @@ export const AnnouncementEmail = ({
           <Img
             src="`https://res.cloudinary.com/dskdr2jxd/image/upload/v1741379214/exe_black_cnonnq.png`"
             width="120"
-            height="40"
-            alt="Your Company"
+            height="45"
+            alt="xcuxion"
             style={logo}
           />
           <Heading style={heading}>New Announcement</Heading>
@@ -62,7 +62,7 @@ export const AnnouncementEmail = ({
                 </Text>
                 <Button
                   style={attachmentButton}
-                  href={`https://xcuxion.org${attachmentUrl}`}
+                  href={`${attachmentUrl}`}
                 >
                   View Attachment
                 </Button>

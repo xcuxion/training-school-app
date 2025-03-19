@@ -42,14 +42,6 @@ const AdmissionPage = () => {
         defaultValue={searchParams.get('query')?.toString()}
         onChange={(e) => handleSearch(e.target.value)} 
         />
-        {/* <Button
-          onClick={async () => {
-            const res = await sendBatchInformation();
-            toast.message(res.message)
-          }}
-        >
-          Send Batch Information
-        </Button> */}
       </section>
       <section className="grid grid-cols-4 gap-4">
         {applicants.map((applicant, index) => (

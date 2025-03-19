@@ -1,13 +1,14 @@
 "use client"
 import { useState } from "react";
 import FormModal from "@/components/form-modal";
-import { SingleImageDropzone } from "@/components/single-image-drpzone";
+import { SingleImageDropzone } from "@/components/single-image-dropzone";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Button } from "@/components/ui/button";
 import { Textarea } from "@/components/ui/textarea";
-import { useToast } from "@/components/ui/use-toast";
 import { sendAnnouncement } from "@/lib/actions/announcement.actions";
+import { toast } from "sonner";
+import { useEdgeStore } from "@/lib/edgestore";
 
 const Announcement = ({
   show,
@@ -20,70 +21,72 @@ const Announcement = ({
   const [content, setContent] = useState("");
   const [file, setFile] = useState<File | undefined>(undefined);
   const [isSubmitting, setIsSubmitting] = useState(false);
-  const { toast } = useToast();
+  const { edgestore } = useEdgeStore();
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     if (!title || !content) {
-      toast({
-        title: "Error",
-        description: "Title and content are required",
-        variant: "destructive",
-      });
+      toast("Title and content are required");
       return;
     }
-
+    
     setIsSubmitting(true);
+    let fileUrl: string | undefined;
+    
     try {
+      // Upload file if it exists
+      if (file) {
+        const res = await edgestore.publicFiles.upload({
+          file,
+          onProgressChange: (progress) => {
+            console.log("Upload progress:", progress);
+          },
+        });
+        fileUrl = res.url;
+      }
+      
+      // Send announcement with the file URL
       await sendAnnouncement({
         title,
         content,
-        file,
+        fileUrl,
       });
       
-      toast({
-        title: "Success",
-        description: "Announcement sent successfully",
-      });
-      
+      toast("Success");
       setTitle("");
       setContent("");
       setFile(undefined);
       onClose();
     } catch (error) {
-      toast({
-        title: "Error",
-        description: "Failed to send announcement",
-        variant: "destructive",
-      });
+      console.error("Error:", error);
+      toast("Failed to send announcement");
     } finally {
       setIsSubmitting(false);
     }
   };
-
+  
   return (
     <FormModal isOpen={show} title="Create Announcement" onClose={onClose}>
       <form onSubmit={handleSubmit} className="flex flex-col gap-y-6 w-full">
         <div className="flex flex-col gap-y-2">
           <Label htmlFor="title">Title</Label>
-          <Input 
+          <Input
             id="title"
-            type="text" 
-            name="title" 
-            placeholder="Enter announcement title" 
+            type="text"
+            name="title"
+            placeholder="Enter announcement title"
             value={title}
             onChange={(e) => setTitle(e.target.value)}
             disabled={isSubmitting}
             required
           />
         </div>
-        
         <div className="flex flex-col gap-y-2">
           <Label htmlFor="content">Content</Label>
-          <Textarea 
+          <Textarea
             id="content"
-            name="content" 
-            placeholder="Enter announcement content" 
+            name="content"
+            placeholder="Enter announcement content"
             rows={5}
             value={content}
             onChange={(e) => setContent(e.target.value)}
@@ -91,13 +94,12 @@ const Announcement = ({
             required
           />
         </div>
-        
         <div className="flex flex-col gap-y-2">
           <Label>Attachment (Optional)</Label>
-          <SingleImageDropzone 
-            height={200} 
-            width={200} 
-            value={file ? URL.createObjectURL(file) : undefined}
+          <SingleImageDropzone
+            height={200}
+            width={200}
+            value={file}
             onChange={setFile}
             disabled={isSubmitting}
           />
@@ -105,17 +107,16 @@ const Announcement = ({
             Supported formats: JPG, PNG, PDF (max 5MB)
           </p>
         </div>
-        
         <div className="flex justify-end gap-x-2 mt-4">
-          <Button 
-            type="button" 
-            variant="outline" 
+          <Button
+            type="button"
+            variant="outline"
             onClick={onClose}
             disabled={isSubmitting}
           >
             Cancel
           </Button>
-          <Button 
+          <Button
             type="submit"
             disabled={isSubmitting}
           >
