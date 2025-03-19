@@ -11,7 +11,18 @@ export interface IApplicant {
   dob: string | Date;
   gender: "male" | "female";
   country: "ghana";
-  school: "ashesi" | "none" | "knust" | "ug" | "uds" | "aamusted" | "uhas" | "ucc" | "uds" | "uew" | null;
+  school:
+    | "ashesi"
+    | "none"
+    | "knust"
+    | "ug"
+    | "uds"
+    | "aamusted"
+    | "uhas"
+    | "ucc"
+    | "uds"
+    | "uew"
+    | null;
   programme: string | null;
   year: "1" | "2" | "3" | "4" | "5" | "6" | string | null;
   reason: string;

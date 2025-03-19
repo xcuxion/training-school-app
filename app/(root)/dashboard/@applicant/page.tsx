@@ -14,6 +14,7 @@ import { FaPen, FaCopy, FaShareAlt } from "react-icons/fa";
 import { useRouter } from "next/navigation";
 import { logOut } from "@/lib/actions/user.action";
 import { useUserStore } from "@/store/user-store";
+import AdmissionDetails from "./admission-details";
 
 const AdmissionPortal = () => {
   const { applicant, setApplicant, logoutApplicant } = useApplicantStore();
@@ -96,7 +97,7 @@ const AdmissionPortal = () => {
         .share({
           title: "SWAM Masterclass Referral",
           text: shareText,
-          url: "https://xcuxion.org/school", // You can customize this
+          url: "https://xcuxion.org/school/apply", // You can customize this
         })
         .catch((err) => console.log("Sharing failed:", err));
     } else {
@@ -133,7 +134,6 @@ const AdmissionPortal = () => {
         </div>
       </header>
 
-    
       <section className="bg-secondary relative p-4 md:p-6 rounded-lg shadow-md md:flex md:flex-row md:gap-6 md:items-center md:justify-between">
         <span className="flex flex-col md:flex-row items-center gap-x-8">
           <Image
@@ -181,12 +181,12 @@ const AdmissionPortal = () => {
             </p>
           </div>
         </span>
-        <div className="flex gap-3">
+        <div className="flex gap-3 ">
           {applicant?.status === "admitted" ? (
-            <>
+            <div className="w-full text-center space-x-3 space-y-2">
               <Button variant={"default"}>Accept</Button>
-              <Button variant={"outline"}>Decline</Button>
-            </>
+              <Button variant={"secondary"} className="bg-black hover:border">Decline</Button>
+            </div>
           ) : editOff ? (
             <span
               className="absolute top-4 right-4 flex items-center justify-center w-8 h-8 rounded-full bg-black hover:cursor-pointer hover:bg-gray-600"
@@ -201,130 +201,138 @@ const AdmissionPortal = () => {
           )}
         </div>
       </section>
+      {applicant?.status === "pending" ? (
+        <>
+          <section
+            className={`grid grid-cols-1 ${applicant?.oname !== "" ? "md:grid-cols-3" : "md:grid-cols-2"}  gap-6`}
+          >
+            <div className="space-y-4">
+              <h3 className="text-lg font-semibold">First Name</h3>
+              <Input
+                type="text"
+                name="fname"
+                defaultValue={editableData.fname}
+                onChange={handleChange}
+                disabled={editOff}
+              />
+            </div>
+            {applicant?.oname !== "" && (
+              <div className="space-y-4">
+                <h3 className="text-lg font-semibold">Other Name</h3>
+                <Input
+                  type="text"
+                  name="oname"
+                  defaultValue={editableData.oname}
+                  onChange={handleChange}
+                  disabled={editOff}
+                />
+              </div>
+            )}
+            <div className="space-y-4">
+              <h3 className="text-lg font-semibold">Last Name</h3>
+              <Input
+                type="text"
+                name="lname"
+                defaultValue={editableData.lname}
+                onChange={handleChange}
+                disabled={editOff}
+              />
+            </div>
+          </section>
+          <section className="grid grid-cols-1 md:grid-cols-2 gap-6">
+            <div className="space-y-4">
+              <h3 className="text-lg font-semibold">Gender</h3>
+              <Input
+                type="text"
+                name="gender"
+                className="capitalize"
+                defaultValue={editableData.gender}
+                onChange={handleChange}
+                disabled={editOff}
+              />
+            </div>
 
-      <section
-        className={`grid grid-cols-1 ${applicant?.oname !== "" ? "md:grid-cols-3" : "md:grid-cols-2"}  gap-6`}
-      >
-        <div className="space-y-4">
-          <h3 className="text-lg font-semibold">First Name</h3>
-          <Input
-            type="text"
-            name="fname"
-            defaultValue={editableData.fname}
-            onChange={handleChange}
-            disabled={editOff}
-          />
-        </div>
-        {applicant?.oname !== "" && (
-          <div className="space-y-4">
-            <h3 className="text-lg font-semibold">Other Name</h3>
-            <Input
-              type="text"
-              name="oname"
-              defaultValue={editableData.oname}
+            <div className="space-y-4">
+              <h3 className="text-lg font-semibold">Date of Birth</h3>
+              <Input
+                type="date" // ✅ Use date type
+                name="dob"
+                defaultValue={editableData.dob} // ✅ No need for conversion
+                onChange={handleChange}
+                disabled={editOff}
+              />
+            </div>
+          </section>
+          <section className="grid grid-cols-1 md:grid-cols-2 gap-6">
+            <div className="space-y-4">
+              <h3 className="text-lg font-semibold">Phone Contact</h3>
+              <Input
+                type="text"
+                name="contact"
+                defaultValue={editableData.contact}
+                onChange={handleChange}
+                disabled={editOff}
+              />
+            </div>
+            {applicant?.student && (
+              <div className="space-y-4">
+                <h3 className="text-lg font-semibold">Programme of Study</h3>
+                <Input
+                  type="text"
+                  name="programme"
+                  defaultValue={editableData.programme}
+                  onChange={handleChange}
+                  disabled={editOff}
+                />
+              </div>
+            )}
+          </section>
+
+          <section className="mt-6">
+            <h3 className="text-lg font-semibold">Reason for Application</h3>
+            <Textarea
+              name="reason"
+              defaultValue={editableData.reason}
               onChange={handleChange}
               disabled={editOff}
+              className="w-full h-24"
             />
-          </div>
-        )}
-        <div className="space-y-4">
-          <h3 className="text-lg font-semibold">Last Name</h3>
-          <Input
-            type="text"
-            name="lname"
-            defaultValue={editableData.lname}
-            onChange={handleChange}
-            disabled={editOff}
-          />
-        </div>
-      </section>
-      <section className="grid grid-cols-1 md:grid-cols-2 gap-6">
-        <div className="space-y-4">
-          <h3 className="text-lg font-semibold">Gender</h3>
-          <Input
-            type="text"
-            name="gender"
-            className="capitalize"
-            defaultValue={editableData.gender}
-            onChange={handleChange}
-            disabled={editOff}
-          />
-        </div>
-
-        <div className="space-y-4">
-          <h3 className="text-lg font-semibold">Date of Birth</h3>
-          <Input
-            type="date" // ✅ Use date type
-            name="dob"
-            defaultValue={editableData.dob} // ✅ No need for conversion
-            onChange={handleChange}
-            disabled={editOff}
-          />
-        </div>
-      </section>
-      <section className="grid grid-cols-1 md:grid-cols-2 gap-6">
-        <div className="space-y-4">
-          <h3 className="text-lg font-semibold">Phone Contact</h3>
-          <Input
-            type="text"
-            name="contact"
-            defaultValue={editableData.contact}
-            onChange={handleChange}
-            disabled={editOff}
-          />
-        </div>
-        {applicant?.student && (
-          <div className="space-y-4">
-            <h3 className="text-lg font-semibold">Programme of Study</h3>
-            <Input
-              type="text"
-              name="programme"
-              defaultValue={editableData.programme}
+          </section>
+          <section className="mt-6">
+            <h3 className="text-lg font-semibold">
+              How you intend to balance the training with your academics?
+            </h3>
+            <Textarea
+              name="balance"
+              defaultValue={editableData.balance}
               onChange={handleChange}
               disabled={editOff}
+              className="w-full h-24"
             />
-          </div>
-        )}
-      </section>
-
-      <section className="mt-6">
-        <h3 className="text-lg font-semibold">Reason for Application</h3>
-        <Textarea
-          name="reason"
-          defaultValue={editableData.reason}
-          onChange={handleChange}
-          disabled={editOff}
-          className="w-full h-24"
-        />
-      </section>
-      <section className="mt-6">
-        <h3 className="text-lg font-semibold">
-          How you intend to balance the training with your academics?
-        </h3>
-        <Textarea
-          name="balance"
-          defaultValue={editableData.balance}
-          onChange={handleChange}
-          disabled={editOff}
-          className="w-full h-24"
-        />
-      </section>
-      {applicant?.scholarship && (
-        <section className="mt-6">
-          <h3 className="text-lg font-semibold">
-            Why should we award you a scholarship?
-          </h3>
-          <Textarea
-            name="statement"
-            defaultValue={editableData.statement}
-            onChange={handleChange}
-            disabled={editOff}
-            className="w-full h-24"
-          />
-        </section>
+          </section>
+          {applicant?.scholarship && (
+            <section className="mt-6">
+              <h3 className="text-lg font-semibold">
+                Why should we award you a scholarship?
+              </h3>
+              <Textarea
+                name="statement"
+                defaultValue={editableData.statement}
+                onChange={handleChange}
+                disabled={editOff}
+                className="w-full h-24"
+              />
+            </section>
+          )}
+        </>
+      ) : applicant?.status === "admitted" ? (
+        <AdmissionDetails applicant={applicant}/>
+      ) : (
+        ""
       )}
     </div>
   );
 };
 
 export default AdmissionPortal;
+

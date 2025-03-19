@@ -20,8 +20,8 @@ const Layout = ({ children }: { children: React.ReactNode }) => {
     <>
       {shouldShowHeader && (
         <>
-          <AdminHeader />
-          <HeaderTitle />
+          {/* <AdminHeader /> */}
+          {/* <HeaderTitle /> */}
         </>
       )}
       <main className="px-10">{children}</main>

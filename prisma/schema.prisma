@@ -90,52 +90,19 @@ model Student {
   admissionOffer  AdmissionType
 }
 
-// model Applicant {
-//   id            String          @id @default(uuid())
-//   user          User            @relation(fields: [userId], references: [id])
-//   userId        String          @unique
-//   email         String?         @db.VarChar(255)
-//   fname         String          @db.VarChar(255)
-//   lname         String          @db.VarChar(255)
-//   oname         String?         @db.VarChar(255)
-//   dob           DateTime        @db.Date()
-//   country       Countries       @default(ghana)
-//   gender        Gender
-//   contact       String          @db.VarChar(10)
-//   school        School?
-//   programme     String?         @db.VarChar()
-//   year          String?         @db.VarChar(4)
-//   reason        String          @db.Text()
-//   balance       String          @db.Text()
-//   laptop        Boolean         @db.Boolean()
-//   scholarship   Boolean         @db.Boolean()
-//   status        AdmissionStatus @default(pending)
-//   statement     String?         @db.Text()
-//   student       Boolean
-//   admissionType AdmissionType?
-//   batch         String
-//   track         Track
-//   createdAt     DateTime        @default(now())
-//   updatedAt     DateTime        @updatedAt
-// }
+model Announcement {
+  id            String    @id @default(cuid())
+  title         String
+  content       String    @db.Text
+  hasAttachment Boolean   @default(false)
+  attachmentUrl String?
+  sentAt        DateTime?
+  sentToCount   Int?
+  createdAt     DateTime  @default(now())
+  updatedAt     DateTime  @updatedAt
 
-// model User {
-//   id          String       @id @default(uuid())
-//   createdAt   DateTime     @default(now())
-//   updatedAt   DateTime     @updatedAt
-//   email       String       @unique @db.VarChar(80)
-//   password    String       @db.VarChar(80)
-//   interest    Interest     @default(school)
-//   role        Role?        @default(visitor)
-//   Facilitator Facilitator?
-//   GuildMember GuildMember?
-//   Applicant   Applicant?
-//   Student     Student?
-//   attendedEvents EventAttendee[]
-//   refereeCode String?
-//   referees Applicant[]
-// }
-
+  @@index([createdAt])
+}
 
 model Class {
   id           String       @id @default(uuid())
@@ -243,12 +210,14 @@ model Event {
   title         String   @db.VarChar(100)
   description   String   @db.Text()
   attendees     EventAttendee[]  // Many-to-many relation with User
-  hostedAt      DateTime
-  endTime       DateTime? 
+  date      DateTime
+  time       DateTime? 
   guestSpeakers String[]   
-  meetingLink   String   @db.VarChar(255)
+  location   String   @db.VarChar(255)
+  link   String   @db.VarChar(255)
+  banner   String   @db.VarChar(255)
   status        EventStatus @default(SCHEDULED) 
-  type          EventType @default(WEBINAR) 
+  type          EventType? @default(WEBINAR) 
   createdAt     DateTime @default(now())
   updatedAt     DateTime @updatedAt
 }
