@@ -31,13 +31,13 @@ const ImageUploader = () => {
         </div>
         <Button className="bg-black text-fontColor rounded px-2 hover:opacity-80" onClick={async()=>{
             if (file){
-                const res = await edgestore.myPublicImages.upload({file, onProgressChange: (progress) => {
+                const res = await edgestore.publicFiles.upload({file, onProgressChange: (progress) => {
                     setProgess(progress)
                 }})
 
                 setUrls({
                     url: res.url,
-                    thumbnailUrl: res.thumbnailUrl
+                    thumbnailUrl: res.url
                 })
             }
         }}>Upload</Button>
